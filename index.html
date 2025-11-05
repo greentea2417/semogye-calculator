@@ -1,34 +1,39 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>월급 계산기 (세모계)</title>
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <header class="page-header">
     <h1>월급 계산기</h1>
-    <p class="sub">홈택스 간이세액표 기준에 맞추는 구조(4대보험 자동)</p>
+    <p class="sub">홈택스 간이세액표 기준 구조(4대보험 자동)</p>
   </header>
 
   <main class="card">
     <div class="grid">
       <label>세전 월급(원)
-        <input type="number" id="gross" inputmode="numeric" placeholder="예) 3300000">
+        <input type="number" id="gross" inputmode="numeric" placeholder="예) 3300000" />
       </label>
 
-      <label>비과세 월액(원)
-        <input type="number" id="nontax" inputmode="numeric" value="200000">
-        <small class="hint">식대 등(월 최대 200,000원 자동 처리)</small>
+      <label>비과세 식대(원)
+        <input type="number" id="meal" inputmode="numeric" value="200000" />
+        <small class="hint">월 최대 200,000원 자동 반영</small>
+      </label>
+
+      <label>비과세 차량유지비(원)
+        <input type="number" id="car" inputmode="numeric" value="0" />
+        <small class="hint">월 최대 200,000원(요건 충족 시) 자동 반영</small>
       </label>
 
       <label>부양가족 수(본인 제외)
-        <input type="number" id="dependents" min="0" max="11" value="0">
+        <input type="number" id="dependents" min="0" max="11" value="0" />
       </label>
 
       <label>8~20세 자녀 수
-        <input type="number" id="kids" min="0" max="11" value="0">
+        <input type="number" id="kids" min="0" max="11" value="0" />
       </label>
     </div>
 
@@ -37,6 +42,7 @@
     <section id="result" class="result hide">
       <h2>실수령액</h2>
       <div class="takehome" id="takeHome">-</div>
+      <div class="annual">연봉 환산 실수령액: <b id="takeHomeYear">-</b></div>
 
       <div class="breakdown">
         <div class="row"><span>국민연금</span><b id="np">-</b></div>
@@ -49,7 +55,7 @@
       </div>
 
       <p class="footnote">
-        * 소득세는 간이세액표 룩업 구조. 테이블 JSON을 주입하면 홈택스 결과와 100% 일치합니다.
+        * 소득세는 간이세액표 룩업 구조입니다. 표(JSON) 주입 시 홈택스와 100% 일치합니다. 현재 표 미주입 시 근사 계산.
       </p>
     </section>
   </main>
@@ -60,7 +66,7 @@
       <a href="#" aria-disabled="true">부가세</a>
       <a href="#" aria-disabled="true">기타</a>
     </nav>
-    <small class="source">출처: 국세청 홈택스 간이세액표, 국민연금/건보/요양/고용보험 고시율</small>
+    <small class="source">출처: 국세청 홈택스 간이세액표, 국민연금/건보/장기요양/고용보험 고시율</small>
   </footer>
 
   <script src="./app.js"></script>
