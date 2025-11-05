@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>월급 계산기 (세모계)</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
@@ -15,25 +15,25 @@
   <main class="card">
     <div class="grid">
       <label>세전 월급(원)
-        <input type="number" id="gross" inputmode="numeric" placeholder="예) 3300000" />
+        <input type="number" id="gross" inputmode="numeric" placeholder="콤마 없이 입력 (예: 3300000)" />
       </label>
 
       <label>비과세 식대(원)
-        <input type="number" id="meal" inputmode="numeric" value="200000" />
+        <input type="number" id="meal" inputmode="numeric" value="200000" placeholder="콤마 없이 입력 (예: 200000)" />
         <small class="hint">월 최대 200,000원 자동 반영</small>
       </label>
 
       <label>비과세 차량유지비(원)
-        <input type="number" id="car" inputmode="numeric" value="0" />
+        <input type="number" id="car" inputmode="numeric" value="0" placeholder="콤마 없이 입력 (예: 200000)" />
         <small class="hint">월 최대 200,000원(요건 충족 시) 자동 반영</small>
       </label>
 
       <label>부양가족 수(본인 제외)
-        <input type="number" id="dependents" min="0" max="11" value="0" />
+        <input type="number" id="dependents" min="0" max="11" value="0" placeholder="숫자만 입력 (예: 2)" />
       </label>
 
       <label>8~20세 자녀 수
-        <input type="number" id="kids" min="0" max="11" value="0" />
+        <input type="number" id="kids" min="0" max="11" value="0" placeholder="숫자만 입력 (예: 1)" />
       </label>
     </div>
 
