@@ -1,23 +1,12 @@
-function calcNetSalary(){
-  const salary = Number(document.getElementById("salary").value||0);
-  const dependents = Number(document.getElementById("dependents").value||0);
-  const kids = Number(document.getElementById("kids").value||0);
-  const taxfree = Number(document.getElementById("taxfree").value||0);
+function calc(){
+  const salary = parseInt(document.getElementById('salary').value.replace(/,/g,'')) || 0;
+  const nontax = parseInt(document.getElementById('nontax').value.replace(/,/g,'')) || 0;
 
-  // (엄밀 계산식 X) — MVP, 간이 버전
-  const afterTax = salary * 0.935; // 그냥 평균 공제 6.5%
+  // 실 테스트용 간단 버전
+  const taxable = salary - nontax;
+  const tax = Math.floor(taxable * 0.033);
+  const result = salary - tax;
 
-  const total = afterTax + taxfree;
-
-  document.getElementById("resultValue").innerText = total.toLocaleString()+"원";
+  document.getElementById('result').innerHTML = 
+    `실수령액(간이테스트): ${result.toLocaleString()}원`;
 }
-
-document.getElementById("calculate").addEventListener("click", calcNetSalary);
-
-document.getElementById("dependents").addEventListener("input",e=>{
-  document.getElementById("dependentsValue").innerText = e.target.value;
-});
-
-document.getElementById("kids").addEventListener("input",e=>{
-  document.getElementById("kidsValue").innerText = e.target.value;
-});
