@@ -1,2 +1,43 @@
-<link rel="stylesheet" href="./styles.css">
-<script src="./app.js"></script>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>월급 계산기</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+  <h1>월급 계산기</h1>
+
+  <div class="container">
+    <label>세전 월급</label>
+    <input type="number" id="salary" placeholder="예: 3,300,000">
+    
+    <div class="row">
+      <div>1 · 양가족 수</div>
+      <input type="range" id="dependents" min="0" max="11" value="0">
+      <span id="dependentsValue">0</span>
+    </div>
+
+    <div class="row">
+      <div>0~20세 자녀 수</div>
+      <input type="range" id="kids" min="0" max="11" value="0">
+      <span id="kidsValue">0</span>
+    </div>
+
+    <label>비과세 식대(월)</label>
+    <input type="number" id="taxfree" value="200000">
+
+    <button id="calculate">계산하기</button>
+
+    <div class="result">
+      <p>내 통장에 들어올 금액</p>
+      <h2 id="resultValue">-</h2>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+
+</body>
+</html>
