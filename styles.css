@@ -1,1 +1,69 @@
-body { background:#000; color:#fff; }
+body{
+  font-family: pretendard, sans-serif;
+  background:#fafafa;
+  margin:0;
+  padding:20px;
+}
+
+h1{
+  font-size:24px;
+  font-weight:700;
+  margin-bottom:20px;
+}
+
+.container{
+  background:white;
+  border-radius:14px;
+  padding:20px;
+  box-shadow:0 4px 14px rgba(0,0,0,0.06);
+  max-width:420px;
+}
+
+label{
+  display:block;
+  font-size:14px;
+  margin:14px 0 6px;
+}
+
+input[type="number"]{
+  font-size:16px;
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ddd;
+}
+
+.row{
+  margin:16px 0;
+}
+
+.row input[type=range]{
+  width:100%;
+}
+
+.row span{
+  font-size:14px;
+  color:#666;
+}
+
+button{
+  margin-top:20px;
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:12px;
+  background:black;
+  color:white;
+  font-size:16px;
+  font-weight:600;
+}
+
+.result{
+  margin-top:26px;
+  text-align:center;
+}
+
+.result h2{
+  font-size:28px;
+  font-weight:700;
+}
