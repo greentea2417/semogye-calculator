@@ -1,70 +1,74 @@
-:root{
-  --bg:#f6f7fb;
-  --card:#fff;
-  --ink:#0b1020;
-  --muted:#6b7280;
-  --primary:#0a66ff;
-  --border:#e5e7eb;
-}
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>월급 계산기 (세모계)</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="page-header">
+    <h1>월급 계산기</h1>
+    <p class="sub">홈택스 간이세액표 기준 구조(4대보험 자동)</p>
+  </header>
 
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Apple SD Gothic Neo,Helvetica,Arial,sans-serif;
-  color:var(--ink); background:var(--bg);
-}
+  <main class="card">
+    <div class="grid">
+      <label>세전 월급(원)
+        <input type="number" id="gross" inputmode="numeric" placeholder="예) 3300000" />
+      </label>
 
-.page-header{
-  padding:24px 20px 8px;
-}
-.page-header h1{margin:0 0 6px 0;font-size:28px;font-weight:800}
-.page-header .sub{margin:0;color:var(--muted);font-size:14px}
+      <label>비과세 식대(원)
+        <input type="number" id="meal" inputmode="numeric" value="200000" />
+        <small class="hint">월 최대 200,000원 자동 반영</small>
+      </label>
 
-.card{
-  background:var(--card);
-  margin:12px 20px;
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:16px;
-  max-width:720px;
-}
+      <label>비과세 차량유지비(원)
+        <input type="number" id="car" inputmode="numeric" value="0" />
+        <small class="hint">월 최대 200,000원(요건 충족 시) 자동 반영</small>
+      </label>
 
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-@media (max-width:640px){ .grid{grid-template-columns:1fr} }
+      <label>부양가족 수(본인 제외)
+        <input type="number" id="dependents" min="0" max="11" value="0" />
+      </label>
 
-label{display:flex;flex-direction:column;font-size:14px;gap:6px}
-input{
-  padding:12px 12px;
-  border:1px solid var(--border);
-  border-radius:12px;
-  background:#fff;font-size:16px;
-}
-.hint{color:var(--muted);font-size:12px}
+      <label>8~20세 자녀 수
+        <input type="number" id="kids" min="0" max="11" value="0" />
+      </label>
+    </div>
 
-button#calcBtn{
-  margin-top:12px;width:100%;padding:14px 16px;
-  border:0;border-radius:12px;background:var(--primary);
-  color:#fff;font-weight:700;font-size:16px;cursor:pointer;
-}
-button#calcBtn:active{transform:translateY(1px)}
+    <button id="calcBtn">계산하기</button>
 
-.result{margin-top:8px}
-.result.hide{display:none}
+    <section id="result" class="result hide">
+      <h2>실수령액</h2>
+      <div class="takehome" id="takeHome">-</div>
+      <div class="annual">연봉 환산 실수령액: <b id="takeHomeYear">-</b></div>
 
-.result h2{margin:12px 0 8px;font-size:18px}
-.takehome{
-  font-size:28px;font-weight:800;margin:6px 0 12px;
-}
+      <div class="breakdown">
+        <div class="row"><span>국민연금</span><b id="np">-</b></div>
+        <div class="row"><span>건강보험</span><b id="hi">-</b></div>
+        <div class="row"><span>장기요양</span><b id="ltc">-</b></div>
+        <div class="row"><span>고용보험</span><b id="ei">-</b></div>
+        <div class="row"><span>소득세(간이)</span><b id="it">-</b></div>
+        <div class="row"><span>지방소득세</span><b id="lit">-</b></div>
+        <div class="row total"><span>공제 합계</span><b id="totalDeduct">-</b></div>
+      </div>
 
-.breakdown{border-top:1px dashed var(--border);padding-top:10px}
-.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--border)}
-.row.total{font-weight:700;border-bottom:0}
+      <p class="footnote">
+        * 소득세는 간이세액표 룩업 구조입니다. 표(JSON) 주입 시 홈택스와 100% 일치합니다. 현재 표 미주입 시 근사 계산.
+      </p>
+    </section>
+  </main>
 
-.page-footer{padding:0 20px 28px;color:var(--muted);font-size:12px}
-.links{display:flex;gap:12px;margin:16px 0 4px}
-.links a[aria-disabled="true"]{opacity:.35;pointer-events:none}
-.source{display:block}
+  <footer class="page-footer">
+    <nav class="links">
+      <a href="#" aria-disabled="true">연봉↔월급</a>
+      <a href="#" aria-disabled="true">부가세</a>
+      <a href="#" aria-disabled="true">기타</a>
+    </nav>
+    <small class="source">출처: 국세청 홈택스 간이세액표, 국민연금/건보/장기요양/고용보험 고시율</small>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>
