@@ -1,26 +1,45 @@
-<h2>월급 계산기 (홈택스 2024 기준)</h2>
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>월급 계산기 (홈택스 2024 기준)</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>💼 월급 계산기 <span>(홈택스 2024 기준)</span></h1>
 
-<label for="salary">세전 월급 (원):</label>
-<input id="salary" type="text" placeholder="콤마 없이 입력 (예: 3300000)" />
+      <div class="card">
+        <label for="salary">세전 월급 (원)</label>
+        <input id="salary" type="text" placeholder="예: 5,000,000" />
 
-<label for="meal">비과세 식대 (월, 원):</label>
-<input id="meal" type="text" placeholder="최대 200000원 자동 반영" />
+        <label for="meal">비과세 식대 (월, 원)</label>
+        <input id="meal" type="text" placeholder="최대 200,000원" />
 
-<label for="car">비과세 차량유지비 (월, 원):</label>
-<input id="car" type="text" placeholder="최대 200000원 자동 반영" />
+        <label for="car">비과세 차량유지비 (월, 원)</label>
+        <input id="car" type="text" placeholder="최대 200,000원" />
 
-<label for="family">부양가족 수 (본인 제외):</label>
-<select id="family">
-  <option value="0">0명</option>
-  <option value="1">1명</option>
-  <option value="2">2명</option>
-  <option value="3">3명</option>
-  <option value="4">4명</option>
-  <option value="5">5명</option>
-</select>
+        <label for="family">부양가족 수 (본인 제외)</label>
+        <select id="family">
+          <option value="0">0명</option>
+          <option value="1">1명</option>
+          <option value="2">2명</option>
+          <option value="3">3명</option>
+          <option value="4">4명</option>
+          <option value="5">5명</option>
+        </select>
 
-<button id="calcBtn">계산하기</button>
+        <small class="tip">
+          💡 비과세 식대·차량유지비는 각각 월 최대 200,000원까지만 공제됩니다.
+        </small>
 
-<div id="result" style="margin-top:20px; font-weight:bold;"></div>
+        <button id="calcBtn">계산하기</button>
+      </div>
 
-<script src="./app.js"></script>
+      <div id="result" class="result"></div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
