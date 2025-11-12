@@ -3,6 +3,12 @@
 <label for="salary">세전 월급 (원):</label>
 <input id="salary" type="text" placeholder="콤마 없이 입력 (예: 3300000)" />
 
+<label for="meal">비과세 식대 (월, 원):</label>
+<input id="meal" type="text" placeholder="최대 200000원 자동 반영" />
+
+<label for="car">비과세 차량유지비 (월, 원):</label>
+<input id="car" type="text" placeholder="최대 200000원 자동 반영" />
+
 <label for="family">부양가족 수 (본인 제외):</label>
 <select id="family">
   <option value="0">0명</option>
@@ -14,6 +20,7 @@
 </select>
 
 <button id="calcBtn">계산하기</button>
+
 <div id="result" style="margin-top:20px; font-weight:bold;"></div>
 
 <script src="./app.js"></script>
