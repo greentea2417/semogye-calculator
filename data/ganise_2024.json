@@ -2,13 +2,47 @@
   "year": 2024,
   "unit": "thousand_won",
   "byFamily": {
+    "0": [
+      { "fromK": 945, "toK": 950, "tax": 1040 },
+      { "fromK": 950, "toK": 955, "tax": 1060 },
+      { "fromK": 955, "toK": 960, "tax": 1080 },
+      { "fromK": 960, "toK": 965, "tax": 1100 }
+    ],
     "1": [
       { "fromK": 945, "toK": 950, "tax": 950 },
       { "fromK": 950, "toK": 955, "tax": 955 },
       { "fromK": 955, "toK": 960, "tax": 960 },
-      { "fromK": 960, "toK": 965, "tax": 965 },
-      { "fromK": 965, "toK": 970, "tax": 970 },
-      { "fromK": 970, "toK": 975, "tax": 975 }
+      { "fromK": 960, "toK": 965, "tax": 965 }
+    ],
+    "2": [
+      { "fromK": 945, "toK": 950, "tax": 850 },
+      { "fromK": 950, "toK": 955, "tax": 860 },
+      { "fromK": 955, "toK": 960, "tax": 870 },
+      { "fromK": 960, "toK": 965, "tax": 880 }
+    ],
+    "3": [
+      { "fromK": 945, "toK": 950, "tax": 700 },
+      { "fromK": 950, "toK": 955, "tax": 710 },
+      { "fromK": 955, "toK": 960, "tax": 720 },
+      { "fromK": 960, "toK": 965, "tax": 730 }
+    ],
+    "4": [
+      { "fromK": 945, "toK": 950, "tax": 620 },
+      { "fromK": 950, "toK": 955, "tax": 630 },
+      { "fromK": 955, "toK": 960, "tax": 640 },
+      { "fromK": 960, "toK": 965, "tax": 650 }
+    ],
+    "5": [
+      { "fromK": 945, "toK": 950, "tax": 520 },
+      { "fromK": 950, "toK": 955, "tax": 530 },
+      { "fromK": 955, "toK": 960, "tax": 540 },
+      { "fromK": 960, "toK": 965, "tax": 550 }
+    ],
+    "6": [
+      { "fromK": 945, "toK": 950, "tax": 420 },
+      { "fromK": 950, "toK": 955, "tax": 430 },
+      { "fromK": 955, "toK": 960, "tax": 440 },
+      { "fromK": 960, "toK": 965, "tax": 450 }
     ]
   }
 }
