@@ -41,18 +41,17 @@ async function calculateTax() {
 
   // 결과 표시
   const info = `
-    과세소득: ${taxableSalary.toLocaleString()}원<br>
-    (세전 ${salary.toLocaleString()} - 식대 ${meal.toLocaleString()} - 차량유지비 ${car.toLocaleString()})<br><br>
-    <b>예상 원천징수 세액: ${
-      foundTax ? foundTax.toLocaleString() + '원' : '계산 불가'
-    }</b>
-  `;
+  <div style="margin-top:15px; font-size:1.1em; line-height:1.8;">
+    <div><b>💰 과세소득:</b> ${taxableSalary.toLocaleString()}원</div>
+    <div>└ 세전 ${salary.toLocaleString()}원 
+      - 식대 ${meal.toLocaleString()}원 
+      - 차량유지비 ${car.toLocaleString()}원
+    </div>
+    <br>
+    <div style="font-size:1.2em; font-weight:bold; color:#0044cc;">
+      📊 예상 원천징수 세액: ${foundTax ? foundTax.toLocaleString() + '원' : '계산 불가'}
+    </div>
+  </div>
+`;
+resultBox.innerHTML = info;
 
-  resultBox.innerHTML = info;
-}
-
-// ✅ 이벤트 연결
-document.addEventListener('DOMContentLoaded', () => {
-  const btn = document.getElementById('calcBtn');
-  btn.addEventListener('click', calculateTax);
-});
