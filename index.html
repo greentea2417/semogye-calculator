@@ -1,46 +1,44 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>월급 계산기 (홈택스 2024 기준)</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="container">
-      <h1>💼 월급 계산기 <span>(홈택스 2024 기준)</span></h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💼 월급 계산기 (홈택스 2024 기준)</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>💼 월급 계산기 <span>(홈택스 2024 기준)</span></h1>
 
-      <div class="card">
-        <label for="salary">세전 월급 (원)</label>
-        <input id="salary" type="text" placeholder="예: 5,000,000" />
+    <div class="card">
+      <label>세전 월급 (원)</label>
+      <input id="salary" type="number" placeholder="예: 5,000,000" value="5000000" />
 
-        <label for="meal">비과세 식대 (월, 원)</label>
-        <input id="meal" type="text" placeholder="최대 200,000원" />
+      <label>비과세 식대 (월, 원)</label>
+      <input id="food" type="number" placeholder="최대 200,000" value="200000" />
 
-        <label for="car">비과세 차량유지비 (월, 원)</label>
-        <input id="car" type="text" placeholder="최대 200,000원" />
+      <label>비과세 차량유지비 (월, 원)</label>
+      <input id="car" type="number" placeholder="최대 200,000" value="200000" />
 
-        <label for="family">부양가족 수 (본인 제외)</label>
-        <select id="family">
-          <option value="0">0명</option>
-          <option value="1">1명</option>
-          <option value="2">2명</option>
-          <option value="3">3명</option>
-          <option value="4">4명</option>
-          <option value="5">5명</option>
-        </select>
+      <label>부양가족 수 (본인 제외)</label>
+      <select id="family">
+        <option value="0">0명</option>
+        <option value="1" selected>1명</option>
+        <option value="2">2명</option>
+        <option value="3">3명</option>
+        <option value="4">4명</option>
+        <option value="5">5명</option>
+        <option value="6">6명</option>
+      </select>
 
-        <small class="tip">
-          💡 비과세 식대·차량유지비는 각각 월 최대 200,000원까지만 공제됩니다.
-        </small>
+      <p class="tip">💡 비과세 식대·차량유지비는 각각 월 최대 200,000원까지만 공제됩니다.</p>
 
-        <button type="button" onclick="calculateTax()">계산하기</button>
-
-      </div>
-
-      <div id="result" class="result"></div>
+      <button onclick="calculateTax()">계산하기</button>
     </div>
 
-    <script src="app.js"></script>
-  </body>
+    <div id="result" class="result-box"></div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
 </html>
