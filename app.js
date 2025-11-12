@@ -1,66 +1,52 @@
 async function calculateTax() {
-  const salaryInput = document.getElementById("salary");
-  const mealInput = document.getElementById("meal");
-  const carInput = document.getElementById("car");
-  const familyInput = document.getElementById("family");
-  const resultBox = document.getElementById("result");
+  const salaryInput = document.getElementById("salary").value.replace(/,/g, "");
+  const foodInput = document.getElementById("food").value.replace(/,/g, "");
+  const carInput = document.getElementById("car").value.replace(/,/g, "");
+  const familyCount = parseInt(document.getElementById("family").value);
 
-  const salary = parseInt(salaryInput.value.replace(/,/g, "")) || 0;
-  let meal = parseInt(mealInput.value.replace(/,/g, "")) || 0;
-  let car = parseInt(carInput.value.replace(/,/g, "")) || 0;
-  const family = parseInt(familyInput.value) || 0;
+  const salary = Number(salaryInput);
+  const food = Math.min(Number(foodInput) || 0, 200000);
+  const car = Math.min(Number(carInput) || 0, 200000);
 
-  // 비과세 한도 처리
-  if (meal > 200000) meal = 200000;
-  if (car > 200000) car = 200000;
+  const taxable = Math.max(0, salary - food - car);
+  const taxableK = Math.floor(taxable / 1000);
 
-  const taxable = salary - (meal + car);
+  const resultDiv = document.getElementById("result");
 
-  // JSON 불러오기
-  const res = await fetch("./data/ganise_2024.json");
-  const data = await res.json();
-  const familyKey = family.toString();
-  const table = data.byFamily?.[familyKey];
+  try {
+    const response = await fetch("./data/ganise_2024.json");
+    const data = await response.json();
 
-  if (!table) {
-    resultBox.innerHTML = "⚠️ 부양가족 수 데이터가 없습니다.";
-    return;
-  }
+    const famKey = familyCount.toString();
+    const famData = data.byFamily[famKey];
 
-  // 가장 근접한 세액 찾기
-  let foundTax = null;
-  for (let i = table.length - 1; i >= 0; i--) {
-    if (taxable >= table[i].fromK && taxable < table[i].toK) {
-      foundTax = table[i].tax;
-      break;
+    if (!famData) {
+      resultDiv.innerHTML = `<div class='alert'>⚠️ 부양가족 수 데이터가 없습니다.</div>`;
+      return;
     }
-  }
 
-  resultBox.innerHTML = `
-    <div><b>과세소득:</b> ${taxable.toLocaleString()}원</div>
-    <div>(세전 ${salary.toLocaleString()} - 식대 ${meal.toLocaleString()} - 차량유지비 ${car.toLocaleString()})</div>
-    <hr>
-    <div style="font-size:1.2em;">
-      💰 <b>예상 원천징수 세액:</b> ${foundTax ? foundTax.toLocaleString() + "원" : "계산 불가"}
-    </div>
-  `;
-}
+    // 해당 구간 찾기
+    const match = famData.find(row => taxableK >= row.fromK && taxableK < row.toK);
 
-// ✅ 입력 시 자동 콤마 추가
-function addCommaFormat(input) {
-  input.addEventListener("input", () => {
-    let value = input.value.replace(/,/g, "");
-    if (!isNaN(value) && value.length > 0) {
-      input.value = parseInt(value).toLocaleString();
+    if (!match) {
+      resultDiv.innerHTML = `
+        <div class='result-box'>
+          과세소득: ${taxable.toLocaleString()}원<br>
+          (세전 ${salary.toLocaleString()} - 식대 ${food.toLocaleString()} - 차량 ${car.toLocaleString()})<br><br>
+          <b>💰 예상 원천징수 세액:</b> 계산 불가 (표 범위 밖)
+        </div>`;
+      return;
     }
-  });
-}
 
-document.addEventListener("DOMContentLoaded", () => {
-  ["salary", "meal", "car"].forEach((id) =>
-    addCommaFormat(document.getElementById(id))
-  );
-  document
-    .getElementById("calcBtn")
-    .addEventListener("click", calculateTax);
-});
+    const tax = match.tax * 1000; // 천원 단위 환산
+    resultDiv.innerHTML = `
+      <div class='result-box'>
+        과세소득: ${taxable.toLocaleString()}원<br>
+        (세전 ${salary.toLocaleString()} - 식대 ${food.toLocaleString()} - 차량 ${car.toLocaleString()})<br><br>
+        <b>💰 예상 원천징수 세액:</b> ${tax.toLocaleString()}원
+      </div>`;
+  } catch (error) {
+    resultDiv.innerHTML = `<div class='alert'>❌ 계산 중 오류가 발생했습니다.</div>`;
+    console.error(error);
+  }
+}
