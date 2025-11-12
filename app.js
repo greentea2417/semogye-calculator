@@ -21,32 +21,32 @@ async function calculateTax() {
     const famData = data.byFamily[famKey];
 
     if (!famData) {
-      resultDiv.innerHTML = `<div class='alert'>⚠️ 부양가족 수 데이터가 없습니다.</div>`;
+      resultDiv.innerHTML = `<div class="alert">⚠️ 부양가족 수 데이터가 없습니다.</div>`;
       return;
     }
 
-    // 해당 구간 찾기
     const match = famData.find(row => taxableK >= row.fromK && taxableK < row.toK);
 
     if (!match) {
       resultDiv.innerHTML = `
-        <div class='result-box'>
+        <div class="result-box">
           과세소득: ${taxable.toLocaleString()}원<br>
           (세전 ${salary.toLocaleString()} - 식대 ${food.toLocaleString()} - 차량 ${car.toLocaleString()})<br><br>
-          <b>💰 예상 원천징수 세액:</b> 계산 불가 (표 범위 밖)
+          💡 <b>해당 구간의 세액표 데이터가 없습니다.</b><br>
+          계산 불가 ⚠️
         </div>`;
       return;
     }
 
-    const tax = match.tax * 1000; // 천원 단위 환산
+    const tax = match.tax * 1000;
+
     resultDiv.innerHTML = `
-      <div class='result-box'>
-        과세소득: ${taxable.toLocaleString()}원<br>
-        (세전 ${salary.toLocaleString()} - 식대 ${food.toLocaleString()} - 차량 ${car.toLocaleString()})<br><br>
-        <b>💰 예상 원천징수 세액:</b> ${tax.toLocaleString()}원
+      <div class="result-box success">
+        💰 예상 원천징수 세액: <b>${tax.toLocaleString()}원</b><br><br>
+        <small>과세소득 ${taxable.toLocaleString()}원<br>(세전 ${salary.toLocaleString()} - 식대 ${food.toLocaleString()} - 차량 ${car.toLocaleString()})</small>
       </div>`;
   } catch (error) {
-    resultDiv.innerHTML = `<div class='alert'>❌ 계산 중 오류가 발생했습니다.</div>`;
     console.error(error);
+    resultDiv.innerHTML = `<div class="alert">❌ 계산 중 오류가 발생했습니다. (JSON 경로 확인)</div>`;
   }
 }
