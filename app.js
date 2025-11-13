@@ -9,7 +9,7 @@ async function calculateTax() {
   const car = Math.min(Number(carInput) || 0, 200000);
 
   const taxable = Math.max(0, salary - food - car);
-  const taxableK = Math.floor(taxable / 1000);
+  const taxableK = Math.round(taxable / 1000);
 
   const resultDiv = document.getElementById("result");
 
