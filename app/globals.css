@@ -1,0 +1,152 @@
+/* 1) @import는 반드시 최상단 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
+
+/* 2) 그 다음 tailwind 지시어 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 3) 공통 스타일 */
+.container {
+  @apply max-w-xl mx-auto px-4;
+}
+
+.card {
+  @apply bg-white shadow-sm rounded-xl p-5 border border-gray-100;
+}
+
+.input-block {
+  @apply flex flex-col gap-2 py-2;
+}
+
+.input-label {
+  @apply text-sm font-medium text-gray-700;
+}
+
+.input-field {
+  @apply w-full rounded-lg border border-gray-300 px-3 py-2 
+         focus:outline-none focus:ring-2 focus:ring-black
+         text-black;
+}
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #111111;
+}
+
+body {
+  font-family: 'Pretendard Variable', sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.fade-slide-up {
+  animation: fadeSlideUp 0.35s ease-out forwards;
+}
+
+/* number input 텍스트 강제 회색 처리 */
+input[type="number"] {
+  color: #4b5563 !important; /* text-gray-600 */
+}
+
+/* placeholder 회색 */
+input[type="number"]::placeholder {
+  color: #9ca3af !important; /* text-gray-400 */
+}
+
+/* 스핀버튼 제거 (iOS/모바일 스타일) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input {
+  color: #000 !important;
+}
+
+input::placeholder {
+  color: #9ca3af !important; /* tailwind gray-400 */
+}
+
+/* number input에서 텍스트 색이 회색으로 고정되는 문제 완전 해결 */
+input[type="number"] {
+  -webkit-text-fill-color: #000 !important; /* Chrome 엔진 강제 적용 */
+  color: #000 !important;                    /* 기본 텍스트도 블랙 */
+}
+
+/* 입력한 실제 값 = 블랙 */
+input[type="number"] {
+  -webkit-text-fill-color: #000 !important;
+  color: #000 !important;
+}
+
+/* placeholder = 연한 회색 */
+input[type="number"]::placeholder {
+  color: #9ca3af !important; /* Tailwind gray-400 수준 */
+  -webkit-text-fill-color: #9ca3af !important;
+}
+
+/* 포커스하면 placeholder 사라짐 */
+input[type="number"]:focus::placeholder {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* 📌 입력값이 있을 때 = 무조건 블랙 고정 */
+input.prefilled {
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+}
+
+/* 📌 placeholder = 항상 연한 회색 */
+input::placeholder {
+  color: #9ca3af !important; /* gray-400 */
+  -webkit-text-fill-color: #9ca3af !important;
+}
+
+/* 📌 포커스하면 placeholder 자연스럽게 사라짐 */
+input:focus::placeholder {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* =========================
+   Semogye Focus (Final)
+   - 기본 outline 제거
+   - Tailwind ring/shadow 강제 OFF
+   - 얇은 블루 라인만 유지
+   ========================= */
+
+input:focus,
+select:focus,
+textarea:focus,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none !important;
+
+  /* Tailwind ring / shadow 완전 제거 */
+  --tw-ring-offset-shadow: 0 0 #0000 !important;
+  --tw-ring-shadow: 0 0 #0000 !important;
+  --tw-shadow: 0 0 #0000 !important;
+
+  /* 우리가 원하는 얇은 블루 라인 */
+  border-color: #2563eb !important; /* blue-600 */
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.6) !important;
+}
+
