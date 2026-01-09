@@ -43,7 +43,7 @@ type SalaryInputsShare = {
   salaryRaw: string;
   insured: "yes" | "no";
   dependents: number;
-  child20: number;
+  child20: string; // ✅ 모바일 숫자 입력 버그 방지: 입력은 string
   nonTax: number;
 };
 
@@ -74,7 +74,7 @@ export default function SalaryPage() {
   const [salaryRaw, setSalaryRaw] = useState(""); // 세전 월급
   const [insured, setInsured] = useState<"yes" | "no">("yes");
   const [dependents, setDependents] = useState(1);
-  const [child20, setChild20] = useState(0);
+  const [child20, setChild20] = useState<string>("0"); // ✅ FIX: number -> string
   const [nonTax, setNonTax] = useState(200000);
   const [openDesc, setOpenDesc] = useState(false);
 
@@ -106,7 +106,17 @@ export default function SalaryPage() {
     setSalaryRaw(restored.salaryRaw ?? "");
     setInsured(restored.insured === "no" ? "no" : "yes");
     setDependents(Number.isFinite(restored.dependents) ? restored.dependents : 1);
-    setChild20(Number.isFinite(restored.child20) ? restored.child20 : 0);
+
+    // ✅ 과거 링크가 number로 들어왔을 가능성까지 방어
+    const restoredChild = (restored as any)?.child20;
+    if (typeof restoredChild === "string") {
+      setChild20(restoredChild === "" ? "" : String(parseNumber(restoredChild)));
+    } else if (typeof restoredChild === "number" && Number.isFinite(restoredChild)) {
+      setChild20(String(restoredChild));
+    } else {
+      setChild20("0");
+    }
+
     setNonTax(Number.isFinite(restored.nonTax) ? restored.nonTax : 200000);
 
     // URL 정리
@@ -119,12 +129,13 @@ export default function SalaryPage() {
   // ✅ 자동 계산 (버튼 제거)
   const result = useMemo(() => {
     const salary = parseNumber(salaryRaw);
+    const child20Count = Number(child20 || 0); // ✅ 계산 시점에만 숫자로 변환
 
     const res = calculateSalary({
-      salary: parseNumber(salary),
+      salary,
       insured,
       dependents,
-      child20,
+      child20: child20Count,
       nonTax,
     });
 
@@ -146,6 +157,7 @@ export default function SalaryPage() {
 
   function handleDownloadSalaryCSV() {
     const salary = parseNumber(salaryRaw);
+    const child20Count = Number(child20 || 0);
     const now = new Date();
     const y = now.getFullYear();
     const m = String(now.getMonth() + 1).padStart(2, "0");
@@ -159,10 +171,11 @@ export default function SalaryPage() {
     lines.push([csvEscape("월 급여(세전)"), csvEscape(String(salary))].join(","));
     lines.push([csvEscape("4대보험 가입"), csvEscape(insured === "yes" ? "예" : "아니오")].join(","));
     lines.push([csvEscape("부양가족 수(본인 포함)"), csvEscape(String(dependents))].join(","));
-    lines.push([csvEscape("20세 이하 자녀 수"), csvEscape(String(child20))].join(","));
+    lines.push([csvEscape("20세 이하 자녀 수"), csvEscape(String(child20Count))].join(","));
     lines.push([csvEscape("비과세 식대"), csvEscape(String(nonTax))].join(","));
 
     lines.push(""); // 구분
+
     // 결과값
     lines.push([csvEscape("국민연금"), csvEscape(String(result?.pension ?? 0))].join(","));
     lines.push([csvEscape("건강보험"), csvEscape(String(result?.health ?? 0))].join(","));
@@ -174,6 +187,23 @@ export default function SalaryPage() {
 
     downloadCSV(`semogye-salary-${y}${m}${d}.csv`, lines.join("\n"));
   }
+
+  // ✅ 모바일에서 0이 안 지워지는 문제 해결용 onChange
+  const handleChild20Change = (e: any) => {
+    const v = String(e?.target?.value ?? "");
+
+    // 지우기 허용
+    if (v === "") {
+      setChild20("");
+      return;
+    }
+
+    // 숫자만 허용(정수)
+    if (/^\d+$/.test(v)) {
+      // 선행 0 정리: "00" -> "0", "01" -> "1"
+      setChild20(String(Number(v)));
+    }
+  };
 
   return (
     <main className="max-w-2xl mx-auto px-5 py-10 space-y-8">
@@ -214,21 +244,25 @@ export default function SalaryPage() {
           label="부양가족 수 (본인 포함)"
           type="number"
           value={dependents}
-          onChange={(e) => setDependents(Number(e.target.value))}
+          onChange={(e: any) => setDependents(Number(e.target.value))}
         />
 
+        {/* ✅ FIX: child20은 string으로 관리 */}
         <InputBlock
           label="20세 이하 자녀 수"
           type="number"
           value={child20}
-          onChange={(e) => setChild20(Number(e.target.value))}
+          onChange={handleChild20Change}
+          // InputBlock이 props를 그대로 input에 전달한다면 아래 두 개도 UX에 도움됨
+          // inputMode="numeric"
+          // pattern="[0-9]*"
         />
 
         <InputBlock
           label="비과세 식대 (기본 200,000원)"
           type="number"
           value={nonTax}
-          onChange={(e) => setNonTax(Number(e.target.value))}
+          onChange={(e: any) => setNonTax(Number(e.target.value))}
         />
 
         <p className="text-xs text-gray-500">
