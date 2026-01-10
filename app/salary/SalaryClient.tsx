@@ -42,7 +42,7 @@ function downloadCSV(filename: string, csvText: string) {
 type SalaryInputsShare = {
   salaryRaw: string;
   insured: "yes" | "no";
-  dependents: number;
+  dependents: string; // ✅ 모바일 숫자 입력 버그 방지: 입력은 string
   child20: string; // ✅ 모바일 숫자 입력 버그 방지: 입력은 string
   nonTax: number;
 };
@@ -66,6 +66,25 @@ async function copyToClipboardSafe(text: string) {
   }
 }
 
+// ✅ 숫자 입력(문자열) 공통 정리: 숫자만 남기고, 빈값 허용
+function toDigitsOrEmpty(v: unknown) {
+  const s = String(v ?? "");
+  const digits = s.replace(/[^\d]/g, "");
+  return digits; // "" 가능
+}
+
+// ✅ 과거 공유 링크(숫자였던 경우)까지 안전 복원
+function restoreNumericString(value: unknown, fallback: string) {
+  if (typeof value === "string") {
+    const digits = toDigitsOrEmpty(value);
+    return digits === "" ? "" : String(Number(digits)); // "01" -> "1"
+  }
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return String(value);
+  }
+  return fallback;
+}
+
 export default function SalaryPage() {
   const sp = useSearchParams();
   const router = useRouter();
@@ -73,8 +92,11 @@ export default function SalaryPage() {
   // ✅ 입력은 "표시용 문자열"로 관리(콤마 유지)
   const [salaryRaw, setSalaryRaw] = useState(""); // 세전 월급
   const [insured, setInsured] = useState<"yes" | "no">("yes");
-  const [dependents, setDependents] = useState(1);
-  const [child20, setChild20] = useState<string>("0"); // ✅ FIX: number -> string
+
+  // ✅ FIX: dependents / child20 모두 string으로 관리
+  const [dependents, setDependents] = useState<string>("1");
+  const [child20, setChild20] = useState<string>("0");
+
   const [nonTax, setNonTax] = useState(200000);
   const [openDesc, setOpenDesc] = useState(false);
 
@@ -105,17 +127,10 @@ export default function SalaryPage() {
 
     setSalaryRaw(restored.salaryRaw ?? "");
     setInsured(restored.insured === "no" ? "no" : "yes");
-    setDependents(Number.isFinite(restored.dependents) ? restored.dependents : 1);
 
-    // ✅ 과거 링크가 number로 들어왔을 가능성까지 방어
-    const restoredChild = (restored as any)?.child20;
-    if (typeof restoredChild === "string") {
-      setChild20(restoredChild === "" ? "" : String(parseNumber(restoredChild)));
-    } else if (typeof restoredChild === "number" && Number.isFinite(restoredChild)) {
-      setChild20(String(restoredChild));
-    } else {
-      setChild20("0");
-    }
+    // ✅ dependents/child20: 과거(number) 공유까지 방어 + 문자열 표준화
+    setDependents(restoreNumericString((restored as any)?.dependents, "1"));
+    setChild20(restoreNumericString((restored as any)?.child20, "0"));
 
     setNonTax(Number.isFinite(restored.nonTax) ? restored.nonTax : 200000);
 
@@ -129,12 +144,15 @@ export default function SalaryPage() {
   // ✅ 자동 계산 (버튼 제거)
   const result = useMemo(() => {
     const salary = parseNumber(salaryRaw);
-    const child20Count = Number(child20 || 0); // ✅ 계산 시점에만 숫자로 변환
+
+    // ✅ 계산 시점에만 숫자로 변환
+    const dependentsCount = Number(dependents || 0);
+    const child20Count = Number(child20 || 0);
 
     const res = calculateSalary({
       salary,
       insured,
-      dependents,
+      dependents: dependentsCount,
       child20: child20Count,
       nonTax,
     });
@@ -157,7 +175,9 @@ export default function SalaryPage() {
 
   function handleDownloadSalaryCSV() {
     const salary = parseNumber(salaryRaw);
+    const dependentsCount = Number(dependents || 0);
     const child20Count = Number(child20 || 0);
+
     const now = new Date();
     const y = now.getFullYear();
     const m = String(now.getMonth() + 1).padStart(2, "0");
@@ -170,7 +190,7 @@ export default function SalaryPage() {
     // 입력값
     lines.push([csvEscape("월 급여(세전)"), csvEscape(String(salary))].join(","));
     lines.push([csvEscape("4대보험 가입"), csvEscape(insured === "yes" ? "예" : "아니오")].join(","));
-    lines.push([csvEscape("부양가족 수(본인 포함)"), csvEscape(String(dependents))].join(","));
+    lines.push([csvEscape("부양가족 수(본인 포함)"), csvEscape(String(dependentsCount))].join(","));
     lines.push([csvEscape("20세 이하 자녀 수"), csvEscape(String(child20Count))].join(","));
     lines.push([csvEscape("비과세 식대"), csvEscape(String(nonTax))].join(","));
 
@@ -187,23 +207,6 @@ export default function SalaryPage() {
 
     downloadCSV(`semogye-salary-${y}${m}${d}.csv`, lines.join("\n"));
   }
-
-  // ✅ 모바일에서 0이 안 지워지는 문제 해결용 onChange
-  const handleChild20Change = (e: any) => {
-    const v = String(e?.target?.value ?? "");
-
-    // 지우기 허용
-    if (v === "") {
-      setChild20("");
-      return;
-    }
-
-    // 숫자만 허용(정수)
-    if (/^\d+$/.test(v)) {
-      // 선행 0 정리: "00" -> "0", "01" -> "1"
-      setChild20(String(Number(v)));
-    }
-  };
 
   return (
     <main className="max-w-2xl mx-auto px-5 py-10 space-y-8">
@@ -240,22 +243,31 @@ export default function SalaryPage() {
           </select>
         </div>
 
+        {/* ✅ FIX: dependents는 text+numeric 키패드 + string */}
         <InputBlock
           label="부양가족 수 (본인 포함)"
-          type="number"
+          type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
           value={dependents}
-          onChange={(e: any) => setDependents(Number(e.target.value))}
+          onChange={(e: any) => {
+            const digits = toDigitsOrEmpty(e.target.value);
+            // 선행 0 정리 (단, 빈값은 그대로 유지해서 지우기 가능)
+            setDependents(digits === "" ? "" : String(Number(digits)));
+          }}
         />
 
-        {/* ✅ FIX: child20은 string으로 관리 */}
+        {/* ✅ FIX: child20도 type=number 금지! text+numeric로 통일 */}
         <InputBlock
           label="20세 이하 자녀 수"
-          type="number"
+          type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
           value={child20}
-          onChange={handleChild20Change}
-          // InputBlock이 props를 그대로 input에 전달한다면 아래 두 개도 UX에 도움됨
-          // inputMode="numeric"
-          // pattern="[0-9]*"
+          onChange={(e: any) => {
+            const digits = toDigitsOrEmpty(e.target.value);
+            setChild20(digits === "" ? "" : String(Number(digits)));
+          }}
         />
 
         <InputBlock
