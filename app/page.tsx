@@ -16,7 +16,7 @@ export default function Home() {
 
       <div className="space-y-4">
         <Link href="/salary" className="block card">
-          월급 계산기
+          월급 실수령액 계산기
         </Link>
 
         <Link href="/hourly" className="block card">
