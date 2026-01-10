@@ -85,6 +85,62 @@ function restoreNumericString(value: unknown, fallback: string) {
   return fallback;
 }
 
+/** ✅ 설명 + FAQ 컴포넌트 (SalaryPage 밖에 선언해야 JSX가 안 꼬임) */
+function SalaryWhySection() {
+  return (
+    <div className="mt-4 space-y-3 text-sm text-gray-700">
+      <p>
+        <b>세모계 월급 실수령액 계산기</b>는 <b>세전 월급</b>을 입력하면 <b>2025년 기준</b>{" "}
+        <b>4대보험</b>과 <b>세금</b>을 반영해 실제로 받는 월급(<b>실수령액</b>)을 계산합니다.
+      </p>
+
+      <p>
+        이 계산 결과는 <b>국민연금</b>, <b>건강보험(장기요양보험 포함)</b>, <b>고용보험</b>,{" "}
+        <b>근로소득세 및 지방소득세</b>를 기준으로 산출됩니다.
+      </p>
+
+      <ul className="list-disc pl-5 space-y-1">
+        <li>국민연금</li>
+        <li>건강보험 (장기요양보험 포함)</li>
+        <li>고용보험</li>
+        <li>근로소득세 및 지방소득세</li>
+      </ul>
+
+      <p className="text-gray-600">
+        회사별 공제 기준이나 개인의 소득 조건(부양가족 수 등), 급여 구성(수당/비과세 등)에 따라 실제 급여와 계산 결과에는
+        차이가 있을 수 있습니다.
+      </p>
+
+      <hr className="my-2 opacity-30" />
+
+      <div className="space-y-2">
+        <p className="font-semibold text-gray-800">자주 묻는 질문</p>
+
+        <details className="rounded-lg border bg-white px-4 py-3">
+          <summary className="cursor-pointer font-medium">Q. 월급 실수령액은 어떻게 계산되나요?</summary>
+          <div className="mt-2 text-gray-700">
+            A. 기본적으로 <b>세전 월급</b>에서 <b>4대보험</b>과 <b>세금</b>을 차감해 <b>실제 수령액(실수령액)</b>을 계산합니다.
+          </div>
+        </details>
+
+        <details className="rounded-lg border bg-white px-4 py-3">
+          <summary className="cursor-pointer font-medium">Q. 2025년 기준 계산이 맞나요?</summary>
+          <div className="mt-2 text-gray-700">
+            A. 네. 현재 공개된 기준 자료를 바탕으로 계산하며, 제도/기준이 개정되면 계산 방식이 변경될 수 있습니다.
+          </div>
+        </details>
+
+        <details className="rounded-lg border bg-white px-4 py-3">
+          <summary className="cursor-pointer font-medium">Q. 실제 급여와 계산 결과가 다른 이유는 무엇인가요?</summary>
+          <div className="mt-2 text-gray-700">
+            A. 회사별 공제 항목/기준, 개인의 공제 조건(부양가족 수 등), 기타 급여 구성(수당/비과세 등)에 따라 차이가 발생할 수 있습니다.
+          </div>
+        </details>
+      </div>
+    </div>
+  );
+}
+
 export default function SalaryPage() {
   const sp = useSearchParams();
   const router = useRouter();
@@ -252,7 +308,6 @@ export default function SalaryPage() {
           value={dependents}
           onChange={(e: any) => {
             const digits = toDigitsOrEmpty(e.target.value);
-            // 선행 0 정리 (단, 빈값은 그대로 유지해서 지우기 가능)
             setDependents(digits === "" ? "" : String(Number(digits)));
           }}
         />
@@ -314,7 +369,7 @@ export default function SalaryPage() {
           onShare={async () => {
             if (navigator.share) {
               await navigator.share({
-                title: "세모계 월급 계산기",
+                title: "세모계 월급 실수령액 계산기",
                 url: shareUrl,
               });
             } else {
@@ -325,27 +380,21 @@ export default function SalaryPage() {
         />
       </section>
 
-      {/* 설명 영역 */}
+      {/* ✅ 설명 영역 (openDesc 버튼으로 토글, 내부 FAQ만 details로 접힘) */}
       <section className="pt-2">
-        <button onClick={() => setOpenDesc(!openDesc)} className="text-sm text-gray-600 hover:text-gray-800">
+        <button
+          type="button"
+          onClick={() => setOpenDesc((v) => !v)}
+          className="text-sm text-gray-600 hover:text-gray-800"
+          aria-expanded={openDesc}
+          aria-controls="salary-why"
+        >
           🔍 왜 이 금액이 나왔나요?
         </button>
 
         {openDesc && (
-          <div className="mt-4 rounded-xl bg-gray-50 p-5 text-sm text-gray-700 space-y-3">
-            <p>
-              세모계 월급 계산기는 <strong>2025년 기준</strong>으로 국민연금, 건강보험, 고용보험, 소득세를 반영해 실수령액을
-              계산합니다.
-            </p>
-
-            <ul className="list-disc pl-5 space-y-1">
-              <li>국민연금</li>
-              <li>건강보험 (장기요양보험 포함)</li>
-              <li>고용보험</li>
-              <li>소득세 및 지방소득세</li>
-            </ul>
-
-            <p className="text-gray-500">회사별 공제 기준이나 개인 상황에 따라 실제 급여와 차이가 있을 수 있습니다.</p>
+          <div id="salary-why" className="mt-2">
+            <SalaryWhySection />
           </div>
         )}
       </section>
