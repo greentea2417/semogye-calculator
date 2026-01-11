@@ -44,6 +44,9 @@ export default function HourlyClient() {
   const [includeWeeklyHolidayPay, setIncludeWeeklyHolidayPay] = useState(false);
   const [avgWorkDaysPerWeekRaw, setAvgWorkDaysPerWeekRaw] = useState("5");
 
+  // ✅ 하단 폴딩
+  const [infoOpen, setInfoOpen] = useState(false);
+
   // ✅ 공유 state (입력만)
   const shareState = useMemo<HourlyShareState>(
     () => ({
@@ -101,6 +104,11 @@ export default function HourlyClient() {
     <main className="mx-auto max-w-3xl px-4 py-10">
       <h1 className="text-center text-3xl font-bold">시급 계산기</h1>
       <p className="mt-2 text-center text-sm text-gray-500">월 총 급여 자동 계산</p>
+
+      {/* ✅ SEO/UX 한 줄 요약 */}
+      <p className="mt-2 text-center text-sm text-gray-600">
+        시급을 입력하면 월 기준 총 급여를 자동으로 계산해줍니다.
+      </p>
 
       <section className="mt-8 space-y-5 rounded-2xl border p-6 shadow-sm bg-white">
         {/* 시급 */}
@@ -162,13 +170,28 @@ export default function HourlyClient() {
         {/* 주휴 토글 */}
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm font-medium text-gray-700">주휴수당 포함 여부</p>
+            <div className="flex items-center gap-2">
+              <p className="text-sm font-medium text-gray-700">주휴수당 포함 여부</p>
+
+              {/* ✅ 툴팁(한 줄) */}
+              <button
+                type="button"
+                className="inline-flex h-6 w-6 items-center justify-center rounded-full border text-xs text-gray-600 hover:bg-gray-50"
+                title="주 15시간 이상 근무하고, 소정 근로일을 개근한 경우 주휴수당이 발생할 수 있습니다."
+                aria-label="주휴수당 설명"
+              >
+                i
+              </button>
+            </div>
             <p className="text-xs text-gray-500">* 조건에 따라 달라질 수 있어요</p>
           </div>
+
           <button
             type="button"
             onClick={() => setIncludeWeeklyHolidayPay(!includeWeeklyHolidayPay)}
             className={`h-7 w-12 rounded-full ${includeWeeklyHolidayPay ? "bg-blue-600" : "bg-gray-300"}`}
+            aria-pressed={includeWeeklyHolidayPay}
+            aria-label="주휴수당 포함 토글"
           >
             <span
               className={`block h-5 w-5 rounded-full bg-white transition ${
@@ -225,6 +248,36 @@ export default function HourlyClient() {
             }}
           />
         </div>
+      </section>
+
+      {/* ✅ 하단 폴딩 설명(SEO + 신뢰) */}
+      <section className="mt-6 rounded-2xl border bg-white shadow-sm">
+        <button
+          type="button"
+          onClick={() => setInfoOpen((v) => !v)}
+          className="flex w-full items-center justify-between px-6 py-4 text-left"
+          aria-expanded={infoOpen}
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-base">🔍</span>
+            <span className="font-semibold text-gray-900">이 시급 계산기는 어떻게 계산하나요?</span>
+          </div>
+          <span className="text-gray-500">{infoOpen ? "▲" : "▼"}</span>
+        </button>
+
+        {infoOpen && (
+          <div className="px-6 pb-5 pt-0 text-sm text-gray-700 space-y-2">
+            <p>
+              이 시급 계산기는 시급과 월 실제 근무시간을 기준으로 <b>주휴수당 포함 여부</b>를 선택해{" "}
+              <b>월 총 급여(세전)</b>를 계산합니다.
+            </p>
+            <p>알바·파트타임 근로자가 월급으로 얼마를 받는지 빠르게 확인할 수 있습니다.</p>
+            <p className="text-xs text-gray-500">
+              * 본 계산 결과는 2025년 기준 정보를 바탕으로 산출되었으며, 실제 급여는 근로 형태·계약 조건·사업장
+              정책에 따라 달라질 수 있습니다.
+            </p>
+          </div>
+        )}
       </section>
     </main>
   );
