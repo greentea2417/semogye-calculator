@@ -29,7 +29,7 @@ export default function Home() {
         </Link>
 
         <Link href="/compare" className="block card">
-          근로자 vs 프리랜서 비교
+          프리랜서·알바 소득 처리 확인
         </Link>
 
         <Link href="/hourly-multi" className="block card">

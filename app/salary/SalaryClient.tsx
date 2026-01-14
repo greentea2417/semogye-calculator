@@ -65,53 +65,72 @@ type SalaryShareState = { v: 1; inputs: SalaryInputsShare };
 /* ================= FAQ / 설명 ================= */
 function SalaryWhySection() {
   return (
-    <div className="mt-4 space-y-3 text-sm text-gray-700">
-      <p>
-        <b>세모계 월급 실수령액 계산기</b>는 <b>세전 월급</b>을 입력하면{" "}
-        <b>2025년 기준</b> <b>4대보험</b>과 <b>세금</b>을 반영해 실제로 받는 월급(
-        <b>실수령액</b>)을 계산합니다.
-      </p>
+    <div className="mt-6 space-y-4">
+      {/* 설명 */}
+      <div className="space-y-3 text-sm text-gray-700">
+        <div className="flex items-center gap-2">
+          <span aria-hidden>🔎</span>
+          <p className="font-semibold text-gray-900">왜 이 금액이 나왔나요?</p>
+        </div>
 
-      <ul className="list-disc pl-5 space-y-1">
-        <li>국민연금</li>
-        <li>건강보험 (장기요양보험 포함)</li>
-        <li>고용보험</li>
-        <li>근로소득세 및 지방소득세</li>
-      </ul>
+        <p className="text-sm leading-6 text-gray-700">
+          세모계 월급 실수령액 계산기는{" "}
+          <b className="font-medium text-gray-900">세전 월급</b>
+          {" "}을 입력하면
+          <br />
+          <b className="font-medium text-gray-900">현재 적용 중인 4대보험 요율</b>
+          {" "}과{" "}
+          <b className="font-medium text-gray-900">
+            국세청 고시 근로소득 간이세액표(2024. 3. 1 시행 기준)
+          </b>
+          {" "}을 반영하여
+          <br />
+          실제로 받는 월급(
+          <b className="font-medium text-gray-900">실수령액</b>
+          )을 계산합니다.
+        </p>
 
-      <p className="text-gray-600">
-        회사별 공제 기준이나 개인 조건(부양가족 수, 비과세 항목 등)에 따라 실제 급여와
-        차이가 있을 수 있습니다.
-      </p>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>국민연금</li>
+          <li>건강보험 (장기요양보험 포함)</li>
+          <li>고용보험</li>
+          <li>근로소득세 및 지방소득세</li>
+        </ul>
+
+        <p className="text-xs leading-5 text-gray-500">
+          회사별 공제 기준이나 개인 조건(부양가족 수, 비과세 항목 등)에 따라 실제 급여와 차이가 있을 수 있습니다.
+        </p>
+      </div>
 
       <hr className="my-2 opacity-30" />
 
+      {/* FAQ */}
       <div className="space-y-2">
-        <p className="font-semibold text-gray-800">자주 묻는 질문</p>
+        <p className="text-sm font-semibold text-gray-900">자주 묻는 질문</p>
 
         <details className="rounded-lg border bg-white px-4 py-3">
-          <summary className="cursor-pointer font-medium">
+          <summary className="cursor-pointer text-sm font-medium text-gray-900">
             Q. 월급 실수령액은 어떻게 계산되나요?
           </summary>
-          <div className="mt-2">
-            A. 세전 월급에서 4대보험과 세금을 차감해 실제 수령액을 계산합니다.
+          <div className="mt-2 text-sm leading-6 text-gray-700">
+            A. 세전 월급에서 4대보험과 소득세·지방소득세를 차감해 실수령액을 계산합니다.
           </div>
         </details>
 
         <details className="rounded-lg border bg-white px-4 py-3">
-          <summary className="cursor-pointer font-medium">
-            Q. 2025년 기준 계산이 맞나요?
+          <summary className="cursor-pointer text-sm font-medium text-gray-900">
+            Q. 기준이 최신인가요?
           </summary>
-          <div className="mt-2">
-            A. 현재 공개된 기준을 반영했으며, 제도 개정 시 변경될 수 있습니다.
+          <div className="mt-2 text-sm leading-6 text-gray-700">
+            A. 현재 공개된 기준을 반영했으며, 제도 개정 시 계산 기준은 업데이트됩니다.
           </div>
         </details>
 
         <details className="rounded-lg border bg-white px-4 py-3">
-          <summary className="cursor-pointer font-medium">
+          <summary className="cursor-pointer text-sm font-medium text-gray-900">
             Q. 4대보험 미가입이면 왜 달라지나요?
           </summary>
-          <div className="mt-2">
+          <div className="mt-2 text-sm leading-6 text-gray-700">
             A. 보험 공제 항목이 달라져 실수령액이 다르게 계산될 수 있습니다.
           </div>
         </details>
@@ -119,6 +138,7 @@ function SalaryWhySection() {
     </div>
   );
 }
+
 
 /* ================= main ================= */
 export default function SalaryClient() {
