@@ -129,3 +129,15 @@ export function calculateSalary({
     takeHome,
   };
 }
+export function calculateBonus({ salary, bonus, insured, dependents, child20, nonTax }: any) {
+  // 핵심: 월급과 상여금을 합친 금액을 '총 급여'로 보고 계산기에 던집니다.
+  const totalSalary = salary + bonus;
+
+  return calculateSalary({
+    salary: totalSalary,
+    insured,
+    dependents,
+    child20,
+    nonTax
+  });
+}
