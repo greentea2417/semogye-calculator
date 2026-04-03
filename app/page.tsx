@@ -20,7 +20,7 @@ export default function Home() {
         </Link>
 
         <Link href="/bonus" className="block card bg-blue-50/50 border-blue-100">
-          💰 상여금·성과급 실수령액 계산기
+          상여금·성과급 실수령액 계산기
         </Link>
 
         <Link href="/hourly" className="block card">

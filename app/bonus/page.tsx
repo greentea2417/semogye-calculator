@@ -1,7 +1,6 @@
 "use client";
 
-import { Suspense } from "react"; // 추가
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import InputBlock from "@/components/InputBlock";
 import ResultRow from "@/components/ResultRow";
@@ -9,30 +8,43 @@ import BottomActions from "@/components/BottomActions";
 import { calculateSalary } from "@/utils/salaryCalculators";
 import { decodeShareState, encodeShareState } from "../components/lib/shareState";
 
-/* ... (기본 함수들: parseNumber, formatComma 등은 동일하므로 생략하거나 기존 것 유지) ... */
+/* ================= utils ================= */
 function parseNumber(raw: string | number) {
   const cleaned = String(raw ?? "").replace(/[^\d]/g, "");
-  if (!cleaned) return 0;
-  return Number(cleaned) || 0;
+  return cleaned ? Number(cleaned) : 0;
 }
+
 function formatComma(n: number) {
   return n !== undefined ? n.toLocaleString("ko-KR") : "";
 }
+
 function toDigitsOrEmpty(v: unknown) {
   return String(v ?? "").replace(/[^\d]/g, "");
 }
+
 function restoreNumericString(value: unknown, fallback: string) {
-  if (typeof value === "string") {
-    const d = toDigitsOrEmpty(value);
-    return d === "" ? "" : String(Number(d));
-  }
-  return fallback;
-}
-async function copyToClipboardSafe(text: string) {
-  try { await navigator.clipboard.writeText(text); } catch { /* 생략 */ }
+  const d = toDigitsOrEmpty(value);
+  return d === "" ? fallback : String(Number(d));
 }
 
-/* ================= 메인 로직 분리 ================= */
+// 🔗 클립보드 복사 함수 (이게 없어서 안됐던 거예요!)
+async function copyToClipboardSafe(text: string) {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.top = "-9999px";
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    document.execCommand("copy");
+    ta.remove();
+  }
+}
+
+/* ================= 메인 콘텐츠 ================= */
 function BonusContent() {
   const sp = useSearchParams();
   const router = useRouter();
@@ -56,7 +68,13 @@ function BonusContent() {
     }) || { pension: 0, health: 0, care: 0, employment: 0, incomeTax: 0, residentTax: 0, takeHome: 0 };
   }, [salaryRaw, bonusRaw, insured, dependents, child20, nonTaxRaw]);
 
-  // 공유 데이터 복구 로직 (기존과 동일)
+  // 🔗 공유 URL 생성 로직
+  const shareUrl = useMemo(() => {
+    if (typeof window === "undefined") return "";
+    const state = { v: 1, inputs: { salaryRaw, bonusRaw, insured, dependents, child20, nonTaxRaw } };
+    return `${window.location.origin}/bonus?data=${encodeURIComponent(encodeShareState(state))}`;
+  }, [salaryRaw, bonusRaw, insured, dependents, child20, nonTaxRaw]);
+
   useEffect(() => {
     const data = sp.get("data");
     if (!data) return;
@@ -73,6 +91,11 @@ function BonusContent() {
     }
   }, [sp, router]);
 
+  const handleShare = async () => {
+    await copyToClipboardSafe(shareUrl);
+    alert("링크가 복사되었습니다. 카톡 등에 붙여넣어 보세요!");
+  };
+
   return (
     <main className="max-w-2xl mx-auto px-5 py-10 space-y-8">
       <section className="text-center">
@@ -81,16 +104,50 @@ function BonusContent() {
       </section>
 
       <section className="bg-white p-6 rounded-xl border space-y-4">
-        <InputBlock label="기본 월 급여 (세전)" type="text" value={salaryRaw} onChange={(e: any) => setSalaryRaw(formatComma(parseNumber(e.target.value)))} placeholder="예: 3,000,000" />
-        <InputBlock label="상여금/성과급 (세전)" type="text" value={bonusRaw} onChange={(e: any) => setBonusRaw(formatComma(parseNumber(e.target.value)))} placeholder="예: 5,000,000" />
-        {/* ... 나머지 입력창 UI는 기존과 동일 ... */}
-        <select className="w-full border p-3 rounded-lg" value={insured} onChange={(e) => setInsured(e.target.value as any)}>
+        <InputBlock
+          label="기본 월 급여 (세전)"
+          type="text"
+          value={salaryRaw}
+          onChange={(e: any) => setSalaryRaw(formatComma(parseNumber(e.target.value)))}
+          placeholder="예: 3,000,000"
+        />
+        <InputBlock
+          label="상여금/성과급 (세전)"
+          type="text"
+          value={bonusRaw}
+          onChange={(e: any) => setBonusRaw(formatComma(parseNumber(e.target.value)))}
+          placeholder="예: 5,000,000"
+        />
+
+        <select 
+          className="w-full border p-3 rounded-lg bg-white text-gray-900" 
+          value={insured} 
+          onChange={(e) => setInsured(e.target.value as any)}
+        >
           <option value="yes">4대보험 가입</option>
           <option value="no">4대보험 미가입</option>
         </select>
-        <InputBlock label="부양가족 수" type="text" inputMode="numeric" value={dependents} onChange={(e: any) => setDependents(toDigitsOrEmpty(e.target.value))} />
-        <InputBlock label="20세 이하 자녀 수" type="text" inputMode="numeric" value={child20} onChange={(e: any) => setChild20(toDigitsOrEmpty(e.target.value))} />
-        <InputBlock label="비과세 식대" type="text" value={nonTaxRaw} onChange={(e: any) => setNonTaxRaw(formatComma(parseNumber(e.target.value)))} />
+
+        <InputBlock 
+          label="부양가족 수 (본인 포함)" 
+          type="text" 
+          inputMode="numeric" 
+          value={dependents} 
+          onChange={(e: any) => setDependents(toDigitsOrEmpty(e.target.value))} 
+        />
+        <InputBlock 
+          label="20세 이하 자녀 수" 
+          type="text" 
+          inputMode="numeric" 
+          value={child20} 
+          onChange={(e: any) => setChild20(toDigitsOrEmpty(e.target.value))} 
+        />
+        <InputBlock 
+          label="비과세 식대" 
+          type="text" 
+          value={nonTaxRaw} 
+          onChange={(e: any) => setNonTaxRaw(formatComma(parseNumber(e.target.value)))} 
+        />
       </section>
 
       <section className="bg-white p-6 rounded-xl border">
@@ -106,16 +163,17 @@ function BonusContent() {
           <span>최종 실수령액</span>
           <span>{result.takeHome.toLocaleString()}원</span>
         </div>
-        <BottomActions onCopyLink={() => {}} onShare={() => {}} />
+
+        <BottomActions onCopyLink={handleShare} onShare={handleShare} />
       </section>
     </main>
   );
 }
 
-// 🚀 최종 Export: Suspense로 감싸서 빌드 에러 해결!
+// 🚀 빌드 에러 방지를 위한 Suspense 래퍼
 export default function BonusPage() {
   return (
-    <Suspense fallback={<div className="p-10 text-center">계산기 불러오는 중...</div>}>
+    <Suspense fallback={<div className="p-10 text-center text-gray-500">계산기 불러오는 중...</div>}>
       <BonusContent />
     </Suspense>
   );
