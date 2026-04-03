@@ -10,13 +10,17 @@ export default function Home() {
         <p className="text-gray-500 text-sm">
           월급·시급·대출까지,
           <br />
-         복잡한 계산은 우리가 할게요
+          복잡한 계산은 우리가 할게요
         </p>
       </section>
 
       <div className="space-y-4">
         <Link href="/salary" className="block card">
           월급 실수령액 계산기
+        </Link>
+
+        <Link href="/bonus" className="block card bg-blue-50/50 border-blue-100">
+          💰 상여금·성과급 실수령액 계산기
         </Link>
 
         <Link href="/hourly" className="block card">
