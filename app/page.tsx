@@ -39,7 +39,10 @@ export default function Home() {
         <Link href="/hourly-multi" className="block card">
           사장님용 시급 계산기 (여러 명)
         </Link>
-
+        <Link href="/profit" className="block p-6 bg-white border rounded-xl shadow-sm hover:border-gray-900 transition-colors">
+          <h3 className="font-bold text-lg text-gray-900">개인사업자 순이익 계산기</h3>
+          <p className="text-sm text-gray-400 mt-1">매출액 대비 실질 영업이익 리포트</p>
+        </Link>
         <Link href="/burden" className="block card">
           상환부담률 계산기
         </Link>
