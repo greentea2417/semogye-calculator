@@ -1,48 +1,45 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 
-export default function KbmPage() {
-  const [height, setHeight] = useState("");
-  const [weight, setWeight] = useState("");
-  const kbm = height && weight ? (parseFloat(height) - parseFloat(weight)).toFixed(1) : null;
+const LIFE_TOOLS = [
+  { title: "학점 계산기", description: "기말고사 대비 목표 학점 시뮬레이션", href: "/life/grade", tag: "TARGET" },
+  { title: "BMI 지수", description: "체질량 지수 기반 비만도 체크", href: "/life/bmi", tag: "HEALTH" },
+  { title: "키빼몸", description: "미용 체중과 옷핏 스펙 확인", href: "/life/kbm", tag: "HIT" },
+];
 
+export default function LifePage() {
   return (
-    <main className="max-w-xl mx-auto px-6 py-12 space-y-10">
-      <Link href="/life" className="group inline-flex items-center text-[11px] font-bold text-gray-300 uppercase tracking-[0.2em] hover:text-blue-500 transition-colors">
-        <span className="mr-1 transform group-hover:-translate-x-1 transition-transform">←</span> Life
-      </Link>
-
-      <section className="space-y-1">
-        <h1 className="text-3xl font-black text-gray-900 tracking-tighter">키빼몸</h1>
-        <p className="text-[13px] text-gray-400 font-medium tracking-tight">나의 미용 체중 스펙 확인</p>
+    <main className="max-w-xl mx-auto px-5 py-16 space-y-16">
+      <section className="space-y-2">
+        {/* 중복된 홈 링크 제거 후 타이틀 섹션만 유지 */}
+        <div className="flex items-center space-x-2">
+          <h1 className="text-3xl font-black text-gray-900 tracking-tighter">라이프 계산기</h1>
+          <span className="bg-blue-500 text-[10px] text-white px-2 py-0.5 rounded-full font-black uppercase">New</span>
+        </div>
+        <p className="text-sm text-gray-400 font-medium">더 나은 일상을 위한 생활 지표들</p>
       </section>
 
-      <div className="bg-white border border-gray-50 rounded-[32px] p-8 shadow-sm shadow-gray-200/30 space-y-10">
-        <div className="grid grid-cols-2 gap-6">
-          <div className="space-y-3">
-            <label className="text-[11px] font-bold text-gray-400 uppercase tracking-widest ml-1">Height (cm)</label>
-            <input type="number" placeholder="165" value={height} onChange={(e) => setHeight(e.target.value)}
-              className="w-full bg-gray-50 border-none rounded-[20px] p-5 text-xl font-bold focus:ring-2 focus:ring-blue-500/20 transition-all placeholder:text-gray-200" />
-          </div>
-          <div className="space-y-3">
-            <label className="text-[11px] font-bold text-gray-400 uppercase tracking-widest ml-1">Weight (kg)</label>
-            <input type="number" placeholder="52" value={weight} onChange={(e) => setHeight(e.target.value)}
-              className="w-full bg-gray-50 border-none rounded-[20px] p-5 text-xl font-bold focus:ring-2 focus:ring-blue-500/20 transition-all placeholder:text-gray-200" />
-          </div>
-        </div>
-
-        {kbm && (
-          <div className="pt-10 border-t border-gray-50 flex flex-col items-center animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <span className="text-[10px] font-black text-blue-500 uppercase tracking-[0.2em] mb-2 text-center">Your Result</span>
-            <div className="text-6xl font-black text-gray-900 tracking-tighter mb-4">{kbm}</div>
-            <div className="px-4 py-2 bg-blue-50 rounded-full text-blue-600 text-[12px] font-bold">
-              {parseFloat(kbm) >= 110 ? "👗 모델급 실루엣이네요!" : "✨ 건강하고 정갈한 체중이에요!"}
+      <div className="space-y-4">
+        {LIFE_TOOLS.map((tool, index) => (
+          <Link key={index} href={tool.href} className="group block bg-white border border-gray-100 p-8 rounded-[32px] hover:border-blue-500 transition-all duration-300 shadow-sm shadow-blue-500/5">
+            <div className="flex justify-between items-center">
+              <div className="space-y-1">
+                <div className="flex items-center space-x-2">
+                  <h3 className="font-bold text-lg text-gray-900">{tool.title}</h3>
+                  <span className="text-[9px] font-bold text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded-md">{tool.tag}</span>
+                </div>
+                <p className="text-xs text-gray-400 font-medium">{tool.description}</p>
+              </div>
+              <span className="text-xl text-gray-200 group-hover:text-blue-500 transition-colors transform group-hover:translate-x-1 duration-300">→</span>
             </div>
-          </div>
-        )}
+          </Link>
+        ))}
       </div>
+
+      <footer className="pt-20 text-center">
+        <p className="text-[10px] font-bold text-gray-200 uppercase tracking-[0.2em]">Designed by greentea • 2026</p>
+      </footer>
     </main>
   );
 }
