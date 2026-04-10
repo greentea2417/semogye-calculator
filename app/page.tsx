@@ -58,3 +58,21 @@ export default function HomePage() {
     </main>
   );
 }
+// app/page.tsx 내의 영어 텍스트 부분들 (예시)
+
+{/* 카테고리 태그 부분 */}
+<span className="font-inter text-[10px] font-bold text-gray-300 uppercase tracking-[0.25em]">
+  Business
+</span>
+
+{/* NEW 태그 부분 */}
+<span className="font-inter bg-blue-50 text-[9px] text-blue-500 px-1.5 py-0.5 rounded-md font-bold tracking-[0.05em]">
+  NEW
+</span>
+
+{/* 푸터 부분 */}
+<footer className="pt-10 border-t border-gray-50 text-center">
+  <p className="font-inter text-[9px] font-semibold text-gray-200 uppercase tracking-[0.35em]">
+    Designed by greentea • 2026
+  </p>
+</footer>
