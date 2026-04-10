@@ -5,7 +5,7 @@ import HomeLink from "./components/HomeLink";
 
 export const metadata: Metadata = {
   title: "세모계 | 계산하고 싶은 모든 것",
-  description: "8년 차 광고 디자인 감각으로 설계한 가장 정갈하고 정확한 계산기. 직장인, 프리랜서, 대학생을 위한 모든 계산을 담았습니다.",
+  description: "8년 차 광고 디자인 감각으로 설계한 가장 정갈하고 정확한 계산기.",
   icons: {
     icon: "/favicon.ico",
   },
@@ -24,14 +24,10 @@ export default function RootLayout({
           content="1a5acd7bca43d938b1312e19c2fb3677332e3a02"
         />
       </head>
-      <body className="bg-gray-50 text-gray-900 antialiased font-sans">
-        {/* 홈으로 가기 링크 */}
+      {/* tracking-tighter 추가로 전 페이지 자간을 쫀득하게 설정 */}
+      <body className="bg-gray-50 text-gray-900 antialiased font-sans tracking-tighter">
         <HomeLink />
-        
-        {/* 실제 페이지 내용 */}
         {children}
-        
-        {/* 알림 토스트 호스트 */}
         <ToastHost />
       </body>
     </html>
