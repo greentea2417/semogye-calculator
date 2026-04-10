@@ -2,15 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import ToastHost from "./components/ToastHost";
 import HomeLink from "./components/HomeLink";
-import { Inter } from 'next/font/google';
 
-// 1. 세련된 영문 폰트 Inter 설정
-const inter = Inter({ 
-  subsets: ['latin'],
-  variable: '--font-inter', 
-});
-
-// 2. SEO 및 메타데이터 설정
 export const metadata: Metadata = {
   title: "세모계 | 계산하고 싶은 모든 것",
   description: "8년 차 광고 디자인 감각으로 설계한 가장 정갈하고 정확한 계산기. 직장인, 프리랜서, 대학생을 위한 모든 계산을 담았습니다.",
@@ -19,21 +11,19 @@ export const metadata: Metadata = {
   },
 };
 
-// 3. 메인 레이아웃 함수 (하나로 통합!)
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko" className={inter.variable} suppressHydrationWarning>
+    <html lang="ko" suppressHydrationWarning>
       <head>
         <meta
           name="naver-site-verification"
           content="1a5acd7bca43d938b1312e19c2fb3677332e3a02"
         />
       </head>
-
       <body className="bg-gray-50 text-gray-900 antialiased font-sans">
         {/* 홈으로 가기 링크 */}
         <HomeLink />

@@ -8,7 +8,6 @@ export default function HomePage() {
       {/* --- 상단 헤더 --- */}
       <section className="space-y-2">
         <h1 className="text-3xl font-black text-gray-900 tracking-tighter">세모계</h1>
-        {/* 수정된 슬로건 */}
         <p className="text-sm text-gray-400 font-medium italic">계산하고 싶은 모든 것</p>
       </section>
 
@@ -19,13 +18,13 @@ export default function HomePage() {
             <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Business</span>
             <div className="h-[1px] flex-1 bg-gray-50"></div>
           </div>
-          <Link href="/business" className="group block bg-white border border-gray-100 p-7 rounded-[32px] hover:border-gray-900 transition-all duration-300">
+          <Link href="/business" className="group block bg-white border border-gray-100 p-7 rounded-[32px] hover:border-gray-900 transition-all duration-300 shadow-sm shadow-gray-200/20">
             <div className="flex justify-between items-center">
               <div>
                 <h3 className="font-bold text-lg text-gray-900 mb-0.5">금융·정산</h3>
                 <p className="text-xs text-gray-400">월급, 시급부터 사업 정산까지</p>
               </div>
-              <span className="text-xl text-gray-200 group-hover:text-gray-900 transition-colors">→</span>
+              <span className="text-xl text-gray-200 group-hover:text-gray-900 transition-colors transform group-hover:translate-x-1 duration-300">→</span>
             </div>
           </Link>
         </section>
@@ -45,34 +44,16 @@ export default function HomePage() {
                 </div>
                 <p className="text-xs text-gray-400">학점, 키빼몸 등 일상 지표</p>
               </div>
-              <span className="text-xl text-gray-200 group-hover:text-blue-500 transition-colors">→</span>
+              <span className="text-xl text-gray-200 group-hover:text-blue-500 transition-colors transform group-hover:translate-x-1 duration-300">→</span>
             </div>
           </Link>
         </section>
       </div>
 
       {/* 푸터 */}
-      <footer className="pt-10 border-t border-gray-50 text-center">
+      <footer className="pt-20 text-center">
         <p className="text-[10px] font-bold text-gray-200 uppercase tracking-[0.2em]">Designed by greentea • 2026</p>
       </footer>
     </main>
   );
 }
-// app/page.tsx 내의 영어 텍스트 부분들 (예시)
-
-{/* 카테고리 태그 부분 */}
-<span className="font-inter text-[10px] font-bold text-gray-300 uppercase tracking-[0.25em]">
-  Business
-</span>
-
-{/* NEW 태그 부분 */}
-<span className="font-inter bg-blue-50 text-[9px] text-blue-500 px-1.5 py-0.5 rounded-md font-bold tracking-[0.05em]">
-  NEW
-</span>
-
-{/* 푸터 부분 */}
-<footer className="pt-10 border-t border-gray-50 text-center">
-  <p className="font-inter text-[9px] font-semibold text-gray-200 uppercase tracking-[0.35em]">
-    Designed by greentea • 2026
-  </p>
-</footer>
