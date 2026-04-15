@@ -3,42 +3,66 @@
 import Link from "next/link";
 
 const LIFE_TOOLS = [
-  { title: "학점 계산기", description: "중간, 기말 대비 학점 시뮬레이션", href: "/life/grade", tag: "TARGET" },
-  { title: "BMI 지수", description: "체질량 지수 기반 비만도 체크", href: "/life/bmi", tag: "HEALTH" },
-  { title: "키빼몸", description: "키빼몸을 알아보자", href: "/life/kbm", tag: "HIT" },
+  {
+    category: "학업·자기계발",
+    tools: [
+      { title: "학점 계산기", description: "과목별 성적 입력 후 평균 평점 확인", href: "/life/gpa" },
+      { title: "인생 낭비 환산기", description: "스마트폰 사용 시간으로 본 인생의 기회비용", href: "/life/waste-time" },
+    ],
+  },
+  {
+    category: "건강·저속노화", // 키워드 트렌드에 맞춰 카테고리명 살짝 변경
+    tools: [
+      { title: "내 몸 나이 (생체 나이)", description: "생활 습관 기반 나의 생물학적 나이 측정", href: "/life/body-age" },
+      { title: "키빼몸·BMI", description: "신체 지표를 통한 권장 체질량 및 체중 체크", href: "/life/bmi" },
+    ],
+  },
+  {
+    category: "일상·주거",
+    tools: [
+      { title: "평수 ↔ m² 변환", description: "아파트 타입별 전용면적 초간단 환산", href: "/life/unit-conv" },
+      { title: "이사 D-Day", description: "새집 입주까지 남은 일정과 체크리스트", href: "/life/moving-day" },
+    ],
+  },
 ];
 
 export default function LifePage() {
   return (
-    <main className="max-w-xl mx-auto px-5 py-24 space-y-16">
-      {/* 상단 홈 링크들을 제거하고 타이틀 섹션만 정갈하게 배치 */}
-      <section className="space-y-2">
-        <div className="flex items-center space-x-2">
-          <h1 className="text-3xl font-black text-gray-900 tracking-tighter">라이프 계산기</h1>
-          <span className="bg-blue-500 text-[10px] text-white px-2 py-0.5 rounded-full font-black uppercase tracking-tight">New</span>
-        </div>
-        <p className="text-sm text-gray-400 font-medium tracking-tight">더 나은 일상을 위한 생활 지표들</p>
+    <main className="max-w-xl mx-auto px-5 py-16 space-y-16">
+      <section className="space-y-2 text-center">
+        <h1 className="text-3xl font-black text-gray-900 tracking-tighter">라이프</h1>
+        <p className="text-sm text-gray-400 font-medium">일상의 가치를 숫자로 환산하는 도구</p>
       </section>
 
-      {/* 리스트 섹션 */}
-      <div className="space-y-4">
-        {LIFE_TOOLS.map((tool, index) => (
-          <Link 
-            key={index} 
-            href={tool.href} 
-            className="group block bg-white border border-gray-100 p-8 rounded-[32px] hover:border-blue-500 transition-all duration-300 shadow-sm shadow-blue-500/5"
-          >
-            <div className="flex justify-between items-center">
-              <div className="space-y-1">
-                <div className="flex items-center space-x-2">
-                  <h3 className="font-bold text-lg text-gray-900">{tool.title}</h3>
-                  <span className="text-[9px] font-bold text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded-md">{tool.tag}</span>
-                </div>
-                <p className="text-xs text-gray-400 font-medium">{tool.description}</p>
-              </div>
-              <span className="text-xl text-gray-200 group-hover:text-blue-500 transition-colors transform group-hover:translate-x-1 duration-300">→</span>
+      <div className="space-y-14">
+        {LIFE_TOOLS.map((group, idx) => (
+          <section key={idx} className="space-y-6">
+            <div className="flex items-center space-x-4">
+              <div className="h-[1px] flex-1 bg-gray-100"></div>
+              <span className="text-xs font-black text-gray-900 uppercase tracking-[0.25em]">
+                {group.category}
+              </span>
+              <div className="h-[1px] flex-1 bg-gray-100"></div>
             </div>
-          </Link>
+
+            <div className="grid grid-cols-1 gap-4">
+              {group.tools.map((tool, tIdx) => (
+                <Link 
+                  key={tIdx} 
+                  href={tool.href} 
+                  className="group block bg-white border border-gray-100 p-7 rounded-[32px] hover:border-gray-900 transition-all duration-300 shadow-sm shadow-gray-200/20"
+                >
+                  <div className="flex justify-between items-center">
+                    <div className="space-y-0.5">
+                      <h3 className="font-bold text-lg text-gray-900">{tool.title}</h3>
+                      <p className="text-xs text-gray-400 font-medium">{tool.description}</p>
+                    </div>
+                    <span className="text-xl text-gray-200 group-hover:text-gray-900 transition-colors transform group-hover:translate-x-1 duration-300">→</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
         ))}
       </div>
 

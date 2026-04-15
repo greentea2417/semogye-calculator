@@ -40,9 +40,10 @@ export default function GradeCalculator() {
   };
 
   return (
-    <main className="max-w-md mx-auto px-6 py-12 space-y-8">
-      <section className="text-center space-y-4">
-        <h1 className="text-2xl font-black text-gray-900">학점 계산기</h1>
+    <main className="max-w-md mx-auto px-5 py-12 space-y-8">
+      {/* 헤더 섹션 */}
+      <section className="text-center space-y-5">
+        <h1 className="text-2xl font-black text-gray-900 tracking-tighter">학점 계산기</h1>
         <div className="inline-flex bg-gray-100 p-1 rounded-2xl">
           {[4.5, 4.3].map((val) => (
             <button
@@ -61,7 +62,8 @@ export default function GradeCalculator() {
         </div>
       </section>
 
-      <div className="bg-gray-900 rounded-[40px] p-10 text-center shadow-2xl shadow-blue-100 transition-all">
+      {/* 결과 카드 */}
+      <div className="bg-gray-900 rounded-[40px] p-10 text-center shadow-2xl shadow-blue-100/50">
         <p className="text-white/50 text-xs font-bold mb-2 uppercase tracking-widest">
           {maxGrade} 기준 예상 평점
         </p>
@@ -70,25 +72,26 @@ export default function GradeCalculator() {
         </div>
       </div>
 
+      {/* 과목 리스트 */}
       <div className="space-y-3">
-        {subjects.map((subject, index) => (
-          <div key={subject.id} className="flex items-center space-x-2 bg-white border border-gray-100 p-4 rounded-3xl shadow-sm">
+        {subjects.map((subject) => (
+          <div key={subject.id} className="flex items-center space-x-2 bg-white border border-gray-100 p-4 rounded-[24px] shadow-sm">
             <input
               type="text"
               placeholder="과목명"
-              className="flex-1 text-sm font-bold bg-transparent outline-none border-none focus:ring-0 placeholder:text-gray-200"
+              className="flex-1 text-sm font-bold bg-transparent outline-none border-none focus:ring-0 placeholder:text-gray-200 min-w-0"
               value={subject.name}
               onChange={(e) => updateSubject(subject.id, "name", e.target.value)}
             />
             <select 
-              className="text-xs font-bold bg-gray-50 p-2 rounded-xl outline-none border-none"
+              className="text-[11px] font-bold bg-gray-50 p-2 rounded-xl outline-none border-none cursor-pointer"
               value={subject.credit}
               onChange={(e) => updateSubject(subject.id, "credit", e.target.value)}
             >
               {[1, 2, 3, 4].map(c => <option key={c} value={c}>{c}학점</option>)}
             </select>
             <select 
-              className="text-xs font-black text-blue-600 bg-blue-50 p-2 rounded-xl outline-none border-none min-w-[60px]"
+              className="text-[11px] font-black text-blue-600 bg-blue-50 p-2 rounded-xl outline-none border-none min-w-[55px] cursor-pointer"
               value={subject.grade}
               onChange={(e) => updateSubject(subject.id, "grade", e.target.value)}
             >
@@ -96,23 +99,35 @@ export default function GradeCalculator() {
                 <option key={g} value={g}>{g}</option>
               ))}
             </select>
-            <button onClick={() => removeSubject(subject.id)} className="text-gray-300 hover:text-red-400 px-1">×</button>
+            <button onClick={() => removeSubject(subject.id)} className="text-gray-300 hover:text-red-400 px-1 text-xl">×</button>
           </div>
         ))}
       </div>
 
+      {/* 추가 버튼 */}
       <button 
         onClick={addSubject}
-        className="w-full py-5 border-2 border-dashed border-gray-100 rounded-[30px] text-gray-400 text-sm font-bold hover:bg-gray-50 transition-all"
+        className="w-full py-5 border-2 border-dashed border-gray-100 rounded-[30px] text-gray-400 text-sm font-bold hover:bg-gray-50 hover:border-gray-200 transition-all"
       >
         + 과목 추가하기
       </button>
 
-      <p className="text-[10px] text-gray-300 text-center leading-relaxed">
-        {maxGrade === 4.3 ? "A-, B-, C-, D- 성적이 포함된 4.3 만점 기준입니다." : "일반적인 4.5 만점 기준입니다."}
-        <br />
-        P/NP 과목은 평점에서 제외됩니다.
-      </p>
+      {/* 수정된 푸터 가이드 박스 (이 부분이 핵심입니다) */}
+      <div className="bg-gray-50 rounded-[32px] p-6 space-y-2 mx-1">
+        <p className="text-[11px] text-gray-400 text-center leading-relaxed break-keep">
+          <span className="font-bold text-gray-500 block mb-1">💡 계산 기준 안내</span>
+          {maxGrade === 4.3 
+            ? "A-부터 D-까지 세분화된 4.3 만점 성적 체계를 적용합니다." 
+            : "일반적인 대학교에서 사용하는 4.5 만점 기준입니다."
+          }
+          <br />
+          P(Pass)와 NP(Non-Pass) 과목은 평점 산출 시 제외됩니다.
+        </p>
+      </div>
+
+      <footer className="pt-8 text-center">
+        <p className="text-[10px] font-bold text-gray-200 uppercase tracking-[0.2em]">Designed by greentea • 2026</p>
+      </footer>
     </main>
   );
 }
