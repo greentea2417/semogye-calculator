@@ -18,10 +18,10 @@ const MAIN_CATEGORIES = [
 export default function Home() {
   return (
     <main className="max-w-xl mx-auto px-5 py-24 space-y-20">
-      {/* 히어로 섹션 - 중앙 정렬 강화 */}
+      {/* 히어로 섹션 - 한국어로 복구 및 중앙 정렬 */}
       <section className="flex flex-col items-center text-center space-y-4">
         <h1 className="text-5xl font-black text-gray-900 tracking-tighter italic">
-          SEMOGYE
+          세모계
         </h1>
         <p className="text-sm text-gray-400 font-medium tracking-widest uppercase">
           Everything is Calculable
@@ -31,11 +31,11 @@ export default function Home() {
       {/* 카테고리 선택 섹션 */}
       <div className="space-y-16">
         <section className="space-y-8">
-          {/* 중앙 정렬된 볼드 카테고리 헤더 */}
+          {/* 중앙 정렬된 볼드 카테고리 헤더 - 한국어 복구 */}
           <div className="flex items-center space-x-5">
             <div className="h-[1px] flex-1 bg-gray-100"></div>
             <span className="text-sm font-black text-gray-900 uppercase tracking-[0.2em]">
-              SELECT CATEGORY
+              카테고리 선택
             </span>
             <div className="h-[1px] flex-1 bg-gray-100"></div>
           </div>
@@ -45,18 +45,19 @@ export default function Home() {
               <Link
                 key={idx}
                 href={item.href}
-                className="group block bg-white border border-gray-100 p-9 rounded-[40px] hover:border-gray-900 transition-all duration-300 shadow-sm shadow-gray-200/20"
+                className="group block bg-white border border-gray-100 p-9 rounded-[40px] hover:border-blue-600 transition-all duration-300 shadow-sm shadow-gray-200/20"
               >
                 <div className="flex justify-between items-center">
                   <div className="text-left space-y-2">
-                    <h3 className="font-black text-2xl text-gray-900 italic tracking-tight group-hover:text-blue-600 transition-colors">
+                    {/* 호버 시 폰트 변화 없이 파란색 라인만 뜨도록 설정 */}
+                    <h3 className="font-black text-2xl text-gray-900 italic tracking-tight transition-colors">
                       {item.category}
                     </h3>
                     <p className="text-xs text-gray-400 font-medium">
                       {item.description}
                     </p>
                   </div>
-                  <span className="text-2xl text-gray-200 group-hover:text-gray-900 transition-colors transform group-hover:translate-x-1 duration-300">
+                  <span className="text-2xl text-gray-200 group-hover:text-blue-600 transition-colors transform group-hover:translate-x-1 duration-300">
                     →
                   </span>
                 </div>
