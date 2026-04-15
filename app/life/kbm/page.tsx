@@ -6,8 +6,8 @@ const LIFE_TOOLS = [
   {
     category: "학업·자기계발",
     tools: [
-      { title: "학점 계산기", description: "과목별 성적 입력 후 평균 평점 확인", href: "/life/grade" }, // 탐색기 상 app/life/grade
-      { title: "인생 낭비 환산기", description: "스마트폰 사용 시간으로 본 인생의 기회비용", href: "/life/wast-time" }, // 탐색기 오타 wast-time 반영
+      { title: "학점 계산기", description: "과목별 성적 입력 후 평균 평점 확인", href: "/life/grade" },
+      { title: "인생 낭비 환산기", description: "스마트폰 사용 시간으로 본 인생의 기회비용", href: "/life/wast-time" },
     ],
   },
   {
