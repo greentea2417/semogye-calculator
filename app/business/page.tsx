@@ -5,30 +5,20 @@ import Link from "next/link";
 
 const BUSINESS_TOOLS = [
   {
-    category: "사장님 필수",
+    category: "핵심 도구",
     tools: [
-      { title: "수익률 계산기", description: "판매가 대비 순이익 및 마진율 체크", href: "/profit" },
-    ],
-  },
-  {
-    category: "금융·대출",
-    tools: [
-      { title: "대출부담률 계산기", description: "월 소득 대비 원리금 상환 비율(DSR) 체크", href: "/burden" },
-    ],
-  },
-  {
-    category: "직장인 필수",
-    tools: [
-      { title: "월급 실수령액", description: "비과세, 부양가족 반영 4대보험·소득세 자동 계산", href: "/salary" },
-      { title: "상여금·성과급", description: "보너스 수령 시 실제 내 통장에 꽂히는 금액", href: "/bonus" },
-    ],
-  },
-  {
-    category: "알바·프리랜서",
-    tools: [
-      { title: "시급·알바비", description: "주휴수당, 포괄임금제 포함 월 환산 금액", href: "/hourly" },
-      { title: "프리랜서 3.3%", description: "소득세 3.3% 제외 실지급액 및 원천징수 영수증", href: "/freelance" },
-      { title: "알바 vs 프리랜서 비교", description: "내게 더 유리한 쪽은?", href: "/compare" },
+      // 1. 사장님 계산기: 폴더명이 'profit'입니다.
+      { 
+        title: "사장님 계산기", 
+        description: "판매가 대비 순이익 및 마진율을 한눈에 확인", 
+        href: "/business/profit" 
+      },
+      // 2. 대출부담 계산기: 폴더명이 'burden'입니다.
+      { 
+        title: "대출부담 계산기", 
+        description: "월 소득 대비 원리금 상환 비율(DSR) 체크", 
+        href: "/business/burden" 
+      },
     ],
   },
 ];
@@ -36,19 +26,22 @@ const BUSINESS_TOOLS = [
 export default function BusinessPage() {
   return (
     <main className="max-w-xl mx-auto px-5 py-16 space-y-16">
+      {/* 헤더 섹션 - 중앙 정렬 */}
       <section className="flex flex-col items-center text-center space-y-2">
         <h1 className="text-3xl font-black text-gray-900 tracking-tighter italic">비즈니스·금융</h1>
-        <p className="text-sm text-gray-400 font-medium">정교한 정산 도구</p>
+        <p className="text-sm text-gray-400 font-medium">사장님을 위한 필수 정산 도구</p>
       </section>
 
       <div className="space-y-16">
         {BUSINESS_TOOLS.map((group, idx) => (
           <section key={idx} className="space-y-8">
-            <div className="flex items-center space-x-5">
+            {/* 카테고리 구분선 */}
+            <div className="flex items-center space-x-5 px-2">
               <div className="h-[1px] flex-1 bg-gray-100"></div>
               <span className="text-sm font-black text-gray-900 uppercase tracking-[0.2em]">{group.category}</span>
               <div className="h-[1px] flex-1 bg-gray-100"></div>
             </div>
+            
             <div className="grid grid-cols-1 gap-4">
               {group.tools.map((tool, tIdx) => (
                 <Link 
@@ -56,11 +49,12 @@ export default function BusinessPage() {
                   href={tool.href} 
                   className="group block bg-white border border-gray-100 p-7 rounded-[32px] hover:border-blue-600 transition-all duration-300 shadow-sm shadow-gray-200/20"
                 >
-                  <div className="flex justify-between items-center text-left">
+                  <div className="flex justify-between items-center text-left px-2">
                     <div className="space-y-0.5">
                       <h3 className="font-bold text-lg text-gray-900">{tool.title}</h3>
                       <p className="text-xs text-gray-400 font-medium">{tool.description}</p>
                     </div>
+                    {/* 호버 시 파란색으로 변하는 화살표 */}
                     <span className="text-xl text-gray-200 group-hover:text-blue-600 transition-colors transform group-hover:translate-x-1 duration-300">→</span>
                   </div>
                 </Link>
@@ -69,6 +63,7 @@ export default function BusinessPage() {
           </section>
         ))}
       </div>
+
       <footer className="pt-20 text-center">
         <p className="text-[10px] font-bold text-gray-200 uppercase tracking-[0.2em]">Designed by greentea • 2026</p>
       </footer>
