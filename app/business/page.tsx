@@ -8,7 +8,7 @@ const BUSINESS_TOOLS = [
     category: "사장님 필수",
     tools: [
       { title: "사장님 계산기", description: "판매가 대비 순이익 및 마진율 확인", href: "/profit" },
-      { title: "사장님용 시급 계산", description: "여러 명의 알바생 급여를 한 번에 정산", href: "/business/hourly-multi" },
+      { title: "사장님용 시급 계산", description: "여러 명의 알바생 급여를 한 번에 정산", href: "/hourly-multi" },
       { title: "대출부담률 계산기", description: "소득 대비 원리금 상환 비율(DSR) 체크", href: "/burden" },
     ],
   },
@@ -16,15 +16,15 @@ const BUSINESS_TOOLS = [
     category: "급여 및 정산",
     tools: [
       { title: "월급 실수령액", description: "비과세, 부양가족 반영 세후 급여 계산", href: "/salary" },
-      { title: "상여금·보너스", description: "보너스 수령 시 실제 내 통장에 꽂히는 금액", href: "/business/holiday-pay" },
-      { title: "월급 vs 프리랜서", description: "정규직과 3.3% 계약 중 유리한 쪽 비교", href: "/business/compare" },
+      { title: "상여금·보너스", description: "보너스 수령 시 실제 내 통장에 꽂히는 금액", href: "/bonus" },
+      { title: "월급 vs 프리랜서", description: "정규직과 3.3% 계약 중 유리한 쪽 비교", href: "/compare" },
     ],
   },
   {
     category: "알바·프리랜서",
     tools: [
-      { title: "프리랜서 3.3%", description: "소득세 3.3% 제외 실지급액 확인", href: "/business/freelance" },
-      { title: "시급·알바비", description: "주휴수당 포함 월 예상 수령액 확인", href: "/business/hourly" },
+      { title: "프리랜서 3.3%", description: "소득세 3.3% 제외 실지급액 확인", href: "/freelance" },
+      { title: "시급·알바비", description: "주휴수당 포함 월 예상 수령액 확인", href: "/hourly" },
     ],
   },
 ];
