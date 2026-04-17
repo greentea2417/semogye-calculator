@@ -6,16 +6,15 @@ import { usePathname } from "next/navigation";
 export default function HomeLink() {
   const pathname = usePathname();
 
-  // ✅ 메인페이지에서는 숨김
   if (pathname === "/") return null;
 
   return (
-    <div className="max-w-2xl mx-auto px-5 pt-6">
+    <div className="max-w-md mx-auto px-5 mb-4">
       <Link
         href="/"
-        className="text-sm text-gray-400 hover:text-gray-600 underline"
+        className="text-sm text-gray-500"
       >
-        ← 홈으로
+        ← 홈
       </Link>
     </div>
   );

@@ -1,49 +1,51 @@
 import Link from "next/link";
+import HomeLink from "@/components/HomeLink";
+
+function Item({ href, title, desc }) {
+  return (
+    <Link href={href} className="flex items-center justify-between py-4 border-b border-gray-100">
+      <div>
+        <p className="text-[15px] font-medium text-gray-900">{title}</p>
+        <p className="text-[12px] text-gray-400 mt-1">{desc}</p>
+      </div>
+      <span className="text-gray-300">›</span>
+    </Link>
+  );
+}
 
 export default function BusinessPage() {
   return (
-    <main className="max-w-2xl mx-auto px-5 py-10 space-y-12 mb-20">
-      <section className="flex flex-col items-center text-center mb-10">
-        <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">비즈니스 · 금융</h1>
-        <p className="text-gray-500 text-sm mt-2">당신이 계산하고 싶은 모든 것</p>
-      </section>
+    <main className="max-w-md mx-auto px-5 py-8">
+
+      <h1 className="text-lg font-bold text-gray-900 mb-6">비즈니스</h1>
 
       {/* 사장님 필수 */}
-      <section className="space-y-4">
-        <h2 className="text-center text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase">사장님 필수</h2>
-        <div className="flex flex-col gap-3">
-          <Link href="/profit" className="block p-8 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group text-center">
-            <h3 className="font-bold text-gray-900 text-lg group-hover:text-blue-600 transition-colors">손익계산기</h3>
-            <p className="text-gray-400 text-sm mt-1.5">판매가 대비 수익과 마진율 확인</p>
-          </Link>
-
-          <Link href="/hourly-multi" className="block p-8 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group text-center">
-            <h3 className="font-bold text-gray-900 text-lg group-hover:text-blue-600 transition-colors">사장님용 시급 계산</h3>
-            <p className="text-gray-400 text-sm mt-1.5">여러 알바생의 급여를 한 번에 정산</p>
-          </Link>
+      <section className="mb-8">
+        <h2 className="text-xs font-bold text-gray-400 mb-2">사장님 필수</h2>
+        <div className="bg-white rounded-xl px-2">
+          <Item href="/profit" title="손익 계산기" desc="판매 수익과 마진 확인" />
+          <Item href="/hourly-multi" title="사장님 시급 계산" desc="직원 급여 한번에 계산" />
         </div>
       </section>
 
-      {/* 알바 · 프리랜서 (사라졌던 메뉴들 복구!) */}
-      <section className="space-y-4">
-        <h2 className="text-center text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase">알바 · 프리랜서</h2>
-        <div className="flex flex-col gap-3">
-          <Link href="/hourly" className="block p-8 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group text-center">
-            <h3 className="font-bold text-gray-900 text-lg group-hover:text-blue-600 transition-colors">알바 시급 계산기</h3>
-            <p className="text-gray-400 text-sm mt-1.5">주휴수당 포함 월 예상 수령액 확인</p>
-          </Link>
-
-          <Link href="/compare" className="block p-8 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group text-center">
-            <h3 className="font-bold text-gray-900 text-lg group-hover:text-blue-600 transition-colors">월급 vs 프리랜서</h3>
-            <p className="text-gray-400 text-sm mt-1.5">나에게 유리한 계약 방식 비교</p>
-          </Link>
-
-          <Link href="/freelance" className="block p-8 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group text-center">
-            <h3 className="font-bold text-gray-900 text-lg group-hover:text-blue-600 transition-colors">프리랜서 3.3%</h3>
-            <p className="text-gray-400 text-sm mt-1.5">세금 떼고 실제로 받는 금액 확인</p>
-          </Link>
+      {/* 급여 · 보상 */}
+      <section className="mb-8">
+        <h2 className="text-xs font-bold text-gray-400 mb-2">급여 · 보상</h2>
+        <div className="bg-white rounded-xl px-2">
+          <Item href="/salary" title="월급 계산기" desc="세후 실수령액 확인" />
+          <Item href="/bonus" title="상여금 계산기" desc="보너스 실수령액 계산" />
         </div>
       </section>
+
+      {/* 근로 · 계약 */}
+      <section>
+        <h2 className="text-xs font-bold text-gray-400 mb-2">근로 · 계약</h2>
+        <div className="bg-white rounded-xl px-2">
+          <Item href="/hourly" title="시급 계산기" desc="주휴 포함 월급 계산" />
+          <Item href="/compare" title="월급 vs 프리랜서" desc="유리한 계약 비교" />
+        </div>
+      </section>
+
     </main>
   );
 }

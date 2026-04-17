@@ -1,32 +1,68 @@
 import Link from "next/link";
+import HomeLink from "@/components/HomeLink";
+function Item({ href, title, desc }) {
+  return (
+    <Link
+      href={href}
+      className="flex items-center justify-between py-4 border-b border-gray-100"
+    >
+      <div>
+        <p className="text-[15px] font-medium text-gray-900">{title}</p>
+        <p className="text-[12px] text-gray-400 mt-1">{desc}</p>
+      </div>
+      <span className="text-gray-300">›</span>
+    </Link>
+  );
+}
 
 export default function LifePage() {
   return (
-    <main className="max-w-2xl mx-auto px-5 py-10 space-y-12 mb-20">
-      <section className="flex flex-col items-center text-center mb-10">
-        <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">라이프 계산기</h1>
-      </section>
+    <main className="max-w-md mx-auto px-5 py-8">
 
-      {/* 건강 섹션 (분리 완료!) */}
-      <section className="space-y-4">
-        <h2 className="text-center text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase">건강 관리</h2>
-        <div className="flex flex-col gap-3">
-          <Link href="/life/body-age" className="block p-8 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group text-center">
-            <h3 className="font-bold text-gray-900 text-lg group-hover:text-green-600 transition-colors">내 몸 나이 (생체 나이)</h3>
-            <p className="text-gray-400 text-sm mt-1.5">생활 습관 기반 생물학적 나이 측정</p>
-          </Link>
+      {/* 타이틀 */}
+      <h1 className="text-lg font-bold text-gray-900 mb-6">라이프</h1>
 
-          <Link href="/life/kbm" className="block p-8 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group text-center">
-            <h3 className="font-bold text-gray-900 text-lg group-hover:text-green-600 transition-colors">키빼몸 · 미용 몸무게</h3>
-            <p className="text-gray-400 text-sm mt-1.5">내 키에 딱 예쁜 체중 확인</p>
-          </Link>
-
-          <Link href="/life/bmi" className="block p-8 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group text-center">
-            <h3 className="font-bold text-gray-900 text-lg group-hover:text-green-600 transition-colors">BMI 계산기</h3>
-            <p className="text-gray-400 text-sm mt-1.5">체질량 지수로 보는 비만도 체크</p>
-          </Link>
+      {/* 건강 */}
+      <section className="mb-8">
+        <h2 className="text-xs font-bold text-gray-400 mb-2">건강</h2>
+        <div className="bg-white rounded-xl px-2">
+          <Item
+            href="/life/bmi"
+            title="BMI 계산기"
+            desc="비만도 지수 확인"
+          />
+          <Item
+            href="/life/body-age"
+            title="신체 나이 계산기"
+            desc="내 몸의 실제 나이 확인"
+          />
         </div>
       </section>
+
+      {/* 학습 */}
+      <section className="mb-8">
+        <h2 className="text-xs font-bold text-gray-400 mb-2">학습</h2>
+        <div className="bg-white rounded-xl px-2">
+          <Item
+            href="/life/grade"
+            title="학점 계산기"
+            desc="평균 학점 자동 계산"
+          />
+        </div>
+      </section>
+
+      {/* 재미 */}
+      <section>
+        <h2 className="text-xs font-bold text-gray-400 mb-2">재미</h2>
+        <div className="bg-white rounded-xl px-2">
+          <Item
+            href="/life/waste-time"
+            title="인생 낭비 계산기"
+            desc="내가 낭비한 시간 계산"
+          />
+        </div>
+      </section>
+
     </main>
   );
 }
