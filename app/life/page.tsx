@@ -13,15 +13,15 @@ export default function LifePage() {
         <h2 className="text-center text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase">건강 · 저속노화</h2>
         
         <div className="flex flex-col gap-3">
-          {/* 생체 나이 */}
-          <Link href="/life/bio-age" className="block p-7 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group">
+          {/* 생체 나이 (폴더명: body-age) */}
+          <Link href="/life/body-age" className="block p-7 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group">
             <div className="text-center">
               <h3 className="font-bold text-gray-900 text-lg not-italic">내 몸 나이 (생체 나이)</h3>
               <p className="text-gray-400 text-sm mt-1.5 not-italic">생활 습관 기반 나의 생물학적 나이 측정</p>
             </div>
           </Link>
 
-          {/* BMI 계산기 */}
+          {/* BMI 계산기 (폴더명: bmi) */}
           <Link href="/life/bmi" className="block p-7 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group">
             <div className="text-center">
               <h3 className="font-bold text-gray-900 text-lg not-italic">BMI 계산기</h3>
@@ -29,8 +29,8 @@ export default function LifePage() {
             </div>
           </Link>
 
-          {/* 키빼몸 계산기 */}
-          <Link href="/life/height-weight" className="block p-7 bg-white rounded-[32px] border border-gray-100 shadow-sm hover:shadow-md transition-all group">
+          {/* 키빼몸 계산기 (폴더명: kbm) */}
+          <Link href="/life/kbm" className="block p-7 bg-white rounded-[32px] border border-gray-100 shadow-sm hover:shadow-md transition-all group">
             <div className="text-center">
               <h3 className="font-bold text-gray-900 text-lg not-italic">키빼몸 · 미용 몸무게</h3>
               <p className="text-gray-400 text-sm mt-1.5 not-italic">나의 키에 맞는 가장 예쁘고 건강한 체중 확인</p>
@@ -44,7 +44,7 @@ export default function LifePage() {
         <h2 className="text-center text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase">학업 · 자기관리</h2>
         
         <div className="flex flex-col gap-3">
-          {/* 학점 계산기 */}
+          {/* 학점 계산기 (폴더명: grade) */}
           <Link href="/life/grade" className="block p-7 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group">
             <div className="text-center">
               <h3 className="font-bold text-gray-900 text-lg not-italic">학점 계산기</h3>
@@ -52,8 +52,8 @@ export default function LifePage() {
             </div>
           </Link>
 
-          {/* 인생 낭비 환산기 */}
-          <Link href="/life/waste-time" className="block p-7 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group">
+          {/* 인생 낭비 환산기 (폴더명: wast-time) */}
+          <Link href="/life/wast-time" className="block p-7 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group">
             <div className="text-center">
               <h3 className="font-bold text-gray-900 text-lg not-italic">인생 낭비 환산기</h3>
               <p className="text-gray-400 text-sm mt-1.5 not-italic">무심코 버려지는 시간의 기회비용 확인</p>

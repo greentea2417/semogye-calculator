@@ -1,75 +1,57 @@
-"use client";
-
 import Link from "next/link";
 
-const MAIN_CATEGORIES = [
-  {
-    category: "비즈니스·금융",
-    description: "사장님부터 직장인까지 꼭 필요한 정산 도구",
-    href: "/business",
-  },
-  {
-    category: "라이프·건강",
-    description: "일상의 가치를 숫자로 환산하는 도구",
-    href: "/life",
-  },
-];
-
-export default function Home() {
+export default function HomePage() {
   return (
-    <main className="max-w-xl mx-auto px-5 py-24 space-y-20">
-      {/* 히어로 섹션 - 한국어로 복구 및 중앙 정렬 */}
-      <section className="flex flex-col items-center text-center space-y-4">
-        <h1 className="text-5xl font-black text-gray-900 tracking-tighter italic">
+    <main className="min-h-screen bg-white flex flex-col items-center justify-center px-5 py-20">
+      
+      {/* 헤더 영역: items-center와 text-center로 완벽 중앙 정렬 */}
+      <section className="flex flex-col items-center text-center mb-16">
+        {/* italic 클래스를 삭제하고 font-bold만 남겼습니다 */}
+        <h1 className="text-5xl font-bold text-gray-900 tracking-tighter not-italic">
           세모계
         </h1>
-        <p className="text-sm text-gray-400 font-medium tracking-widest uppercase">
-          Everything is Calculable
+        <p className="text-gray-400 text-xs mt-3 tracking-[0.2em] uppercase not-italic">
+          EVERYTHING IS CALCULABLE
         </p>
       </section>
 
-      {/* 카테고리 선택 섹션 */}
-      <div className="space-y-16">
-        <section className="space-y-8">
-          {/* 중앙 정렬된 볼드 카테고리 헤더 - 한국어 복구 */}
-          <div className="flex items-center space-x-5">
-            <div className="h-[1px] flex-1 bg-gray-100"></div>
-            <span className="text-sm font-black text-gray-900 uppercase tracking-[0.2em]">
-              카테고리 선택
-            </span>
-            <div className="h-[1px] flex-1 bg-gray-100"></div>
-          </div>
+      {/* 카테고리 선택 영역 */}
+      <div className="w-full max-w-[400px] space-y-6">
+        <div className="text-center mb-8">
+          <span className="text-[11px] font-bold text-gray-300 tracking-[0.3em] uppercase">
+            카테고리 선택
+          </span>
+        </div>
 
-          <div className="grid grid-cols-1 gap-5">
-            {MAIN_CATEGORIES.map((item, idx) => (
-              <Link
-                key={idx}
-                href={item.href}
-                className="group block bg-white border border-gray-100 p-9 rounded-[40px] hover:border-blue-600 transition-all duration-300 shadow-sm shadow-gray-200/20"
-              >
-                <div className="flex justify-between items-center">
-                  <div className="text-left space-y-2">
-                    {/* 호버 시 폰트 변화 없이 파란색 라인만 뜨도록 설정 */}
-                    <h3 className="font-black text-2xl text-gray-900 italic tracking-tight transition-colors">
-                      {item.category}
-                    </h3>
-                    <p className="text-xs text-gray-400 font-medium">
-                      {item.description}
-                    </p>
-                  </div>
-                  <span className="text-2xl text-gray-200 group-hover:text-blue-600 transition-colors transform group-hover:translate-x-1 duration-300">
-                    →
-                  </span>
-                </div>
-              </Link>
-            ))}
+        {/* 비즈니스·금융 카드 */}
+        <Link href="/business" className="group block p-10 bg-gray-50 rounded-[40px] hover:bg-gray-100 transition-all border border-transparent hover:border-gray-200">
+          <div className="flex flex-col items-center text-center">
+            <h2 className="text-2xl font-bold text-gray-900 not-italic">
+              비즈니스·금융
+            </h2>
+            <p className="text-gray-400 text-sm mt-2 not-italic">
+              사장님부터 직장인까지 꼭 필요한 정산 도구
+            </p>
           </div>
-        </section>
+        </Link>
+
+        {/* 라이프·건강 카드 */}
+        <Link href="/life" className="group block p-10 bg-gray-50 rounded-[40px] hover:bg-gray-100 transition-all border border-transparent hover:border-gray-200">
+          <div className="flex flex-col items-center text-center">
+            <h2 className="text-2xl font-bold text-gray-900 not-italic">
+              라이프·건강
+            </h2>
+            <p className="text-gray-400 text-sm mt-2 not-italic">
+              일상의 가치를 숫자로 환산하는 도구
+            </p>
+          </div>
+        </Link>
       </div>
 
-      <footer className="pt-20 text-center">
-        <p className="text-[10px] font-bold text-gray-200 uppercase tracking-[0.2em]">
-          Designed by greentea • 2026
+      {/* 하단 카피라이트 */}
+      <footer className="mt-20">
+        <p className="text-[10px] text-gray-300 tracking-[0.2em] uppercase not-italic">
+          DESIGNED BY GREENTEA • 2026
         </p>
       </footer>
     </main>

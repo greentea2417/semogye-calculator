@@ -1,29 +1,9 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import ToastHost from "./components/ToastHost";
-import HomeLink from "./components/HomeLink";
+import Script from 'next/script';
+import "./globals.css"; 
 
-export const metadata: Metadata = {
-  title: "세모계 | 세상의 모든 계산기",
-  description: "광고 디자인 감각으로 설계한 가장 정갈하고 정확한 사장님 필수 계산 도구 모음.",
-  icons: {
-    icon: "/favicon.ico",
-  },
-  // 네이버 및 카톡 공유 시 나타나는 오픈 그래프 설정
-  openGraph: {
-    title: "세모계 | 세상의 모든 계산기",
-    description: "사장님 계산기부터 대출부담률까지, 가장 정갈하고 정확한 계산기 서비스입니다.",
-    url: "https://semogye.com",
-    siteName: "세모계",
-    locale: "ko_KR",
-    type: "website",
-  },
-  // 네이버 검색 로봇을 위한 추가 설정
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+// 만약 아래 Footer 임포트에서 빨간 줄이 나면, 
+// 파일 탐색기에서 components 폴더 안에 Footer.tsx가 있는지 확인해주세요!
+import Footer from "../components/Footer";
 
 export default function RootLayout({
   children,
@@ -33,16 +13,31 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <head>
+        {/* 네이버 사이트 소유 확인 */}
         <meta
           name="naver-site-verification"
           content="1a5acd7bca43d938b1312e19c2fb3677332e3a02"
         />
+        
+        {/* 구글 애드센스 (ca-pub 번호는 사장님 계정 번호로 나중에 꼭 바꾸세요!) */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-553908888516512"
+          strategy="afterInteractive"
+        />
       </head>
-      {/* tracking-tighter 추가로 전 페이지 자간을 쫀득하게 설정 */}
-      <body className="bg-gray-50 text-gray-900 antialiased font-sans tracking-tighter">
-        <HomeLink />
-        {children}
-        <ToastHost />
+      
+      {/* 사장님의 쫀득한 자간 스타일 유지 */}
+      <body className="bg-gray-50 text-gray-900 antialiased font-sans tracking-tighter min-h-screen flex flex-col">
+        
+        {/* 메인 콘텐츠 영역 */}
+        <main className="flex-grow">
+          {children}
+        </main>
+        
+        {/* 하단 푸터 (개인정보처리방침 링크 포함) */}
+        <Footer />
+        
       </body>
     </html>
   );
