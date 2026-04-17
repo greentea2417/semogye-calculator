@@ -1,9 +1,13 @@
 import Script from 'next/script';
 import "./globals.css"; 
 
-// 1. 경로 수정: app 폴더 안에 있으니 ./ 로 시작
-// 2. 파일명 수정: 사진 속 소문자 파일명 footer 반영
+// 1. 경로 및 소문자 파일명 footer 반영 완료
 import Footer from "./components/footer";
+
+export const metadata = {
+  title: "세모계 - 세상의 모든 계산기",
+  description: "당신이 계산하고 싶은 모든 것",
+};
 
 export default function RootLayout({
   children,
@@ -23,18 +27,19 @@ export default function RootLayout({
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1553908888516512"
+          crossOrigin="anonymous"
           strategy="afterInteractive"
         />
       </head>
       
       <body className="bg-gray-50 text-gray-900 antialiased font-sans tracking-tighter min-h-screen flex flex-col">
         
-        {/* 메인 콘텐츠 영역 */}
+        {/* 메인 콘텐츠 영역: flex-grow로 푸터를 하단에 고정 */}
         <main className="flex-grow">
           {children}
         </main>
         
-        {/* 하단 푸터 */}
+        {/* 하단 푸터: components/footer.tsx에서 가져옴 */}
         <Footer />
         
       </body>
