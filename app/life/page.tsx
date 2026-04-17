@@ -35,6 +35,7 @@ export default function LifePage() {
         <div className="bg-white rounded-xl overflow-hidden">
           <Item href="/life/bmi" title="BMI 계산기" desc="비만도 지수 확인" />
           <Item href="/life/body-age" title="신체 나이 계산기" desc="내 몸의 실제 나이 확인" />
+          <Item href="/life/kbm" title="키빼몸 계산기" desc="내 몸매 기준 한눈에 확인"/>
         </div>
       </section>
 

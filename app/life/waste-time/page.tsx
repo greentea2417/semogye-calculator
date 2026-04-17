@@ -75,40 +75,44 @@ export default function WasteTimeCalculator() {
       <footer className="pt-8 text-center">
         <p className="text-[10px] font-bold text-gray-200 uppercase tracking-[0.2em]">Designed by greentea • 2026</p>
       
-      {/* SEO를 위한 정보성 컨텐츠 섹션 */}
-      <section className="mt-20 space-y-10 text-left border-t border-gray-50 pt-16">
-        <div className="space-y-4">
-          <h2 className="text-xl font-bold text-gray-900 tracking-tight">
-            당신의 스마트폰 사용 시간, 왜 중요할까요?
-          </h2>
-          <p className="text-sm text-gray-500 leading-relaxed">
-            현대인의 평균 스마트폰 사용 시간은 하루 5시간 이상으로 조사되었습니다. 
-            단순히 <b>쇼츠, 릴스, 틱톡</b>을 보는 즐거움을 넘어, 이 시간이 평생 쌓였을 때 
-            우리가 잃어버리는 기회비용은 상상 이상입니다. '세모계'의 <b>인생 낭비 환산기</b>는 
-            여러분의 소중한 시간을 시각화하여 더 나은 라이프스타일을 제안합니다.
-          </p>
-        </div>
+      {/* 하단 통합 컨텐츠 */}
+<section className="mt-20 space-y-8 text-left border-t border-gray-100 pt-12">
 
-        <div className="grid gap-6">
-          <div className="p-6 bg-blue-50/50 rounded-[24px] space-y-2">
-            <h3 className="font-bold text-gray-900 text-sm">✅ 스마트폰 중독 방지를 위한 3단계 습관</h3>
-            <ul className="text-xs text-gray-500 space-y-2 list-disc ml-4">
-              <li><b>스크린 타임 확인:</b> 매일 아침 전날 사용 시간을 체크하며 메타인지를 높이세요.</li>
-              <li><b>방해 금지 모드 활용:</b> 집중이 필요한 업무나 공부 시간에는 알림을 차단하세요.</li>
-              <li><b>대체 취미 찾기:</b> 독서, 산책 등 오프라인 활동 시간을 10분씩 늘려보세요.</li>
-            </ul>
-          </div>
+  <h2 className="text-xl font-bold text-gray-900 tracking-tight text-center">
+    당신의 하루 3시간, 정말 괜찮을까요?
+  </h2>
 
-          <div className="p-6 bg-gray-50 rounded-[24px] space-y-2">
-            <h3 className="font-bold text-gray-900 text-sm">💡 시간 관리의 경제적 가치</h3>
-            <p className="text-xs text-gray-500 leading-relaxed">
-              하루 1시간만 아껴도 1년에 365시간, 최저시급 기준 약 360만 원 이상의 가치를 창출할 수 있습니다. 
-              재테크의 시작은 소비를 줄이는 것이 아니라, <b>시간이라는 자원을 관리하는 것</b>에서 시작됩니다.
-            </p>
-          </div>
-        </div>
-      </section>
+  <p className="text-sm text-gray-500 leading-relaxed">
+    요즘 평균 스마트폰 사용 시간은 하루 4~5시간 수준입니다.  
+    얼핏 보면 “다들 이 정도는 쓰지”라고 생각할 수 있지만, 이 시간이 1년, 10년, 평생 쌓이면 이야기가 달라집니다.  
+    단순한 휴식이 아니라 <b>반복적인 짧은 도파민 소비</b>는 집중력 저하, 시간 인식 왜곡, 그리고 생산성 감소로 이어질 수 있습니다.
+  </p>
 
+  <div className="bg-red-50 rounded-[24px] p-6 space-y-2">
+    <h3 className="font-bold text-gray-900 text-sm">⚠️ 우리가 놓치고 있는 것</h3>
+    <p className="text-xs text-gray-600 leading-relaxed">
+      하루 3시간은 1년에 1,000시간이 넘습니다.  
+      이 시간은 새로운 기술을 배우거나, 운동을 하거나, 가족과 더 많은 시간을 보낼 수 있는 기회였습니다.  
+      중요한 건 단순한 “시간 낭비”가 아니라, <b>기회 상실</b>입니다.
+    </p>
+  </div>
+
+  <div className="bg-blue-50 rounded-[24px] p-6 space-y-3">
+    <h3 className="font-bold text-gray-900 text-sm">💡 현실적으로 줄이는 방법</h3>
+    <ul className="text-xs text-gray-600 space-y-2 list-disc ml-4">
+      <li><b>스크린 타임 확인:</b> 하루 사용 시간을 숫자로 인식하는 것부터 시작하세요.</li>
+      <li><b>앱 사용 제한:</b> SNS·영상 앱 사용 시간을 하루 1~2시간으로 제한합니다.</li>
+      <li><b>대체 행동 만들기:</b> 무의식적으로 폰을 들 때, 대신 할 행동을 정해두세요.</li>
+    </ul>
+  </div>
+
+  <p className="text-sm text-gray-500 leading-relaxed">
+    스마트폰은 문제의 원인이 아니라 도구입니다.  
+    중요한 건 “얼마나 쓰느냐”가 아니라 <b>어떻게 쓰느냐</b>입니다.  
+    지금 이 순간부터 단 30분만 줄여도, 당신의 하루는 완전히 달라질 수 있습니다.
+  </p>
+
+</section>
       </footer>
     </main>
   );
