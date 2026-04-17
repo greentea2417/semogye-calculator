@@ -1,9 +1,6 @@
 import Script from 'next/script';
 import "./globals.css"; 
 
-// 1. 경로 및 소문자 파일명 footer 반영 완료
-import Footer from "./components/footer";
-
 export const metadata = {
   title: "세모계 - 세상의 모든 계산기",
   description: "당신이 계산하고 싶은 모든 것",
@@ -32,15 +29,10 @@ export default function RootLayout({
         />
       </head>
       
-      <body className="bg-gray-50 text-gray-900 antialiased font-sans tracking-tighter min-h-screen flex flex-col">
+      <body className="bg-gray-50 text-gray-900 antialiased font-sans tracking-tighter min-h-screen">
         
-        {/* 메인 콘텐츠 영역: flex-grow로 푸터를 하단에 고정 */}
-        <main className="flex-grow">
-          {children}
-        </main>
-        
-        {/* 하단 푸터: components/footer.tsx에서 가져옴 */}
-        <Footer />
+        {/* 메인 콘텐츠 */}
+        {children}
         
       </body>
     </html>
