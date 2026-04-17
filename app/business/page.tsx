@@ -1,62 +1,46 @@
 import Link from "next/link";
 
-export default function LifePage() {
+export default function BusinessPage() {
   return (
     <main className="max-w-2xl mx-auto px-5 py-10 space-y-12 mb-20">
       <section className="flex flex-col items-center text-center mb-10">
-        <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 not-italic">라이프 계산기</h1>
-        <p className="text-gray-500 text-sm mt-2 not-italic">더 나은 일상을 위한 정갈한 도구들</p>
+        <h1 className="text-3xl font-extrabold tracking-tight not-italic">비즈니스 · 금융</h1>
+        <p className="text-gray-500 text-sm mt-2 not-italic">사장님을 위한 정갈한 계산 도구</p>
       </section>
 
-      {/* 건강·저속노화 섹션 */}
+      {/* 정산·세금 섹션 */}
       <section className="space-y-4">
-        <h2 className="text-center text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase not-italic">건강 · 저속노화</h2>
+        <h2 className="text-center text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase not-italic">정산 · 세금</h2>
         
         <div className="flex flex-col gap-3">
-          {/* BMI처럼 폴더구조(/life/body-age/page.tsx)를 찾아가도록 수정 */}
-          <Link href="/life/body-age" className="block p-7 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group">
+          {/* 부가세 계산기 (폴더: vat) */}
+          <Link href="/business/vat" className="block p-7 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group">
             <div className="flex flex-col items-center text-center">
-              <h3 className="font-bold text-gray-900 text-lg not-italic">내 몸 나이 (생체 나이)</h3>
-              <p className="text-gray-400 text-sm mt-1.5 not-italic">생활 습관 기반 나의 생물학적 나이 측정</p>
+              <h3 className="font-bold text-gray-900 text-lg not-italic">부가세 계산기</h3>
+              <p className="text-gray-400 text-sm mt-1.5 not-italic">매출액 기반 간편 부가세 및 공급가액 산출</p>
             </div>
           </Link>
 
-          {/* BMI 계산기 (성공했던 경로 그대로 유지) */}
-          <Link href="/life/bmi" className="block p-7 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group">
+          {/* 종합소득세 (폴더: income) */}
+          <Link href="/business/income" className="block p-7 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group">
             <div className="flex flex-col items-center text-center">
-              <h3 className="font-bold text-gray-900 text-lg not-italic">BMI 계산기</h3>
-              <p className="text-gray-400 text-sm mt-1.5 not-italic">신체 지표를 통한 비만도 및 건강 상태 체크</p>
-            </div>
-          </Link>
-
-          {/* 키빼몸 (폴더구조: /life/kbm/page.tsx) */}
-          <Link href="/life/kbm" className="block p-7 bg-white rounded-[32px] border border-gray-100 shadow-sm hover:shadow-md transition-all group">
-            <div className="flex flex-col items-center text-center">
-              <h3 className="font-bold text-gray-900 text-lg not-italic">키빼몸 · 미용 몸무게</h3>
-              <p className="text-gray-400 text-sm mt-1.5 not-italic">나의 키에 맞는 가장 예쁘고 건강한 체중 확인</p>
+              <h3 className="font-bold text-gray-900 text-lg not-italic">종합소득세 예측</h3>
+              <p className="text-gray-400 text-sm mt-1.5 not-italic">과세표준에 따른 예상 소득세 및 지방소득세 확인</p>
             </div>
           </Link>
         </div>
       </section>
 
-      {/* 학업·자기관리 섹션 */}
+      {/* 이익·마진 섹션 */}
       <section className="space-y-4">
-        <h2 className="text-center text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase not-italic">학업 · 자기관리</h2>
+        <h2 className="text-center text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase not-italic">이익 · 마진</h2>
         
         <div className="flex flex-col gap-3">
-          {/* 학점 계산기 (폴더구조: /life/grade/page.tsx) */}
-          <Link href="/life/grade" className="block p-7 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group">
+          {/* 마진율 계산기 (폴더: margin) */}
+          <Link href="/business/margin" className="block p-7 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group">
             <div className="flex flex-col items-center text-center">
-              <h3 className="font-bold text-gray-900 text-lg not-italic">학점 계산기</h3>
-              <p className="text-gray-400 text-sm mt-1.5 not-italic">4.5 / 4.3 만점 기준 과목별 성적 산출</p>
-            </div>
-          </Link>
-
-          {/* 인생 낭비 환산기 (폴더구조: /life/wast-time/page.tsx) */}
-          <Link href="/life/wast-time" className="block p-7 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group">
-            <div className="flex flex-col items-center text-center">
-              <h3 className="font-bold text-gray-900 text-lg not-italic">인생 낭비 환산기</h3>
-              <p className="text-gray-400 text-sm mt-1.5 not-italic">무심코 버려지는 시간의 기회비용 확인</p>
+              <h3 className="font-bold text-gray-900 text-lg not-italic">마진율 계산기</h3>
+              <p className="text-gray-400 text-sm mt-1.5 not-italic">원가와 판매가 대비 순이익 및 마진율 분석</p>
             </div>
           </Link>
         </div>
