@@ -4,28 +4,33 @@ function Item({ href, title, desc }) {
   return (
     <Link
       href={href}
-      className="flex items-center justify-between py-4 border-b border-gray-100"
+      className="relative flex justify-center py-4 border-b border-gray-100"
     >
-      <div>
+      {/* 가운데 정렬 컨텐츠 */}
+      <div className="text-center">
         <p className="text-[15px] font-medium text-gray-900">{title}</p>
         <p className="text-[12px] text-gray-400 mt-1">{desc}</p>
       </div>
-      <span className="text-gray-300">›</span>
+
+      {/* 오른쪽 화살표 (고정 위치) */}
+      <span className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-300">
+        ›
+      </span>
     </Link>
   );
 }
 
 export default function BusinessPage() {
   return (
-    <main className="max-w-md mx-auto px-5 py-8">
+    <main className="max-w-md mx-auto px-5 py-8 text-center">
 
-      <h1 className="text-2xl font-extrabold text-gray-900 mb-8 text-center tracking-tight">
-        비즈니스
+      <h1 className="text-2xl font-extrabold text-gray-900 mb-8 tracking-tight">
+        비즈니스 계산기
       </h1>
 
       {/* 사장님 필수 */}
       <section className="mb-8">
-        <h2 className="text-xs font-bold text-gray-400 mb-2 text-center">
+        <h2 className="text-xs font-bold text-gray-400 mb-2">
           사장님 필수
         </h2>
         <div className="bg-white rounded-xl px-2">
@@ -36,7 +41,7 @@ export default function BusinessPage() {
 
       {/* 급여 · 보상 */}
       <section className="mb-8">
-        <h2 className="text-xs font-bold text-gray-400 mb-2 text-center">
+        <h2 className="text-xs font-bold text-gray-400 mb-2">
           급여 · 보상
         </h2>
         <div className="bg-white rounded-xl px-2">
@@ -47,24 +52,24 @@ export default function BusinessPage() {
 
       {/* 근로 · 계약 */}
       <section className="mb-8">
-        <h2 className="text-xs font-bold text-gray-400 mb-2 text-center">
+        <h2 className="text-xs font-bold text-gray-400 mb-2">
           근로 · 계약
         </h2>
         <div className="bg-white rounded-xl px-2">
           <Item href="/hourly" title="시급 계산기" desc="주휴 포함 월급 계산" />
-          <Item href="/compare" title="월급 vs 프리랜서" desc="유리한 계약 비교" />
+          <Item href="/compare" title="알바 vs 프리랜서" desc="유리한 계약 비교" />
         </div>
       </section>
 
       {/* 대출 · 금융 */}
       <section>
-        <h2 className="text-xs font-bold text-gray-400 mb-2 text-center">
+        <h2 className="text-xs font-bold text-gray-400 mb-2">
           대출 · 금융
         </h2>
         <div className="bg-white rounded-xl px-2">
           <Item
             href="/burden"
-            title="👉 내 월급으로 이 대출 괜찮을까?"
+            title="내 월급으로 이 대출 괜찮을까?"
             desc="소득 대비 대출 위험도 확인"
           />
         </div>
