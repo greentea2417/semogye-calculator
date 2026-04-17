@@ -167,6 +167,18 @@ export default function BurdenPage() {
           </div>
         )}
       </section>
+      {/* 2. 여기서부터 SEO용 텍스트 추가 (로봇이 좋아하는 부분) */}
+      <section className="space-y-4 px-1">
+        <div>
+          <h4 className="font-bold text-gray-800">내 소득으로 대출 이자 감담 가능할까? DSR 가이드</h4>
+          <p>대출부담률은 금융권에서 말하는 DSR(총부채원리금상환비율)과 일맥상통하며, 이 수치가 높을수록 실질적인 가용 소득이 줄어듭니다. 2026년 금리 변동 시나리오를 고려하여 나의 안전 구간을 미리 체크하는 것이 현명한 금융 생활의 시작입니다.</p>
+        </div>
+
+        <div>
+          <h4 className="font-bold text-gray-800">현명한 대출 관리를 위한 팁</h4>
+          <p>원리금 균등 상환인지, 원금 균등 상환인지에 따라 매달 고정 지출액이 달라집니다. 세모계의 대출부담률 계산기를 통해 복잡한 은행 용어 없이도 나의 재무 건강 상태를 직관적으로 확인해 보세요.</p>
+        </div>
+      </section>
     </main>
   );
 }

@@ -4,10 +4,24 @@ import ToastHost from "./components/ToastHost";
 import HomeLink from "./components/HomeLink";
 
 export const metadata: Metadata = {
-  title: "세모계 | 계산하고 싶은 모든 것",
-  description: "8년 차 광고 디자인 감각으로 설계한 가장 정갈하고 정확한 계산기.",
+  title: "세모계 | 세상의 모든 계산기",
+  description: "광고 디자인 감각으로 설계한 가장 정갈하고 정확한 사장님 필수 계산 도구 모음.",
   icons: {
     icon: "/favicon.ico",
+  },
+  // 네이버 및 카톡 공유 시 나타나는 오픈 그래프 설정
+  openGraph: {
+    title: "세모계 | 세상의 모든 계산기",
+    description: "사장님 계산기부터 대출부담률까지, 가장 정갈하고 정확한 계산기 서비스입니다.",
+    url: "https://semogye.com",
+    siteName: "세모계",
+    locale: "ko_KR",
+    type: "website",
+  },
+  // 네이버 검색 로봇을 위한 추가 설정
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 

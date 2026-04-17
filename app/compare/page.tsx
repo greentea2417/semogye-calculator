@@ -181,3 +181,45 @@ export default function ComparePage() {
     </main>
   );
 }
+<div className="mt-12 w-full border-t border-gray-100 pt-8 mb-20 px-4">
+  <details className="group">
+    <summary className="list-none cursor-pointer flex justify-between items-center text-gray-600 font-bold text-lg">
+      <span className="tracking-tight">📊 월급 vs 프리랜서, 무엇이 다를까요?</span>
+      <span className="text-gray-300 group-open:rotate-180 transition-transform duration-300 text-xs">▼</span>
+    </summary>
+    <div className="mt-6 text-sm text-gray-500 leading-relaxed space-y-6 pb-10">
+      
+      {/* 1. 핵심 요약 비교 (사용자 가이드) */}
+      <div className="bg-blue-50 p-5 rounded-2xl space-y-3">
+        <p className="font-bold text-blue-900">단순 금액보다 '세후 실지급액'이 중요합니다.</p>
+        <div className="grid grid-cols-1 gap-3 text-xs border-t border-blue-100 pt-3">
+          <div className="flex justify-between">
+            <span className="font-semibold text-blue-700">정규직(알바)</span>
+            <span className="text-right text-blue-900">4대 보험 가입, 퇴직금, 유급휴가</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="font-semibold text-blue-700">프리랜서(3.3%)</span>
+            <span className="text-right text-blue-900">소득세 3.3% 공제, 본인 보험료 부담</span>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. SEO용 텍스트 (검색 엔진 로봇 공략) */}
+      <section className="space-y-4 px-1">
+        <div>
+          <h4 className="font-bold text-gray-800 mb-1">프리랜서 전향 전 반드시 체크하세요</h4>
+          <p>프리랜서는 3.3% 원천징수 후 금액을 받지만, 건강보험과 국민연금을 지역가입자로 직접 부담해야 합니다. 일반적으로 프리랜서 소득이 월급의 1.3~1.5배 이상은 되어야 실질적인 소득 수준이 비슷하다고 평가받습니다.</p>
+        </div>
+
+        <div>
+          <h4 className="font-bold text-gray-800 mb-1">2026년 종합소득세와 비용 처리</h4>
+          <p>프리랜서는 매년 5월 종합소득세를 신고합니다. 업무 관련 지출을 비용으로 인정받아 절세할 수 있는 장점이 있지만, 퇴직금이 없다는 점을 고려해 자금을 관리해야 합니다. 세모계는 이런 복잡한 차이를 시각적으로 한눈에 비교할 수 있게 돕습니다.</p>
+        </div>
+      </section>
+
+      <p className="text-[11px] text-gray-400 italic border-l-2 border-gray-200 pl-3">
+        ※ 본 비교는 입력값 기준의 단순 계산이며, 실제 4대 보험 및 근로 조건에 따라 차이가 있을 수 있습니다. 광고 디자이너의 감각으로 설계된 세모계에서 가장 정확한 차이를 확인해 보세요.
+      </p>
+    </div>
+  </details>
+</div>

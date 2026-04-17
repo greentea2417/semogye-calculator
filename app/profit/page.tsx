@@ -107,3 +107,42 @@ export default function ProfitPage() {
     </Suspense>
   );
 }
+
+<div className="mt-12 w-full border-t border-gray-100 pt-8 mb-20 px-4">
+  <details className="group">
+    <summary className="list-none cursor-pointer flex justify-between items-center text-gray-600 font-bold text-lg">
+      <span className="tracking-tight">💡 마진율과 순이익, 정확하게 계산하고 계신가요?</span>
+      <span className="text-gray-300 group-open:rotate-180 transition-transform duration-300 text-xs">▼</span>
+    </summary>
+    <div className="mt-6 text-sm text-gray-500 leading-relaxed space-y-6 pb-10">
+      
+      <section>
+        <h4 className="font-bold text-gray-800 mb-2">1. 마진율과 수익률, 차이를 정확히 아시나요?</h4>
+        <p>마진율은 판매가에서 원가를 뺀 마진이 판매가에서 차지하는 비중을 말하며, 수익률은 원가 대비 이익을 뜻합니다. 장사를 지속하려면 정확한 마진율을 파악하여 적정 판매가를 설정하는 것이 무엇보다 중요합니다.</p>
+      </section>
+      
+      <section>
+        <h4 className="font-bold text-gray-800 mb-2">2. 놓치기 쉬운 '숨은 비용' 체크리스트</h4>
+        <div className="bg-rose-50 p-5 rounded-2xl space-y-3 border border-rose-100 text-xs text-rose-800">
+          <p>• <strong>플랫폼 수수료:</strong> 스마트스토어, 쿠팡 등 매체별 수수료율</p>
+          <p>• <strong>결제 수수료:</strong> 카드 결제 및 각종 페이 수수료(1.5%~3.7%)</p>
+          <p>• <strong>소모품비:</strong> 포장 박스, 테이프, 완충재 비용 등</p>
+        </div>
+      </section>
+
+      <section>
+        <h4 className="font-bold text-gray-800 mb-2">3. 세모계가 제안하는 경영 팁</h4>
+        <p>마진율이 너무 낮으면 유지가 어렵고, 너무 높으면 경쟁력이 떨어집니다. 세모계를 통해 심리적 저항선을 넘지 않는 최적의 판매가를 시뮬레이션해 보세요.</p>
+      </section>
+
+      <section>
+        <h4 className="font-bold text-gray-800 mb-2">4. 디자인으로 완성한 경영의 직관</h4>
+        <p>8년 차 광고 디자이너가 설계한 세모계는 복잡한 숫자 나열이 아닙니다. 사장님이 가장 편안하게 수익 구조를 읽고 현명한 판단을 내릴 수 있도록 최적화된 인터페이스를 제공합니다.</p>
+      </section>
+
+      <p className="text-[11px] text-gray-400 italic border-l-2 border-gray-200 pl-3">
+        ※ 본 계산기는 입력된 값을 바탕으로 한 시뮬레이션 결과이며, 실제 정산 금액은 플랫폼의 정산 주기와 부가세 신고 방식에 따라 달라질 수 있습니다.
+      </p>
+    </div>
+  </details>
+</div>

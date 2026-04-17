@@ -131,3 +131,39 @@ export default function GradeCalculator() {
     </main>
   );
 }
+
+<div className="mt-12 w-full border-t border-gray-100 pt-8 mb-20 px-4">
+  <details className="group">
+    <summary className="list-none cursor-pointer flex justify-between items-center text-gray-600 font-bold text-lg">
+      <span className="tracking-tight">💡 대학 학점 계산기 활용 가이드</span>
+      <span className="text-gray-300 group-open:rotate-180 transition-transform duration-300 text-xs">▼</span>
+    </summary>
+    <div className="mt-6 text-sm text-gray-500 leading-relaxed space-y-6 pb-10">
+      
+      {/* 학점 요약 박스 */}
+      <div className="bg-indigo-50 p-5 rounded-2xl space-y-3 border border-indigo-100">
+        <p className="font-bold text-indigo-900 text-xs uppercase tracking-wider font-mono">GPA Academic Guide</p>
+        <div className="space-y-2 text-xs text-indigo-800">
+          <p>• <strong>계산 기준:</strong> 4.5 만점 및 4.3 만점 선택 지원</p>
+          <p>• <strong>주의 사항:</strong> P/NP 과목은 일반적으로 평점 계산에서 제외됩니다.</p>
+        </div>
+      </div>
+
+      <section className="space-y-4 px-1">
+        <div>
+          <h4 className="font-bold text-gray-800 mb-1">성적 관리의 첫걸음</h4>
+          <p>취업이나 장학금 신청 시 정확한 GPA 파악은 필수입니다. 2026년 최신 대학별 기준을 고려하여, 본인의 성적을 가장 정교하게 시뮬레이션해 보세요. 세모계는 오차 없는 계산 결과를 제공합니다.</p>
+        </div>
+
+        <div>
+          <h4 className="font-bold text-gray-800 mb-1">정갈한 디자인으로 보는 나의 성취</h4>
+          <p>8년 차 광고 디자이너의 감각으로 설계된 인터페이스는 복잡한 과목 입력도 즐겁게 만듭니다. 불필요한 요소는 빼고 성취도에만 집중할 수 있는 세모계만의 디자인을 경험해 보세요.</p>
+        </div>
+      </section>
+
+      <p className="text-[11px] text-gray-400 italic border-l-2 border-gray-200 pl-3">
+        ※ 본 계산기는 일반적인 대학 학점 계산 방식을 따르며, 실제 성적표의 평점 산출 방식은 각 대학교의 학칙에 따라 차이가 있을 수 있습니다.
+      </p>
+    </div>
+  </details>
+</div>

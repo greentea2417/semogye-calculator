@@ -1,58 +1,66 @@
-"use client";
-
-import React from "react";
 import Link from "next/link";
-
-const LIFE_TOOLS = [
-  {
-    category: "학업·자기계발",
-    tools: [
-      { title: "학점 계산기", description: "과목별 성적 입력 후 평균 평점 확인", href: "/life/grade" },
-      { title: "인생 낭비 환산기", description: "스마트폰 사용 시간으로 본 인생의 기회비용", href: "/life/wast-time" }, // 오타 wast-time 반영
-    ],
-  },
-  {
-    category: "건강·저속노화",
-    tools: [
-      { title: "내 몸 나이 (생체 나이)", description: "생활 습관 기반 나의 생물학적 나이 측정", href: "/life/body-age" },
-      { title: "키빼몸·BMI", description: "신체 지표를 통한 권장 체질량 및 체중 체크", href: "/life/bmi" },
-    ],
-  },
-];
 
 export default function LifePage() {
   return (
-    <main className="max-w-xl mx-auto px-5 py-16 space-y-16">
-      <section className="text-center space-y-2">
-        <h1 className="text-3xl font-black text-gray-900 tracking-tighter italic">라이프·건강</h1>
-        <p className="text-sm text-gray-400 font-medium">일상의 가치를 숫자로 환산하는 도구</p>
+    <main className="max-w-2xl mx-auto px-5 py-10 space-y-12 mb-20">
+      <section className="text-center mb-10">
+        <h1 className="text-3xl font-extrabold tracking-tight">라이프 계산기</h1>
+        <p className="text-gray-500 text-sm mt-2">더 나은 일상을 위한 정갈한 도구들</p>
       </section>
 
-      <div className="space-y-16">
-        {LIFE_TOOLS.map((group, idx) => (
-          <section key={idx} className="space-y-8">
-            <div className="flex items-center space-x-5">
-              <div className="h-[1px] flex-1 bg-gray-100"></div>
-              <span className="text-sm font-black text-gray-900 uppercase tracking-[0.2em]">{group.category}</span>
-              <div className="h-[1px] flex-1 bg-gray-100"></div>
+      {/* 건강·저속노화 섹션 */}
+      <section className="space-y-4">
+        <h2 className="text-center text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase">건강 · 저속노화</h2>
+        
+        <div className="flex flex-col gap-3">
+          {/* 생체 나이 */}
+          <Link href="/life/bio-age" className="block p-7 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group">
+            <div className="text-center">
+              <h3 className="font-bold text-gray-900 text-lg not-italic">내 몸 나이 (생체 나이)</h3>
+              <p className="text-gray-400 text-sm mt-1.5 not-italic">생활 습관 기반 나의 생물학적 나이 측정</p>
             </div>
-            <div className="grid grid-cols-1 gap-4">
-              {group.tools.map((tool, tIdx) => (
-                <Link key={tIdx} href={tool.href} className="group block bg-white border border-gray-100 p-7 rounded-[32px] hover:border-blue-600 transition-all duration-300 shadow-sm shadow-gray-200/20">
-                  <div className="flex justify-between items-center text-left">
-                    <div className="space-y-0.5">
-                      <h3 className="font-bold text-lg text-gray-900">{tool.title}</h3>
-                      <p className="text-xs text-gray-400 font-medium">{tool.description}</p>
-                    </div>
-                    <span className="text-xl text-gray-200 group-hover:text-blue-600 transition-colors transform group-hover:translate-x-1 duration-300">→</span>
-                  </div>
-                </Link>
-              ))}
+          </Link>
+
+          {/* BMI 계산기 */}
+          <Link href="/life/bmi" className="block p-7 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group">
+            <div className="text-center">
+              <h3 className="font-bold text-gray-900 text-lg not-italic">BMI 계산기</h3>
+              <p className="text-gray-400 text-sm mt-1.5 not-italic">신체 지표를 통한 비만도 및 건강 상태 체크</p>
             </div>
-          </section>
-        ))}
-      </div>
-      <footer className="pt-20 text-center text-[10px] font-bold text-gray-200 uppercase tracking-[0.2em]">Designed by greentea • 2026</footer>
+          </Link>
+
+          {/* 키빼몸 계산기 */}
+          <Link href="/life/height-weight" className="block p-7 bg-white rounded-[32px] border border-gray-100 shadow-sm hover:shadow-md transition-all group">
+            <div className="text-center">
+              <h3 className="font-bold text-gray-900 text-lg not-italic">키빼몸 · 미용 몸무게</h3>
+              <p className="text-gray-400 text-sm mt-1.5 not-italic">나의 키에 맞는 가장 예쁘고 건강한 체중 확인</p>
+            </div>
+          </Link>
+        </div>
+      </section>
+
+      {/* 학업·자기관리 섹션 */}
+      <section className="space-y-4">
+        <h2 className="text-center text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase">학업 · 자기관리</h2>
+        
+        <div className="flex flex-col gap-3">
+          {/* 학점 계산기 */}
+          <Link href="/life/grade" className="block p-7 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group">
+            <div className="text-center">
+              <h3 className="font-bold text-gray-900 text-lg not-italic">학점 계산기</h3>
+              <p className="text-gray-400 text-sm mt-1.5 not-italic">4.5 / 4.3 만점 기준 과목별 성적 산출</p>
+            </div>
+          </Link>
+
+          {/* 인생 낭비 환산기 */}
+          <Link href="/life/waste-time" className="block p-7 bg-white rounded-[32px] border border-gray-50 shadow-sm hover:shadow-md transition-all group">
+            <div className="text-center">
+              <h3 className="font-bold text-gray-900 text-lg not-italic">인생 낭비 환산기</h3>
+              <p className="text-gray-400 text-sm mt-1.5 not-italic">무심코 버려지는 시간의 기회비용 확인</p>
+            </div>
+          </Link>
+        </div>
+      </section>
     </main>
   );
 }

@@ -115,3 +115,39 @@ export default function BodyAgeCalculator() {
     </main>
   );
 }
+
+<div className="mt-12 w-full border-t border-gray-100 pt-8 mb-20 px-4">
+  <details className="group">
+    <summary className="list-none cursor-pointer flex justify-between items-center text-gray-600 font-bold text-lg">
+      <span className="tracking-tight">💡 내 몸의 진짜 나이, 생체나이 가이드</span>
+      <span className="text-gray-300 group-open:rotate-180 transition-transform duration-300 text-xs">▼</span>
+    </summary>
+    <div className="mt-6 text-sm text-gray-500 leading-relaxed space-y-6 pb-10">
+      
+      {/* 건강 지표 요약 박스 */}
+      <div className="bg-orange-50 p-5 rounded-2xl space-y-3 border border-orange-100">
+        <p className="font-bold text-orange-900 text-xs uppercase tracking-wider font-mono">Bio-Age Management</p>
+        <div className="space-y-2 text-xs text-orange-800">
+          <p>• <strong>핵심 지표:</strong> 식습관, 활동량, 수면의 질 등을 통한 종합 측정</p>
+          <p>• <strong>목표:</strong> 실제 나이보다 5살 젊은 신체 데이터 유지하기</p>
+        </div>
+      </div>
+
+      <section className="space-y-4 px-1">
+        <div>
+          <h4 className="font-bold text-gray-800 mb-1">생체나이, 왜 확인해야 할까요?</h4>
+          <p>단순히 오래 사는 것보다 '건강하게' 사는 것이 중요해진 2026년, 생체나이는 나의 노화 속도를 조절할 수 있는 지표가 됩니다. 세모계는 사장님의 현재 습관이 미래의 신체에 어떤 영향을 주는지 직관적으로 보여드립니다.</p>
+        </div>
+
+        <div>
+          <h4 className="font-bold text-gray-800 mb-1">정갈한 인터페이스로 건강을 디자인하다</h4>
+          <p>8년 차 광고 디자이너의 감각으로 설계된 세모계는 복잡한 건강 수치를 가장 명확하고 아름답게 표현합니다. 지금 당신의 생체나이를 확인하고, 더 젊어질 내일을 계획해 보세요.</p>
+        </div>
+      </section>
+
+      <p className="text-[11px] text-gray-400 italic border-l-2 border-gray-200 pl-3">
+        ※ 본 생체나이 계산은 입력된 설문 데이터를 바탕으로 한 추정치이며, 정확한 진단을 위해서는 정기적인 건강검진 데이터 활용을 권장합니다.
+      </p>
+    </div>
+  </details>
+</div>

@@ -246,11 +246,20 @@ export default function SalaryClient() {
         />
       </section>
 
-      <section>
-        <button onClick={() => setOpenDesc(!openDesc)} className="text-sm text-gray-600">
-          🔍 왜 이 금액이 나왔나요?
-        </button>
-        {openDesc && <SalaryWhySection />}
+      
+        {/* SEO 아코디언 가이드 섹션 */}
+      <section className="mt-12 w-full border-t border-gray-100 pt-8 mb-20">
+        <details 
+          className="group" 
+          open={openDesc} 
+          onToggle={(e) => setOpenDesc((e.target as HTMLDetailsElement).open)}
+        >
+          <summary className="list-none cursor-pointer flex justify-between items-center text-gray-600 font-bold text-lg">
+            <span className="tracking-tight">💡 2026년 월급 실수령액과 세금 가이드</span>
+            <span className="text-gray-300 group-open:rotate-180 transition-transform duration-300 text-xs">▼</span>
+          </summary>
+          <SalaryWhySection />
+        </details>
       </section>
     </main>
   );

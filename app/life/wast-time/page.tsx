@@ -60,7 +60,7 @@ export default function WasteTimeCalculator() {
             <div className="text-3xl font-black text-white">
               {moneyWasted}원
             </div>
-            <p className="text-[10px] text-blue-400 font-bold">이 돈이면 최신 아이폰 한 대 사고 남아요!</p>
+            <p className="text-[10px] text-blue-400 font-bold">금액보다 중요한 건 당신이 놓쳐버린 수만 가지 기회들입니다.</p>
           </div>
         </div>
       )}

@@ -165,3 +165,35 @@ export default function BonusPage() {
     </Suspense>
   );
 }
+
+<div className="mt-12 w-full border-t border-gray-100 pt-8 mb-20">
+  <details className="group">
+    <summary className="list-none cursor-pointer flex justify-between items-center text-gray-600 font-bold text-lg">
+      <span className="tracking-tight">💡 보너스 수령 전 필수 체크! 상여금 실수령액 가이드</span>
+      <span className="text-gray-300 group-open:rotate-180 transition-transform duration-300">▼</span>
+    </summary>
+    <div className="mt-6 text-sm text-gray-500 leading-relaxed space-y-6 pb-10">
+      <section>
+        <h4 className="font-bold text-gray-800 mb-2">1. 보너스, 왜 생각보다 적게 들어올까요?</h4>
+        <p>상여금은 평소 받는 월급과 세금 계산 방식이 다릅니다. 월급과 상여금을 합산하여 소득세 구간을 결정하기 때문에 평소보다 높은 세율이 적용될 수 있습니다.</p>
+      </section>
+      
+      <section>
+        <h4 className="font-bold text-gray-800 mb-2">2. 상여금 세금의 핵심</h4>
+        <div className="bg-orange-50 p-4 rounded-2xl text-orange-900 text-xs">
+          • 소득세: 당월 급여와 합산하여 간이세액표 기준으로 산출<br/>
+          • 4대보험: 상여금 금액에 비례하여 동일하게 차감
+        </div>
+      </section>
+
+      <section>
+        <h4 className="font-bold text-gray-800 mb-2">3. 똑똑한 자금 관리의 시작</h4>
+        <p>세모계는 복잡한 수식 없이도 사장님과 직장인 모두가 직관적으로 실수령액을 파악할 수 있도록 설계되었습니다. 8년 차 디자이너의 감각으로 가장 편안한 정산 경험을 제공합니다.</p>
+      </section>
+
+      <p className="text-[11px] text-gray-400 italic border-l-2 border-gray-200 pl-3">
+        정확한 세액은 개별 연봉 조건과 회사 규정에 따라 다를 수 있으므로 참고용으로 활용하시기 바랍니다.
+      </p>
+    </div>
+  </details>
+</div>
