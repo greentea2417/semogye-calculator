@@ -4,15 +4,15 @@ function Item({ href, title, desc }) {
   return (
     <Link
       href={href}
-      className="group flex items-center justify-between p-5 rounded-2xl border border-gray-100 bg-white hover:border-blue-200 hover:shadow-md transition-all"
+      className="relative flex items-center justify-center p-4 rounded-xl border border-gray-100 bg-white hover:border-blue-200 hover:shadow-sm transition-all group"
     >
-      <div className="text-left">
-        <p className="text-[15px] font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+      <div className="text-center">
+        <p className="text-[14px] font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
           {title}
         </p>
-        <p className="text-[12px] text-gray-400 mt-1">{desc}</p>
+        <p className="text-[11px] text-gray-400 mt-1">{desc}</p>
       </div>
-      <span className="text-gray-300 group-hover:text-blue-500 group-hover:translate-x-1 transition-all">
+      <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-300 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all">
         →
       </span>
     </Link>
@@ -51,42 +51,42 @@ export default function BusinessPage() {
           </p>
         </div>
 
-        <div className="space-y-10">
+        <div className="space-y-8">
           <section>
-            <h2 className="text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase mb-3">
+            <h2 className="text-center text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase mb-3">
               사장님 필수
             </h2>
-            <div className="space-y-3">
+            <div className="space-y-2.5">
               <Item href="/profit" title="손익 계산기" desc="판매 수익과 마진 확인" />
               <Item href="/hourly-multi" title="사장님 시급 계산" desc="직원 급여 한번에 계산" />
             </div>
           </section>
 
           <section>
-            <h2 className="text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase mb-3">
+            <h2 className="text-center text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase mb-3">
               급여 · 보상
             </h2>
-            <div className="space-y-3">
+            <div className="space-y-2.5">
               <Item href="/salary" title="월급 계산기" desc="세후 실수령액 확인" />
               <Item href="/bonus" title="상여금 계산기" desc="보너스 실수령액 계산" />
             </div>
           </section>
 
           <section>
-            <h2 className="text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase mb-3">
+            <h2 className="text-center text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase mb-3">
               근로 · 계약
             </h2>
-            <div className="space-y-3">
+            <div className="space-y-2.5">
               <Item href="/hourly" title="시급 계산기" desc="주휴 포함 월급 계산" />
               <Item href="/compare" title="알바 vs 프리랜서" desc="유리한 계약 비교" />
             </div>
           </section>
 
           <section>
-            <h2 className="text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase mb-3">
+            <h2 className="text-center text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase mb-3">
               대출 · 금융
             </h2>
-            <div className="space-y-3">
+            <div className="space-y-2.5">
               <Item
                 href="/burden"
                 title="내 월급으로 이 대출 괜찮을까?"
