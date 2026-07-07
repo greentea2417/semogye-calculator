@@ -4,15 +4,15 @@ function Item({ href, title, desc }) {
   return (
     <Link
       href={href}
-      className="group flex items-center justify-between p-5 rounded-2xl border border-gray-100 bg-white hover:border-green-200 hover:shadow-md transition-all"
+      className="relative flex items-center justify-center p-4 rounded-xl border border-gray-100 bg-white hover:border-green-200 hover:shadow-sm transition-all group"
     >
-      <div className="text-left">
-        <p className="text-[15px] font-bold text-gray-900 group-hover:text-green-600 transition-colors">
+      <div className="text-center">
+        <p className="text-[14px] font-bold text-gray-900 group-hover:text-green-600 transition-colors">
           {title}
         </p>
-        <p className="text-[12px] text-gray-400 mt-1">{desc}</p>
+        <p className="text-[11px] text-gray-400 mt-1">{desc}</p>
       </div>
-      <span className="text-gray-300 group-hover:text-green-500 group-hover:translate-x-1 transition-all">
+      <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-300 group-hover:text-green-500 group-hover:translate-x-0.5 transition-all">
         →
       </span>
     </Link>
@@ -51,12 +51,12 @@ export default function LifePage() {
           </p>
         </div>
 
-        <div className="space-y-10">
+        <div className="space-y-8">
           <section>
-            <h2 className="text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase mb-3">
+            <h2 className="text-center text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase mb-3">
               건강
             </h2>
-            <div className="space-y-3">
+            <div className="space-y-2.5">
               <Item href="/life/bmi" title="BMI 계산기" desc="비만도 지수 확인" />
               <Item href="/life/body-age" title="신체 나이 계산기" desc="내 몸의 실제 나이 확인" />
               <Item href="/life/kbm" title="키빼몸 계산기" desc="내 몸매 기준 한눈에 확인" />
@@ -64,19 +64,19 @@ export default function LifePage() {
           </section>
 
           <section>
-            <h2 className="text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase mb-3">
+            <h2 className="text-center text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase mb-3">
               학습
             </h2>
-            <div className="space-y-3">
+            <div className="space-y-2.5">
               <Item href="/life/grade" title="학점 계산기" desc="평균 학점 자동 계산" />
             </div>
           </section>
 
           <section>
-            <h2 className="text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase mb-3">
+            <h2 className="text-center text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase mb-3">
               재미
             </h2>
-            <div className="space-y-3">
+            <div className="space-y-2.5">
               <Item
                 href="/life/waste-time"
                 title="내가 날린 인생 시간은?"
