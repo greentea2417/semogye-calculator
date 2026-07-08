@@ -7,6 +7,10 @@ import ResultRow from "@/components/ResultRow";
 import BottomActions from "@/components/BottomActions";
 import { decodeShareState, encodeShareState } from "../components/lib/shareState";
 
+/* ================= 결제/잠금 관련 상수 ================= */
+const PAYMENT_LINK = "https://payment-link-here"; // TODO: 실제 토스 결제 링크로 교체
+const FREE_DOWNLOAD_LIMIT = 1;
+
 /* ================= utils ================= */
 function parseNumber(raw: string | number) {
   const cleaned = String(raw ?? "").replace(/[^\d]/g, "");
@@ -22,12 +26,31 @@ function ProfitContent() {
   const router = useRouter();
 
   // 입력 항목 (사장님용)
-  const [salesRaw, setSalesRaw] = useState("");      // 총 매출
-  const [costRaw, setCostRaw] = useState("");       // 원재료/매입비
-  const [rentRaw, setRentRaw] = useState("");       // 임대료
-  const [laborRaw, setLaborRaw] = useState("");      // 인건비
-  const [utilityRaw, setUtilityRaw] = useState("");    // 공과금/기타
+  const [salesRaw, setSalesRaw] = useState(""); // 총 매출
+  const [costRaw, setCostRaw] = useState(""); // 원재료/매입비
+  const [rentRaw, setRentRaw] = useState(""); // 임대료
+  const [laborRaw, setLaborRaw] = useState(""); // 인건비
+  const [utilityRaw, setUtilityRaw] = useState(""); // 공과금/기타
   const [marketingRaw, setMarketingRaw] = useState(""); // 광고비
+
+  // 유료 기능 상태
+  const [unlocked, setUnlocked] = useState(false);
+  const [freeUsed, setFreeUsed] = useState(false);
+  const [showPaywall, setShowPaywall] = useState(false);
+  const [monthsRaw, setMonthsRaw] = useState("");
+
+  // 결제 완료 후 ?unlocked=1 로 돌아오면 잠금 해제 처리
+  useEffect(() => {
+    try {
+      if (sp.get("unlocked") === "1") {
+        localStorage.setItem("semogye_unlocked", "1");
+        router.replace("/profit");
+      }
+      setUnlocked(localStorage.getItem("semogye_unlocked") === "1");
+      setFreeUsed(localStorage.getItem("semogye_free_used") === "1");
+    } catch (e) {}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const result = useMemo(() => {
     const sales = parseNumber(salesRaw);
@@ -44,6 +67,8 @@ function ProfitContent() {
     return { totalExpense, netProfit, marginRate };
   }, [salesRaw, costRaw, rentRaw, laborRaw, utilityRaw, marketingRaw]);
 
+  const months = parseNumber(monthsRaw);
+
   // 공유 기능 (남편분께 카톡 보낼 때 사용)
   const shareUrl = useMemo(() => {
     if (typeof window === "undefined") return "";
@@ -54,6 +79,48 @@ function ProfitContent() {
   const handleShare = () => {
     navigator.clipboard.writeText(shareUrl);
     alert("이번 달 손익 리포트 링크가 복사되었습니다!");
+  };
+
+  const canDownloadFree = () => !unlocked && !freeUsed;
+
+  const markFreeUsed = () => {
+    try {
+      localStorage.setItem("semogye_free_used", "1");
+      setFreeUsed(true);
+    } catch (e) {}
+  };
+
+  const downloadCsv = () => {
+    const rows = [
+      ["항목", "금액"],
+      ["총 매출", parseNumber(salesRaw)],
+      ["재료/매입비", parseNumber(costRaw)],
+      ["임대료", parseNumber(rentRaw)],
+      ["총 인건비", parseNumber(laborRaw)],
+      ["공과금/기타", parseNumber(utilityRaw)],
+      ["마케팅/광고비", parseNumber(marketingRaw)],
+      ["총 지출액", result.totalExpense],
+      ["최종 순이익", result.netProfit],
+      ["수익률(%)", result.marginRate.toFixed(1)],
+    ];
+    const csv = "\uFEFF" + rows.map((r) => r.join(",")).join("\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "세모계_손익리포트.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleExport = (type: "csv" | "pdf") => {
+    if (!unlocked && freeUsed) {
+      setShowPaywall(true);
+      return;
+    }
+    if (!unlocked) markFreeUsed();
+    if (type === "csv") downloadCsv();
+    else window.print();
   };
 
   return (
@@ -76,7 +143,7 @@ function ProfitContent() {
         <InputBlock label="마케팅/광고비" type="text" value={marketingRaw} onChange={(e: any) => setMarketingRaw(formatComma(parseNumber(e.target.value)))} />
       </section>
 
-      <section className="bg-white p-6 rounded-xl border shadow-sm">
+      <section className="bg-white p-6 rounded-xl border shadow-sm print-report">
         <h2 className="font-bold text-xl mb-4 text-gray-900 border-b pb-2">월간 손익 리포트</h2>
         <ResultRow label="총 지출액" value={result.totalExpense} />
         <hr className="my-4" />
@@ -87,7 +154,7 @@ function ProfitContent() {
         <div className="text-right mt-1 text-sm text-gray-500">
           수익률: <span className="font-bold text-orange-500">{result.marginRate.toFixed(1)}%</span>
         </div>
-        
+
         <p className="mt-6 text-[11px] text-gray-400 leading-relaxed text-center bg-gray-50 p-2 rounded">
           * 부가세 및 종합소득세는 별도로 고려되지 않은 단순 영업이익 계산입니다.
         </p>
@@ -96,6 +163,141 @@ function ProfitContent() {
           <BottomActions onCopyLink={handleShare} onShare={handleShare} />
         </div>
       </section>
+
+      {/* 여러 달 합산 계산 (유료) */}
+      <section className="bg-white p-6 rounded-xl border shadow-sm no-print">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="font-bold text-lg text-gray-900">여러 달 합산 계산</h2>
+          {!unlocked && (
+            <span className="text-[10px] font-extrabold text-white bg-gradient-to-r from-amber-500 to-orange-500 px-2.5 py-1 rounded-full tracking-wide">
+              PRO
+            </span>
+          )}
+        </div>
+        {unlocked ? (
+          <div className="space-y-3">
+            <InputBlock
+              label="합산할 개월 수"
+              type="text"
+              value={monthsRaw}
+              onChange={(e: any) => setMonthsRaw(formatComma(parseNumber(e.target.value)))}
+              placeholder="예: 3"
+            />
+            {months > 0 && (
+              <div className="bg-gray-50 rounded-lg p-4 text-sm space-y-2">
+                <div className="flex justify-between">
+                  <span className="text-gray-500">{months}개월 총 매출</span>
+                  <span className="font-semibold">{(parseNumber(salesRaw) * months).toLocaleString()}원</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-500">{months}개월 총 지출</span>
+                  <span className="font-semibold">{(result.totalExpense * months).toLocaleString()}원</span>
+                </div>
+                <div className="flex justify-between font-bold text-blue-600">
+                  <span>{months}개월 합산 순이익</span>
+                  <span>{(result.netProfit * months).toLocaleString()}원</span>
+                </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="relative bg-gray-50 rounded-lg p-6 text-center overflow-hidden">
+            <div className="absolute inset-0 flex items-center justify-center opacity-[0.06] text-6xl select-none pointer-events-none">
+              🔒
+            </div>
+            <p className="relative text-sm text-gray-500 mb-1">분기·반기 결산을 한번에 계산하고 싶다면?</p>
+            <p className="relative text-xs text-gray-400 mb-4">리포트 팩 구매 시 바로 이용 가능</p>
+            <button
+              onClick={() => setShowPaywall(true)}
+              className="relative px-5 py-2.5 rounded-full bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition-colors"
+            >
+              🔓 잠금 해제하기
+            </button>
+          </div>
+        )}
+      </section>
+
+      {/* 다운로드 */}
+      <section className="no-print space-y-2">
+        <div className="flex gap-3">
+          <button
+            onClick={() => handleExport("csv")}
+            className="flex-1 px-4 py-3 rounded-xl border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
+          >
+            📊 엑셀 다운로드
+          </button>
+          <button
+            onClick={() => handleExport("pdf")}
+            className="flex-1 px-4 py-3 rounded-xl border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
+          >
+            📄 PDF 리포트
+          </button>
+        </div>
+        {!unlocked && (
+          <p className="text-[11px] text-gray-400 text-center">
+            {freeUsed ? (
+              <>무료 다운로드를 모두 사용했어요 · <button onClick={() => setShowPaywall(true)} className="text-blue-600 font-semibold underline">리포트 팩 보기</button></>
+            ) : (
+              "무료 체험 1회 · 이후 리포트 팩으로 무제한 이용"
+            )}
+          </p>
+        )}
+      </section>
+
+      {showPaywall && (
+        <div
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 no-print"
+          onClick={() => setShowPaywall(false)}
+        >
+          <div
+            className="bg-white rounded-2xl p-7 max-w-sm w-full shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="w-12 h-12 rounded-full bg-amber-50 flex items-center justify-center text-2xl mb-4">
+              🔓
+            </div>
+            <h3 className="font-extrabold text-xl text-gray-900 mb-1">리포트 팩 잠금 해제</h3>
+            <p className="text-sm text-gray-500 mb-5">
+              무료 다운로드를 이미 사용하셨어요. 아래 기능을 한 번 결제로 평생 이용하세요.
+            </p>
+
+            <div className="space-y-2.5 mb-6">
+              <div className="flex items-center gap-2 text-sm text-gray-700">
+                <span className="text-green-500 font-bold">✓</span>
+                엑셀·PDF 무제한 다운로드
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-700">
+                <span className="text-green-500 font-bold">✓</span>
+                여러 달 합산 계산 (분기·반기 결산)
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-700">
+                <span className="text-green-500 font-bold">✓</span>
+                평생 이용 (원타임 결제, 구독 아님)
+              </div>
+            </div>
+
+            <div className="flex items-end justify-between mb-4 px-1">
+              <span className="text-xs text-gray-400">일회성 결제</span>
+              <span className="text-2xl font-extrabold text-gray-900">3,900원</span>
+            </div>
+
+            <a
+              href={PAYMENT_LINK}
+              target="_blank"
+              rel="noreferrer"
+              className="block text-center px-5 py-3.5 rounded-full bg-gray-900 text-white text-sm font-bold hover:bg-gray-800 transition-colors mb-2"
+            >
+              지금 잠금 해제하기
+            </a>
+            <button
+              onClick={() => setShowPaywall(false)}
+              className="block w-full text-center px-5 py-2 text-sm text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              나중에 할게요
+            </button>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
@@ -109,40 +311,40 @@ export default function ProfitPage() {
 }
 
 <div className="mt-12 w-full border-t border-gray-100 pt-8 mb-20 px-4">
-  <details className="group">
-    <summary className="list-none cursor-pointer flex justify-between items-center text-gray-600 font-bold text-lg">
-      <span className="tracking-tight">💡 마진율과 순이익, 정확하게 계산하고 계신가요?</span>
-      <span className="text-gray-300 group-open:rotate-180 transition-transform duration-300 text-xs">▼</span>
-    </summary>
-    <div className="mt-6 text-sm text-gray-500 leading-relaxed space-y-6 pb-10">
-      
-      <section>
-        <h4 className="font-bold text-gray-800 mb-2">1. 마진율과 수익률, 차이를 정확히 아시나요?</h4>
-        <p>마진율은 판매가에서 원가를 뺀 마진이 판매가에서 차지하는 비중을 말하며, 수익률은 원가 대비 이익을 뜻합니다. 장사를 지속하려면 정확한 마진율을 파악하여 적정 판매가를 설정하는 것이 무엇보다 중요합니다.</p>
-      </section>
-      
-      <section>
-        <h4 className="font-bold text-gray-800 mb-2">2. 놓치기 쉬운 '숨은 비용' 체크리스트</h4>
-        <div className="bg-rose-50 p-5 rounded-2xl space-y-3 border border-rose-100 text-xs text-rose-800">
-          <p>• <strong>플랫폼 수수료:</strong> 스마트스토어, 쿠팡 등 매체별 수수료율</p>
-          <p>• <strong>결제 수수료:</strong> 카드 결제 및 각종 페이 수수료(1.5%~3.7%)</p>
-          <p>• <strong>소모품비:</strong> 포장 박스, 테이프, 완충재 비용 등</p>
-        </div>
-      </section>
+<details className="group">
+<summary className="list-none cursor-pointer flex justify-between items-center text-gray-600 font-bold text-lg">
+<span className="tracking-tight">💡 마진율과 순이익, 정확하게 계산하고 계신가요?</span>
+<span className="text-gray-300 group-open:rotate-180 transition-transform duration-300 text-xs">▼</span>
+</summary>
+<div className="mt-6 text-sm text-gray-500 leading-relaxed space-y-6 pb-10">
 
-      <section>
-        <h4 className="font-bold text-gray-800 mb-2">3. 세모계가 제안하는 경영 팁</h4>
-        <p>마진율이 너무 낮으면 유지가 어렵고, 너무 높으면 경쟁력이 떨어집니다. 세모계를 통해 심리적 저항선을 넘지 않는 최적의 판매가를 시뮬레이션해 보세요.</p>
-      </section>
+<section>
+<h4 className="font-bold text-gray-800 mb-2">1. 마진율과 수익률, 차이를 정확히 아시나요?</h4>
+<p>마진율은 판매가에서 원가를 뺀 마진이 판매가에서 차지하는 비중을 말하며, 수익률은 원가 대비 이익을 뜻합니다. 장사를 지속하려면 정확한 마진율을 파악하여 적정 판매가를 설정하는 것이 무엇보다 중요합니다.</p>
+</section>
 
-      <section>
-        <h4 className="font-bold text-gray-800 mb-2">4. 디자인으로 완성한 경영의 직관</h4>
-        <p>8년 차 광고 디자이너가 설계한 세모계는 복잡한 숫자 나열이 아닙니다. 사장님이 가장 편안하게 수익 구조를 읽고 현명한 판단을 내릴 수 있도록 최적화된 인터페이스를 제공합니다.</p>
-      </section>
+<section>
+<h4 className="font-bold text-gray-800 mb-2">2. 놓치기 쉬운 '숨은 비용' 체크리스트</h4>
+<div className="bg-rose-50 p-5 rounded-2xl space-y-3 border border-rose-100 text-xs text-rose-800">
+<p>• <strong>플랫폼 수수료:</strong> 스마트스토어, 쿠팡 등 매체별 수수료율</p>
+<p>• <strong>결제 수수료:</strong> 카드 결제 및 각종 페이 수수료(1.5%~3.7%)</p>
+<p>• <strong>소모품비:</strong> 포장 박스, 테이프, 완충재 비용 등</p>
+</div>
+</section>
 
-      <p className="text-[11px] text-gray-400 italic border-l-2 border-gray-200 pl-3">
-        ※ 본 계산기는 입력된 값을 바탕으로 한 시뮬레이션 결과이며, 실제 정산 금액은 플랫폼의 정산 주기와 부가세 신고 방식에 따라 달라질 수 있습니다.
-      </p>
-    </div>
-  </details>
+<section>
+<h4 className="font-bold text-gray-800 mb-2">3. 세모계가 제안하는 경영 팁</h4>
+<p>마진율이 너무 낮으면 유지가 어렵고, 너무 높으면 경쟁력이 떨어집니다. 세모계를 통해 심리적 저항선을 넘지 않는 최적의 판매가를 시뮬레이션해 보세요.</p>
+</section>
+
+<section>
+<h4 className="font-bold text-gray-800 mb-2">4. 디자인으로 완성한 경영의 직관</h4>
+<p>8년 차 광고 디자이너가 설계한 세모계는 복잡한 숫자 나열이 아닙니다. 사장님이 가장 편안하게 수익 구조를 읽고 현명한 판단을 내릴 수 있도록 최적화된 인터페이스를 제공합니다.</p>
+</section>
+
+<p className="text-[11px] text-gray-400 italic border-l-2 border-gray-200 pl-3">
+※ 본 계산기는 입력된 값을 바탕으로 한 시뮬레이션 결과이며, 실제 정산 금액은 플랫폼의 정산 주기와 부가세 신고 방식에 따라 달라질 수 있습니다.
+</p>
+</div>
+</details>
 </div>
