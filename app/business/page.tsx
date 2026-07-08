@@ -1,80 +1,24 @@
 import Link from "next/link";
 
-function Item({ href, title, desc }) {
-  return (
-    <Link
-      href={href}
-      className="relative flex justify-center py-4 border-b border-gray-100"
-    >
-      {/* 가운데 정렬 컨텐츠 */}
-      <div className="text-center">
-        <p className="text-[15px] font-medium text-gray-900">{title}</p>
-        <p className="text-[12px] text-gray-400 mt-1">{desc}</p>
-      </div>
-
-      {/* 오른쪽 화살표 (고정 위치) */}
-      <span className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-300">
-        ›
-      </span>
-    </Link>
-  );
-}
-
 export default function BusinessPage() {
   return (
-    <main className="max-w-md mx-auto px-5 py-8 text-center">
-
-      <h1 className="text-2xl font-extrabold text-gray-900 mb-8 tracking-tight">
+    <div className="flex flex-col items-center justify-center text-center py-16 md:py-20">
+      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold tracking-wide mb-5">
+        <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
         비즈니스 계산기
+      </span>
+      <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-gray-900 mb-3">
+        왼쪽에서 계산기를 선택해주세요
       </h1>
-
-      {/* 사장님 필수 */}
-      <section className="mb-8">
-        <h2 className="text-xs font-bold text-gray-400 mb-2">
-          사장님 필수
-        </h2>
-        <div className="bg-white rounded-xl px-2">
-          <Item href="/profit" title="손익 계산기" desc="판매 수익과 마진 확인" />
-          <Item href="/hourly-multi" title="사장님 시급 계산" desc="직원 급여 한번에 계산" />
-        </div>
-      </section>
-
-      {/* 급여 · 보상 */}
-      <section className="mb-8">
-        <h2 className="text-xs font-bold text-gray-400 mb-2">
-          급여 · 보상
-        </h2>
-        <div className="bg-white rounded-xl px-2">
-          <Item href="/salary" title="월급 계산기" desc="세후 실수령액 확인" />
-          <Item href="/bonus" title="상여금 계산기" desc="보너스 실수령액 계산" />
-        </div>
-      </section>
-
-      {/* 근로 · 계약 */}
-      <section className="mb-8">
-        <h2 className="text-xs font-bold text-gray-400 mb-2">
-          근로 · 계약
-        </h2>
-        <div className="bg-white rounded-xl px-2">
-          <Item href="/hourly" title="시급 계산기" desc="주휴 포함 월급 계산" />
-          <Item href="/compare" title="알바 vs 프리랜서" desc="유리한 계약 비교" />
-        </div>
-      </section>
-
-      {/* 대출 · 금융 */}
-      <section>
-        <h2 className="text-xs font-bold text-gray-400 mb-2">
-          대출 · 금융
-        </h2>
-        <div className="bg-white rounded-xl px-2">
-          <Item
-            href="/burden"
-            title="내 월급으로 이 대출 괜찮을까?"
-            desc="소득 대비 대출 위험도 확인"
-          />
-        </div>
-      </section>
-
-    </main>
+      <p className="text-gray-500 mb-8">
+        급여, 세금, 인건비까지. 필요한 계산을 골라보세요.
+      </p>
+      <Link
+        href="/business/profit"
+        className="px-6 py-3 rounded-full bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition-colors"
+      >
+        손익 계산기로 시작하기 →
+      </Link>
+    </div>
   );
 }

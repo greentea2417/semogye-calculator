@@ -1,68 +1,24 @@
 import Link from "next/link";
 
-function Item({ href, title, desc }) {
-  return (
-    <Link
-      href={href}
-      className="block py-5 border-b border-gray-100 hover:bg-gray-50 transition"
-    >
-      <div className="flex flex-col items-center text-center">
-        <p className="text-[15px] font-medium text-gray-900">
-          {title}
-        </p>
-        <p className="text-[12px] text-gray-400 mt-1">
-          {desc}
-        </p>
-      </div>
-    </Link>
-  );
-}
-
 export default function LifePage() {
   return (
-    <main className="max-w-md mx-auto px-5 py-8 text-center">
-
-      {/* 타이틀 */}
-      <h1 className="text-2xl font-extrabold text-gray-900 mb-8 tracking-tight">
+    <div className="flex flex-col items-center justify-center text-center py-16 md:py-20">
+      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-50 text-green-600 text-xs font-semibold tracking-wide mb-5">
+        <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
         라이프 계산기
+      </span>
+      <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-gray-900 mb-3">
+        왼쪽에서 계산기를 선택해주세요
       </h1>
-
-      {/* 건강 */}
-      <section className="mb-8">
-        <h2 className="text-xs font-bold text-gray-400 mb-3">
-          건강
-        </h2>
-        <div className="bg-white rounded-xl overflow-hidden">
-          <Item href="/life/bmi" title="BMI 계산기" desc="비만도 지수 확인" />
-          <Item href="/life/body-age" title="신체 나이 계산기" desc="내 몸의 실제 나이 확인" />
-          <Item href="/life/kbm" title="키빼몸 계산기" desc="내 몸매 기준 한눈에 확인"/>
-        </div>
-      </section>
-
-      {/* 학습 */}
-      <section className="mb-8">
-        <h2 className="text-xs font-bold text-gray-400 mb-3">
-          학습
-        </h2>
-        <div className="bg-white rounded-xl overflow-hidden">
-          <Item href="/life/grade" title="학점 계산기" desc="평균 학점 자동 계산" />
-        </div>
-      </section>
-
-      {/* 재미 */}
-      <section>
-        <h2 className="text-xs font-bold text-gray-400 mb-3">
-          재미
-        </h2>
-        <div className="bg-white rounded-xl overflow-hidden">
-          <Item
-            href="/life/waste-time"
-            title="내가 날린 인생 시간은?"
-            desc="지금까지 낭비한 시간 계산"
-          />
-        </div>
-      </section>
-
-    </main>
+      <p className="text-gray-500 mb-8">
+        건강, 학업, 그리고 재미까지. 숫자로 확인해보세요.
+      </p>
+      <Link
+        href="/life/bmi"
+        className="px-6 py-3 rounded-full bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition-colors"
+      >
+        BMI 계산기로 시작하기 →
+      </Link>
+    </div>
   );
 }
