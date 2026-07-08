@@ -169,7 +169,9 @@ function ProfitContent() {
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-bold text-lg text-gray-900">여러 달 합산 계산</h2>
           {!unlocked && (
-            <span className="text-[11px] font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded-full">🔒 유료</span>
+            <span className="text-[10px] font-extrabold text-white bg-gradient-to-r from-amber-500 to-orange-500 px-2.5 py-1 rounded-full tracking-wide">
+              PRO
+            </span>
           )}
         </div>
         {unlocked ? (
@@ -199,13 +201,17 @@ function ProfitContent() {
             )}
           </div>
         ) : (
-          <div className="bg-gray-50 rounded-lg p-6 text-center">
-            <p className="text-sm text-gray-500 mb-3">분기·반기 결산을 한번에 계산하고 싶다면?</p>
+          <div className="relative bg-gray-50 rounded-lg p-6 text-center overflow-hidden">
+            <div className="absolute inset-0 flex items-center justify-center opacity-[0.06] text-6xl select-none pointer-events-none">
+              🔒
+            </div>
+            <p className="relative text-sm text-gray-500 mb-1">분기·반기 결산을 한번에 계산하고 싶다면?</p>
+            <p className="relative text-xs text-gray-400 mb-4">리포트 팩 구매 시 바로 이용 가능</p>
             <button
               onClick={() => setShowPaywall(true)}
-              className="px-5 py-2.5 rounded-full bg-gray-900 text-white text-sm font-semibold"
+              className="relative px-5 py-2.5 rounded-full bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition-colors"
             >
-              잠금 해제하기
+              🔓 잠금 해제하기
             </button>
           </div>
         )}
@@ -229,32 +235,63 @@ function ProfitContent() {
         </div>
         {!unlocked && (
           <p className="text-[11px] text-gray-400 text-center">
-            {freeUsed ? "무료 다운로드를 이미 사용했어요" : "무료로 1회 다운로드 가능해요"}
+            {freeUsed ? (
+              <>무료 다운로드를 모두 사용했어요 · <button onClick={() => setShowPaywall(true)} className="text-blue-600 font-semibold underline">리포트 팩 보기</button></>
+            ) : (
+              "무료 체험 1회 · 이후 리포트 팩으로 무제한 이용"
+            )}
           </p>
         )}
       </section>
 
       {showPaywall && (
         <div
-          className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4 no-print"
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 no-print"
           onClick={() => setShowPaywall(false)}
         >
-          <div className="bg-white rounded-2xl p-6 max-w-sm w-full" onClick={(e) => e.stopPropagation()}>
-            <h3 className="font-bold text-lg text-gray-900 mb-2">무료 다운로드를 사용하셨어요</h3>
+          <div
+            className="bg-white rounded-2xl p-7 max-w-sm w-full shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="w-12 h-12 rounded-full bg-amber-50 flex items-center justify-center text-2xl mb-4">
+              🔓
+            </div>
+            <h3 className="font-extrabold text-xl text-gray-900 mb-1">리포트 팩 잠금 해제</h3>
             <p className="text-sm text-gray-500 mb-5">
-              엑셀·PDF 무제한 다운로드 + 여러 달 합산 계산을 잠금 해제하세요.
+              무료 다운로드를 이미 사용하셨어요. 아래 기능을 한 번 결제로 평생 이용하세요.
             </p>
+
+            <div className="space-y-2.5 mb-6">
+              <div className="flex items-center gap-2 text-sm text-gray-700">
+                <span className="text-green-500 font-bold">✓</span>
+                엑셀·PDF 무제한 다운로드
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-700">
+                <span className="text-green-500 font-bold">✓</span>
+                여러 달 합산 계산 (분기·반기 결산)
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-700">
+                <span className="text-green-500 font-bold">✓</span>
+                평생 이용 (원타임 결제, 구독 아님)
+              </div>
+            </div>
+
+            <div className="flex items-end justify-between mb-4 px-1">
+              <span className="text-xs text-gray-400">일회성 결제</span>
+              <span className="text-2xl font-extrabold text-gray-900">3,900원</span>
+            </div>
+
             <a
               href={PAYMENT_LINK}
               target="_blank"
               rel="noreferrer"
-              className="block text-center px-5 py-3 rounded-full bg-gray-900 text-white text-sm font-semibold mb-2"
+              className="block text-center px-5 py-3.5 rounded-full bg-gray-900 text-white text-sm font-bold hover:bg-gray-800 transition-colors mb-2"
             >
-              3,900원으로 잠금 해제
+              지금 잠금 해제하기
             </a>
             <button
               onClick={() => setShowPaywall(false)}
-              className="block w-full text-center px-5 py-2 text-sm text-gray-400"
+              className="block w-full text-center px-5 py-2 text-sm text-gray-400 hover:text-gray-600 transition-colors"
             >
               나중에 할게요
             </button>
