@@ -30,6 +30,10 @@ const groups = [
     label: "대출 · 금융",
     items: [{ href: "/business/burden", title: "내 월급으로 이 대출 괜찮을까?" }],
   },
+  {
+    label: "세금",
+    items: [{ href: "/business/vat", title: "부가세 계산기" }],
+  },
 ];
 
 export default function BusinessLayout({ children }) {
