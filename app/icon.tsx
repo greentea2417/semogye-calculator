@@ -15,17 +15,14 @@ export default function Icon() {
           justifyContent: "center",
           background: "#2563eb",
           borderRadius: "8px",
+          color: "white",
+          fontSize: 20,
+          fontWeight: 800,
+          fontFamily: "sans-serif",
+          letterSpacing: -1,
         }}
       >
-        <div
-          style={{
-            width: 0,
-            height: 0,
-            borderLeft: "9px solid transparent",
-            borderRight: "9px solid transparent",
-            borderBottom: "15px solid white",
-          }}
-        />
+        S
       </div>
     ),
     { ...size }
