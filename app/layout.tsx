@@ -1,5 +1,5 @@
 import Script from 'next/script';
-import "./globals.css"; 
+import "./globals.css";
 
 export const metadata = {
   title: "세모계 - 세상의 모든 계산기",
@@ -19,7 +19,21 @@ export default function RootLayout({
           name="naver-site-verification"
           content="1a5acd7bca43d938b1312e19c2fb3677332e3a02"
         />
-        
+
+        {/* 구글 애널리틱스 (GA4) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-RK8M44P79P"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-RK8M44P79P');
+          `}
+        </Script>
+
         {/* 구글 애드센스 */}
         <Script
           async
@@ -28,12 +42,12 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
       </head>
-      
+
       <body className="bg-gray-50 text-gray-900 antialiased font-sans tracking-tighter min-h-screen">
-        
+
         {/* 메인 콘텐츠 */}
         {children}
-        
+
       </body>
     </html>
   );
