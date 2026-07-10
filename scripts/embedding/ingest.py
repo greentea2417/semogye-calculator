@@ -34,7 +34,7 @@ PRICE_PER_MTOK = 0.02
 
 # Bump when the embedding recipe changes; the index is rebuilt from scratch so
 # vectors produced by different recipes never coexist in one collection.
-EMBED_VERSION = "v2-contextual"
+EMBED_VERSION = "v3-h3-headings"
 
 SOURCES = [
     (REPO / "task.md", "계산기 제작 원칙", "calculator-loop"),
@@ -93,24 +93,30 @@ def chunk_markdown(text: str, max_chars: int = 1800) -> list[tuple[str, str]]:
         if len(body) <= max_chars:
             out.append((head, body))
             continue
-        # too large: split on H3, then on paragraph boundaries
-        parts, cur = [], []
+        # Too large: split on H3. Each H3 part carries its own heading — inheriting
+        # the parent H2 would label every step of a long loop with the same name,
+        # which then poisons the contextual prefix built from that label.
+        parts: list[tuple[str, str]] = []
+        cur: list[str] = []
+        cur_head = head
         for line in body.splitlines():
-            if line.startswith("### ") and cur:
-                parts.append("\n".join(cur))
-                cur = []
+            if line.startswith("### "):
+                if cur:
+                    parts.append((cur_head, "\n".join(cur)))
+                    cur = []
+                cur_head = line.lstrip("# ").strip()
             cur.append(line)
         if cur:
-            parts.append("\n".join(cur))
+            parts.append((cur_head, "\n".join(cur)))
 
-        for part in parts:
+        for sub_head, part in parts:
             while len(part) > max_chars:
                 cut = part.rfind("\n", 0, max_chars)
                 cut = cut if cut > 0 else max_chars
-                out.append((head, part[:cut].strip()))
+                out.append((sub_head, part[:cut].strip()))
                 part = part[cut:]
             if part.strip():
-                out.append((head, part.strip()))
+                out.append((sub_head, part.strip()))
     return out
 
 
@@ -271,6 +277,10 @@ def main() -> int:
     report["finished_at"] = datetime.now(timezone.utc).isoformat()
     report["status"] = "failed" if report["failures"] else "ok"
 
+    # Only claim the recipe version once vectors for it are actually in the index.
+    # Otherwise a failed run would mark the index as up-to-date and the next run
+    # would skip the rebuild it still needs.
+    manifest["embed_version"] = EMBED_VERSION if report["status"] == "ok" else manifest.get("embed_version")
     manifest["runs"].append(
         {k: report[k] for k in ("task_id", "started_at", "finished_at", "status", "chunks_new", "tokens", "cost_usd")}
     )

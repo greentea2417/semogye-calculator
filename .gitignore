@@ -46,3 +46,4 @@ next-env.d.ts
 # knowledge embedding index (local vector DB + backups)
 .knowledge-index/
 .knowledge-index.bak.*/
+__pycache__/
