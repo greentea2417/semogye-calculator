@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/burden",
     "/retirement",
     "/annual",
+    "/unemployment",
     "/privacy",
     "/terms",
     "/contact",
