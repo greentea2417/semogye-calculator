@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/compare",
     "/freelance",
     "/burden",
+    "/rag",
     "/retirement",
     "/annual",
     "/unemployment",

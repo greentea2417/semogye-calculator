@@ -210,6 +210,7 @@ export default function HomePage() {
             <Link href="/contact" className="hover:text-white">문의하기</Link>
             <Link href="/privacy" className="hover:text-white">개인정보처리방침</Link>
             <Link href="/terms" className="hover:text-white">이용약관</Link>
+            <Link href="/rag" className="hover:text-white">RAG 챗봇</Link>
             <Link href="/retirement" className="hover:text-white">퇴직금 계산기</Link>
             <Link href="/annual" className="hover:text-white">연차수당 계산기</Link>
             <Link href="/unemployment" className="hover:text-white">실업급여 계산기</Link>

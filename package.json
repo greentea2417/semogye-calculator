@@ -9,8 +9,10 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "chromadb": "^3.5.0",
     "framer-motion": "^12.23.25",
     "next": "15.5.20",
+    "openai": "^6.46.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
