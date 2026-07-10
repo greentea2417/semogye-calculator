@@ -204,6 +204,15 @@ export default function HomePage() {
           >
             비즈니스 계산기 시작하기
           </Link>
+          <div className="mt-10 flex flex-wrap justify-center gap-3 text-sm text-gray-400">
+            <Link href="/about" className="hover:text-white">소개</Link>
+            <Link href="/faq" className="hover:text-white">FAQ</Link>
+            <Link href="/contact" className="hover:text-white">문의하기</Link>
+            <Link href="/privacy" className="hover:text-white">개인정보처리방침</Link>
+            <Link href="/terms" className="hover:text-white">이용약관</Link>
+            <Link href="/retirement" className="hover:text-white">퇴직금 계산기</Link>
+            <Link href="/annual" className="hover:text-white">연차수당 계산기</Link>
+          </div>
         </div>
       </section>
     </div>
