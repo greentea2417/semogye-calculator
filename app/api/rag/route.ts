@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import kb from './knowledge.json';
+import knowledge from './knowledge.json';
 
 export const runtime = 'nodejs';
 export const maxDuration = 30;
@@ -17,7 +17,7 @@ type KbItem = {
   embedding: number[];
 };
 
-const ITEMS = (kb as { items: KbItem[] }).items;
+const ITEMS = (knowledge as { items: KbItem[] }).items;
 
 function cosine(a: number[], b: number[]): number {
   let dot = 0;
@@ -34,18 +34,26 @@ function cosine(a: number[], b: number[]): number {
 async function embed(apiKey: string, input: string): Promise<{ vector: number[]; tokens: number }> {
   const res = await fetch('https://api.openai.com/v1/embeddings', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`,
+    },
     body: JSON.stringify({ model: EMBED_MODEL, input }),
   });
-  if (!res.ok) throw new Error(`embedding failed: ${res.status} ${await res.text()}`);
+  if (!res.ok) {
+    throw new Error(`embedding failed: ${res.status} ${await res.text()}`);
+  }
   const json = await res.json();
-  return { vector: json.data[0].embedding, tokens: json.usage?.total_tokens ?? 0 };
+  return { vector: json.data[0].embedding as number[], tokens: json.usage?.total_tokens ?? 0 };
 }
 
 async function answer(apiKey: string, question: string, context: string) {
   const res = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`,
+    },
     body: JSON.stringify({
       model: CHAT_MODEL,
       temperature: 0.2,
@@ -53,14 +61,15 @@ async function answer(apiKey: string, question: string, context: string) {
         {
           role: 'system',
           content:
-            '당신은 세모계(semogye.com) 지식 도우미입니다. 아래 제공된 컨텍스트에만 근거해 한국어로 간결하게 답하세요. ' +
-            '컨텍스트에 근거가 없으면 "제공된 문서에서 관련 내용을 찾지 못했습니다"라고 답하세요. 추측하지 마세요.',
+            '당신은 세모계(semogye.com) 지식 도우미입니다. 아래 제공된 컨텍스트에만 근거해 한국어로 간결하게 답하세요. 컨텍스트에 근거가 없으면 "제공된 문서에서 관련 내용을 찾지 못했습니다"라고 답하세요. 추측하지 마세요.',
         },
         { role: 'user', content: `컨텍스트:\n${context}\n\n질문: ${question}` },
       ],
     }),
   });
-  if (!res.ok) throw new Error(`chat failed: ${res.status} ${await res.text()}`);
+  if (!res.ok) {
+    throw new Error(`chat failed: ${res.status} ${await res.text()}`);
+  }
   return res.json();
 }
 
@@ -74,13 +83,13 @@ export async function POST(req: Request) {
       );
     }
 
-    const { question } = await req.json();
+    const body = await req.json().catch(() => ({}));
+    const question = body?.question;
     if (!question || typeof question !== 'string') {
       return NextResponse.json({ ok: false, error: 'question is required' }, { status: 400 });
     }
 
     const { vector, tokens: embTokens } = await embed(apiKey, question);
-
     const ranked = ITEMS.map((it) => ({ it, score: cosine(vector, it.embedding) }))
       .sort((a, b) => b.score - a.score)
       .slice(0, TOP_K);
