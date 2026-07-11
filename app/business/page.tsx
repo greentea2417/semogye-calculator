@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const items = [
   { href: "/business/salary", label: "월급 계산기", desc: "실수령액을 빠르게 확인" },
+  { href: "/business/hourly-multi", label: "여러 명 시급 계산기", desc: "사장님용 근무 인원 급여 계산" },
   { href: "/business/freelance", label: "프리랜서 실수령액", desc: "3.3% 원천징수 기준 간이 계산" },
   { href: "/business/salary-conversion", label: "연봉 → 월급 계산기", desc: "연봉을 월급으로 환산" },
   { href: "/business/net-salary", label: "세후 실수령액 간이 계산기", desc: "보험·세금 공제 후 금액 확인" },
