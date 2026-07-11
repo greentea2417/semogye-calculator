@@ -197,32 +197,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 클로징 CTA */}
+      {/* 클로징 설명 */}
       <section className="bg-gray-900">
         <div className="max-w-3xl mx-auto px-6 py-20 text-center">
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white not-italic">
-            지금 바로 계산해보세요
+            세모계는 계산을 쉽게 만드는 도구입니다
           </h2>
-          <p className="mt-4 text-gray-400 not-italic">
-            가입도, 결제도 필요 없어요. 숫자만 입력하면 끝.
+          <p className="mt-5 text-gray-400 not-italic leading-relaxed max-w-2xl mx-auto">
+            급여, 세금, 생활, 건강까지. 필요한 계산만 빠르게 모아 정확하게 안내합니다.
+            복잡한 계산을 줄이고, 사용자는 결과만 편하게 확인할 수 있도록 만들었습니다.
           </p>
-          <Link
-            href="/business"
-            className="inline-block mt-8 px-8 py-3.5 rounded-full bg-white text-gray-900 text-sm font-semibold hover:bg-gray-100 transition-colors"
-          >
-            비즈니스 계산기 시작하기
-          </Link>
-          <div className="mt-10 flex flex-wrap justify-center gap-3 text-sm text-gray-400">
-            <Link href="/about" className="hover:text-white">소개</Link>
-            <Link href="/faq" className="hover:text-white">FAQ</Link>
-            <Link href="/contact" className="hover:text-white">문의하기</Link>
-            <Link href="/privacy" className="hover:text-white">개인정보처리방침</Link>
-            <Link href="/terms" className="hover:text-white">이용약관</Link>
-            <Link href="/rag" className="hover:text-white">RAG 챗봇</Link>
-            <Link href="/retirement" className="hover:text-white">퇴직금 계산기</Link>
-            <Link href="/annual" className="hover:text-white">연차수당 계산기</Link>
-            <Link href="/unemployment" className="hover:text-white">실업급여 계산기</Link>
-          </div>
         </div>
       </section>
     </div>
