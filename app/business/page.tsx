@@ -25,6 +25,10 @@ export default function BusinessPage() {
         </p>
       </div>
 
+      <div className="md:hidden mb-6 text-center">
+        <h1 className="text-2xl font-extrabold tracking-tight text-gray-900">비즈니스 계산기</h1>
+      </div>
+
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {items.map((item) => (
           <Link
