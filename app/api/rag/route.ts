@@ -76,6 +76,11 @@ async function answer(apiKey: string, question: string, context: string) {
 export async function POST(req: Request) {
   try {
     const apiKey = process.env.OPENAI_API_KEY;
+    console.log(
+      process.env.OPENAI_API_KEY
+        ? `KEY OK: ${process.env.OPENAI_API_KEY.slice(0, 10)}`
+        : 'KEY NONE',
+    );
     if (!apiKey) {
       return NextResponse.json(
         { ok: false, error: 'OPENAI_API_KEY가 이 배포 환경에 설정되어 있지 않습니다.' },
