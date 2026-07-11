@@ -39,13 +39,13 @@ export default function HomePage() {
           <div className="mt-7 flex flex-wrap justify-center gap-3">
             <Link
               href="/business"
-              className="rounded-full border border-gray-900 bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm transition-colors hover:bg-gray-900 hover:text-white"
+              className="rounded-full border border-gray-900 bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(37,99,235,0.22)]"
             >
               비즈니스 계산기
             </Link>
             <Link
               href="/life"
-              className="rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm font-semibold text-gray-700 shadow-sm transition-colors hover:border-gray-300 hover:bg-gray-50 hover:text-gray-900"
+              className="rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm font-semibold text-gray-700 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(34,197,94,0.20)]"
             >
               라이프 계산기
             </Link>

@@ -4,6 +4,7 @@ const items = [
   { href: "/life/bmi", label: "BMI 계산기", desc: "체질량지수를 빠르게 확인" },
   { href: "/life/body-age", label: "신체 나이 계산기", desc: "몸 상태를 나이로 보기" },
   { href: "/life/kbm", label: "키빼몸 계산기", desc: "간단한 체형 기준 확인" },
+  { href: "/life/future-height", label: "우리 아이 예상 키", desc: "부모 키로 간단히 예측" },
   { href: "/life/grade", label: "학점 계산기", desc: "평균 학점 계산" },
   { href: "/life/waste-time", label: "내가 날린 인생 시간은?", desc: "재미로 보는 시간 계산" },
 ];
