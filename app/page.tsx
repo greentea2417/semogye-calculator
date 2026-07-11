@@ -34,6 +34,21 @@ export default function HomePage() {
           <p className="mt-4 text-xs text-gray-400 not-italic">
             회원가입 없이 무료로 바로 이용 가능
           </p>
+
+          <div className="mt-7 flex flex-wrap justify-center gap-3">
+            <Link
+              href="/business"
+              className="rounded-full border border-gray-900 bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm transition-colors hover:bg-gray-900 hover:text-white"
+            >
+              비즈니스 계산기
+            </Link>
+            <Link
+              href="/life"
+              className="rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm font-semibold text-gray-700 shadow-sm transition-colors hover:border-gray-300 hover:bg-gray-50 hover:text-gray-900"
+            >
+              라이프 계산기
+            </Link>
+          </div>
         </div>
       </section>
 
