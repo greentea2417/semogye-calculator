@@ -30,6 +30,10 @@ export default function BmiPage() {
       <section className="space-y-2">
         <h1 className="text-3xl font-black text-gray-900 tracking-tighter">BMI 지수</h1>
         <p className="text-sm text-gray-400 font-medium">나의 체질량 지수를 확인해보세요</p>
+        <div className="mt-3 rounded-2xl bg-blue-50/60 border border-blue-100 px-4 py-3 text-sm leading-relaxed text-gray-600">
+          키와 몸무게를 입력하면 BMI 수치를 계산하고, 저체중·정상·과체중·비만 구간을 함께 보여줘요.
+          체중 관리의 참고 지표로 활용하기 좋지만, 근육량이나 체지방 분포까지 모두 반영하는 것은 아니니 건강 상태는 종합적으로 살펴보는 것이 좋아요.
+        </div>
       </section>
 
       <div className="bg-white border border-gray-100 rounded-[32px] p-8 shadow-sm shadow-gray-200/20">

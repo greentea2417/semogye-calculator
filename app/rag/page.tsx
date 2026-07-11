@@ -33,7 +33,7 @@ export default function RagPage() {
   }
 
   return (
-    <main className="min-h-screen bg-white px-6 py-16">
+    <main className="min-h-screen px-6 py-16">
       <div className="max-w-3xl mx-auto">
         <div className="mb-8">
           <p className="text-sm font-semibold text-blue-600">세모계 RAG 챗봇 MVP</p>

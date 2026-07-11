@@ -2,6 +2,9 @@ import Link from "next/link";
 
 const items = [
   { href: "/business/salary", label: "월급 계산기", desc: "실수령액을 빠르게 확인" },
+  { href: "/business/freelance", label: "프리랜서 실수령액", desc: "3.3% 원천징수 기준 간이 계산" },
+  { href: "/business/salary-conversion", label: "연봉 → 월급 계산기", desc: "연봉을 월급으로 환산" },
+  { href: "/business/net-salary", label: "세후 실수령액 간이 계산기", desc: "보험·세금 공제 후 금액 확인" },
   { href: "/business/profit", label: "손익 계산기", desc: "매출과 비용을 한 번에" },
   { href: "/business/retirement", label: "퇴직금 계산기", desc: "퇴직금 예상액 확인" },
   { href: "/business/unemployment", label: "실업급여 계산기", desc: "수급 가능액 예상" },

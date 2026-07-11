@@ -52,7 +52,7 @@ export default function KBMCalculator() {
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-gray-100 p-4">
+    <div className="min-h-screen flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-6 space-y-6">
 
         {/* 제목 */}
