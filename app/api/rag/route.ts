@@ -75,15 +75,11 @@ async function answer(apiKey: string, question: string, context: string) {
 
 export async function POST(req: Request) {
   try {
+    console.log('RAG ROUTE START');
+    console.log('OPENAI KEY EXISTS:', Boolean(process.env.OPENAI_API_KEY));
     const apiKey = process.env.OPENAI_API_KEY;
-    console.log(
-      process.env.OPENAI_API_KEY
-        ? `KEY OK: ${process.env.OPENAI_API_KEY.slice(0, 10)}`
-        : 'KEY NONE',
-    );
-    console.log('RAG STEP: start');
     if (!apiKey) {
-      console.error('RAG ERROR: OPENAI_API_KEY missing in this deployment environment');
+      console.error('RAG 503 REASON: OPENAI_API_KEY missing');
       return NextResponse.json(
         { ok: false, error: 'OPENAI_API_KEY가 이 배포 환경에 설정되어 있지 않습니다.' },
         { status: 503 },
@@ -96,13 +92,11 @@ export async function POST(req: Request) {
     });
     const question = body?.question;
     if (!question || typeof question !== 'string') {
-      console.error('RAG ERROR: question is missing or invalid', { body });
+      console.error('RAG 503 REASON: question is missing or invalid');
       return NextResponse.json({ ok: false, error: 'question is required' }, { status: 400 });
     }
 
-    console.log('RAG STEP: embedding request');
     const { vector, tokens: embTokens } = await embed(apiKey, question);
-    console.log('RAG STEP: embedding complete');
     const ranked = ITEMS.map((it) => ({ it, score: cosine(vector, it.embedding) }))
       .sort((a, b) => b.score - a.score)
       .slice(0, TOP_K);
