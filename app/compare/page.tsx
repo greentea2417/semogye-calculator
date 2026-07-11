@@ -81,6 +81,10 @@ export default function ComparePage() {
         <p className="text-gray-500 text-sm">
           시급 알바(세전)와 프리랜서 3.3%(실수령 예상)를 비교합니다.
         </p>
+        <p className="text-sm leading-relaxed text-gray-500">
+          이 페이지는 알바와 프리랜서 소득 구조의 차이를 이해하기 쉽게 비교해 줍니다.
+          단순 세전 금액뿐 아니라 3.3% 원천징수, 월 근로시간, 실수령 차이까지 한 번에 확인할 수 있어요.
+        </p>
       </section>
 
       {/* 입력 */}

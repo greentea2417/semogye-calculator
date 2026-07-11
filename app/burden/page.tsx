@@ -75,6 +75,10 @@ export default function BurdenPage() {
         <p className="text-sm text-gray-500">
           소득 대비 대출 상환 부담 수준을 확인하기 위한 계산기입니다.
         </p>
+        <p className="text-sm leading-relaxed text-gray-500">
+          월 소득과 월 상환액을 넣으면 현재 부담률을 바로 볼 수 있어요.
+          대출, 카드, 할부처럼 매달 빠져나가는 고정 비용을 관리할 때 유용한 참고 지표입니다.
+        </p>
         <p className="text-xs text-gray-500">(대출·카드·할부 등 월 상환액 기준)</p>
       </section>
 
