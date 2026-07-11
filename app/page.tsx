@@ -19,20 +19,16 @@ export default function HomePage() {
             사장님을 위한 계산기
           </span>
 
-          <h1 className="text-4xl font-extrabold tracking-tighter text-gray-900 leading-[1.08] not-italic sm:text-5xl md:text-6xl">
+          <h1 className="text-4xl font-extrabold tracking-tighter text-gray-900 leading-[1.08] not-italic sm:text-5xl md:text-6xl font-['Pretendard_Variable',sans-serif]">
             복잡한 계산은
             <br />
             <span className="text-blue-600">세모계</span>가 합니다
           </h1>
 
           <p className="mt-5 max-w-xl text-base leading-relaxed text-gray-500 not-italic sm:mt-6 sm:text-lg">
-            급여, 주휴수당, 세금까지. 사장님이 직접 계산할 필요 없이
+            급여, 주휴수당, 세금부터 생활 계산까지. 사장님이 직접 계산할 필요 없이
             <br className="hidden md:block" />
-            자동으로 정확하게 계산해드려요.
-          </p>
-
-          <p className="mt-8 max-w-xl text-sm leading-relaxed text-gray-500 not-italic sm:text-base">
-            급여, 주휴수당, 세금부터 생활 계산까지. 필요한 계산만 빠르게 찾고 바로 확인할 수 있게 만든 계산기 모음입니다.
+            필요한 계산만 빠르게 찾고 바로 확인할 수 있게 만들었어요.
           </p>
 
           <p className="mt-4 text-xs text-gray-400 not-italic">
@@ -117,49 +113,6 @@ export default function HomePage() {
               소상공인 현실에 맞춘 도구만 모았어요.
             </p>
           </div>
-        </div>
-      </section>
-
-      {/* 카테고리 섹션 */}
-      <section className="max-w-3xl mx-auto px-6 pb-24">
-        <h2 className="text-center text-[11px] font-bold text-gray-400 tracking-[0.2em] uppercase not-italic mb-6">
-          카테고리 선택
-        </h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Link
-            href="/business"
-            className="group block p-7 bg-white rounded-2xl border border-gray-200 hover:border-blue-200 hover:shadow-lg transition-all"
-          >
-            <div className="flex items-center justify-between">
-              <h3 className="font-bold text-gray-900 text-lg not-italic group-hover:text-blue-600 transition-colors">
-                비즈니스 · 금융
-              </h3>
-              <span className="text-gray-300 group-hover:text-blue-500 group-hover:translate-x-1 transition-all not-italic">
-                →
-              </span>
-            </div>
-            <p className="text-gray-400 text-sm mt-2 not-italic">
-              사장님부터 직장인까지 꼭 필요한 정산 도구
-            </p>
-          </Link>
-
-          <Link
-            href="/life"
-            className="group block p-7 bg-white rounded-2xl border border-gray-200 hover:border-green-200 hover:shadow-lg transition-all"
-          >
-            <div className="flex items-center justify-between">
-              <h3 className="font-bold text-gray-900 text-lg not-italic group-hover:text-green-600 transition-colors">
-                라이프 · 건강
-              </h3>
-              <span className="text-gray-300 group-hover:text-green-500 group-hover:translate-x-1 transition-all not-italic">
-                →
-              </span>
-            </div>
-            <p className="text-gray-400 text-sm mt-2 not-italic">
-              일상의 가치를 숫자로 환산하는 도구
-            </p>
-          </Link>
         </div>
       </section>
 
