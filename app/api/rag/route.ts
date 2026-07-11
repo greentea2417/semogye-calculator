@@ -81,20 +81,28 @@ export async function POST(req: Request) {
         ? `KEY OK: ${process.env.OPENAI_API_KEY.slice(0, 10)}`
         : 'KEY NONE',
     );
+    console.log('RAG STEP: start');
     if (!apiKey) {
+      console.error('RAG ERROR: OPENAI_API_KEY missing in this deployment environment');
       return NextResponse.json(
         { ok: false, error: 'OPENAI_API_KEY가 이 배포 환경에 설정되어 있지 않습니다.' },
         { status: 503 },
       );
     }
 
-    const body = await req.json().catch(() => ({}));
+    const body = await req.json().catch((err) => {
+      console.error('RAG ERROR: failed to parse request body', err);
+      return {};
+    });
     const question = body?.question;
     if (!question || typeof question !== 'string') {
+      console.error('RAG ERROR: question is missing or invalid', { body });
       return NextResponse.json({ ok: false, error: 'question is required' }, { status: 400 });
     }
 
+    console.log('RAG STEP: embedding request');
     const { vector, tokens: embTokens } = await embed(apiKey, question);
+    console.log('RAG STEP: embedding complete');
     const ranked = ITEMS.map((it) => ({ it, score: cosine(vector, it.embedding) }))
       .sort((a, b) => b.score - a.score)
       .slice(0, TOP_K);
