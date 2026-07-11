@@ -27,6 +27,14 @@ const groups = [
     ],
   },
   {
+    label: "퇴직 · 노동",
+    items: [
+      { href: "/business/retirement", title: "퇴직금 계산기" },
+      { href: "/business/unemployment", title: "실업급여 계산기" },
+      { href: "/business/annual", title: "연차수당 계산기" },
+    ],
+  },
+  {
     label: "대출 · 금융",
     items: [{ href: "/business/burden", title: "내 월급으로 이 대출 괜찮을까?" }],
   },
