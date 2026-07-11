@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# knowledge index (regenerable vector DB)
+/.knowledge-index/
+
+# knowledge embedding index (local vector DB + backups)
+.knowledge-index/
+.knowledge-index.bak.*/
+__pycache__/

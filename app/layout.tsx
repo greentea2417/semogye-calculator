@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata = {
   title: "세모계 - 세상의 모든 계산기",
-  description: "당신이 계산하고 싶은 모든 것",
+  description: "생활, 급여, 세금, 자영업까지. 세상의 모든 계산을 더 정확하게.",
 };
 
 export default function RootLayout({

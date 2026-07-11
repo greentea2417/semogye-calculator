@@ -14,6 +14,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/compare",
     "/freelance",
     "/burden",
+    "/rag",
+    "/retirement",
+    "/annual",
+    "/unemployment",
+    "/privacy",
+    "/terms",
+    "/contact",
+    "/about",
+    "/faq",
   ];
 
   return staticRoutes.map((path) => {
