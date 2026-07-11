@@ -31,20 +31,9 @@ export default function HomePage() {
             자동으로 정확하게 계산해드려요.
           </p>
 
-          <div className="mt-8 grid w-full max-w-md grid-cols-1 gap-3 sm:mt-10 sm:grid-cols-2">
-            <Link
-              href="/business"
-              className="inline-flex items-center justify-center rounded-full bg-gray-900 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-gray-900/10 transition-all hover:-translate-y-0.5 hover:bg-gray-800 hover:shadow-xl"
-            >
-              비즈니스 계산기
-            </Link>
-            <Link
-              href="/life"
-              className="inline-flex items-center justify-center rounded-full border border-gray-200 bg-white px-6 py-3.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50"
-            >
-              라이프 계산기
-            </Link>
-          </div>
+          <p className="mt-8 max-w-xl text-sm leading-relaxed text-gray-500 not-italic sm:text-base">
+            급여, 주휴수당, 세금부터 생활 계산까지. 필요한 계산만 빠르게 찾고 바로 확인할 수 있게 만든 계산기 모음입니다.
+          </p>
 
           <p className="mt-4 text-xs text-gray-400 not-italic">
             회원가입 없이 무료로 바로 이용 가능
@@ -184,6 +173,32 @@ export default function HomePage() {
             급여, 세금, 생활, 건강까지. 필요한 계산만 빠르게 모아 정확하게 안내합니다.
             복잡한 계산을 줄이고, 사용자는 결과만 편하게 확인할 수 있도록 만들었습니다.
           </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm text-gray-400">
+            <Link href="/about" className="hover:text-white">소개</Link>
+            <Link href="/faq" className="hover:text-white">FAQ</Link>
+            <Link href="/contact" className="hover:text-white">문의사항</Link>
+            <Link href="/privacy" className="hover:text-white">개인정보처리방침</Link>
+            <Link href="/terms" className="hover:text-white">이용약관</Link>
+          </div>
+        </div>
+      </section>
+      {/* 하단 설명 */}
+      <section className="bg-gray-900">
+        <div className="max-w-3xl mx-auto px-6 py-20 text-center">
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white not-italic">
+            세모계는 계산을 쉽게 만드는 도구입니다
+          </h2>
+          <p className="mt-5 text-gray-400 not-italic leading-relaxed max-w-2xl mx-auto">
+            급여, 세금, 생활, 건강까지. 필요한 계산만 빠르게 모아 정확하게 안내합니다.
+            복잡한 계산을 줄이고, 사용자는 결과만 편하게 확인할 수 있도록 만들었습니다.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm text-gray-400">
+            <Link href="/about" className="hover:text-white">소개</Link>
+            <Link href="/faq" className="hover:text-white">FAQ</Link>
+            <Link href="/contact" className="hover:text-white">문의사항</Link>
+            <Link href="/privacy" className="hover:text-white">개인정보처리방침</Link>
+            <Link href="/terms" className="hover:text-white">이용약관</Link>
+          </div>
         </div>
       </section>
     </div>

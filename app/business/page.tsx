@@ -12,7 +12,7 @@ const items = [
 export default function BusinessPage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
-      <div className="mb-8 text-center">
+      <div className="mb-8 text-center sm:block hidden">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold tracking-wide text-blue-600">
           <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
           비즈니스 계산기

@@ -69,28 +69,6 @@ export default function BusinessLayout({ children }) {
         </div>
       </nav>
 
-      {/* 모바일: 가로 스크롤 메뉴 */}
-      <div className="md:hidden sticky top-16 z-40 bg-white border-b border-gray-100 overflow-x-auto">
-        <div className="flex gap-2 px-6 py-3 w-max">
-          {allItems.map((item) => {
-            const active = pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`whitespace-nowrap px-3.5 py-1.5 rounded-full text-[13px] font-semibold transition-colors ${
-                  active
-                    ? "bg-gray-900 text-white"
-                    : "bg-gray-50 text-gray-500 hover:bg-gray-100"
-                }`}
-              >
-                {item.title}
-              </Link>
-            );
-          })}
-        </div>
-      </div>
-
       <div className="max-w-5xl mx-auto px-6 py-10 flex gap-10">
         {/* 데스크톱 사이드바 */}
         <aside className="w-56 shrink-0 hidden md:block">
