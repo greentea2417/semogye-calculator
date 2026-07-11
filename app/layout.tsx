@@ -1,5 +1,6 @@
 import Script from 'next/script';
 import "./globals.css";
+import RagWidget from '../components/rag-widget';
 
 export const metadata = {
   title: "세모계 - 세상의 모든 계산기",
@@ -44,10 +45,9 @@ export default function RootLayout({
       </head>
 
       <body className="min-h-screen bg-[radial-gradient(circle_at_top,rgba(96,165,250,0.14)_0%,rgba(191,219,254,0.10)_22%,rgba(241,245,249,0.55)_52%,rgba(248,250,252,0.88)_78%,rgba(255,255,255,1)_96%)] text-gray-900 antialiased font-sans tracking-tighter">
-
         {/* 메인 콘텐츠 */}
         {children}
-
+        <RagWidget />
       </body>
     </html>
   );
