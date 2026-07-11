@@ -3,29 +3,6 @@ import Link from "next/link";
 export default function HomePage() {
   return (
     <div className="min-h-screen">
-      {/* 네비게이션 */}
-      <nav className="sticky top-0 z-50 border-b border-white/70 bg-white/72 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6">
-          <Link href="/" className="font-extrabold text-lg tracking-tight text-gray-900 not-italic">
-            세모계
-          </Link>
-          <div className="hidden sm:flex items-center gap-2">
-            <Link
-              href="/business"
-              className="px-4 py-2 rounded-full bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition-colors"
-            >
-              계산 시작하기
-            </Link>
-            <Link
-              href="/life"
-              className="px-4 py-2 rounded-full border border-gray-200 bg-white text-gray-700 text-sm font-semibold hover:bg-gray-50 transition-colors"
-            >
-              라이프 보기
-            </Link>
-          </div>
-        </div>
-      </nav>
-
       {/* 히어로 */}
       <section className="relative overflow-hidden">
         <div
