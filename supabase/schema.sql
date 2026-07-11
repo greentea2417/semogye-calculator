@@ -18,7 +18,7 @@ create table if not exists public.calculators (
 );
 
 create index if not exists calculators_category_idx on public.calculators (category);
-create index if not exists calculators_page_path_idx on public.calculators (page_path);
+create unique index if not exists calculators_page_path_idx on public.calculators (page_path);
 create index if not exists calculators_embedding_idx on public.calculators using ivfflat (embedding vector_cosine_ops) with (lists = 100);
 
 create or replace function public.touch_updated_at()
