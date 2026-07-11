@@ -12,21 +12,18 @@ const items = [
 export default function BusinessPage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
-      <div className="mb-8 text-center sm:block hidden">
+      <div className="mb-8 text-center">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold tracking-wide text-blue-600">
           <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
           비즈니스 계산기
         </span>
-        <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+        <h1 className="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900 font-['Pretendard_Variable',sans-serif]">
           필요한 계산기를 골라보세요
         </h1>
+        <div className="mt-4 h-1 w-16 mx-auto rounded-full bg-gradient-to-r from-blue-600 to-sky-300" />
         <p className="mt-3 text-gray-500">
           급여, 세금, 퇴직, 실업급여, 연차수당까지 자주 쓰는 계산기만 모았습니다.
         </p>
-      </div>
-
-      <div className="md:hidden mb-6 text-center">
-        <h1 className="text-2xl font-extrabold tracking-tight text-gray-900">비즈니스 계산기</h1>
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

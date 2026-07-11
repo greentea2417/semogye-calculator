@@ -24,6 +24,7 @@ export default function HomePage() {
             <br />
             <span className="text-blue-600">세모계</span>가 합니다
           </h1>
+          <div className="mt-5 h-1 w-16 rounded-full bg-gradient-to-r from-blue-500 to-sky-300" />
 
           <p className="mt-5 max-w-xl text-base leading-relaxed text-gray-500 not-italic sm:mt-6 sm:text-lg">
             급여, 주휴수당, 세금부터 생활 계산까지. 사장님이 직접 계산할 필요 없이
