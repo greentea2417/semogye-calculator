@@ -43,7 +43,7 @@ export default function RootLayout({
         />
       </head>
 
-      <body className="bg-gray-50 text-gray-900 antialiased font-sans tracking-tighter min-h-screen">
+      <body className="min-h-screen bg-[radial-gradient(circle_at_top,rgba(191,219,254,0.32)_0%,rgba(239,246,255,0.55)_28%,rgba(255,255,255,1)_72%)] text-gray-900 antialiased font-sans tracking-tighter">
 
         {/* 메인 콘텐츠 */}
         {children}

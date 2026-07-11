@@ -2,66 +2,74 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       {/* 네비게이션 */}
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
-        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <span className="font-extrabold text-lg tracking-tight text-gray-900 not-italic">
+      <nav className="sticky top-0 z-50 border-b border-white/70 bg-white/72 backdrop-blur-xl">
+        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6">
+          <Link href="/" className="font-extrabold text-lg tracking-tight text-gray-900 not-italic">
             세모계
-          </span>
-          <Link
-            href="/business"
-            className="px-4 py-2 rounded-full bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition-colors"
-          >
-            계산 시작하기
           </Link>
+          <div className="hidden sm:flex items-center gap-2">
+            <Link
+              href="/business"
+              className="px-4 py-2 rounded-full bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition-colors"
+            >
+              계산 시작하기
+            </Link>
+            <Link
+              href="/life"
+              className="px-4 py-2 rounded-full border border-gray-200 bg-white text-gray-700 text-sm font-semibold hover:bg-gray-50 transition-colors"
+            >
+              라이프 보기
+            </Link>
+          </div>
         </div>
       </nav>
 
       {/* 히어로 */}
       <section className="relative overflow-hidden">
         <div
-          className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[640px] h-[640px] rounded-full opacity-40 blur-3xl"
+          className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[640px] h-[640px] rounded-full opacity-50 blur-3xl"
           style={{
             background:
-              "radial-gradient(circle, rgba(37,99,235,0.25) 0%, rgba(37,99,235,0) 70%)",
+              "radial-gradient(circle, rgba(96,165,250,0.22) 0%, rgba(96,165,250,0) 70%)",
           }}
         />
 
-        <div className="relative max-w-3xl mx-auto px-6 pt-24 pb-20 flex flex-col items-center text-center">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold tracking-wide not-italic mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+        <div className="relative mx-auto flex max-w-3xl flex-col items-center px-4 pb-16 pt-20 text-center sm:px-6 sm:pb-20 sm:pt-24">
+          <span className="mb-8 inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold tracking-wide text-blue-600 not-italic">
+            <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
             사장님을 위한 계산기
           </span>
 
-          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tighter text-gray-900 leading-[1.1] not-italic">
+          <h1 className="text-4xl font-extrabold tracking-tighter text-gray-900 leading-[1.08] not-italic sm:text-5xl md:text-6xl">
             복잡한 계산은
             <br />
             <span className="text-blue-600">세모계</span>가 합니다
           </h1>
 
-          <p className="mt-6 text-lg text-gray-500 max-w-lg not-italic leading-relaxed">
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-gray-500 not-italic sm:mt-6 sm:text-lg">
             급여, 주휴수당, 세금까지. 사장님이 직접 계산할 필요 없이
             <br className="hidden md:block" />
             자동으로 정확하게 계산해드려요.
           </p>
 
-          <div className="mt-10 flex flex-col sm:flex-row gap-3">
+          <div className="mt-8 grid w-full max-w-md grid-cols-1 gap-3 sm:mt-10 sm:grid-cols-2">
             <Link
               href="/business"
-              className="px-7 py-3.5 rounded-full bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition-all shadow-lg shadow-gray-900/10 hover:shadow-xl hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center rounded-full bg-gray-900 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-gray-900/10 transition-all hover:-translate-y-0.5 hover:bg-gray-800 hover:shadow-xl"
             >
-              비즈니스 계산기 시작하기 →
+              비즈니스 계산기
             </Link>
             <Link
               href="/life"
-              className="px-7 py-3.5 rounded-full border border-gray-200 text-gray-700 text-sm font-semibold hover:bg-gray-50 transition-colors"
+              className="inline-flex items-center justify-center rounded-full border border-gray-200 bg-white px-6 py-3.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50"
             >
-              라이프 계산기 보기
+              라이프 계산기
             </Link>
           </div>
 
-          <p className="mt-5 text-xs text-gray-400 not-italic">
+          <p className="mt-4 text-xs text-gray-400 not-italic">
             회원가입 없이 무료로 바로 이용 가능
           </p>
         </div>
