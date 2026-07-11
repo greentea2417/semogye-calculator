@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed:supabase": "tsx scripts/seed_calculators.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.110.2",
@@ -26,6 +27,7 @@
     "eslint-config-next": "16.0.6",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.18",
+    "tsx": "^4.23.0",
     "typescript": "^5"
   }
 }
