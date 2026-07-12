@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import PageTitle from "../../components/PageTitle";
 import InputBlock from "../../components/InputBlock";
+import CalculatorLayout from "../../components/CalculatorLayout";
 
 export default function BusinessFreelancePage() {
   const [amount, setAmount] = useState("");
@@ -17,49 +17,38 @@ export default function BusinessFreelancePage() {
   }, [value, valid]);
 
   return (
-    <main className="mx-auto max-w-xl px-5 py-12 sm:py-16">
-      <section className="mb-8">
-        <div className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold tracking-wide text-blue-600">
-          <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
-          비즈니스 계산기
-        </div>
-        <PageTitle
-          title="프리랜서 실수령액 계산기"
-          subtitle="3.3% 원천징수 기준으로 간단히 예상해보세요."
-        />
-        <div className="h-1 w-16 rounded-full bg-gradient-to-r from-blue-600 to-sky-300" />
-        <p className="mt-4 text-sm leading-relaxed text-gray-500">
-          프리랜서 정산은 세전 금액에서 사업소득 원천징수 3.3%를 먼저 반영해 예상 실수령액을 보는 방식이에요.
-          실제 신고 시에는 필요경비, 공제 항목, 신고 방식에 따라 결과가 달라질 수 있으니 참고용으로 확인해 주세요.
-        </p>
-      </section>
-
-      <section className="rounded-[28px] border border-gray-100 bg-white p-6 shadow-sm shadow-gray-200/30 sm:p-8">
-        <InputBlock
-          label="세전 금액 (원)"
-          type="number"
-          placeholder="1000000"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          className="text-center text-lg font-bold text-gray-900"
-        />
-
-        {result ? (
-          <div className="mt-8 border-t border-gray-100 pt-8">
+    <CalculatorLayout
+      tone="business"
+      title="프리랜서 실수령액 계산기"
+      subtitle="3.3% 원천징수 기준으로 간단히 예상해보세요."
+      intro="프리랜서 정산은 세전 금액에서 사업소득 원천징수 3.3%를 먼저 반영해 예상 실수령액을 보는 방식이에요."
+      faqTitle="프리랜서 실수령액 계산기 자주 묻는 질문"
+      faqItems={[
+        { q: "Q. 3.3%는 무엇인가요?", a: "A. 사업소득 원천징수 세율로, 소득세와 지방소득세를 합친 값입니다." },
+        { q: "Q. 실제 신고 결과와 같은가요?", a: "A. 아니요. 필요경비와 신고 방식에 따라 달라질 수 있습니다." },
+        { q: "Q. 부가세도 반영되나요?", a: "A. 이 계산은 원천징수 기준이며 부가세는 별도입니다." },
+      ]}
+      result={
+        result ? (
+          <>
+            <h2 className="mb-4 text-lg font-bold text-gray-900">계산 결과</h2>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-              <div className="rounded-2xl bg-blue-50 p-4 text-center">
-                <p className="text-xs font-semibold text-blue-700">예상 세금</p>
-                <p className="mt-1 text-2xl font-extrabold text-blue-700">{result.tax.toLocaleString()}원</p>
+              <div className="rounded-2xl bg-white p-4 border border-gray-100 text-center">
+                <p className="text-xs font-semibold text-gray-500">예상 세금</p>
+                <p className="mt-1 text-2xl font-extrabold text-gray-900 tabular-nums">{result.tax.toLocaleString()}원</p>
               </div>
-              <div className="rounded-2xl bg-sky-50 p-4 text-center">
-                <p className="text-xs font-semibold text-sky-700">예상 실수령액</p>
-                <p className="mt-1 text-2xl font-extrabold text-sky-700">{result.net.toLocaleString()}원</p>
+              <div className="rounded-2xl bg-white p-4 border border-gray-100 text-center">
+                <p className="text-xs font-semibold text-gray-500">예상 실수령액</p>
+                <p className="mt-1 text-2xl font-extrabold text-gray-900 tabular-nums">{result.net.toLocaleString()}원</p>
               </div>
             </div>
-            <p className="mt-4 text-center text-xs text-gray-400">간이 계산이며 실제 신고/공제 조건에 따라 달라질 수 있어요.</p>
-          </div>
-        ) : null}
-      </section>
-    </main>
+          </>
+        ) : (
+          <div className="rounded-2xl border border-dashed border-gray-200 bg-gray-50 p-6 text-center text-sm text-gray-500">세전 금액을 입력하면 예상 실수령액이 표시됩니다.</div>
+        )
+      }
+    >
+      <InputBlock label="세전 금액 (원)" type="number" placeholder="1000000" value={amount} onChange={(e) => setAmount(e.target.value)} className="text-center text-lg font-bold text-gray-900" />
+    </CalculatorLayout>
   );
 }
