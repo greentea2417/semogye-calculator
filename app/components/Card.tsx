@@ -1,7 +1,3 @@
 export default function Card({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="bg-white rounded-xl border shadow-sm p-5">
-      {children}
-    </div>
-  );
+  return <div className="rounded-[28px] border border-gray-100 bg-white p-6 shadow-sm shadow-gray-200/30">{children}</div>;
 }

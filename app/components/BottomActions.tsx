@@ -27,7 +27,7 @@ export default function BottomActions({
           <button
             type="button"
             onClick={onShare}
-            className="rounded-full bg-gradient-to-r from-blue-600 to-sky-500 px-6 py-3 text-white font-semibold shadow-sm shadow-blue-500/20 transition hover:from-blue-500 hover:to-sky-400"
+            className="rounded-full border border-gray-200 bg-white px-6 py-3 text-sm font-semibold text-gray-900 shadow-sm shadow-gray-200/40 transition hover:border-gray-300 hover:bg-gray-50"
           >
             {shareLabel}
           </button>
@@ -37,7 +37,7 @@ export default function BottomActions({
           <button
             type="button"
             onClick={onExcelDownload}
-            className="rounded-full bg-slate-900 px-6 py-3 text-white font-semibold shadow-sm shadow-slate-900/15 transition hover:bg-slate-800"
+            className="rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-sm shadow-slate-900/15 transition hover:bg-slate-800"
           >
             {excelLabel}
           </button>
