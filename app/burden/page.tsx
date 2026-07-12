@@ -108,7 +108,7 @@ export default function BurdenPage() {
 
         <p className="text-xs text-gray-500">* 입력 즉시 자동 계산됩니다.</p>
 
-        <BottomActions copyLabel="링크복사" onCopyLink={onCopyLink} />
+        <BottomActions onShare={onCopyLink} />
       </section>
 
       {/* 결과 */}

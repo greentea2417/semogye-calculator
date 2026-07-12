@@ -151,7 +151,7 @@ function BonusContent() {
         </p>
 
         <div className="mt-6">
-          <BottomActions onCopyLink={handleShare} onShare={handleShare} />
+          <BottomActions onShare={handleShare} />
         </div>
       </section>
     </main>

@@ -237,16 +237,10 @@ export default function HourlyClient() {
 
           {/* ✅ 액션(공유/복사) */}
           <BottomActions
-            copyLabel="공유 링크 복사"
-            onCopyLink={async () => {
-              await copyToClipboardSafe(shareUrl);
-              alert("공유 링크가 복사되었습니다.");
-            }}
-            onShare={async () => {
-              const r = await shareOrCopy("세모계 시급 계산기", shareUrl);
-              if (r.method === "copy") alert("공유 링크가 복사되었습니다.");
-            }}
-          />
+          onShare={async () => {
+            await shareOrCopy("세모계 시급 계산기", shareUrl);
+          }}
+        />
         </div>
       </section>
 

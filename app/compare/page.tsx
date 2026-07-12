@@ -170,17 +170,12 @@ export default function ComparePage() {
           ※ 본 비교는 입력값 기준의 단순 계산 결과이며, 실제 세금·보험·근로조건에 따라 달라질 수 있습니다.
         </p>
 
-        <BottomActions
-          copyLabel="링크 복사"
-          onCopyLink={async () => {
-            await copyToClipboardSafe(shareUrl);
-            alert("현재 입력값이 포함된 링크가 복사되었습니다.");
-          }}
-          onShare={async () => {
-            const r = await shareOrCopy("세모계 알바 vs 프리랜서 비교", shareUrl);
-            if (r.method === "copy") alert("현재 입력값이 포함된 링크가 복사되었습니다.");
-          }}
-        />
+          <BottomActions
+            onShare={async () => {
+              const r = await shareOrCopy("세모계 알바 vs 프리랜서 비교", shareUrl);
+              if (r.method === "copy") alert("현재 입력값이 포함된 링크가 복사되었습니다.");
+            }}
+          />
       </section>
     </main>
   );

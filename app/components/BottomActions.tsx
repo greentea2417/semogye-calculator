@@ -1,71 +1,50 @@
 "use client";
 
 type Props = {
-  // Excel (선택)
   excelLabel?: string;
   excelHint?: string;
   onExcelDownload?: () => void;
-
-  // Link copy (선택)
-  copyLabel?: string;
-  onCopyLink?: () => void;
-
-  // Share (선택)
   shareLabel?: string;
   onShare?: () => void;
+  shareHint?: string;
 };
 
 export default function BottomActions({
   excelLabel = "엑셀 다운로드",
   excelHint,
   onExcelDownload,
-
-  copyLabel = "링크 복사",
-  onCopyLink,
-
   shareLabel = "공유하기",
   onShare,
+  shareHint,
 }: Props) {
-  const hasAny = !!onExcelDownload || !!onCopyLink || !!onShare;
+  const hasAny = !!onExcelDownload || !!onShare;
   if (!hasAny) return null;
 
   return (
     <div className="mt-6 flex flex-col items-center gap-2">
       <div className="flex flex-wrap justify-center gap-3">
-        {/* ✅ 공유 */}
         {onShare && (
           <button
             type="button"
             onClick={onShare}
-            className="rounded-xl bg-blue-600 px-6 py-3 text-white font-semibold hover:bg-blue-700"
+            className="rounded-full bg-gradient-to-r from-blue-600 to-sky-500 px-6 py-3 text-white font-semibold shadow-sm shadow-blue-500/20 transition hover:from-blue-500 hover:to-sky-400"
           >
             {shareLabel}
           </button>
         )}
 
-        {/* ✅ 링크 복사 */}
-        {onCopyLink && (
-          <button
-            type="button"
-            onClick={onCopyLink}
-            className="rounded-xl bg-blue-600 px-6 py-3 text-white font-semibold hover:bg-blue-700"
-          >
-            {copyLabel}
-          </button>
-        )}
-
-        {/* ✅ 엑셀 다운로드(있는 계산기만) */}
         {onExcelDownload && (
           <button
             type="button"
             onClick={onExcelDownload}
-            className="rounded-xl bg-blue-600 px-6 py-3 text-white font-semibold hover:bg-blue-700"
+            className="rounded-full bg-slate-900 px-6 py-3 text-white font-semibold shadow-sm shadow-slate-900/15 transition hover:bg-slate-800"
           >
             {excelLabel}
           </button>
         )}
       </div>
 
+      {onShare && shareHint && <div className="text-xs text-gray-500">{shareHint}</div>}
       {onExcelDownload && excelHint && <div className="text-xs text-gray-500">{excelHint}</div>}
     </div>
   );

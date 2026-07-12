@@ -145,11 +145,7 @@ export default function FreelancePage() {
           </span>
         </div>
 
-        <BottomActions
-          onShare={onShare}
-          onCopyLink={onCopyLink}
-          copyLabel="링크 복사"
-        />
+        <BottomActions onShare={onShare} />
       </section>
 
       {/* 설명 + FAQ */}

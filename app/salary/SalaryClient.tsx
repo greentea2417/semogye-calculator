@@ -235,10 +235,6 @@ export default function SalaryClient() {
         </div>
 
         <BottomActions
-          onCopyLink={async () => {
-            await copyToClipboardSafe(shareUrl);
-            alert("링크가 복사되었습니다.");
-          }}
           onShare={async () => {
             await copyToClipboardSafe(shareUrl);
             alert("링크가 복사되었습니다.");
