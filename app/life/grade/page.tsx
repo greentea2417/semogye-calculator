@@ -74,7 +74,7 @@ export default function GradePage() {
           note="실제 평점 산출 방식은 각 대학 학칙에 따라 차이가 있을 수 있습니다."
         />
       }
-      guide={<BottomActions onShare={onShare} showPdf={false} />}
+      guide={<BottomActions onShare={onShare} />}
     >
       <div className="space-y-2">
         <span className="block text-[10px] font-black uppercase tracking-widest text-gray-400">만점 기준</span>
