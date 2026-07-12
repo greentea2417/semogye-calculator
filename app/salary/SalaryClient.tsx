@@ -5,6 +5,7 @@ import InputBlock from "../components/InputBlock";
 import BottomActions from "../components/BottomActions";
 import ResultRow from "../components/ResultRow";
 import PageTitle from "../components/PageTitle";
+import AccordionFAQ from "../components/AccordionFAQ";
 import { copyToClipboardSafe } from "../components/lib/shareUtils";
 
 function parseNumber(raw: string | number) {
@@ -41,7 +42,7 @@ export default function SalaryClient() {
   return (
     <main className="mx-auto max-w-xl px-5 py-12 sm:py-16">
       <section className="mb-8">
-        <PageTitle title="월급 실수령액 계산기" subtitle="세전 월급 기준으로 실제 받는 금액을 계산합니다." />
+        <PageTitle tone="business" title="월급 실수령액 계산기" subtitle="세전 월급 기준으로 실제 받는 금액을 계산합니다." />
         <p className="text-sm leading-relaxed text-gray-500 text-center">
           4대보험 가입 여부와 비과세 식대 등을 반영해 월 실수령액을 빠르게 확인해보세요.
         </p>
@@ -72,6 +73,15 @@ export default function SalaryClient() {
         </div>
         <BottomActions onShare={async () => { await copyToClipboardSafe(shareUrl); }} />
       </section>
+
+      <AccordionFAQ
+        title="월급 실수령액 계산기 자주 묻는 질문"
+        items={[
+          { q: "Q. 4대보험 가입 여부에 따라 왜 금액이 달라지나요?", a: "A. 공제 항목이 달라져서 실수령액이 달라집니다." },
+          { q: "Q. 비과세 식대는 무엇인가요?", a: "A. 급여 중 세금이 붙지 않는 식대 항목을 뜻합니다." },
+          { q: "Q. 이 결과를 그대로 급여명세서로 써도 되나요?", a: "A. 참고용 계산이며 실제 명세서는 회사 규정과 세법 기준을 따릅니다." },
+        ]}
+      />
     </main>
   );
 }
