@@ -401,8 +401,10 @@ export default function HourlyMultiClient() {
             type="button"
             onClick={addRow}
             disabled={!canAdd}
-            className={`rounded-xl px-4 py-2 text-sm font-semibold text-white ${
-              canAdd ? "bg-blue-600 hover:opacity-90" : "bg-gray-300 cursor-not-allowed"
+            className={`shrink-0 rounded-full border px-5 py-2.5 text-sm font-semibold shadow-sm transition ${
+              canAdd
+                ? "border-gray-200 bg-white text-gray-900 shadow-gray-200/40 hover:border-gray-300 hover:bg-gray-50"
+                : "cursor-not-allowed border-gray-100 bg-gray-50 text-gray-300 shadow-none"
             }`}
           >
             + 직원 추가 ({rows.length}/{MAX_ROWS})
