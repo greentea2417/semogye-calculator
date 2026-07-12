@@ -22,7 +22,7 @@ const backupData = {
           label: "사장님 필수",
           items: [
             { slug: "profit", title: "손익 계산기", href: "/business/profit" },
-            { slug: "hourly-multi", title: "사장님 시급 계산", href: "/business/hourly-multi" },
+            { slug: "hourly-multi", title: "사장님용 시급 계산기", href: "/business/hourly-multi" },
           ],
         },
         {

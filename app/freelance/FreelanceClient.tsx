@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import InputBlock from "../components/InputBlock";
 import BottomActions from "../components/BottomActions";
 import CalculatorLayout from "../components/CalculatorLayout";
+import ResultPanel from "../components/ResultPanel";
 import { toast } from "../components/toast";
 
 function parseNumber(raw: string | number) {
@@ -74,15 +75,17 @@ export default function FreelancePage() {
       ]}
       guide={<BottomActions onShare={onShare} />}
       result={
-        <>
-          <h2 className="mb-4 text-lg font-bold text-gray-900">계산 결과</h2>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <div className="rounded-2xl border border-gray-100 bg-white p-4"><p className="text-xs font-semibold text-gray-500">소득세(3%)</p><p className="mt-1 text-xl font-extrabold text-gray-900 tabular-nums">{result.tax.toLocaleString()}원</p></div>
-            <div className="rounded-2xl border border-gray-100 bg-white p-4"><p className="text-xs font-semibold text-gray-500">지방소득세(0.3%)</p><p className="mt-1 text-xl font-extrabold text-gray-900 tabular-nums">{result.localTax.toLocaleString()}원</p></div>
-            <div className="rounded-2xl border border-gray-100 bg-white p-4"><p className="text-xs font-semibold text-gray-500">총 공제액</p><p className="mt-1 text-xl font-extrabold text-gray-900 tabular-nums">{result.totalTax.toLocaleString()}원</p></div>
-          </div>
-          <div className="mt-4 rounded-2xl bg-blue-50 p-4 text-center"><p className="text-xs font-semibold text-blue-700">실수령액</p><p className="mt-1 text-3xl font-extrabold text-blue-700 tabular-nums">{result.takeHome.toLocaleString()}원</p></div>
-        </>
+        <ResultPanel
+          title="계산 결과"
+          lines={[
+            { label: "세전 수입", value: `${amountNum.toLocaleString()}원` },
+            { label: "소득세", hint: "(3%)", value: `${result.tax.toLocaleString()}원` },
+            { label: "지방소득세", hint: "(0.3%)", value: `${result.localTax.toLocaleString()}원` },
+          ]}
+          subTotal={{ label: "총 공제액", value: `${result.totalTax.toLocaleString()}원` }}
+          total={{ label: "실수령액(예상)", value: `${result.takeHome.toLocaleString()}원` }}
+          note="* 원천징수 3.3% 기준이며, 5월 종합소득세 신고 결과에 따라 최종 세액은 달라질 수 있습니다."
+        />
       }
     >
       <InputBlock label="프리랜서 월 수입 (세전)" type="text" inputMode="numeric" placeholder="예: 2,500,000" value={amount} onChange={onChangeAmount} />

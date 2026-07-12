@@ -19,7 +19,7 @@ export default function PageTitle({
     <header className="mb-6 text-center">
       <div className={`mb-4 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold tracking-wide ${badgeClass}`}>
         <span className={`h-1.5 w-1.5 rounded-full ${dotClass}`} />
-        계산기
+        {tone === "business" ? "비즈니스 계산기" : "라이프 계산기"}
       </div>
       <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900 font-['Pretendard_Variable',sans-serif]">
         {title}

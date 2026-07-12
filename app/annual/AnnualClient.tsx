@@ -3,6 +3,10 @@
 import { useMemo, useState } from "react";
 import InputBlock from "@/components/InputBlock";
 import CalculatorLayout from "@/components/CalculatorLayout";
+import ResultPanel from "@/components/ResultPanel";
+import BottomActions from "@/components/BottomActions";
+import { copyToClipboardSafe } from "@/components/lib/shareUtils";
+import { toast } from "@/components/toast";
 
 function parseNumber(raw: string | number) {
   const cleaned = String(raw ?? "").replace(/[^\d]/g, "");
@@ -21,6 +25,18 @@ export default function AnnualClient() {
     return { dailyWage, unusedDays, allowance };
   }, [dailyWageRaw, unusedDaysRaw]);
 
+  const onShare = async () => {
+    const url = typeof window === "undefined" ? "" : window.location.href;
+    if (!url) return;
+    try {
+      if (navigator.share) await navigator.share({ title: "연차수당 계산기", url });
+      else {
+        await copyToClipboardSafe(url);
+        toast("링크를 복사했어요!");
+      }
+    } catch {}
+  };
+
   return (
     <CalculatorLayout
       tone="business"
@@ -34,15 +50,17 @@ export default function AnnualClient() {
         { q: "Q. 실제 지급액과 차이가 날 수 있나요?", a: "A. 네. 회사 규정, 임금 산정 방식, 연차 소멸·이월 기준 등에 따라 달라질 수 있습니다." },
       ]}
       result={
-        <>
-          <h2 className="mb-4 text-lg font-bold text-gray-900">계산 결과</h2>
-          <div className="space-y-3">
-            <div className="rounded-2xl border border-gray-100 bg-white p-4"><p className="text-xs font-semibold text-gray-500">1일 임금</p><p className="mt-1 text-xl font-extrabold text-gray-900 tabular-nums">{result.dailyWage.toLocaleString()}원</p></div>
-            <div className="rounded-2xl border border-gray-100 bg-white p-4"><p className="text-xs font-semibold text-gray-500">미사용 연차일수</p><p className="mt-1 text-xl font-extrabold text-gray-900 tabular-nums">{result.unusedDays.toLocaleString()}일</p></div>
-          </div>
-          <div className="mt-4 rounded-2xl bg-blue-50 p-4 text-center"><p className="text-xs font-semibold text-blue-700">예상 연차수당</p><p className="mt-1 text-3xl font-extrabold text-blue-700 tabular-nums">{result.allowance.toLocaleString()}원</p></div>
-        </>
+        <ResultPanel
+          title="계산 결과"
+          lines={[
+            { label: "1일 임금", value: `${result.dailyWage.toLocaleString()}원` },
+            { label: "미사용 연차일수", value: `${result.unusedDays.toLocaleString()}일` },
+          ]}
+          total={{ label: "예상 연차수당", value: `${result.allowance.toLocaleString()}원` }}
+          note="* 연차수당 = 1일 임금 × 미사용 연차일수. 회사 규정·통상임금 산정 방식에 따라 달라질 수 있습니다."
+        />
       }
+      guide={<BottomActions onShare={onShare} />}
     >
       <InputBlock label="1일 통상임금(또는 평균임금)" type="text" value={dailyWageRaw} onChange={(e: any) => setDailyWageRaw(formatComma(parseNumber(e.target.value)))} placeholder="예: 100,000" />
       <InputBlock label="미사용 연차일수" type="text" value={unusedDaysRaw} onChange={(e: any) => setUnusedDaysRaw(formatComma(parseNumber(e.target.value)))} placeholder="예: 8" />

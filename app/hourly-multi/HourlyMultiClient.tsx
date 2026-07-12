@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import BottomActions from "@/components/BottomActions";
+import AccordionFAQ from "@/components/AccordionFAQ";
 
 import { encodeShareState } from "../components/lib/shareState";
 import { buildShareUrl, copyToClipboardSafe, shareOrCopy } from "../components/lib/shareUtils";
@@ -684,6 +685,32 @@ export default function HourlyMultiClient() {
           </p>
         </div>
       </section>
+
+      <AccordionFAQ
+        title="사장님용 시급 계산기 자주 묻는 질문"
+        items={[
+          {
+            q: "Q. 직원 여러 명의 인건비를 한 번에 계산할 수 있나요?",
+            a: "A. 네. 직원별로 시급, 월 실근로시간, 주휴수당 여부, 프리랜서 3.3% 여부를 각각 입력하면 개인별 실지급액과 매장 전체 총 인건비를 함께 보여줍니다.",
+          },
+          {
+            q: "Q. 주휴수당은 어떤 기준으로 계산되나요?",
+            a: "A. 주 평균 근로시간이 15시간 이상일 때 1일 소정근로시간(최대 8시간)을 기준으로 예상 주휴수당을 더합니다. 실제 지급 의무는 근무 형태와 계약 조건에 따라 달라질 수 있습니다.",
+          },
+          {
+            q: "Q. 근무시간에 휴게시간도 포함해서 넣나요?",
+            a: "A. 아니요. 무급 휴게시간을 제외한 실근로시간만 입력해야 정확합니다. 근로기준법상 4시간 근무마다 30분의 휴게시간이 발생합니다.",
+          },
+          {
+            q: "Q. 프리랜서 3.3%를 켜면 무엇이 달라지나요?",
+            a: "A. 세전 합계에서 사업소득 원천징수 3.3%를 뺀 금액을 실지급액으로 보여줍니다. 4대보험 가입 직원이라면 이 옵션을 끄고 사용하세요.",
+          },
+          {
+            q: "Q. 계산 결과를 저장하거나 공유할 수 있나요?",
+            a: "A. 공유하기 버튼으로 현재 입력값이 담긴 링크를 보낼 수 있고, PDF 다운로드와 엑셀 다운로드로 정산 자료를 남길 수 있습니다.",
+          },
+        ]}
+      />
     </main>
   );
 }
