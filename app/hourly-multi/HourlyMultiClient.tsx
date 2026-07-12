@@ -357,15 +357,24 @@ export default function HourlyMultiClient() {
   }
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-10">
-      <header className="text-center">
-        <h1 className="text-3xl font-bold tracking-tight">사장님용 시급 계산기</h1>
-        <p className="mt-2 text-sm text-gray-500">
+    <main className="mx-auto max-w-4xl px-4 py-10 sm:py-14">
+      <header className="mb-8 text-center">
+        <div className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold tracking-wide text-blue-600">
+          <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+          비즈니스 계산기
+        </div>
+        <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 font-['Pretendard_Variable',sans-serif]">사장님용 시급 계산기</h1>
+        <div className="mt-4 h-1 w-16 mx-auto rounded-full bg-gradient-to-r from-blue-600 to-sky-300" />
+        <p className="mt-3 text-sm text-gray-500">
           시급을 기준으로 <b>사장님이 실제 부담하는 인건비</b>를 확인합니다.
+        </p>
+        <p className="mt-3 text-sm leading-relaxed text-gray-500">
+          직원별 시급, 월 근무시간, 주휴수당, 프리랜서 3.3% 여부를 한 번에 정리해 볼 수 있습니다.
+          입력 수가 많아도 같은 카드 톤과 간격으로 읽기 편하게 유지했습니다.
         </p>
       </header>
 
-      <section className="mt-8 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+      <section className="rounded-[28px] border border-gray-100 bg-white p-6 shadow-sm shadow-gray-200/30">
         <div className="flex items-start justify-between gap-3">
           <div>
             <h2 className="text-lg font-bold text-gray-900">직원 입력</h2>
