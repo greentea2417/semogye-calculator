@@ -53,7 +53,16 @@ export default function VatPage() {
             value: `${Math.abs(result.payable).toLocaleString()}원`,
           };
   const onCsvDownload = () =>
-    downloadResultCsv({ slug: "vat", title: "부가세 계산기", lines: resultLines, total: resultTotal });
+    downloadResultCsv({
+      slug: "vat",
+      title: "부가세 계산기",
+      inputs: [
+        { label: "매출 공급가액(입력)", value: `${parseNumber(salesRaw).toLocaleString()}원` },
+        { label: "매입 공급가액(입력)", value: `${parseNumber(purchaseRaw).toLocaleString()}원` },
+      ],
+      lines: resultLines,
+      total: resultTotal,
+    });
 
   return (
     <CalculatorLayout

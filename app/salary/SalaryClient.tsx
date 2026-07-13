@@ -64,7 +64,20 @@ export default function SalaryClient() {
   const resultSubTotal: ResultLine = { label: "총 공제액", value: `${result.totalDeduction.toLocaleString()}원` };
   const resultTotal: ResultLine = { label: "월 실수령액", value: `${result.takeHome.toLocaleString()}원` };
   const onCsvDownload = () =>
-    downloadResultCsv({ slug: "salary", title: "월급 실수령액 계산기", lines: resultLines, subTotal: resultSubTotal, total: resultTotal });
+    downloadResultCsv({
+      slug: "salary",
+      title: "월급 실수령액 계산기",
+      inputs: [
+        { label: "세전 월급(입력)", value: `${parseNumber(salaryRaw).toLocaleString()}원` },
+        { label: "4대보험 가입(입력)", value: insured === "yes" ? "가입" : "미가입" },
+        { label: "부양가족 수(입력)", value: `${dependents}명` },
+        { label: "20세 이하 자녀 수(입력)", value: `${child20}명` },
+        { label: "비과세액(입력)", value: `${parseNumber(nonTaxRaw).toLocaleString()}원` },
+      ],
+      lines: resultLines,
+      subTotal: resultSubTotal,
+      total: resultTotal,
+    });
 
   return (
     <CalculatorLayout

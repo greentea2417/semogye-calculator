@@ -45,7 +45,13 @@ export default function BusinessFreelancePage() {
           ];
   const resultTotal: ResultLine = { label: "실수령액(예상)", value: `${result.net.toLocaleString()}원` };
   const onCsvDownload = () =>
-    downloadResultCsv({ slug: "freelance-simple", title: "프리랜서 실수령액 계산기", lines: resultLines, total: resultTotal });
+    downloadResultCsv({
+      slug: "freelance-simple",
+      title: "프리랜서 실수령액 계산기",
+      inputs: [{ label: "세전 금액(입력)", value: `${value.toLocaleString()}원` }],
+      lines: resultLines,
+      total: resultTotal,
+    });
 
   return (
     <CalculatorLayout

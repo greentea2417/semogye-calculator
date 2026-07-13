@@ -90,7 +90,18 @@ export default function HourlyClient() {
           ];
   const resultTotal: ResultLine = { label: "월 총 급여(세전)", value: `${formatKRW(calc.totalPay)}원` };
   const onCsvDownload = () =>
-    downloadResultCsv({ slug: "hourly", title: "시급 계산기", lines: resultLines, total: resultTotal });
+    downloadResultCsv({
+      slug: "hourly",
+      title: "시급 계산기",
+      inputs: [
+        { label: "시급(입력)", value: `${formatKRW(parseNumber(hourlyWageRaw))}원` },
+        { label: "월 실근로시간(입력)", value: `${parseNumber(monthlyHoursRaw)}시간` },
+        { label: "주휴수당 포함(입력)", value: includeWeeklyHolidayPay ? "포함" : "미포함" },
+        { label: "주당 평균 근무일수(입력)", value: `${parseNumber(avgWorkDaysPerWeekRaw) || 5}일` },
+      ],
+      lines: resultLines,
+      total: resultTotal,
+    });
 
   return (
     <CalculatorLayout

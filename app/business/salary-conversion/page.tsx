@@ -45,7 +45,13 @@ export default function SalaryConversionPage() {
           ];
   const resultTotal: ResultLine = { label: "월급(세전, 12개월)", value: `${result.monthly.toLocaleString()}원` };
   const onCsvDownload = () =>
-    downloadResultCsv({ slug: "salary-conversion", title: "연봉 월급 환산 계산기", lines: resultLines, total: resultTotal });
+    downloadResultCsv({
+      slug: "salary-conversion",
+      title: "연봉 월급 환산 계산기",
+      inputs: [{ label: "연봉(입력, 세전)", value: `${annual.toLocaleString()}원` }],
+      lines: resultLines,
+      total: resultTotal,
+    });
 
   return (
     <CalculatorLayout

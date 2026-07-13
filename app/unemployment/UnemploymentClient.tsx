@@ -53,7 +53,17 @@ export default function UnemploymentClient() {
           ];
   const resultTotal: ResultLine = { label: "총 예상 수급액", value: `${result.totalBenefit.toLocaleString()}원` };
   const onCsvDownload = () =>
-    downloadResultCsv({ slug: "unemployment", title: "실업급여 계산기", lines: resultLines, total: resultTotal });
+    downloadResultCsv({
+      slug: "unemployment",
+      title: "실업급여 계산기",
+      inputs: [
+        { label: "평균 1일 임금(입력)", value: `${parseNumber(avgWageRaw).toLocaleString()}원` },
+        { label: "고용보험 가입기간(입력)", value: `${parseNumber(monthsRaw).toLocaleString()}개월` },
+        { label: "예상 수급일수(입력)", value: `${parseNumber(daysRaw).toLocaleString()}일` },
+      ],
+      lines: resultLines,
+      total: resultTotal,
+    });
 
   return (
     <CalculatorLayout

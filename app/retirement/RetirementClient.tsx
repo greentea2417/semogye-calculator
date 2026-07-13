@@ -53,7 +53,17 @@ export default function RetirementClient() {
           ];
   const resultTotal: ResultLine = { label: "예상 퇴직금", value: `${result.retirementPay.toLocaleString()}원` };
   const onCsvDownload = () =>
-    downloadResultCsv({ slug: "retirement", title: "퇴직금 계산기", lines: resultLines, total: resultTotal });
+    downloadResultCsv({
+      slug: "retirement",
+      title: "퇴직금 계산기",
+      inputs: [
+        { label: "최근 3개월 임금 총액(입력)", value: `${parseNumber(wage3mRaw).toLocaleString()}원` },
+        { label: "3개월 총일수(입력)", value: `${parseNumber(days3mRaw).toLocaleString()}일` },
+        { label: "총 재직일수(입력)", value: `${parseNumber(serviceDaysRaw).toLocaleString()}일` },
+      ],
+      lines: resultLines,
+      total: resultTotal,
+    });
 
   return (
     <CalculatorLayout

@@ -78,7 +78,16 @@ export default function BurdenPage() {
           ];
   const resultTotal: ResultLine = { label: "상환부담률", value: rate === null ? "-" : `${rate}%` };
   const onCsvDownload = () =>
-    downloadResultCsv({ slug: "burden", title: "상환부담률 계산기", lines: resultLines, total: resultTotal });
+    downloadResultCsv({
+      slug: "burden",
+      title: "상환부담률 계산기",
+      inputs: [
+        { label: "월 소득(입력, 실수령액)", value: `${income.toLocaleString()}원` },
+        { label: "월 상환액(입력)", value: `${payment.toLocaleString()}원` },
+      ],
+      lines: resultLines,
+      total: resultTotal,
+    });
 
   return (
     <CalculatorLayout

@@ -70,7 +70,14 @@ export default function FreelancePage() {
   const resultSubTotal: ResultLine = { label: "총 공제액", value: `${result.totalTax.toLocaleString()}원` };
   const resultTotal: ResultLine = { label: "실수령액(예상)", value: `${result.takeHome.toLocaleString()}원` };
   const onCsvDownload = () =>
-    downloadResultCsv({ slug: "freelance", title: "프리랜서 실수령액 계산기", lines: resultLines, subTotal: resultSubTotal, total: resultTotal });
+    downloadResultCsv({
+      slug: "freelance",
+      title: "프리랜서 실수령액 계산기",
+      inputs: [{ label: "프리랜서 월 수입(입력, 세전)", value: `${amountNum.toLocaleString()}원` }],
+      lines: resultLines,
+      subTotal: resultSubTotal,
+      total: resultTotal,
+    });
 
   return (
     <CalculatorLayout

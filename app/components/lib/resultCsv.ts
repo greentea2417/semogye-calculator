@@ -21,22 +21,36 @@ function todayStamp() {
   return `${y}${m}${d}`;
 }
 
+/** 사용자가 직접 입력한 값 한 줄 */
+export type CsvInput = { label: string; value: string | number };
+
 type Options = {
   /** 파일명에 쓰는 계산기 슬러그 (예: freelance) */
   slug: string;
   /** CSV 첫 줄에 넣는 계산기 이름 */
   title: string;
+  /** 사용자가 입력한 값. 모든 계산기가 기본으로 함께 내보낸다. */
+  inputs?: CsvInput[];
   lines: ResultLine[];
   subTotal?: ResultLine;
   total?: ResultLine;
 };
 
 /**
- * 결과 패널에 표시되는 줄을 그대로 CSV로 내려받는다.
+ * 사용자 입력값 + 결과 패널에 표시되는 줄을 그대로 CSV로 내려받는다.
  * 한글 엑셀에서 깨지지 않도록 BOM을 붙인다.
  */
-export function downloadResultCsv({ slug, title, lines, subTotal, total }: Options) {
-  const rows: string[][] = [["계산기", title], ["기준일", todayStamp()], [], ["항목", "값"]];
+export function downloadResultCsv({ slug, title, inputs, lines, subTotal, total }: Options) {
+  const rows: string[][] = [["계산기", title], ["기준일", todayStamp()]];
+
+  if (inputs?.length) {
+    rows.push([], ["입력값", "값"]);
+    for (const input of inputs) {
+      rows.push([input.label, toCell(String(input.value ?? ""))]);
+    }
+  }
+
+  rows.push([], ["계산 결과", "값"]);
 
   for (const line of lines) {
     rows.push([line.hint ? `${line.label} ${line.hint}` : line.label, toCell(line.value)]);

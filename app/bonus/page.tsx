@@ -107,7 +107,21 @@ function BonusContent() {
   const resultSubTotal: ResultLine = { label: "총 공제액", value: `${totalDeduction.toLocaleString()}원` };
   const resultTotal: ResultLine = { label: "최종 실수령액", value: `${result.takeHome.toLocaleString()}원` };
   const onCsvDownload = () =>
-    downloadResultCsv({ slug: "bonus", title: "상여금 계산기", lines: resultLines, subTotal: resultSubTotal, total: resultTotal });
+    downloadResultCsv({
+      slug: "bonus",
+      title: "상여금 계산기",
+      inputs: [
+        { label: "기본급(입력, 세전)", value: `${parseNumber(salaryRaw).toLocaleString()}원` },
+        { label: "상여금/성과급(입력)", value: `${parseNumber(bonusRaw).toLocaleString()}원` },
+        { label: "4대보험 가입(입력)", value: insured === "yes" ? "가입" : "미가입" },
+        { label: "부양가족 수(입력)", value: `${dependents}명` },
+        { label: "20세 이하 자녀 수(입력)", value: `${child20}명` },
+        { label: "비과세액(입력)", value: `${parseNumber(nonTaxRaw).toLocaleString()}원` },
+      ],
+      lines: resultLines,
+      subTotal: resultSubTotal,
+      total: resultTotal,
+    });
 
   return (
     <CalculatorLayout

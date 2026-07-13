@@ -42,7 +42,14 @@ export default function NetSalaryPage() {
           };
   const resultTotal: ResultLine = { label: "실수령액(예상)", value: `${(result?.net ?? 0).toLocaleString()}원` };
   const onCsvDownload = () =>
-    downloadResultCsv({ slug: "net-salary", title: "세후 실수령액 간이 계산기", lines: resultLines, subTotal: resultSubTotal, total: resultTotal });
+    downloadResultCsv({
+      slug: "net-salary",
+      title: "세후 실수령액 간이 계산기",
+      inputs: [{ label: "세전 월급(입력)", value: `${value.toLocaleString()}원` }],
+      lines: resultLines,
+      subTotal: resultSubTotal,
+      total: resultTotal,
+    });
 
   return (
     <CalculatorLayout

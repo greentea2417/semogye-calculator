@@ -77,7 +77,17 @@ export default function ComparePage() {
           ];
   const resultTotal: ResultLine = { label: "실수령 차이", value: diffLabel };
   const onCsvDownload = () =>
-    downloadResultCsv({ slug: "compare", title: "알바 vs 프리랜서 비교", lines: resultLines, total: resultTotal });
+    downloadResultCsv({
+      slug: "compare",
+      title: "알바 vs 프리랜서 비교",
+      inputs: [
+        { label: "알바 시급(입력)", value: `${parseNumber(partHourlyRaw).toLocaleString("ko-KR")}원` },
+        { label: "알바 월 근로시간(입력)", value: `${parseNumber(partMonthlyHoursRaw).toLocaleString("ko-KR")}시간` },
+        { label: "프리랜서 월 수입(입력, 세전)", value: `${parseNumber(freelanceMonthlyRaw).toLocaleString("ko-KR")}원` },
+      ],
+      lines: resultLines,
+      total: resultTotal,
+    });
 
   return (
     <CalculatorLayout

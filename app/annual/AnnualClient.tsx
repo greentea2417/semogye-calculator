@@ -44,7 +44,16 @@ export default function AnnualClient() {
           ];
   const resultTotal: ResultLine = { label: "예상 연차수당", value: `${result.allowance.toLocaleString()}원` };
   const onCsvDownload = () =>
-    downloadResultCsv({ slug: "annual", title: "연차수당 계산기", lines: resultLines, total: resultTotal });
+    downloadResultCsv({
+      slug: "annual",
+      title: "연차수당 계산기",
+      inputs: [
+        { label: "1일 임금(입력)", value: `${result.dailyWage.toLocaleString()}원` },
+        { label: "미사용 연차일수(입력)", value: `${result.unusedDays.toLocaleString()}일` },
+      ],
+      lines: resultLines,
+      total: resultTotal,
+    });
 
   return (
     <CalculatorLayout
