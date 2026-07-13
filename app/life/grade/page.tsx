@@ -6,20 +6,17 @@ import CalculatorLayout from "../../components/CalculatorLayout";
 import LifeResult, { LifeChoice } from "../../components/LifeResult";
 import { copyToClipboardSafe } from "../../components/lib/shareUtils";
 import { toast } from "../../components/toast";
+import {
+  GRADE_SCHEMES,
+  buildGradeCsvRows,
+  summarize,
+  toCsvText,
+  todayStamp,
+  type Subject,
+} from "./gradeCsv";
 
-const GRADE_SCHEMES: Record<string, Record<string, number>> = {
-  "4.5": { "A+": 4.5, A0: 4.0, "B+": 3.5, B0: 3.0, "C+": 2.5, C0: 2.0, "D+": 1.5, D0: 1.0, F: 0, P: 0, NP: 0 },
-  "4.3": {
-    "A+": 4.3, A0: 4.0, "A-": 3.7, "B+": 3.3, B0: 3.0, "B-": 2.7,
-    "C+": 2.3, C0: 2.0, "C-": 1.7, "D+": 1.3, D0: 1.0, "D-": 0.7, F: 0, P: 0, NP: 0,
-  },
-};
-
-type Subject = { id: number; name: string; credit: number; grade: string };
-
-function downloadCSV(filename: string, csvText: string) {
-  const BOM = "\uFEFF";
-  const blob = new Blob([BOM + csvText], { type: "text/csv;charset=utf-8" });
+function downloadCSV(filename: string, rows: string[][]) {
+  const blob = new Blob(["\uFEFF" + toCsvText(rows)], { type: "text/csv;charset=utf-8" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
@@ -35,19 +32,7 @@ export default function GradePage() {
   const [subjects, setSubjects] = useState<Subject[]>([{ id: 1, name: "", credit: 3, grade: "A+" }]);
 
   const scheme = GRADE_SCHEMES[maxGrade];
-
-  const gpa = (() => {
-    let credits = 0;
-    let points = 0;
-    subjects.forEach((s) => {
-      if (s.grade === "P" || s.grade === "NP") return;
-      credits += Number(s.credit);
-      points += Number(s.credit) * (scheme[s.grade] ?? 0);
-    });
-    return credits === 0 ? "0.00" : (points / credits).toFixed(2);
-  })();
-
-  const totalCredits = subjects.filter((s) => s.grade !== "P" && s.grade !== "NP").reduce((sum, s) => sum + Number(s.credit), 0);
+  const { totalCredits, gpa } = summarize(subjects, scheme);
 
   const update = (id: number, patch: Partial<Subject>) => setSubjects((prev) => prev.map((s) => (s.id === id ? { ...s, ...patch } : s)));
 
@@ -60,14 +45,8 @@ export default function GradePage() {
     } catch {}
   };
 
-  const onCsvDownload = () => {
-    const rows = [
-      ["과목명", "학점", "성적"],
-      ...subjects.map((s) => [s.name || "", String(s.credit), s.grade]),
-      ["GPA", "", gpa],
-    ];
-    downloadCSV(`grade-calculator-${Date.now()}.csv`, rows.map((r) => r.join(",")).join("\n"));
-  };
+  const onCsvDownload = () =>
+    downloadCSV(`semogye-grade-${todayStamp()}.csv`, buildGradeCsvRows(subjects, maxGrade));
 
   return (
     <CalculatorLayout
