@@ -52,7 +52,7 @@ export default function WasteTimePage() {
           note="재미로 보는 계산이며, 스마트폰 사용이 모두 낭비인 것은 아닙니다."
         />
       }
-      guide={<BottomActions onShare={onShare} showPdf={false} />}
+      guide={<BottomActions onShare={onShare} />}
     >
       <div className="space-y-3 text-center">
         <span className="block text-[10px] font-black uppercase tracking-widest text-gray-400">

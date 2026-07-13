@@ -61,7 +61,7 @@ export default function BodyAgePage() {
           note="설문 기반 추정치이며 의학적 진단을 대체하지 않습니다."
         />
       }
-      guide={<BottomActions onShare={onShare} showPdf={false} />}
+      guide={<BottomActions onShare={onShare} />}
     >
       <label className="block space-y-2">
         <span className="block text-[10px] font-black uppercase tracking-widest text-gray-400">실제 나이</span>

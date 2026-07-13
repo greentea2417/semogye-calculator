@@ -60,7 +60,7 @@ export default function KbmPage() {
           note="체지방과 근육량을 구분하지 못하는 간이 지표입니다."
         />
       }
-      guide={<BottomActions onShare={onShare} showPdf={false} />}
+      guide={<BottomActions onShare={onShare} />}
     >
       <div className="grid grid-cols-2 gap-4">
         <label className="space-y-2">

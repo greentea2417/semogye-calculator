@@ -61,7 +61,7 @@ export default function BmiPage() {
           note="임신 중이거나 근육량이 매우 많은 경우 정확하지 않을 수 있습니다."
         />
       }
-      guide={<BottomActions onShare={onShare} showPdf={false} />}
+      guide={<BottomActions onShare={onShare} />}
     >
       <div className="grid grid-cols-2 gap-4">
         <label className="space-y-2">

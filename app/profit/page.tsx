@@ -151,7 +151,6 @@ function ProfitContent() {
         <>
           <BottomActions
             onShare={onShare}
-            onPdfDownload={() => handleExport("pdf")}
             onExcelDownload={() => handleExport("csv")}
             excelHint={
               unlocked

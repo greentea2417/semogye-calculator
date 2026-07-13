@@ -56,7 +56,7 @@ export default function FutureHeightPage() {
           note="성장 환경, 영양, 건강 상태에 따라 달라질 수 있는 참고용 계산입니다."
         />
       }
-      guide={<BottomActions onShare={onShare} showPdf={false} />}
+      guide={<BottomActions onShare={onShare} />}
     >
       <div className="grid grid-cols-2 gap-4">
         <label className="space-y-2">
