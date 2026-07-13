@@ -17,6 +17,19 @@ const GRADE_SCHEMES: Record<string, Record<string, number>> = {
 
 type Subject = { id: number; name: string; credit: number; grade: string };
 
+function downloadCSV(filename: string, csvText: string) {
+  const BOM = "\uFEFF";
+  const blob = new Blob([BOM + csvText], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
 export default function GradePage() {
   const [maxGrade, setMaxGrade] = useState<"4.5" | "4.3">("4.5");
   const [subjects, setSubjects] = useState<Subject[]>([{ id: 1, name: "", credit: 3, grade: "A+" }]);
@@ -34,23 +47,26 @@ export default function GradePage() {
     return credits === 0 ? "0.00" : (points / credits).toFixed(2);
   })();
 
-  const totalCredits = subjects
-    .filter((s) => s.grade !== "P" && s.grade !== "NP")
-    .reduce((sum, s) => sum + Number(s.credit), 0);
+  const totalCredits = subjects.filter((s) => s.grade !== "P" && s.grade !== "NP").reduce((sum, s) => sum + Number(s.credit), 0);
 
-  const update = (id: number, patch: Partial<Subject>) =>
-    setSubjects((prev) => prev.map((s) => (s.id === id ? { ...s, ...patch } : s)));
+  const update = (id: number, patch: Partial<Subject>) => setSubjects((prev) => prev.map((s) => (s.id === id ? { ...s, ...patch } : s)));
 
   const onShare = async () => {
     const url = typeof window === "undefined" ? "" : window.location.href;
     if (!url) return;
     try {
       if (navigator.share) await navigator.share({ title: "학점 계산기", url });
-      else {
-        await copyToClipboardSafe(url);
-        toast("링크를 복사했어요!");
-      }
+      else { await copyToClipboardSafe(url); toast("링크를 복사했어요!"); }
     } catch {}
+  };
+
+  const onCsvDownload = () => {
+    const rows = [
+      ["과목명", "학점", "성적"],
+      ...subjects.map((s) => [s.name || "", String(s.credit), s.grade]),
+      ["GPA", "", gpa],
+    ];
+    downloadCSV(`grade-calculator-${Date.now()}.csv`, rows.map((r) => r.join(",")).join("\n"));
   };
 
   return (
@@ -74,20 +90,13 @@ export default function GradePage() {
           note="실제 평점 산출 방식은 각 대학 학칙에 따라 차이가 있을 수 있습니다."
         />
       }
-      guide={<BottomActions onShare={onShare} />}
+      guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} excelLabel="CSV 다운로드" />}
     >
       <div className="space-y-2">
         <span className="block text-[10px] font-black uppercase tracking-widest text-gray-400">만점 기준</span>
         <div className="grid grid-cols-2 gap-2">
           {(["4.5", "4.3"] as const).map((v) => (
-            <LifeChoice
-              key={v}
-              active={maxGrade === v}
-              onClick={() => {
-                setMaxGrade(v);
-                setSubjects((prev) => prev.map((s) => ({ ...s, grade: "A+" })));
-              }}
-            >
+            <LifeChoice key={v} active={maxGrade === v} onClick={() => { setMaxGrade(v); setSubjects((prev) => prev.map((s) => ({ ...s, grade: "A+" }))); }}>
               {v} 만점
             </LifeChoice>
           ))}
@@ -96,57 +105,20 @@ export default function GradePage() {
 
       <div className="mt-5 space-y-3">
         {subjects.map((s, idx) => (
-          <div
-            key={s.id}
-            className="flex items-center gap-2 rounded-2xl border border-gray-100 bg-gray-50 p-3"
-          >
-            <input
-              type="text"
-              placeholder={`과목 ${idx + 1}`}
-              value={s.name}
-              onChange={(e) => update(s.id, { name: e.target.value })}
-              className="min-w-0 flex-1 rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm outline-none focus:border-emerald-400"
-            />
-            <select
-              value={s.credit}
-              onChange={(e) => update(s.id, { credit: Number(e.target.value) })}
-              className="rounded-xl border border-gray-200 bg-white px-2 py-2 text-xs font-bold outline-none"
-            >
-              {[1, 2, 3, 4].map((c) => (
-                <option key={c} value={c}>
-                  {c}학점
-                </option>
-              ))}
+          <div key={s.id} className="flex items-center gap-2 rounded-2xl border border-gray-100 bg-gray-50 p-3">
+            <input type="text" placeholder={`과목 ${idx + 1}`} value={s.name} onChange={(e) => update(s.id, { name: e.target.value })} className="min-w-0 flex-1 rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm outline-none focus:border-emerald-400" />
+            <select value={s.credit} onChange={(e) => update(s.id, { credit: Number(e.target.value) })} className="rounded-xl border border-gray-200 bg-white px-2 py-2 text-xs font-bold outline-none">
+              {[1, 2, 3, 4].map((c) => <option key={c} value={c}>{c}학점</option>)}
             </select>
-            <select
-              value={s.grade}
-              onChange={(e) => update(s.id, { grade: e.target.value })}
-              className="rounded-xl border border-gray-200 bg-white px-2 py-2 text-xs font-bold outline-none"
-            >
-              {Object.keys(scheme).map((g) => (
-                <option key={g} value={g}>
-                  {g}
-                </option>
-              ))}
+            <select value={s.grade} onChange={(e) => update(s.id, { grade: e.target.value })} className="rounded-xl border border-gray-200 bg-white px-2 py-2 text-xs font-bold outline-none">
+              {Object.keys(scheme).map((g) => <option key={g} value={g}>{g}</option>)}
             </select>
-            <button
-              type="button"
-              onClick={() => subjects.length > 1 && setSubjects((prev) => prev.filter((x) => x.id !== s.id))}
-              disabled={subjects.length <= 1}
-              className="px-1 text-lg text-gray-300 hover:text-red-400 disabled:opacity-40"
-              aria-label="과목 삭제"
-            >
-              ×
-            </button>
+            <button type="button" onClick={() => subjects.length > 1 && setSubjects((prev) => prev.filter((x) => x.id !== s.id))} disabled={subjects.length <= 1} className="px-1 text-lg text-gray-300 hover:text-red-400 disabled:opacity-40" aria-label="과목 삭제">×</button>
           </div>
         ))}
       </div>
 
-      <button
-        type="button"
-        onClick={() => setSubjects((prev) => [...prev, { id: Date.now(), name: "", credit: 3, grade: "A+" }])}
-        className="mt-4 w-full rounded-2xl border border-gray-200 bg-white py-4 text-sm font-bold text-gray-700 transition hover:border-gray-300 hover:bg-gray-50"
-      >
+      <button type="button" onClick={() => setSubjects((prev) => [...prev, { id: Date.now(), name: "", credit: 3, grade: "A+" }])} className="mt-4 w-full rounded-2xl border border-gray-200 bg-white py-4 text-sm font-bold text-gray-700 transition hover:border-gray-300 hover:bg-gray-50">
         + 과목 추가하기
       </button>
     </CalculatorLayout>

@@ -52,7 +52,6 @@ export default function FutureHeightPage() {
         <LifeResult
           label={gender === "girl" ? "여아 예상 키" : "남아 예상 키"}
           value={result ? `${result.picked}cm` : "-"}
-          desc={result ? `여아 ${result.girl}cm · 남아 ${result.boy}cm 기준` : undefined}
           note="성장 환경, 영양, 건강 상태에 따라 달라질 수 있는 참고용 계산입니다."
         />
       }

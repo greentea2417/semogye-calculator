@@ -44,7 +44,9 @@ export default function BottomActions({
       </div>
 
       {onShare && shareHint && <div className="text-xs text-gray-500">{shareHint}</div>}
-      {onExcelDownload && excelHint && <div className="text-xs text-gray-500">{excelHint}</div>}
+      {onExcelDownload && (
+        <div className="text-xs text-gray-500">엑셀에서 열 수 있어요 (.csv)</div>
+      )}
     </div>
   );
 }
