@@ -254,7 +254,22 @@ export default function HourlyMultiClient() {
   }
 
   function removeRow(id: string) {
-    setRows((prev) => (prev.length <= 1 ? prev : prev.filter((r) => r.id !== id)));
+    setRows((prev) => {
+      if (prev.length <= 1) {
+        return [
+          {
+            ...prev[0],
+            name: "직원 1",
+            hourlyWageRaw: "",
+            monthlyHoursRaw: "",
+            isFreelancer: false,
+            includeWeeklyHolidayPay: false,
+            avgWorkDaysPerWeekRaw: "5",
+          },
+        ];
+      }
+      return prev.filter((r) => r.id !== id);
+    });
     setCollapsed((prev) => {
       const cp = { ...prev };
       delete cp[id];
