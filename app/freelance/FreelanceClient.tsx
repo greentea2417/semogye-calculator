@@ -5,7 +5,8 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import InputBlock from "../components/InputBlock";
 import BottomActions from "../components/BottomActions";
 import CalculatorLayout from "../components/CalculatorLayout";
-import ResultPanel from "../components/ResultPanel";
+import ResultPanel, { type ResultLine } from "../components/ResultPanel";
+import { downloadResultCsv } from "../components/lib/resultCsv";
 import { toast } from "../components/toast";
 
 function parseNumber(raw: string | number) {
@@ -61,6 +62,16 @@ export default function FreelancePage() {
     } catch {}
   };
 
+  const resultLines: ResultLine[] = [
+            { label: "세전 수입", value: `${amountNum.toLocaleString()}원` },
+            { label: "소득세", hint: "(3%)", value: `${result.tax.toLocaleString()}원` },
+            { label: "지방소득세", hint: "(0.3%)", value: `${result.localTax.toLocaleString()}원` },
+          ];
+  const resultSubTotal: ResultLine = { label: "총 공제액", value: `${result.totalTax.toLocaleString()}원` };
+  const resultTotal: ResultLine = { label: "실수령액(예상)", value: `${result.takeHome.toLocaleString()}원` };
+  const onCsvDownload = () =>
+    downloadResultCsv({ slug: "freelance", title: "프리랜서 실수령액 계산기", lines: resultLines, subTotal: resultSubTotal, total: resultTotal });
+
   return (
     <CalculatorLayout
       tone="business"
@@ -73,17 +84,13 @@ export default function FreelancePage() {
         { q: "Q. 이 금액이 최종 세금인가요?", a: "A. 아니요. 5월 종합소득세 신고 시 최종 세액은 달라질 수 있습니다." },
         { q: "Q. 부가세가 포함된 계약도 계산되나요?", a: "A. 이 계산기는 원천징수 3.3% 기준이며, 부가세 포함 여부는 별도입니다." },
       ]}
-      guide={<BottomActions onShare={onShare} />}
+      guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
       result={
         <ResultPanel
           title="계산 결과"
-          lines={[
-            { label: "세전 수입", value: `${amountNum.toLocaleString()}원` },
-            { label: "소득세", hint: "(3%)", value: `${result.tax.toLocaleString()}원` },
-            { label: "지방소득세", hint: "(0.3%)", value: `${result.localTax.toLocaleString()}원` },
-          ]}
-          subTotal={{ label: "총 공제액", value: `${result.totalTax.toLocaleString()}원` }}
-          total={{ label: "실수령액(예상)", value: `${result.takeHome.toLocaleString()}원` }}
+          lines={resultLines}
+          subTotal={resultSubTotal}
+          total={resultTotal}
           note="* 원천징수 3.3% 기준이며, 5월 종합소득세 신고 결과에 따라 최종 세액은 달라질 수 있습니다."
         />
       }

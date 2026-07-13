@@ -3,7 +3,8 @@
 import { useMemo, useState } from "react";
 import InputBlock from "@/components/InputBlock";
 import CalculatorLayout from "@/components/CalculatorLayout";
-import ResultPanel from "@/components/ResultPanel";
+import ResultPanel, { type ResultLine } from "@/components/ResultPanel";
+import { downloadResultCsv } from "@/components/lib/resultCsv";
 import BottomActions from "@/components/BottomActions";
 import { copyToClipboardSafe } from "@/components/lib/shareUtils";
 import { toast } from "@/components/toast";
@@ -37,6 +38,14 @@ export default function AnnualClient() {
     } catch {}
   };
 
+  const resultLines: ResultLine[] = [
+            { label: "1일 임금", value: `${result.dailyWage.toLocaleString()}원` },
+            { label: "미사용 연차일수", value: `${result.unusedDays.toLocaleString()}일` },
+          ];
+  const resultTotal: ResultLine = { label: "예상 연차수당", value: `${result.allowance.toLocaleString()}원` };
+  const onCsvDownload = () =>
+    downloadResultCsv({ slug: "annual", title: "연차수당 계산기", lines: resultLines, total: resultTotal });
+
   return (
     <CalculatorLayout
       tone="business"
@@ -52,15 +61,12 @@ export default function AnnualClient() {
       result={
         <ResultPanel
           title="계산 결과"
-          lines={[
-            { label: "1일 임금", value: `${result.dailyWage.toLocaleString()}원` },
-            { label: "미사용 연차일수", value: `${result.unusedDays.toLocaleString()}일` },
-          ]}
-          total={{ label: "예상 연차수당", value: `${result.allowance.toLocaleString()}원` }}
+          lines={resultLines}
+          total={resultTotal}
           note="* 연차수당 = 1일 임금 × 미사용 연차일수. 회사 규정·통상임금 산정 방식에 따라 달라질 수 있습니다."
         />
       }
-      guide={<BottomActions onShare={onShare} />}
+      guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
     >
       <InputBlock label="1일 통상임금(또는 평균임금)" type="text" value={dailyWageRaw} onChange={(e: any) => setDailyWageRaw(formatComma(parseNumber(e.target.value)))} placeholder="예: 100,000" />
       <InputBlock label="미사용 연차일수" type="text" value={unusedDaysRaw} onChange={(e: any) => setUnusedDaysRaw(formatComma(parseNumber(e.target.value)))} placeholder="예: 8" />

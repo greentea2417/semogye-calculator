@@ -4,7 +4,8 @@ import { useMemo, useState } from "react";
 import InputBlock from "@/components/InputBlock";
 import BottomActions from "@/components/BottomActions";
 import CalculatorLayout from "@/components/CalculatorLayout";
-import ResultPanel from "@/components/ResultPanel";
+import ResultPanel, { type ResultLine } from "@/components/ResultPanel";
+import { downloadResultCsv } from "@/components/lib/resultCsv";
 import { copyToClipboardSafe } from "@/components/lib/shareUtils";
 import { toast } from "@/components/toast";
 
@@ -45,6 +46,15 @@ export default function RetirementClient() {
     } catch {}
   };
 
+  const resultLines: ResultLine[] = [
+            { label: "평균 1일 임금", value: `${result.avgDailyWage.toLocaleString()}원` },
+            { label: "총 재직일수", value: `${result.serviceDays.toLocaleString()}일` },
+            { label: "지급 대상 여부", value: result.eligible ? "대상" : "대상 아님(1년 미만)" },
+          ];
+  const resultTotal: ResultLine = { label: "예상 퇴직금", value: `${result.retirementPay.toLocaleString()}원` };
+  const onCsvDownload = () =>
+    downloadResultCsv({ slug: "retirement", title: "퇴직금 계산기", lines: resultLines, total: resultTotal });
+
   return (
     <CalculatorLayout
       tone="business"
@@ -61,16 +71,12 @@ export default function RetirementClient() {
       result={
         <ResultPanel
           title="계산 결과"
-          lines={[
-            { label: "평균 1일 임금", value: `${result.avgDailyWage.toLocaleString()}원` },
-            { label: "총 재직일수", value: `${result.serviceDays.toLocaleString()}일` },
-            { label: "지급 대상 여부", value: result.eligible ? "대상" : "대상 아님(1년 미만)" },
-          ]}
-          total={{ label: "예상 퇴직금", value: `${result.retirementPay.toLocaleString()}원` }}
+          lines={resultLines}
+          total={resultTotal}
           note="* 퇴직금 = 평균임금 × 30일 × (총 재직일수 ÷ 365). 수당 포함 여부와 산정 기간에 따라 달라질 수 있습니다."
         />
       }
-      guide={<BottomActions onShare={onShare} />}
+      guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
     >
       <InputBlock
         label="최근 3개월 총임금"

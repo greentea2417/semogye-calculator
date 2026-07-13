@@ -4,7 +4,8 @@ import { useMemo, useState } from "react";
 import InputBlock from "@/components/InputBlock";
 import BottomActions from "@/components/BottomActions";
 import CalculatorLayout from "@/components/CalculatorLayout";
-import ResultPanel from "@/components/ResultPanel";
+import ResultPanel, { type ResultLine } from "@/components/ResultPanel";
+import { downloadResultCsv } from "@/components/lib/resultCsv";
 import { copyToClipboardSafe } from "@/components/lib/shareUtils";
 import { toast } from "@/components/toast";
 
@@ -43,6 +44,17 @@ export default function VatPage() {
 
   const isRefund = result.payable < 0;
 
+  const resultLines: ResultLine[] = [
+            { label: "매출세액", hint: "(매출 × 10%)", value: `${result.salesTax.toLocaleString()}원` },
+            { label: "매입세액", hint: "(매입 × 10%)", value: `${result.purchaseTax.toLocaleString()}원` },
+          ];
+  const resultTotal: ResultLine = {
+            label: isRefund ? "환급받을 세액" : "납부할 세액",
+            value: `${Math.abs(result.payable).toLocaleString()}원`,
+          };
+  const onCsvDownload = () =>
+    downloadResultCsv({ slug: "vat", title: "부가세 계산기", lines: resultLines, total: resultTotal });
+
   return (
     <CalculatorLayout
       tone="business"
@@ -59,18 +71,12 @@ export default function VatPage() {
       result={
         <ResultPanel
           title="부가세 신고 리포트"
-          lines={[
-            { label: "매출세액", hint: "(매출 × 10%)", value: `${result.salesTax.toLocaleString()}원` },
-            { label: "매입세액", hint: "(매입 × 10%)", value: `${result.purchaseTax.toLocaleString()}원` },
-          ]}
-          total={{
-            label: isRefund ? "환급받을 세액" : "납부할 세액",
-            value: `${Math.abs(result.payable).toLocaleString()}원`,
-          }}
+          lines={resultLines}
+          total={resultTotal}
           note="* 간이과세자, 면세 항목, 매입세액 불공제, 가산세 등은 반영되지 않은 일반과세자 기준 단순 계산입니다."
         />
       }
-      guide={<BottomActions onShare={onShare} />}
+      guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
     >
       <InputBlock
         label="매출 공급가액 (부가세 별도)"

@@ -5,7 +5,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import InputBlock from "@/components/InputBlock";
 import BottomActions from "@/components/BottomActions";
 import CalculatorLayout from "@/components/CalculatorLayout";
-import ResultPanel from "@/components/ResultPanel";
+import ResultPanel, { type ResultLine } from "@/components/ResultPanel";
+import { downloadResultCsv } from "@/components/lib/resultCsv";
 import { calculateSalary } from "@/utils/salaryCalculators";
 import { decodeShareState, encodeShareState } from "../components/lib/shareState";
 import { copyToClipboardSafe } from "../components/lib/shareUtils";
@@ -95,6 +96,19 @@ function BonusContent() {
     } catch {}
   };
 
+  const resultLines: ResultLine[] = [
+            { label: "국민연금", value: `${result.pension.toLocaleString()}원` },
+            { label: "건강보험", value: `${result.health.toLocaleString()}원` },
+            { label: "장기요양보험", value: `${result.care.toLocaleString()}원` },
+            { label: "고용보험", value: `${result.employment.toLocaleString()}원` },
+            { label: "소득세", value: `${result.incomeTax.toLocaleString()}원` },
+            { label: "지방소득세", value: `${result.residentTax.toLocaleString()}원` },
+          ];
+  const resultSubTotal: ResultLine = { label: "총 공제액", value: `${totalDeduction.toLocaleString()}원` };
+  const resultTotal: ResultLine = { label: "최종 실수령액", value: `${result.takeHome.toLocaleString()}원` };
+  const onCsvDownload = () =>
+    downloadResultCsv({ slug: "bonus", title: "상여금 계산기", lines: resultLines, subTotal: resultSubTotal, total: resultTotal });
+
   return (
     <CalculatorLayout
       tone="business"
@@ -111,20 +125,13 @@ function BonusContent() {
       result={
         <ResultPanel
           title="합산 계산 결과"
-          lines={[
-            { label: "국민연금", value: `${result.pension.toLocaleString()}원` },
-            { label: "건강보험", value: `${result.health.toLocaleString()}원` },
-            { label: "장기요양보험", value: `${result.care.toLocaleString()}원` },
-            { label: "고용보험", value: `${result.employment.toLocaleString()}원` },
-            { label: "소득세", value: `${result.incomeTax.toLocaleString()}원` },
-            { label: "지방소득세", value: `${result.residentTax.toLocaleString()}원` },
-          ]}
-          subTotal={{ label: "총 공제액", value: `${totalDeduction.toLocaleString()}원` }}
-          total={{ label: "최종 실수령액", value: `${result.takeHome.toLocaleString()}원` }}
+          lines={resultLines}
+          subTotal={resultSubTotal}
+          total={resultTotal}
           note="* 국세청 간이세액표를 기준으로 한 모의 계산이며, 실제 홈택스 결과 및 급여명세서와는 차이가 있을 수 있습니다."
         />
       }
-      guide={<BottomActions onShare={onShare} />}
+      guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
     >
       <InputBlock
         label="기본 월 급여 (세전)"

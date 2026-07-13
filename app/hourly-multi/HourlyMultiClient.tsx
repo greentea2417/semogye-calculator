@@ -656,7 +656,7 @@ export default function HourlyMultiClient() {
               if (r.method === "copy") alert("현재 입력값이 포함된 링크가 복사되었습니다.");
             }}
             onExcelDownload={handleDownloadCSV}
-            excelLabel="엑셀 다운로드"
+            excelLabel="CSV 다운로드"
             excelHint="엑셀에서 바로 열 수 있어요 (.csv)"
           />
         </div>

@@ -4,7 +4,8 @@ import { useMemo, useState } from "react";
 import InputBlock from "../../components/InputBlock";
 import BottomActions from "../../components/BottomActions";
 import CalculatorLayout from "../../components/CalculatorLayout";
-import ResultPanel from "../../components/ResultPanel";
+import ResultPanel, { type ResultLine } from "../../components/ResultPanel";
+import { downloadResultCsv } from "../../components/lib/resultCsv";
 import { copyToClipboardSafe } from "../../components/lib/shareUtils";
 import { toast } from "../../components/toast";
 
@@ -30,6 +31,19 @@ export default function NetSalaryPage() {
     return { insurance, tax, net };
   }, [value, valid]);
 
+  const resultLines: ResultLine[] = [
+            { label: "세전 월급", value: `${value.toLocaleString()}원` },
+            { label: "4대보험(추정)", value: `${(result?.insurance ?? 0).toLocaleString()}원` },
+            { label: "세금(추정)", value: `${(result?.tax ?? 0).toLocaleString()}원` },
+          ];
+  const resultSubTotal: ResultLine = {
+            label: "총 공제액",
+            value: `${((result?.insurance ?? 0) + (result?.tax ?? 0)).toLocaleString()}원`,
+          };
+  const resultTotal: ResultLine = { label: "실수령액(예상)", value: `${(result?.net ?? 0).toLocaleString()}원` };
+  const onCsvDownload = () =>
+    downloadResultCsv({ slug: "net-salary", title: "세후 실수령액 간이 계산기", lines: resultLines, subTotal: resultSubTotal, total: resultTotal });
+
   return (
     <CalculatorLayout
       tone="business"
@@ -45,20 +59,13 @@ export default function NetSalaryPage() {
       result={
         <ResultPanel
           title="계산 결과"
-          lines={[
-            { label: "세전 월급", value: `${value.toLocaleString()}원` },
-            { label: "4대보험(추정)", value: `${(result?.insurance ?? 0).toLocaleString()}원` },
-            { label: "세금(추정)", value: `${(result?.tax ?? 0).toLocaleString()}원` },
-          ]}
-          subTotal={{
-            label: "총 공제액",
-            value: `${((result?.insurance ?? 0) + (result?.tax ?? 0)).toLocaleString()}원`,
-          }}
-          total={{ label: "실수령액(예상)", value: `${(result?.net ?? 0).toLocaleString()}원` }}
+          lines={resultLines}
+          subTotal={resultSubTotal}
+          total={resultTotal}
           note="* 간이 추정치이며 회사 공제 구조에 따라 실제 급여명세서와 차이가 있을 수 있습니다."
         />
       }
-      guide={<BottomActions onShare={async () => { if (navigator.share) await navigator.share({ title: "세후 실수령액 간이 계산기", url: shareUrl }); else { await copyToClipboardSafe(shareUrl); toast("링크를 복사했어요!"); } }} />}
+      guide={<BottomActions onShare={async () => { if (navigator.share) await navigator.share({ title: "세후 실수령액 간이 계산기", url: shareUrl }); else { await copyToClipboardSafe(shareUrl); toast("링크를 복사했어요!"); } }} onExcelDownload={onCsvDownload} />}
     >
       <InputBlock label="세전 월급 (원)" type="text" placeholder="3,000,000" value={gross} onChange={(e) => setGross(formatComma(parseNumber(e.target.value)))} />
     </CalculatorLayout>

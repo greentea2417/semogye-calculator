@@ -4,7 +4,8 @@ import { useMemo, useState } from "react";
 import InputBlock from "@/components/InputBlock";
 import BottomActions from "@/components/BottomActions";
 import CalculatorLayout from "@/components/CalculatorLayout";
-import ResultPanel from "@/components/ResultPanel";
+import ResultPanel, { type ResultLine } from "@/components/ResultPanel";
+import { downloadResultCsv } from "@/components/lib/resultCsv";
 import { useUrlQuerySync, codecs } from "@/utils/useUrlQuerySync";
 import { shareOrCopy } from "../components/lib/shareUtils";
 import { toast } from "../components/toast";
@@ -69,6 +70,15 @@ export default function ComparePage() {
     if (r.method === "copy") toast("현재 입력값이 포함된 링크를 복사했어요!");
   };
 
+  const resultLines: ResultLine[] = [
+            { label: "알바 월 수입", hint: "(세전)", value: `${calc.partGross.toLocaleString("ko-KR")}원` },
+            { label: "프리랜서 원천징수", hint: "(3.3%)", value: `${calc.freelanceWithholding.toLocaleString("ko-KR")}원` },
+            { label: "프리랜서 실수령", hint: "(예상)", value: `${calc.freelanceNet.toLocaleString("ko-KR")}원` },
+          ];
+  const resultTotal: ResultLine = { label: "실수령 차이", value: diffLabel };
+  const onCsvDownload = () =>
+    downloadResultCsv({ slug: "compare", title: "알바 vs 프리랜서 비교", lines: resultLines, total: resultTotal });
+
   return (
     <CalculatorLayout
       tone="business"
@@ -85,12 +95,8 @@ export default function ComparePage() {
       result={
         <ResultPanel
           title="비교 결과"
-          lines={[
-            { label: "알바 월 수입", hint: "(세전)", value: `${calc.partGross.toLocaleString("ko-KR")}원` },
-            { label: "프리랜서 원천징수", hint: "(3.3%)", value: `${calc.freelanceWithholding.toLocaleString("ko-KR")}원` },
-            { label: "프리랜서 실수령", hint: "(예상)", value: `${calc.freelanceNet.toLocaleString("ko-KR")}원` },
-          ]}
-          total={{ label: "실수령 차이", value: diffLabel }}
+          lines={resultLines}
+          total={resultTotal}
           note="※ 본 비교는 입력값 기준의 단순 계산 결과이며, 실제 세금·보험·근로조건에 따라 달라질 수 있습니다."
         >
           <p className="mt-4 rounded-xl bg-gray-50 p-4 text-sm font-semibold leading-6 text-gray-800">
@@ -98,7 +104,7 @@ export default function ComparePage() {
           </p>
         </ResultPanel>
       }
-      guide={<BottomActions onShare={onShare} />}
+      guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
     >
       <h2 className="text-base font-bold text-gray-900">알바 정보</h2>
       <div className="mt-3 space-y-4">

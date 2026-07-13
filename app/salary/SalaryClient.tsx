@@ -4,7 +4,8 @@ import { useMemo, useState } from "react";
 import InputBlock from "../components/InputBlock";
 import BottomActions from "../components/BottomActions";
 import CalculatorLayout from "../components/CalculatorLayout";
-import ResultPanel from "../components/ResultPanel";
+import ResultPanel, { type ResultLine } from "../components/ResultPanel";
+import { downloadResultCsv } from "../components/lib/resultCsv";
 import { copyToClipboardSafe } from "../components/lib/shareUtils";
 import { toast } from "../components/toast";
 
@@ -52,6 +53,19 @@ export default function SalaryClient() {
     } catch {}
   };
 
+  const resultLines: ResultLine[] = [
+            { label: "국민연금", value: `${result.pension.toLocaleString()}원` },
+            { label: "건강보험", value: `${result.health.toLocaleString()}원` },
+            { label: "장기요양보험", value: `${result.care.toLocaleString()}원` },
+            { label: "고용보험", value: `${result.employment.toLocaleString()}원` },
+            { label: "소득세", value: `${result.incomeTax.toLocaleString()}원` },
+            { label: "지방소득세", value: `${result.residentTax.toLocaleString()}원` },
+          ];
+  const resultSubTotal: ResultLine = { label: "총 공제액", value: `${result.totalDeduction.toLocaleString()}원` };
+  const resultTotal: ResultLine = { label: "월 실수령액", value: `${result.takeHome.toLocaleString()}원` };
+  const onCsvDownload = () =>
+    downloadResultCsv({ slug: "salary", title: "월급 실수령액 계산기", lines: resultLines, subTotal: resultSubTotal, total: resultTotal });
+
   return (
     <CalculatorLayout
       tone="business"
@@ -68,20 +82,13 @@ export default function SalaryClient() {
       result={
         <ResultPanel
           title="계산 결과"
-          lines={[
-            { label: "국민연금", value: `${result.pension.toLocaleString()}원` },
-            { label: "건강보험", value: `${result.health.toLocaleString()}원` },
-            { label: "장기요양보험", value: `${result.care.toLocaleString()}원` },
-            { label: "고용보험", value: `${result.employment.toLocaleString()}원` },
-            { label: "소득세", value: `${result.incomeTax.toLocaleString()}원` },
-            { label: "지방소득세", value: `${result.residentTax.toLocaleString()}원` },
-          ]}
-          subTotal={{ label: "총 공제액", value: `${result.totalDeduction.toLocaleString()}원` }}
-          total={{ label: "월 실수령액", value: `${result.takeHome.toLocaleString()}원` }}
+          lines={resultLines}
+          subTotal={resultSubTotal}
+          total={resultTotal}
           note="* 간이 추정치이며, 부양가족 수·비과세 항목·회사 규정에 따라 실제 명세서와 차이가 날 수 있습니다."
         />
       }
-      guide={<BottomActions onShare={onShare} />}
+      guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
     >
       <InputBlock
         label="월 급여 (세전)"

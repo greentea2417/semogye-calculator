@@ -13,7 +13,7 @@ export default function BottomActions({
   shareLabel = "공유하기",
   onShare,
   shareHint,
-  excelLabel = "엑셀 다운로드",
+  excelLabel = "CSV 다운로드",
   excelHint,
   onExcelDownload,
 }: Props) {

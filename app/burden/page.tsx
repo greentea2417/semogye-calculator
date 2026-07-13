@@ -4,7 +4,8 @@ import { useMemo, useState } from "react";
 import InputBlock from "@/components/InputBlock";
 import BottomActions from "@/components/BottomActions";
 import CalculatorLayout from "@/components/CalculatorLayout";
-import ResultPanel from "@/components/ResultPanel";
+import ResultPanel, { type ResultLine } from "@/components/ResultPanel";
+import { downloadResultCsv } from "@/components/lib/resultCsv";
 import { copyToClipboardSafe } from "../components/lib/shareUtils";
 import { toast } from "../components/toast";
 import { useUrlQuerySync, codecs } from "@/utils/useUrlQuerySync";
@@ -70,6 +71,15 @@ export default function BurdenPage() {
     } catch {}
   };
 
+  const resultLines: ResultLine[] = [
+            { label: "월 소득 (실수령액)", value: `${income.toLocaleString()}원` },
+            { label: "월 상환액", value: `${payment.toLocaleString()}원` },
+            { label: "상환 후 잔여 소득", value: `${remaining.toLocaleString()}원` },
+          ];
+  const resultTotal: ResultLine = { label: "상환부담률", value: rate === null ? "-" : `${rate}%` };
+  const onCsvDownload = () =>
+    downloadResultCsv({ slug: "burden", title: "상환부담률 계산기", lines: resultLines, total: resultTotal });
+
   return (
     <CalculatorLayout
       tone="business"
@@ -86,12 +96,8 @@ export default function BurdenPage() {
       result={
         <ResultPanel
           title="계산 결과"
-          lines={[
-            { label: "월 소득 (실수령액)", value: `${income.toLocaleString()}원` },
-            { label: "월 상환액", value: `${payment.toLocaleString()}원` },
-            { label: "상환 후 잔여 소득", value: `${remaining.toLocaleString()}원` },
-          ]}
-          total={{ label: "상환부담률", value: rate === null ? "-" : `${rate}%` }}
+          lines={resultLines}
+          total={resultTotal}
           note="※ 본 결과는 상환 부담 수준을 이해하기 위한 참고 지표입니다. 실제 대출 가능 여부나 금융기관 심사 기준을 대체하지 않습니다."
         >
           {summary ? (
@@ -121,7 +127,7 @@ export default function BurdenPage() {
           </div>
         </ResultPanel>
       }
-      guide={<BottomActions onShare={onShare} />}
+      guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
     >
       <InputBlock
         label="월 소득 (실수령액)"

@@ -3,7 +3,8 @@
 import { useMemo, useState } from "react";
 import BottomActions from "@/components/BottomActions";
 import CalculatorLayout from "@/components/CalculatorLayout";
-import ResultPanel from "@/components/ResultPanel";
+import ResultPanel, { type ResultLine } from "@/components/ResultPanel";
+import { downloadResultCsv } from "@/components/lib/resultCsv";
 
 import { encodeShareState } from "../components/lib/shareState";
 import { buildShareUrl, shareOrCopy } from "../components/lib/shareUtils";
@@ -83,6 +84,14 @@ export default function HourlyClient() {
     if (r.method === "copy") toast("현재 입력값이 포함된 링크를 복사했어요!");
   };
 
+  const resultLines: ResultLine[] = [
+            { label: "기본급", hint: "(시급 × 근로시간)", value: `${formatKRW(calc.basePay)}원` },
+            { label: "주휴수당(예상)", value: `${formatKRW(calc.weeklyHolidayPay)}원` },
+          ];
+  const resultTotal: ResultLine = { label: "월 총 급여(세전)", value: `${formatKRW(calc.totalPay)}원` };
+  const onCsvDownload = () =>
+    downloadResultCsv({ slug: "hourly", title: "시급 계산기", lines: resultLines, total: resultTotal });
+
   return (
     <CalculatorLayout
       tone="business"
@@ -99,15 +108,12 @@ export default function HourlyClient() {
       result={
         <ResultPanel
           title="계산 결과"
-          lines={[
-            { label: "기본급", hint: "(시급 × 근로시간)", value: `${formatKRW(calc.basePay)}원` },
-            { label: "주휴수당(예상)", value: `${formatKRW(calc.weeklyHolidayPay)}원` },
-          ]}
-          total={{ label: "월 총 급여(세전)", value: `${formatKRW(calc.totalPay)}원` }}
+          lines={resultLines}
+          total={resultTotal}
           note="* 세전 기준이며 실근로시간(휴게시간 제외)으로 계산합니다. 주휴수당은 예상치이며 근무 조건에 따라 달라질 수 있습니다."
         />
       }
-      guide={<BottomActions onShare={onShare} />}
+      guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
     >
       <div>
         <label className="input-label">시급</label>

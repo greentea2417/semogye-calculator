@@ -4,7 +4,8 @@ import { useMemo, useState } from "react";
 import InputBlock from "@/components/InputBlock";
 import BottomActions from "@/components/BottomActions";
 import CalculatorLayout from "@/components/CalculatorLayout";
-import ResultPanel from "@/components/ResultPanel";
+import ResultPanel, { type ResultLine } from "@/components/ResultPanel";
+import { downloadResultCsv } from "@/components/lib/resultCsv";
 import { copyToClipboardSafe } from "@/components/lib/shareUtils";
 import { toast } from "@/components/toast";
 
@@ -45,6 +46,15 @@ export default function UnemploymentClient() {
     } catch {}
   };
 
+  const resultLines: ResultLine[] = [
+            { label: "수급 자격(가입기간 기준)", value: result.eligible ? "검토 가능" : "요건 부족" },
+            { label: "1일 예상 실업급여", value: `${result.dailyBenefit.toLocaleString()}원` },
+            { label: "예상 수급일수", value: `${result.days.toLocaleString()}일` },
+          ];
+  const resultTotal: ResultLine = { label: "총 예상 수급액", value: `${result.totalBenefit.toLocaleString()}원` };
+  const onCsvDownload = () =>
+    downloadResultCsv({ slug: "unemployment", title: "실업급여 계산기", lines: resultLines, total: resultTotal });
+
   return (
     <CalculatorLayout
       tone="business"
@@ -61,16 +71,12 @@ export default function UnemploymentClient() {
       result={
         <ResultPanel
           title="계산 결과"
-          lines={[
-            { label: "수급 자격(가입기간 기준)", value: result.eligible ? "검토 가능" : "요건 부족" },
-            { label: "1일 예상 실업급여", value: `${result.dailyBenefit.toLocaleString()}원` },
-            { label: "예상 수급일수", value: `${result.days.toLocaleString()}일` },
-          ]}
-          total={{ label: "총 예상 수급액", value: `${result.totalBenefit.toLocaleString()}원` }}
+          lines={resultLines}
+          total={resultTotal}
           note="* 평균임금 60%(상한 적용) 기준의 추정치입니다. 실제 수급 여부·금액은 고용보험 공식 안내를 확인하세요."
         />
       }
-      guide={<BottomActions onShare={onShare} />}
+      guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
     >
       <InputBlock
         label="평균 1일 임금"

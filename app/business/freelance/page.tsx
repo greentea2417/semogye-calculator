@@ -4,7 +4,8 @@ import { useMemo, useState } from "react";
 import InputBlock from "../../components/InputBlock";
 import BottomActions from "../../components/BottomActions";
 import CalculatorLayout from "../../components/CalculatorLayout";
-import ResultPanel from "../../components/ResultPanel";
+import ResultPanel, { type ResultLine } from "../../components/ResultPanel";
+import { downloadResultCsv } from "../../components/lib/resultCsv";
 import { copyToClipboardSafe } from "../../components/lib/shareUtils";
 import { toast } from "../../components/toast";
 
@@ -38,6 +39,14 @@ export default function BusinessFreelancePage() {
     } catch {}
   };
 
+  const resultLines: ResultLine[] = [
+            { label: "세전 금액", value: `${value.toLocaleString()}원` },
+            { label: "원천징수", hint: "(3.3%)", value: `${result.tax.toLocaleString()}원` },
+          ];
+  const resultTotal: ResultLine = { label: "실수령액(예상)", value: `${result.net.toLocaleString()}원` };
+  const onCsvDownload = () =>
+    downloadResultCsv({ slug: "freelance-simple", title: "프리랜서 실수령액 계산기", lines: resultLines, total: resultTotal });
+
   return (
     <CalculatorLayout
       tone="business"
@@ -54,15 +63,12 @@ export default function BusinessFreelancePage() {
       result={
         <ResultPanel
           title="계산 결과"
-          lines={[
-            { label: "세전 금액", value: `${value.toLocaleString()}원` },
-            { label: "원천징수", hint: "(3.3%)", value: `${result.tax.toLocaleString()}원` },
-          ]}
-          total={{ label: "실수령액(예상)", value: `${result.net.toLocaleString()}원` }}
+          lines={resultLines}
+          total={resultTotal}
           note="* 간이 계산이며 실제 신고·공제 조건에 따라 달라질 수 있습니다."
         />
       }
-      guide={<BottomActions onShare={onShare} />}
+      guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
     >
       <InputBlock
         label="세전 금액 (원)"

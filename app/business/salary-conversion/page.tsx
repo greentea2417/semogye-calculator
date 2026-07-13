@@ -4,7 +4,8 @@ import { useMemo, useState } from "react";
 import InputBlock from "../../components/InputBlock";
 import BottomActions from "../../components/BottomActions";
 import CalculatorLayout from "../../components/CalculatorLayout";
-import ResultPanel from "../../components/ResultPanel";
+import ResultPanel, { type ResultLine } from "../../components/ResultPanel";
+import { downloadResultCsv } from "../../components/lib/resultCsv";
 import { copyToClipboardSafe } from "../../components/lib/shareUtils";
 import { toast } from "../../components/toast";
 
@@ -38,6 +39,14 @@ export default function SalaryConversionPage() {
     } catch {}
   };
 
+  const resultLines: ResultLine[] = [
+            { label: "연봉(세전)", value: `${annual.toLocaleString()}원` },
+            { label: "주급 환산", hint: "(52주)", value: `${result.weekly.toLocaleString()}원` },
+          ];
+  const resultTotal: ResultLine = { label: "월급(세전, 12개월)", value: `${result.monthly.toLocaleString()}원` };
+  const onCsvDownload = () =>
+    downloadResultCsv({ slug: "salary-conversion", title: "연봉 월급 환산 계산기", lines: resultLines, total: resultTotal });
+
   return (
     <CalculatorLayout
       tone="business"
@@ -54,15 +63,12 @@ export default function SalaryConversionPage() {
       result={
         <ResultPanel
           title="계산 결과"
-          lines={[
-            { label: "연봉(세전)", value: `${annual.toLocaleString()}원` },
-            { label: "주급 환산", hint: "(52주)", value: `${result.weekly.toLocaleString()}원` },
-          ]}
-          total={{ label: "월급(세전, 12개월)", value: `${result.monthly.toLocaleString()}원` }}
+          lines={resultLines}
+          total={resultTotal}
           note="* 세전 기준 단순 환산 값이며, 상여·성과급·퇴직금 포함 여부에 따라 체감 월급은 달라질 수 있습니다."
         />
       }
-      guide={<BottomActions onShare={onShare} />}
+      guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
     >
       <InputBlock
         label="연봉 (세전)"
