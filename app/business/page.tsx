@@ -11,6 +11,8 @@ const items = [
   { href: "/business/unemployment", label: "실업급여 계산기", desc: "수급 가능액 예상" },
   { href: "/business/annual", label: "연차수당 계산기", desc: "미사용 연차수당 계산" },
   { href: "/business/vat", label: "부가세 계산기", desc: "공급가액/부가세 분리" },
+  { href: "/business/four-insurance", label: "4대보험 계산기", desc: "월급으로 4대보험 공제액 계산" },
+  { href: "/business/compound", label: "복리 계산기", desc: "원금·이율·기간으로 만기 금액 계산" },
 ];
 
 export default function BusinessPage() {
