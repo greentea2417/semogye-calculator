@@ -59,20 +59,14 @@ const accentStyles: Record<string, { badge: string; side: string; item: string; 
   rose: { badge: "bg-rose-50 text-rose-600", side: "bg-rose-50 text-rose-700", item: "hover:border-rose-200", arrow: "group-hover:text-rose-500", dot: "bg-rose-500", hover: "group-hover:text-rose-600", title: "text-rose-700" },
 };
 
-function Sidebar({ groups }: { groups: Group[] }) {
+function Sidebar() {
   return (
     <aside className="hidden md:block md:w-64 md:shrink-0">
-      <div className="sticky top-6 space-y-3 rounded-[28px] border border-gray-100 bg-white p-4 shadow-sm shadow-gray-200/30">
-        <p className="px-2 pb-2 text-xs font-black uppercase tracking-[0.24em] text-gray-400">카테고리</p>
-        {groups.map((group) => {
-          const s = accentStyles[group.accent];
-          return (
-            <a key={group.title} href={`#${group.title}`} className={`flex items-center justify-between rounded-2xl px-3 py-3 text-sm font-bold transition hover:bg-gray-50 ${s.side}`}>
-              <span className="flex items-center gap-2"><span className={`h-2 w-2 rounded-full ${s.dot}`} />{group.title}</span>
-              <span className="text-xs text-gray-400">{group.items.length}</span>
-            </a>
-          );
-        })}
+      <div className="sticky top-6 rounded-[28px] border border-gray-100 bg-white p-4 shadow-sm shadow-gray-200/30">
+        <p className="text-xs font-black uppercase tracking-[0.24em] text-gray-400">카테고리</p>
+        <p className="mt-3 text-sm leading-6 text-gray-500">
+          비즈니스 계산기는 왼쪽 카테고리와 오른쪽 목록으로 탐색할 수 있습니다.
+        </p>
       </div>
     </aside>
   );
@@ -121,7 +115,7 @@ export default function BusinessPage() {
       </div>
 
       <div className="flex flex-col gap-6 md:flex-row">
-        <Sidebar groups={groups} />
+        <Sidebar />
         <div className="min-w-0 flex-1 hidden md:block">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {groups.flatMap((group) =>
