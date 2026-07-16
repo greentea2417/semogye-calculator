@@ -60,16 +60,7 @@ const accentStyles: Record<string, { badge: string; side: string; item: string; 
 };
 
 function Sidebar() {
-  return (
-    <aside className="hidden md:block md:w-64 md:shrink-0">
-      <div className="sticky top-6 px-1 py-2">
-        <p className="text-xs font-black uppercase tracking-[0.24em] text-gray-400">카테고리</p>
-        <p className="mt-3 text-sm leading-6 text-gray-500">
-          비즈니스 계산기는 왼쪽 사이드바와 오른쪽 목록으로 탐색할 수 있습니다.
-        </p>
-      </div>
-    </aside>
-  );
+  return null;
 }
 
 function MobileSections({ groups }: { groups: Group[] }) {
@@ -114,9 +105,8 @@ export default function BusinessPage() {
         <p className="mt-3 text-gray-500">급여, 세금, 퇴직, 실업급여, 연차수당까지 자주 쓰는 계산기만 모았습니다.</p>
       </div>
 
-      <div className="flex flex-col gap-6 md:flex-row">
-        <Sidebar />
-        <div className="min-w-0 flex-1 hidden md:block">
+      <div className="hidden md:block">
+        <div className="min-w-0 flex-1">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {groups.flatMap((group) =>
               group.items.map((item) => (
