@@ -13,6 +13,9 @@ const items = [
   { href: "/business/vat", label: "부가세 계산기", desc: "공급가액/부가세 분리" },
   { href: "/business/four-insurance", label: "4대보험 계산기", desc: "월급으로 4대보험 공제액 계산" },
   { href: "/business/compound", label: "복리 계산기", desc: "원금·이율·기간으로 만기 금액 계산" },
+  { href: "/business/weekly-holiday", label: "주휴수당 계산기", desc: "주 15시간 이상 주휴수당 예상" },
+  { href: "/business/night-pay", label: "야간수당 계산기", desc: "야간근로 가산수당 계산" },
+  { href: "/business/rest-day-pay", label: "휴일근로수당 계산기", desc: "휴일근로 가산수당 계산" },
 ];
 
 export default function BusinessPage() {
