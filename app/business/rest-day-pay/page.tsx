@@ -19,8 +19,9 @@ export default function RestDayPayPage() {
   const result = useMemo(() => {
     const hourly = parseNumber(hourlyRaw);
     const restHours = parseNumber(restHoursRaw);
-    const premium = Math.round(hourly * restHours);
-    return { hourly, restHours, premium };
+    const premiumRate = 1.5;
+    const premium = Math.round(hourly * restHours * premiumRate);
+    return { hourly, restHours, premiumRate, premium };
   }, [hourlyRaw, restHoursRaw]);
 
   const onShare = async () => {
