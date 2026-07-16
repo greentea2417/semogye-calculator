@@ -120,36 +120,28 @@ export default function BusinessPage() {
         <p className="mt-3 text-gray-500">급여, 세금, 퇴직, 실업급여, 연차수당까지 자주 쓰는 계산기만 모았습니다.</p>
       </div>
 
-      <div className="flex flex-col gap-6 lg:flex-row">
+      <div className="flex flex-col gap-6 md:flex-row">
         <Sidebar groups={groups} />
-        <div className="min-w-0 flex-1 space-y-8 hidden md:block">
-          {groups.map((group) => {
-            const s = accentStyles[group.accent];
-            return (
-              <section key={group.title} id={group.title} className="rounded-[28px] border border-gray-100 bg-white p-5 shadow-sm shadow-gray-200/30 sm:p-6">
-                <div className={`mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold ${s.badge}`}>
-                  <span className={`h-1.5 w-1.5 rounded-full ${s.dot}`} /> {group.title}
-                </div>
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  {group.items.map((item) => (
-                    <Link key={item.href} href={item.href} className={`group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 ${s.item} hover:shadow-lg`}>
-                      <div className="flex items-start justify-between gap-4">
-                        <div>
-                          <h2 className="text-lg font-bold text-gray-900 transition-colors group-hover:text-inherit">{item.label}</h2>
-                          <p className="mt-1 text-sm text-gray-500">{item.desc}</p>
-                        </div>
-                        <span className={`text-gray-300 transition-colors ${s.arrow}`}>→</span>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </section>
-            );
-          })}
+        <div className="min-w-0 flex-1 hidden md:block">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {groups.flatMap((group) =>
+              group.items.map((item) => (
+                <Link key={item.href} href={item.href} className="group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <h2 className="text-lg font-bold text-gray-900 transition-colors group-hover:text-blue-600">{item.label}</h2>
+                      <p className="mt-1 text-sm text-gray-500">{item.desc}</p>
+                    </div>
+                    <span className="text-gray-300 transition-colors group-hover:text-blue-500">→</span>
+                  </div>
+                </Link>
+              ))
+            )}
+          </div>
         </div>
       </div>
 
-      <div className="lg:hidden mt-8">
+      <div className="md:hidden mt-8">
         <MobileSections groups={groups} />
       </div>
     </div>
