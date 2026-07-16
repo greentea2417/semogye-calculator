@@ -16,7 +16,7 @@ export default function HomePage() {
         <div className="relative mx-auto flex max-w-3xl flex-col items-center px-4 pb-16 pt-20 text-center sm:px-6 sm:pb-20 sm:pt-24">
           <span className="mb-8 inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold tracking-wide text-blue-600 not-italic">
             <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
-            사장님을 위한 계산기
+            세상의 모든 계산기
           </span>
 
           <h1 className="text-4xl font-extrabold tracking-tighter text-gray-900 leading-[1.08] not-italic sm:text-5xl md:text-6xl font-['Pretendard_Variable',sans-serif]">
