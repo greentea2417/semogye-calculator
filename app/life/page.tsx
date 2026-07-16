@@ -30,10 +30,10 @@ const groups: Group[] = [
   },
 ];
 
-const accentStyles: Record<string, { badge: string; side: string; item: string; arrow: string; dot: string }> = {
-  green: { badge: "bg-green-50 text-green-600", side: "bg-green-50 text-green-700", item: "hover:border-green-200", arrow: "group-hover:text-green-500", dot: "bg-green-500" },
-  sky: { badge: "bg-sky-50 text-sky-600", side: "bg-sky-50 text-sky-700", item: "hover:border-sky-200", arrow: "group-hover:text-sky-500", dot: "bg-sky-500" },
-  violet: { badge: "bg-violet-50 text-violet-600", side: "bg-violet-50 text-violet-700", item: "hover:border-violet-200", arrow: "group-hover:text-violet-500", dot: "bg-violet-500" },
+const accentStyles: Record<string, { badge: string; side: string; item: string; arrow: string; dot: string; hover: string }> = {
+  green: { badge: "bg-green-50 text-green-600", side: "bg-green-50 text-green-700", item: "hover:border-green-200", arrow: "group-hover:text-green-500", dot: "bg-green-500", hover: "group-hover:text-green-600" },
+  sky: { badge: "bg-sky-50 text-sky-600", side: "bg-sky-50 text-sky-700", item: "hover:border-sky-200", arrow: "group-hover:text-sky-500", dot: "bg-sky-500", hover: "group-hover:text-sky-600" },
+  violet: { badge: "bg-violet-50 text-violet-600", side: "bg-violet-50 text-violet-700", item: "hover:border-violet-200", arrow: "group-hover:text-violet-500", dot: "bg-violet-500", hover: "group-hover:text-violet-600" },
 };
 
 function Sidebar({ groups }: { groups: Group[] }) {
@@ -55,6 +55,36 @@ function Sidebar({ groups }: { groups: Group[] }) {
   );
 }
 
+function MobileSections({ groups }: { groups: Group[] }) {
+  return (
+    <div className="space-y-8 lg:hidden">
+      {groups.map((group) => {
+        const s = accentStyles[group.accent];
+        return (
+          <section key={group.title} className="rounded-[28px] border border-gray-100 bg-white p-5 shadow-sm shadow-gray-200/30">
+            <div className={`mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold ${s.badge}`}>
+              <span className={`h-1.5 w-1.5 rounded-full ${s.dot}`} /> {group.title}
+            </div>
+            <div className="grid grid-cols-1 gap-4">
+              {group.items.map((item) => (
+                <Link key={item.href} href={item.href} className={`group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 ${s.item} hover:shadow-lg`}>
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <h2 className={`text-lg font-bold text-gray-900 transition-colors ${s.hover}`}>{item.label}</h2>
+                      <p className="mt-1 text-sm text-gray-500">{item.desc}</p>
+                    </div>
+                    <span className={`text-gray-300 transition-colors ${s.arrow}`}>→</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function LifePage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
@@ -69,8 +99,7 @@ export default function LifePage() {
 
       <div className="flex flex-col gap-6 lg:flex-row">
         <Sidebar groups={groups} />
-
-        <div className="min-w-0 flex-1 space-y-8">
+        <div className="min-w-0 flex-1 space-y-8 hidden lg:block">
           {groups.map((group) => {
             const s = accentStyles[group.accent];
             return (
@@ -95,6 +124,10 @@ export default function LifePage() {
             );
           })}
         </div>
+      </div>
+
+      <div className="lg:hidden mt-8">
+        <MobileSections groups={groups} />
       </div>
     </div>
   );
