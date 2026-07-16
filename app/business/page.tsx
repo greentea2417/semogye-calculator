@@ -38,6 +38,8 @@ const groups: Group[] = [
     items: [
       { href: "/business/profit", label: "손익 계산기", desc: "매출과 비용을 한 번에" },
       { href: "/business/compound", label: "복리 계산기", desc: "원금·이율·기간으로 만기 금액 계산" },
+      { href: "/business/savings-installment", label: "적금 계산기", desc: "정기적금 만기 수령액 계산" },
+      { href: "/business/loan-repayment", label: "대출 이자 계산기", desc: "원리금균등 월 상환액 계산" },
     ],
   },
   {

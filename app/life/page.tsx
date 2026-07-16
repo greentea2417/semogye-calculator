@@ -11,6 +11,7 @@ const groups: Group[] = [
       { href: "/life/body-age", label: "신체 나이 계산기", desc: "몸 상태를 나이로 보기" },
       { href: "/life/kbm", label: "키빼몸 계산기", desc: "간단한 체형 기준 확인" },
       { href: "/life/future-height", label: "우리 아이 예상 키", desc: "부모 키로 간단히 예측" },
+      { href: "/life/bmr", label: "기초대사량(BMR) 계산기", desc: "하루 소비·권장 칼로리 확인" },
       { href: "/life/waste-time", label: "내가 날린 인생 시간은?", desc: "재미로 보는 시간 계산" },
     ],
   },
