@@ -55,7 +55,11 @@ function MobileSections({ groups }: { groups: Group[] }) {
           </div>
           <div className="grid grid-cols-1 gap-4">
             {group.items.map((item) => (
-              <Link key={item.href} href={item.href} className="group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-green-200 hover:shadow-lg">
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-green-200 hover:shadow-lg"
+              >
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <h2 className="text-lg font-bold text-gray-900 transition-colors group-hover:text-green-600">{item.label}</h2>
@@ -86,11 +90,15 @@ export default function LifePage() {
 
       <div className="flex flex-col gap-6 md:flex-row">
         <Sidebar groups={groups} />
-        <div className="hidden min-w-0 flex-1 md:block">
+        <div className="min-w-0 flex-1 hidden md:block">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {groups.flatMap((group) =>
               group.items.map((item) => (
-                <Link key={item.href} href={item.href} className="group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-green-200 hover:shadow-lg">
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-green-200 hover:shadow-lg"
+                >
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <h2 className="text-lg font-bold text-gray-900 transition-colors group-hover:text-green-600">{item.label}</h2>
