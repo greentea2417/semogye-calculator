@@ -51,56 +51,73 @@ const groups: Group[] = [
   },
 ];
 
-const accentStyles: Record<string, { badge: string; heading: string; card: string; arrow: string }> = {
-  blue: { badge: "bg-blue-50 text-blue-600", heading: "text-blue-700", card: "hover:border-blue-200", arrow: "group-hover:text-blue-500" },
-  violet: { badge: "bg-violet-50 text-violet-600", heading: "text-violet-700", card: "hover:border-violet-200", arrow: "group-hover:text-violet-500" },
-  emerald: { badge: "bg-emerald-50 text-emerald-600", heading: "text-emerald-700", card: "hover:border-emerald-200", arrow: "group-hover:text-emerald-500" },
-  amber: { badge: "bg-amber-50 text-amber-600", heading: "text-amber-700", card: "hover:border-amber-200", arrow: "group-hover:text-amber-500" },
-  rose: { badge: "bg-rose-50 text-rose-600", heading: "text-rose-700", card: "hover:border-rose-200", arrow: "group-hover:text-rose-500" },
+const accentStyles: Record<string, { badge: string; side: string; item: string; arrow: string; dot: string }> = {
+  blue: { badge: "bg-blue-50 text-blue-600", side: "bg-blue-50 text-blue-700", item: "hover:border-blue-200", arrow: "group-hover:text-blue-500", dot: "bg-blue-500" },
+  violet: { badge: "bg-violet-50 text-violet-600", side: "bg-violet-50 text-violet-700", item: "hover:border-violet-200", arrow: "group-hover:text-violet-500", dot: "bg-violet-500" },
+  emerald: { badge: "bg-emerald-50 text-emerald-600", side: "bg-emerald-50 text-emerald-700", item: "hover:border-emerald-200", arrow: "group-hover:text-emerald-500", dot: "bg-emerald-500" },
+  amber: { badge: "bg-amber-50 text-amber-600", side: "bg-amber-50 text-amber-700", item: "hover:border-amber-200", arrow: "group-hover:text-amber-500", dot: "bg-amber-500" },
+  rose: { badge: "bg-rose-50 text-rose-600", side: "bg-rose-50 text-rose-700", item: "hover:border-rose-200", arrow: "group-hover:text-rose-500", dot: "bg-rose-500" },
 };
+
+function Sidebar({ groups }: { groups: Group[] }) {
+  return (
+    <aside className="hidden lg:block lg:w-64 lg:shrink-0">
+      <div className="sticky top-6 space-y-3 rounded-[28px] border border-gray-100 bg-white p-4 shadow-sm shadow-gray-200/30">
+        <p className="px-2 pb-2 text-xs font-black uppercase tracking-[0.24em] text-gray-400">카테고리</p>
+        {groups.map((group) => {
+          const s = accentStyles[group.accent];
+          return (
+            <a key={group.title} href={`#${group.title}`} className={`flex items-center justify-between rounded-2xl px-3 py-3 text-sm font-bold transition hover:bg-gray-50 ${s.side}`}>
+              <span className="flex items-center gap-2"><span className={`h-2 w-2 rounded-full ${s.dot}`} />{group.title}</span>
+              <span className="text-xs text-gray-400">{group.items.length}</span>
+            </a>
+          );
+        })}
+      </div>
+    </aside>
+  );
+}
 
 export default function BusinessPage() {
   return (
-    <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
+    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       <div className="mb-8 text-center">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold tracking-wide text-blue-600">
-          <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
-          비즈니스 계산기
+          <span className="h-1.5 w-1.5 rounded-full bg-blue-500" /> 비즈니스 계산기
         </span>
-        <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl font-['Pretendard_Variable',sans-serif]">
-          필요한 계산기를 골라보세요
-        </h1>
+        <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl font-['Pretendard_Variable',sans-serif]">필요한 계산기를 골라보세요</h1>
         <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-gradient-to-r from-blue-600 to-sky-300" />
         <p className="mt-3 text-gray-500">급여, 세금, 퇴직, 실업급여, 연차수당까지 자주 쓰는 계산기만 모았습니다.</p>
       </div>
 
-      <div className="space-y-8">
-        {groups.map((group) => {
-          const s = accentStyles[group.accent];
-          return (
-            <section key={group.title} className="rounded-[28px] border border-gray-100 bg-white p-5 shadow-sm shadow-gray-200/30 sm:p-6">
-              <div className={`mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold ${s.badge}`}>
-                <span className={`h-1.5 w-1.5 rounded-full ${group.accent === 'blue' ? 'bg-blue-500' : group.accent === 'violet' ? 'bg-violet-500' : group.accent === 'emerald' ? 'bg-emerald-500' : group.accent === 'amber' ? 'bg-amber-500' : 'bg-rose-500'}`} />
-                {group.title}
-              </div>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {group.items.map((item) => (
-                  <Link key={item.href} href={item.href} className={`group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 ${s.card} hover:shadow-lg`}>
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <h2 className={`text-lg font-bold text-gray-900 transition-colors group-hover:${s.heading.split(' ')[0]}`}>
-                          {item.label}
-                        </h2>
-                        <p className="mt-1 text-sm text-gray-500">{item.desc}</p>
+      <div className="flex flex-col gap-6 lg:flex-row">
+        <Sidebar groups={groups} />
+
+        <div className="min-w-0 flex-1 space-y-8">
+          {groups.map((group) => {
+            const s = accentStyles[group.accent];
+            return (
+              <section key={group.title} id={group.title} className="rounded-[28px] border border-gray-100 bg-white p-5 shadow-sm shadow-gray-200/30 sm:p-6">
+                <div className={`mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold ${s.badge}`}>
+                  <span className={`h-1.5 w-1.5 rounded-full ${s.dot}`} /> {group.title}
+                </div>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {group.items.map((item) => (
+                    <Link key={item.href} href={item.href} className={`group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 ${s.item} hover:shadow-lg`}>
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <h2 className="text-lg font-bold text-gray-900 transition-colors group-hover:text-inherit">{item.label}</h2>
+                          <p className="mt-1 text-sm text-gray-500">{item.desc}</p>
+                        </div>
+                        <span className={`text-gray-300 transition-colors ${s.arrow}`}>→</span>
                       </div>
-                      <span className={`text-gray-300 transition-colors ${s.arrow}`}>→</span>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </section>
-          );
-        })}
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

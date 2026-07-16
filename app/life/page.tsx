@@ -30,54 +30,71 @@ const groups: Group[] = [
   },
 ];
 
-const accentStyles: Record<string, { badge: string; card: string; title: string; dot: string; arrow: string }> = {
-  green: { badge: "bg-green-50 text-green-600", card: "hover:border-green-200", title: "group-hover:text-green-600", dot: "bg-green-500", arrow: "group-hover:text-green-500" },
-  sky: { badge: "bg-sky-50 text-sky-600", card: "hover:border-sky-200", title: "group-hover:text-sky-600", dot: "bg-sky-500", arrow: "group-hover:text-sky-500" },
-  violet: { badge: "bg-violet-50 text-violet-600", card: "hover:border-violet-200", title: "group-hover:text-violet-600", dot: "bg-violet-500", arrow: "group-hover:text-violet-500" },
+const accentStyles: Record<string, { badge: string; side: string; item: string; arrow: string; dot: string }> = {
+  green: { badge: "bg-green-50 text-green-600", side: "bg-green-50 text-green-700", item: "hover:border-green-200", arrow: "group-hover:text-green-500", dot: "bg-green-500" },
+  sky: { badge: "bg-sky-50 text-sky-600", side: "bg-sky-50 text-sky-700", item: "hover:border-sky-200", arrow: "group-hover:text-sky-500", dot: "bg-sky-500" },
+  violet: { badge: "bg-violet-50 text-violet-600", side: "bg-violet-50 text-violet-700", item: "hover:border-violet-200", arrow: "group-hover:text-violet-500", dot: "bg-violet-500" },
 };
+
+function Sidebar({ groups }: { groups: Group[] }) {
+  return (
+    <aside className="hidden lg:block lg:w-64 lg:shrink-0">
+      <div className="sticky top-6 space-y-3 rounded-[28px] border border-gray-100 bg-white p-4 shadow-sm shadow-gray-200/30">
+        <p className="px-2 pb-2 text-xs font-black uppercase tracking-[0.24em] text-gray-400">카테고리</p>
+        {groups.map((group) => {
+          const s = accentStyles[group.accent];
+          return (
+            <a key={group.title} href={`#${group.title}`} className={`flex items-center justify-between rounded-2xl px-3 py-3 text-sm font-bold transition hover:bg-gray-50 ${s.side}`}>
+              <span className="flex items-center gap-2"><span className={`h-2 w-2 rounded-full ${s.dot}`} />{group.title}</span>
+              <span className="text-xs text-gray-400">{group.items.length}</span>
+            </a>
+          );
+        })}
+      </div>
+    </aside>
+  );
+}
 
 export default function LifePage() {
   return (
-    <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
+    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       <div className="mb-8 text-center">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-green-50 px-3 py-1 text-xs font-semibold tracking-wide text-green-600">
-          <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
-          라이프 계산기
+          <span className="h-1.5 w-1.5 rounded-full bg-green-500" /> 라이프 계산기
         </span>
-        <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl font-['Pretendard_Variable',sans-serif]">
-          필요한 계산기를 골라보세요
-        </h1>
+        <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl font-['Pretendard_Variable',sans-serif]">필요한 계산기를 골라보세요</h1>
         <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-gradient-to-r from-green-600 to-emerald-300" />
         <p className="mt-3 text-gray-500">건강, 학업, 재미까지 일상에서 바로 쓰는 계산기만 모았습니다.</p>
       </div>
 
-      <div className="space-y-8">
-        {groups.map((group) => {
-          const s = accentStyles[group.accent];
-          return (
-            <section key={group.title} className="rounded-[28px] border border-gray-100 bg-white p-5 shadow-sm shadow-gray-200/30 sm:p-6">
-              <div className={`mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold ${s.badge}`}>
-                <span className={`h-1.5 w-1.5 rounded-full ${s.dot}`} />
-                {group.title}
-              </div>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {group.items.map((item) => (
-                  <Link key={item.href} href={item.href} className={`group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 ${s.card} hover:shadow-lg`}>
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <h2 className={`text-lg font-bold text-gray-900 transition-colors ${s.title}`}>
-                          {item.label}
-                        </h2>
-                        <p className="mt-1 text-sm text-gray-500">{item.desc}</p>
+      <div className="flex flex-col gap-6 lg:flex-row">
+        <Sidebar groups={groups} />
+
+        <div className="min-w-0 flex-1 space-y-8">
+          {groups.map((group) => {
+            const s = accentStyles[group.accent];
+            return (
+              <section key={group.title} id={group.title} className="rounded-[28px] border border-gray-100 bg-white p-5 shadow-sm shadow-gray-200/30 sm:p-6">
+                <div className={`mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold ${s.badge}`}>
+                  <span className={`h-1.5 w-1.5 rounded-full ${s.dot}`} /> {group.title}
+                </div>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {group.items.map((item) => (
+                    <Link key={item.href} href={item.href} className={`group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 ${s.item} hover:shadow-lg`}>
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <h2 className="text-lg font-bold text-gray-900 transition-colors group-hover:text-inherit">{item.label}</h2>
+                          <p className="mt-1 text-sm text-gray-500">{item.desc}</p>
+                        </div>
+                        <span className={`text-gray-300 transition-colors ${s.arrow}`}>→</span>
                       </div>
-                      <span className={`text-gray-300 transition-colors ${s.arrow}`}>→</span>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </section>
-          );
-        })}
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
