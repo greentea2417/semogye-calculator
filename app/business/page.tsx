@@ -61,7 +61,7 @@ const accentStyles: Record<string, { badge: string; side: string; item: string; 
 
 function Sidebar({ groups }: { groups: Group[] }) {
   return (
-    <aside className="hidden lg:block lg:w-64 lg:shrink-0">
+    <aside className="hidden md:block md:w-64 md:shrink-0">
       <div className="sticky top-6 space-y-3 rounded-[28px] border border-gray-100 bg-white p-4 shadow-sm shadow-gray-200/30">
         <p className="px-2 pb-2 text-xs font-black uppercase tracking-[0.24em] text-gray-400">카테고리</p>
         {groups.map((group) => {
@@ -80,7 +80,7 @@ function Sidebar({ groups }: { groups: Group[] }) {
 
 function MobileSections({ groups }: { groups: Group[] }) {
   return (
-    <div className="space-y-8 lg:hidden">
+    <div className="space-y-8 md:hidden">
       {groups.map((group) => {
         const s = accentStyles[group.accent];
         return (
@@ -122,7 +122,7 @@ export default function BusinessPage() {
 
       <div className="flex flex-col gap-6 lg:flex-row">
         <Sidebar groups={groups} />
-        <div className="min-w-0 flex-1 space-y-8 hidden lg:block">
+        <div className="min-w-0 flex-1 space-y-8 hidden md:block">
           {groups.map((group) => {
             const s = accentStyles[group.accent];
             return (
