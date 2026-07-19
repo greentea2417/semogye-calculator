@@ -21,6 +21,8 @@ const groups: Group[] = [
     title: "생활 계산기",
     items: [
       { href: "/life/pyeong", label: "평 ↔ ㎡ 변환 계산기", desc: "부동산 면적 단위 양방향 변환" },
+      { href: "/life/calorie-burn", label: "칼로리 소모 계산기", desc: "운동 시간으로 소모 칼로리 추정" },
+      { href: "/life/screen-time", label: "스크린타임 절감 계산기", desc: "하루 절약 시간을 주·월 단위로 환산" },
     ],
   },
   {

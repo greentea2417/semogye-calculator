@@ -41,6 +41,7 @@ const groups: Group[] = [
       { href: "/business/savings-installment", label: "적금 계산기", desc: "정기적금 만기 수령액 계산" },
       { href: "/business/loan-repayment", label: "대출 이자 계산기", desc: "원리금균등 월 상환액 계산" },
       { href: "/business/dsr", label: "DSR 계산기", desc: "총부채원리금상환비율 확인" },
+      { href: "/business/markup-margin", label: "마진율 계산기", desc: "원가와 판매가로 마진 확인" },
     ],
   },
   {
