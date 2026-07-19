@@ -14,6 +14,13 @@ const groups: Group[] = [
       { href: "/life/bmr", label: "기초대사량(BMR) 계산기", desc: "하루 소비·권장 칼로리 확인" },
       { href: "/life/waste-time", label: "내가 날린 인생 시간은?", desc: "재미로 보는 시간 계산" },
       { href: "/life/water-intake", label: "하루 물 섭취량 계산기", desc: "체중·활동량별 권장 물 섭취량" },
+      { href: "/life/heart-rate", label: "목표 심박수 계산기", desc: "운동 강도별 목표 심박수 확인" },
+    ],
+  },
+  {
+    title: "생활 계산기",
+    items: [
+      { href: "/life/pyeong", label: "평 ↔ ㎡ 변환 계산기", desc: "부동산 면적 단위 양방향 변환" },
     ],
   },
   {

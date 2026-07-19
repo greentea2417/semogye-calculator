@@ -40,6 +40,7 @@ const groups: Group[] = [
       { href: "/business/compound", label: "복리 계산기", desc: "원금·이율·기간으로 만기 금액 계산" },
       { href: "/business/savings-installment", label: "적금 계산기", desc: "정기적금 만기 수령액 계산" },
       { href: "/business/loan-repayment", label: "대출 이자 계산기", desc: "원리금균등 월 상환액 계산" },
+      { href: "/business/dsr", label: "DSR 계산기", desc: "총부채원리금상환비율 확인" },
     ],
   },
   {
