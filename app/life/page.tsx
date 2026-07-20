@@ -25,6 +25,14 @@ const groups: Group[] = [
     title: "학점 계산기",
     items: [{ href: "/life/grade", label: "학점 계산기", desc: "평균 학점 계산" }],
   },
+  {
+    title: "운동 · 이동 계산기",
+    items: [
+      { href: "/life/pace", label: "러닝 페이스 계산기", desc: "거리·시간으로 페이스와 속도 계산" },
+      { href: "/life/fuel", label: "연료비 계산기", desc: "거리·연비·유가로 기름값 계산" },
+      { href: "/life/alcohol", label: "혈중 알코올 농도 계산기", desc: "예상 BAC와 해독 시간 확인" },
+    ],
+  },
 ];
 
 function Sidebar({ groups }: { groups: Group[] }) {
