@@ -33,6 +33,14 @@ const groups: Group[] = [
       { href: "/life/alcohol", label: "혈중 알코올 농도 계산기", desc: "예상 BAC와 해독 시간 확인" },
     ],
   },
+  {
+    title: "건강 · 생활 계산기",
+    items: [
+      { href: "/life/bmr", label: "기초대사량(BMR) 계산기", desc: "성별·키·몸무게·나이로 하루 권장 칼로리 계산" },
+      { href: "/life/water", label: "하루 물 섭취량 계산기", desc: "몸무게·운동량으로 권장 수분량 계산" },
+      { href: "/life/pyeong", label: "평수 계산기", desc: "평 ↔ ㎡ 즉시 변환" },
+    ],
+  },
 ];
 
 function Sidebar({ groups }: { groups: Group[] }) {
