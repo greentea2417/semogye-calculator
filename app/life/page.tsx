@@ -19,6 +19,14 @@ const groups: Group[] = [
     items: [
       { href: "/life/korean-age", label: "만 나이 계산기", desc: "생년월일로 오늘 기준 만 나이 확인" },
       { href: "/life/dday", label: "D-day · 기념일 계산기", desc: "목표일까지 남은 날짜 계산" },
+      { href: "/life/sleep", label: "수면 시간 계산기", desc: "90분 수면 주기로 취침·기상 추천" },
+    ],
+  },
+  {
+    title: "건강·생활 계산기",
+    items: [
+      { href: "/life/heart-rate", label: "목표 심박수 계산기", desc: "운동 강도별 목표 심박수 확인" },
+      { href: "/life/discount", label: "할인가 계산기", desc: "정가·할인율로 결제 금액 계산" },
     ],
   },
   {
