@@ -10,6 +10,7 @@ const groups: Group[] = [
       { href: "/life/bmi", label: "BMI 계산기", desc: "체질량지수를 빠르게 확인" },
       { href: "/life/body-age", label: "신체 나이 계산기", desc: "몸 상태를 나이로 보기" },
       { href: "/life/kbm", label: "키빼몸 계산기", desc: "간단한 체형 기준 확인" },
+      { href: "/life/body-fat", label: "체지방률 계산기", desc: "키·체중·나이로 체지방률 추정" },
       { href: "/life/future-height", label: "우리 아이 예상 키", desc: "부모 키로 간단히 예측" },
       { href: "/life/waste-time", label: "내가 날린 인생 시간은?", desc: "재미로 보는 시간 계산" },
     ],
@@ -19,6 +20,13 @@ const groups: Group[] = [
     items: [
       { href: "/life/korean-age", label: "만 나이 계산기", desc: "생년월일로 오늘 기준 만 나이 확인" },
       { href: "/life/dday", label: "D-day · 기념일 계산기", desc: "목표일까지 남은 날짜 계산" },
+      { href: "/life/ovulation", label: "배란일·가임기 계산기", desc: "생리주기로 배란일·가임기 계산" },
+    ],
+  },
+  {
+    title: "건강·생활 계산기",
+    items: [
+      { href: "/life/discomfort-index", label: "불쾌지수 계산기", desc: "기온·습도로 여름철 불쾌지수 계산" },
     ],
   },
   {
