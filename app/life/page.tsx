@@ -75,6 +75,31 @@ function Sidebar({ groups, selected, onSelect }: { groups: Group[]; selected: st
   );
 }
 
+function MobileSections({ groups }: { groups: Group[] }) {
+  return (
+    <div className="space-y-8 md:hidden">
+      {groups.map((group) => (
+        <section key={group.title} className="rounded-[28px] border border-gray-100 bg-white p-5 shadow-sm shadow-gray-200/30">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-green-50 px-3 py-1 text-xs font-bold text-green-600">{group.title}</div>
+          <div className="grid grid-cols-1 gap-4">
+            {group.items.map((item) => (
+              <Link key={item.href} href={item.href} className="group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-green-200 hover:shadow-lg">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h2 className="text-lg font-bold text-gray-900 transition-colors group-hover:text-green-600">{item.label}</h2>
+                    <p className="mt-1 text-sm text-gray-500">{item.desc}</p>
+                  </div>
+                  <span className="text-gray-300 transition-colors group-hover:text-green-500">→</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  );
+}
+
 export default function LifePage() {
   const [selected, setSelected] = useState(ALL_TITLE);
 
@@ -106,11 +131,7 @@ export default function LifePage() {
         <div className="min-w-0 flex-1">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {visibleItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-green-200 hover:shadow-lg"
-              >
+              <Link key={item.href} href={item.href} className="group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-green-200 hover:shadow-lg">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <h2 className="text-lg font-bold text-gray-900 transition-colors group-hover:text-green-600">{item.label}</h2>
@@ -123,6 +144,8 @@ export default function LifePage() {
           </div>
         </div>
       </div>
+
+      <MobileSections groups={groups} />
     </div>
   );
 }
