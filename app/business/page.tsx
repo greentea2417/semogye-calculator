@@ -98,6 +98,9 @@ export default function BusinessPage() {
       </div>
 
       <div className="flex flex-col gap-6 md:flex-row">
+        <div className="hidden md:block md:w-56 md:shrink-0">
+          <DesktopMenu selected={selected} onSelect={setSelected} />
+        </div>
         <div className="min-w-0 flex-1">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {visibleItems.map((item) => (
@@ -112,9 +115,6 @@ export default function BusinessPage() {
               </Link>
             ))}
           </div>
-        </div>
-        <div className="hidden md:block md:w-64 md:shrink-0">
-          <DesktopMenu selected={selected} onSelect={setSelected} />
         </div>
       </div>
 
