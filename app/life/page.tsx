@@ -92,6 +92,28 @@ export default function LifePage() {
           </div>
         </div>
       </div>
+
+      <div className="md:hidden mt-8">
+        <div className="grid grid-cols-1 gap-4">
+          {groups.flatMap((group) =>
+            group.items.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-green-200 hover:shadow-lg"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h2 className="text-lg font-bold text-gray-900 transition-colors group-hover:text-green-600">{item.label}</h2>
+                    <p className="mt-1 text-sm text-gray-500">{item.desc}</p>
+                  </div>
+                  <span className="text-gray-300 transition-colors group-hover:text-green-500">→</span>
+                </div>
+              </Link>
+            ))
+          )}
+        </div>
+      </div>
     </div>
   );
 }
