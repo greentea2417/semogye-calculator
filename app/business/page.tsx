@@ -56,6 +56,36 @@ const groups: Group[] = [
 
 const ALL_TITLE = "전체";
 
+function DesktopMenu({ selected, onSelect }: { selected: string; onSelect: (title: string) => void }) {
+  return (
+    <div className="sticky top-6 space-y-2">
+      <a
+        href="#전체"
+        onClick={(e) => {
+          e.preventDefault();
+          onSelect(ALL_TITLE);
+        }}
+        className={`flex items-center justify-between rounded-2xl px-1 py-2 text-sm font-bold transition ${selected === ALL_TITLE ? "text-blue-700" : "text-gray-700 hover:text-blue-600"}`}
+      >
+        <span>{ALL_TITLE}</span>
+      </a>
+      {groups.map((group) => (
+        <a
+          key={group.title}
+          href={`#${group.title}`}
+          onClick={(e) => {
+            e.preventDefault();
+            onSelect(group.title);
+          }}
+          className={`flex items-center justify-between rounded-2xl px-1 py-2 text-sm font-bold transition ${selected === group.title ? "text-blue-700" : "text-gray-700 hover:text-blue-600"}`}
+        >
+          <span>{group.title}</span>
+        </a>
+      ))}
+    </div>
+  );
+}
+
 function MobileSections({ groups }: { groups: Group[] }) {
   return (
     <div className="space-y-8 md:hidden">
@@ -93,6 +123,12 @@ function MobileSections({ groups }: { groups: Group[] }) {
 }
 
 export default function BusinessPage() {
+  const [selected, setSelected] = useState(ALL_TITLE);
+  const visibleItems = useMemo(() => {
+    if (selected === ALL_TITLE) return groups.flatMap((g) => g.items);
+    return groups.filter((g) => g.title === selected).flatMap((g) => g.items);
+  }, [selected]);
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       <div className="mb-8 text-center">
@@ -105,21 +141,22 @@ export default function BusinessPage() {
       </div>
 
       <div className="flex flex-col gap-6 md:flex-row">
+        <div className="hidden md:block md:w-64 md:shrink-0">
+          <DesktopMenu selected={selected} onSelect={setSelected} />
+        </div>
         <div className="min-w-0 flex-1">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {groups.flatMap((group) =>
-              group.items.map((item) => (
-                <Link key={item.href} href={item.href} className="group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h2 className="text-lg font-bold text-gray-900 transition-colors group-hover:text-blue-600">{item.label}</h2>
-                      <p className="mt-1 text-sm text-gray-500">{item.desc}</p>
-                    </div>
-                    <span className="text-gray-300 transition-colors group-hover:text-blue-500">→</span>
+            {visibleItems.map((item) => (
+              <Link key={item.href} href={item.href} className="group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h2 className="text-lg font-bold text-gray-900 transition-colors group-hover:text-blue-600">{item.label}</h2>
+                    <p className="mt-1 text-sm text-gray-500">{item.desc}</p>
                   </div>
-                </Link>
-              ))
-            )}
+                  <span className="text-gray-300 transition-colors group-hover:text-blue-500">→</span>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </div>
