@@ -126,7 +126,7 @@ export default function LifePage() {
         <p className="mt-3 text-gray-500">건강, 학업, 재미까지 일상에서 바로 쓰는 계산기만 모았습니다.</p>
       </div>
 
-      <div className="flex flex-col gap-6 md:flex-row">
+      <div className="hidden gap-6 md:flex md:flex-row">
         <Sidebar groups={groups} selected={selected} onSelect={setSelected} />
         <div className="min-w-0 flex-1">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
