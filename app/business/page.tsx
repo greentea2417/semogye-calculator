@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 type Item = { href: string; label: string; desc: string };
 type Group = { title: string; accent: string; items: Item[] };
@@ -124,10 +124,6 @@ function MobileSections({ groups }: { groups: Group[] }) {
 
 export default function BusinessPage() {
   const [selected, setSelected] = useState(ALL_TITLE);
-  const visibleItems = useMemo(() => {
-    if (selected === ALL_TITLE) return groups.flatMap((g) => g.items);
-    return groups.filter((g) => g.title === selected).flatMap((g) => g.items);
-  }, [selected]);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
@@ -141,23 +137,9 @@ export default function BusinessPage() {
       </div>
 
       <div className="flex flex-col gap-6 md:flex-row">
+        <div className="min-w-0 flex-1" />
         <div className="hidden md:block md:w-64 md:shrink-0">
           <DesktopMenu selected={selected} onSelect={setSelected} />
-        </div>
-        <div className="min-w-0 flex-1">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {visibleItems.map((item) => (
-              <Link key={item.href} href={item.href} className="group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h2 className="text-lg font-bold text-gray-900 transition-colors group-hover:text-blue-600">{item.label}</h2>
-                    <p className="mt-1 text-sm text-gray-500">{item.desc}</p>
-                  </div>
-                  <span className="text-gray-300 transition-colors group-hover:text-blue-500">→</span>
-                </div>
-              </Link>
-            ))}
-          </div>
         </div>
       </div>
 
