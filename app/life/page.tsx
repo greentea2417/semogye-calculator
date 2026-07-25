@@ -46,14 +46,14 @@ const ALL_TITLE = "전체";
 function Sidebar({ groups, selected, onSelect }: { groups: Group[]; selected: string; onSelect: (title: string) => void }) {
   return (
     <aside className="hidden md:block md:w-64 md:shrink-0">
-      <div className="sticky top-6 space-y-2 rounded-[28px] border border-gray-100 bg-white p-4 shadow-sm shadow-gray-200/30">
+      <div className="sticky top-6 space-y-2">
         <a
           href="#전체"
           onClick={(e) => {
             e.preventDefault();
             onSelect(ALL_TITLE);
           }}
-          className={`flex items-center justify-between rounded-2xl px-3 py-3 text-sm font-bold transition ${selected === ALL_TITLE ? "bg-green-50 text-green-700" : "text-gray-700 hover:bg-gray-50"}`}
+          className={`flex items-center justify-between rounded-2xl px-1 py-2 text-sm font-bold transition ${selected === ALL_TITLE ? "text-green-700" : "text-gray-700 hover:text-green-600"}`}
         >
           <span>{ALL_TITLE}</span>
         </a>
@@ -65,7 +65,7 @@ function Sidebar({ groups, selected, onSelect }: { groups: Group[]; selected: st
               e.preventDefault();
               onSelect(group.title);
             }}
-            className={`flex items-center justify-between rounded-2xl px-3 py-3 text-sm font-bold transition ${selected === group.title ? "bg-green-50 text-green-700" : "text-gray-700 hover:bg-gray-50"}`}
+            className={`flex items-center justify-between rounded-2xl px-1 py-2 text-sm font-bold transition ${selected === group.title ? "text-green-700" : "text-gray-700 hover:text-green-600"}`}
           >
             <span>{group.title}</span>
           </a>
