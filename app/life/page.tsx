@@ -27,6 +27,9 @@ const groups: Group[] = [
     title: "건강·생활 계산기",
     items: [
       { href: "/life/discomfort-index", label: "불쾌지수 계산기", desc: "기온·습도로 여름철 불쾌지수 계산" },
+      { href: "/life/dog-age", label: "강아지 나이 계산기", desc: "반려견 나이를 사람 나이로 환산" },
+      { href: "/life/percentage", label: "퍼센트 계산기", desc: "퍼센트·비율·증감률 한 번에 계산" },
+      { href: "/life/temperature", label: "온도 변환 계산기", desc: "섭씨·화씨·켈빈 서로 변환" },
     ],
   },
   {
