@@ -97,8 +97,8 @@ export default function BusinessPage() {
         <p className="mt-3 text-gray-500">급여, 세금, 퇴직, 실업급여, 연차수당까지 자주 쓰는 계산기만 모았습니다.</p>
       </div>
 
-      <div className="flex flex-col gap-6 md:flex-row">
-        <div className="hidden md:block md:w-56 md:shrink-0">
+      <div className="hidden gap-6 md:flex md:flex-row">
+        <div className="md:w-56 md:shrink-0">
           <DesktopMenu selected={selected} onSelect={setSelected} />
         </div>
         <div className="min-w-0 flex-1">
