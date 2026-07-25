@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useMemo, useState } from "react";
 
 type Item = { href: string; label: string; desc: string };
 type Group = { title: string; accent: string; items: Item[] };
@@ -51,34 +54,63 @@ const groups: Group[] = [
   },
 ];
 
-const accentStyles: Record<string, { badge: string; side: string; item: string; arrow: string; dot: string; hover: string; title: string }> = {
-  blue: { badge: "bg-blue-50 text-blue-600", side: "bg-blue-50 text-blue-700", item: "hover:border-blue-200", arrow: "group-hover:text-blue-500", dot: "bg-blue-500", hover: "group-hover:text-blue-600", title: "text-blue-700" },
-  violet: { badge: "bg-violet-50 text-violet-600", side: "bg-violet-50 text-violet-700", item: "hover:border-violet-200", arrow: "group-hover:text-violet-500", dot: "bg-violet-500", hover: "group-hover:text-violet-600", title: "text-violet-700" },
-  emerald: { badge: "bg-emerald-50 text-emerald-600", side: "bg-emerald-50 text-emerald-700", item: "hover:border-emerald-200", arrow: "group-hover:text-emerald-500", dot: "bg-emerald-500", hover: "group-hover:text-emerald-600", title: "text-emerald-700" },
-  amber: { badge: "bg-amber-50 text-amber-600", side: "bg-amber-50 text-amber-700", item: "hover:border-amber-200", arrow: "group-hover:text-amber-500", dot: "bg-amber-500", hover: "group-hover:text-amber-600", title: "text-amber-700" },
-  rose: { badge: "bg-rose-50 text-rose-600", side: "bg-rose-50 text-rose-700", item: "hover:border-rose-200", arrow: "group-hover:text-rose-500", dot: "bg-rose-500", hover: "group-hover:text-rose-600", title: "text-rose-700" },
-};
+const ALL_TITLE = "전체";
 
+function DesktopMenu({ selected, onSelect }: { selected: string; onSelect: (title: string) => void }) {
+  return (
+    <div className="sticky top-6 space-y-2">
+      <a
+        href="#전체"
+        onClick={(e) => {
+          e.preventDefault();
+          onSelect(ALL_TITLE);
+        }}
+        className={`flex items-center justify-between rounded-2xl px-1 py-2 text-sm font-bold transition ${selected === ALL_TITLE ? "text-blue-700" : "text-gray-700 hover:text-blue-600"}`}
+      >
+        <span>{ALL_TITLE}</span>
+      </a>
+      {groups.map((group) => (
+        <a
+          key={group.title}
+          href={`#${group.title}`}
+          onClick={(e) => {
+            e.preventDefault();
+            onSelect(group.title);
+          }}
+          className={`flex items-center justify-between rounded-2xl px-1 py-2 text-sm font-bold transition ${selected === group.title ? "text-blue-700" : "text-gray-700 hover:text-blue-600"}`}
+        >
+          <span>{group.title}</span>
+        </a>
+      ))}
+    </div>
+  );
+}
 
 function MobileSections({ groups }: { groups: Group[] }) {
   return (
     <div className="space-y-8 md:hidden">
       {groups.map((group) => {
-        const s = accentStyles[group.accent];
+        const s = {
+          blue: "bg-blue-50 text-blue-600",
+          violet: "bg-violet-50 text-violet-600",
+          emerald: "bg-emerald-50 text-emerald-600",
+          amber: "bg-amber-50 text-amber-600",
+          rose: "bg-rose-50 text-rose-600",
+        }[group.accent];
         return (
           <section key={group.title} className="rounded-[28px] border border-gray-100 bg-white p-5 shadow-sm shadow-gray-200/30">
-            <div className={`mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold ${s.badge}`}>
-              <span className={`h-1.5 w-1.5 rounded-full ${s.dot}`} /> {group.title}
+            <div className={`mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold ${s}`}>
+              {group.title}
             </div>
             <div className="grid grid-cols-1 gap-4">
               {group.items.map((item) => (
-                <Link key={item.href} href={item.href} className={`group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 ${s.item} hover:shadow-lg`}>
+                <Link key={item.href} href={item.href} className="group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <h2 className={`text-lg font-bold text-gray-900 transition-colors ${s.hover}`}>{item.label}</h2>
+                      <h2 className="text-lg font-bold text-gray-900 transition-colors group-hover:text-blue-600">{item.label}</h2>
                       <p className="mt-1 text-sm text-gray-500">{item.desc}</p>
                     </div>
-                    <span className={`text-gray-300 transition-colors ${s.arrow}`}>→</span>
+                    <span className="text-gray-300 transition-colors group-hover:text-blue-500">→</span>
                   </div>
                 </Link>
               ))}
@@ -91,6 +123,12 @@ function MobileSections({ groups }: { groups: Group[] }) {
 }
 
 export default function BusinessPage() {
+  const [selected, setSelected] = useState(ALL_TITLE);
+  const visibleItems = useMemo(() => {
+    if (selected === ALL_TITLE) return groups.flatMap((g) => g.items);
+    return groups.filter((g) => g.title === selected).flatMap((g) => g.items);
+  }, [selected]);
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       <div className="mb-8 text-center">
@@ -102,10 +140,13 @@ export default function BusinessPage() {
         <p className="mt-3 text-gray-500">급여, 세금, 퇴직, 실업급여, 연차수당까지 자주 쓰는 계산기만 모았습니다.</p>
       </div>
 
-      <div className="min-w-0 flex-1 hidden md:block">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {groups.flatMap((group) =>
-            group.items.map((item) => (
+      <div className="flex flex-col gap-6 md:flex-row">
+        <div className="hidden md:block md:w-64 md:shrink-0">
+          <DesktopMenu selected={selected} onSelect={setSelected} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {visibleItems.map((item) => (
               <Link key={item.href} href={item.href} className="group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg">
                 <div className="flex items-start justify-between gap-4">
                   <div>
@@ -115,14 +156,12 @@ export default function BusinessPage() {
                   <span className="text-gray-300 transition-colors group-hover:text-blue-500">→</span>
                 </div>
               </Link>
-            ))
-          )}
+            ))}
+          </div>
         </div>
       </div>
 
-      <div className="md:hidden mt-8">
-        <MobileSections groups={groups} />
-      </div>
+      <MobileSections groups={groups} />
     </div>
   );
 }
