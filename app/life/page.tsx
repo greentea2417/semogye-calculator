@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
 
 type Item = { href: string; label: string; desc: string };
 type Group = { title: string; items: Item[] };
@@ -38,18 +41,28 @@ const groups: Group[] = [
   },
 ];
 
-function Sidebar({ groups }: { groups: Group[] }) {
+const ALL_TITLE = "전체";
+
+function Sidebar({ groups, selected, onSelect }: { groups: Group[]; selected: string; onSelect: (title: string) => void }) {
   return (
     <aside className="hidden md:block md:w-64 md:shrink-0">
       <div className="sticky top-6 space-y-2 rounded-[28px] border border-gray-100 bg-white p-4 shadow-sm shadow-gray-200/30">
+        <button
+          type="button"
+          onClick={() => onSelect(ALL_TITLE)}
+          className={`flex w-full items-center justify-between rounded-2xl px-3 py-3 text-sm font-bold transition ${selected === ALL_TITLE ? "bg-green-50 text-green-700" : "text-gray-700 hover:bg-gray-50"}`}
+        >
+          <span>{ALL_TITLE}</span>
+        </button>
         {groups.map((group) => (
-          <a
+          <button
             key={group.title}
-            href={`#${group.title}`}
-            className="flex items-center justify-between rounded-2xl px-3 py-3 text-sm font-bold text-gray-700 transition hover:bg-gray-50"
+            type="button"
+            onClick={() => onSelect(group.title)}
+            className={`flex w-full items-center justify-between rounded-2xl px-3 py-3 text-sm font-bold transition ${selected === group.title ? "bg-green-50 text-green-700" : "text-gray-700 hover:bg-gray-50"}`}
           >
             <span>{group.title}</span>
-          </a>
+          </button>
         ))}
       </div>
     </aside>
@@ -57,6 +70,20 @@ function Sidebar({ groups }: { groups: Group[] }) {
 }
 
 export default function LifePage() {
+  const [selected, setSelected] = useState(ALL_TITLE);
+
+  useEffect(() => {
+    const hash = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+    if (hash && [...groups.map((g) => g.title), ALL_TITLE].includes(hash)) setSelected(hash);
+  }, []);
+
+  const visibleGroups = useMemo(() => {
+    if (selected === ALL_TITLE) return groups;
+    return groups.filter((group) => group.title === selected);
+  }, [selected]);
+
+  const visibleItems = useMemo(() => visibleGroups.flatMap((group) => group.items), [visibleGroups]);
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       <div className="mb-8 text-center">
@@ -69,34 +96,10 @@ export default function LifePage() {
       </div>
 
       <div className="flex flex-col gap-6 md:flex-row">
-        <Sidebar groups={groups} />
-        <div className="min-w-0 flex-1 hidden md:block">
+        <Sidebar groups={groups} selected={selected} onSelect={setSelected} />
+        <div className="min-w-0 flex-1">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {groups.flatMap((group) =>
-              group.items.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-green-200 hover:shadow-lg"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h2 className="text-lg font-bold text-gray-900 transition-colors group-hover:text-green-600">{item.label}</h2>
-                      <p className="mt-1 text-sm text-gray-500">{item.desc}</p>
-                    </div>
-                    <span className="text-gray-300 transition-colors group-hover:text-green-500">→</span>
-                  </div>
-                </Link>
-              ))
-            )}
-          </div>
-        </div>
-      </div>
-
-      <div className="md:hidden mt-8">
-        <div className="grid grid-cols-1 gap-4">
-          {groups.flatMap((group) =>
-            group.items.map((item) => (
+            {visibleItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -110,8 +113,8 @@ export default function LifePage() {
                   <span className="text-gray-300 transition-colors group-hover:text-green-500">→</span>
                 </div>
               </Link>
-            ))
-          )}
+            ))}
+          </div>
         </div>
       </div>
     </div>
