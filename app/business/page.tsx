@@ -59,19 +59,6 @@ const accentStyles: Record<string, { badge: string; side: string; item: string; 
   rose: { badge: "bg-rose-50 text-rose-600", side: "bg-rose-50 text-rose-700", item: "hover:border-rose-200", arrow: "group-hover:text-rose-500", dot: "bg-rose-500", hover: "group-hover:text-rose-600", title: "text-rose-700" },
 };
 
-function Sidebar({ groups }: { groups: Group[] }) {
-  return (
-    <aside className="hidden md:block md:w-64 md:shrink-0">
-      <div className="sticky top-6 space-y-2 rounded-[28px] border border-gray-100 bg-white p-4 shadow-sm shadow-gray-200/30">
-        {groups.map((group) => (
-          <a key={group.title} href={`#${group.title}`} className="flex items-center justify-between rounded-2xl px-3 py-3 text-sm font-bold text-gray-700 transition hover:bg-gray-50">
-            <span>{group.title}</span>
-          </a>
-        ))}
-      </div>
-    </aside>
-  );
-}
 
 function MobileSections({ groups }: { groups: Group[] }) {
   return (
@@ -115,24 +102,21 @@ export default function BusinessPage() {
         <p className="mt-3 text-gray-500">급여, 세금, 퇴직, 실업급여, 연차수당까지 자주 쓰는 계산기만 모았습니다.</p>
       </div>
 
-      <div className="flex flex-col gap-6 md:flex-row">
-        <Sidebar groups={groups} />
-        <div className="min-w-0 flex-1 hidden md:block">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {groups.flatMap((group) =>
-              group.items.map((item) => (
-                <Link key={item.href} href={item.href} className="group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h2 className="text-lg font-bold text-gray-900 transition-colors group-hover:text-blue-600">{item.label}</h2>
-                      <p className="mt-1 text-sm text-gray-500">{item.desc}</p>
-                    </div>
-                    <span className="text-gray-300 transition-colors group-hover:text-blue-500">→</span>
+      <div className="min-w-0 flex-1 hidden md:block">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {groups.flatMap((group) =>
+            group.items.map((item) => (
+              <Link key={item.href} href={item.href} className="group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h2 className="text-lg font-bold text-gray-900 transition-colors group-hover:text-blue-600">{item.label}</h2>
+                    <p className="mt-1 text-sm text-gray-500">{item.desc}</p>
                   </div>
-                </Link>
-              ))
-            )}
-          </div>
+                  <span className="text-gray-300 transition-colors group-hover:text-blue-500">→</span>
+                </div>
+              </Link>
+            ))
+          )}
         </div>
       </div>
 
