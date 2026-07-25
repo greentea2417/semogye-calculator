@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
 
 type Item = { href: string; label: string; desc: string };
 type Group = { title: string; items: Item[] };
@@ -10,6 +13,7 @@ const groups: Group[] = [
       { href: "/life/bmi", label: "BMI 계산기", desc: "체질량지수를 빠르게 확인" },
       { href: "/life/body-age", label: "신체 나이 계산기", desc: "몸 상태를 나이로 보기" },
       { href: "/life/kbm", label: "키빼몸 계산기", desc: "간단한 체형 기준 확인" },
+      { href: "/life/body-fat", label: "체지방률 계산기", desc: "키·체중·나이로 체지방률 추정" },
       { href: "/life/future-height", label: "우리 아이 예상 키", desc: "부모 키로 간단히 예측" },
       { href: "/life/waste-time", label: "내가 날린 인생 시간은?", desc: "재미로 보는 시간 계산" },
     ],
@@ -19,6 +23,16 @@ const groups: Group[] = [
     items: [
       { href: "/life/korean-age", label: "만 나이 계산기", desc: "생년월일로 오늘 기준 만 나이 확인" },
       { href: "/life/dday", label: "D-day · 기념일 계산기", desc: "목표일까지 남은 날짜 계산" },
+      { href: "/life/ovulation", label: "배란일·가임기 계산기", desc: "생리주기로 배란일·가임기 계산" },
+    ],
+  },
+  {
+    title: "건강·생활 계산기",
+    items: [
+      { href: "/life/discomfort-index", label: "불쾌지수 계산기", desc: "기온·습도로 여름철 불쾌지수 계산" },
+      { href: "/life/dog-age", label: "강아지 나이 계산기", desc: "반려견 나이를 사람 나이로 환산" },
+      { href: "/life/percentage", label: "퍼센트 계산기", desc: "퍼센트·비율·증감률 한 번에 계산" },
+      { href: "/life/temperature", label: "온도 변환 계산기", desc: "섭씨·화씨·켈빈 서로 변환" },
     ],
   },
   {
@@ -27,15 +41,31 @@ const groups: Group[] = [
   },
 ];
 
-function Sidebar({ groups }: { groups: Group[] }) {
+const ALL_TITLE = "전체";
+
+function Sidebar({ groups, selected, onSelect }: { groups: Group[]; selected: string; onSelect: (title: string) => void }) {
   return (
     <aside className="hidden md:block md:w-64 md:shrink-0">
-      <div className="sticky top-6 space-y-2 rounded-[28px] border border-gray-100 bg-white p-4 shadow-sm shadow-gray-200/30">
+      <div className="sticky top-6 space-y-2">
+        <a
+          href="#전체"
+          onClick={(e) => {
+            e.preventDefault();
+            onSelect(ALL_TITLE);
+          }}
+          className={`flex items-center justify-between rounded-2xl px-1 py-2 text-sm font-bold transition ${selected === ALL_TITLE ? "text-green-700" : "text-gray-700 hover:text-green-600"}`}
+        >
+          <span>{ALL_TITLE}</span>
+        </a>
         {groups.map((group) => (
           <a
             key={group.title}
             href={`#${group.title}`}
-            className="flex items-center justify-between rounded-2xl px-3 py-3 text-sm font-bold text-gray-700 transition hover:bg-gray-50"
+            onClick={(e) => {
+              e.preventDefault();
+              onSelect(group.title);
+            }}
+            className={`flex items-center justify-between rounded-2xl px-1 py-2 text-sm font-bold transition ${selected === group.title ? "text-green-700" : "text-gray-700 hover:text-green-600"}`}
           >
             <span>{group.title}</span>
           </a>
@@ -46,6 +76,20 @@ function Sidebar({ groups }: { groups: Group[] }) {
 }
 
 export default function LifePage() {
+  const [selected, setSelected] = useState(ALL_TITLE);
+
+  useEffect(() => {
+    const hash = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+    if (hash && [...groups.map((g) => g.title), ALL_TITLE].includes(hash)) setSelected(hash);
+  }, []);
+
+  const visibleGroups = useMemo(() => {
+    if (selected === ALL_TITLE) return groups;
+    return groups.filter((group) => group.title === selected);
+  }, [selected]);
+
+  const visibleItems = useMemo(() => visibleGroups.flatMap((group) => group.items), [visibleGroups]);
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       <div className="mb-8 text-center">
@@ -58,26 +102,24 @@ export default function LifePage() {
       </div>
 
       <div className="flex flex-col gap-6 md:flex-row">
-        <Sidebar groups={groups} />
-        <div className="min-w-0 flex-1 hidden md:block">
+        <Sidebar groups={groups} selected={selected} onSelect={setSelected} />
+        <div className="min-w-0 flex-1">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {groups.flatMap((group) =>
-              group.items.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-green-200 hover:shadow-lg"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h2 className="text-lg font-bold text-gray-900 transition-colors group-hover:text-green-600">{item.label}</h2>
-                      <p className="mt-1 text-sm text-gray-500">{item.desc}</p>
-                    </div>
-                    <span className="text-gray-300 transition-colors group-hover:text-green-500">→</span>
+            {visibleItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-green-200 hover:shadow-lg"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h2 className="text-lg font-bold text-gray-900 transition-colors group-hover:text-green-600">{item.label}</h2>
+                    <p className="mt-1 text-sm text-gray-500">{item.desc}</p>
                   </div>
-                </Link>
-              ))
-            )}
+                  <span className="text-gray-300 transition-colors group-hover:text-green-500">→</span>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </div>
