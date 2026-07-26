@@ -26,6 +26,11 @@ const groups: Group[] = [
   { title: "사업 / 수익", accent: "amber", items: [
     { href: "/business/profit", label: "손익 계산기", desc: "매출과 비용을 한 번에" },
     { href: "/business/compound", label: "복리 계산기", desc: "원금·이율·기간으로 만기 금액 계산" },
+    { href: "/business/margin", label: "마진율 계산기", desc: "원가·판매가로 마진율·마크업률 계산" },
+  ]},
+  { title: "대출 / 금융", accent: "sky", items: [
+    { href: "/business/loan", label: "대출 이자 계산기", desc: "원리금·원금균등 월 상환금과 총이자" },
+    { href: "/business/savings", label: "적금 이자 계산기", desc: "정기적금 만기 수령액(세후) 계산" },
   ]},
   { title: "근로수당", accent: "rose", items: [
     { href: "/business/weekly-holiday", label: "주휴수당 계산기", desc: "주 15시간 이상 주휴수당 예상" },
@@ -55,7 +60,7 @@ function MobileSections({ groups }: { groups: Group[] }) {
   return (
     <div className="space-y-8 md:hidden">
       {groups.map((group) => {
-        const s = { blue: "bg-blue-50 text-blue-600", violet: "bg-violet-50 text-violet-600", emerald: "bg-emerald-50 text-emerald-600", amber: "bg-amber-50 text-amber-600", rose: "bg-rose-50 text-rose-600" }[group.accent];
+        const s = { blue: "bg-blue-50 text-blue-600", violet: "bg-violet-50 text-violet-600", emerald: "bg-emerald-50 text-emerald-600", amber: "bg-amber-50 text-amber-600", rose: "bg-rose-50 text-rose-600", sky: "bg-sky-50 text-sky-600" }[group.accent];
         return (
           <section key={group.title} className="rounded-[28px] border border-gray-100 bg-white p-5 shadow-sm shadow-gray-200/30">
             <div className={`mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold ${s}`}>{group.title}</div>
