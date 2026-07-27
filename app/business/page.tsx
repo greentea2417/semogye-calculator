@@ -36,6 +36,9 @@ const groups: Group[] = [
     { href: "/business/weekly-holiday", label: "주휴수당 계산기", desc: "주 15시간 이상 주휴수당 예상" },
     { href: "/business/night-pay", label: "야간수당 계산기", desc: "야간근로 가산수당 계산" },
     { href: "/business/rest-day-pay", label: "휴일근로수당 계산기", desc: "휴일근로 가산수당 계산" },
+    { href: "/business/overtime-pay", label: "연장근로수당 계산기", desc: "연장근로 50% 가산수당 계산" },
+    { href: "/business/overtime-night-pay", label: "연장·야간수당 계산기", desc: "연장·야간 중복 가산수당 계산" },
+    { href: "/business/ordinary-hourly", label: "통상시급 계산기", desc: "월 통상임금을 시급으로 환산" },
   ]},
 ];
 
