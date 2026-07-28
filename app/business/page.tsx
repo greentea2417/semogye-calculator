@@ -17,6 +17,7 @@ const groups: Group[] = [
   { title: "세금 / 공제", accent: "violet", items: [
     { href: "/business/vat", label: "부가세 계산기", desc: "공급가액/부가세 분리" },
     { href: "/business/four-insurance", label: "4대보험 계산기", desc: "월급으로 4대보험 공제액 계산" },
+    { href: "/business/comprehensive-tax", label: "종합소득세 계산기", desc: "과세표준으로 산출세액·지방소득세 계산" },
   ]},
   { title: "퇴직 / 실업", accent: "emerald", items: [
     { href: "/business/retirement", label: "퇴직금 계산기", desc: "퇴직금 예상액 확인" },
@@ -27,6 +28,10 @@ const groups: Group[] = [
     { href: "/business/profit", label: "손익 계산기", desc: "매출과 비용을 한 번에" },
     { href: "/business/compound", label: "복리 계산기", desc: "원금·이율·기간으로 만기 금액 계산" },
     { href: "/business/margin", label: "마진율 계산기", desc: "원가·판매가로 마진율·마크업률 계산" },
+    { href: "/business/break-even", label: "손익분기점 계산기", desc: "고정비·공헌이익률로 BEP 매출·판매량 계산" },
+    { href: "/business/discount", label: "할인율 계산기", desc: "정가와 판매가로 할인액·할인율 계산" },
+    { href: "/business/fee", label: "수수료 계산기", desc: "금액과 수수료율로 정산금액 계산" },
+    { href: "/business/target-revenue", label: "목표매출 계산기", desc: "고정비·변동비·목표이익으로 필요 매출 계산" },
   ]},
   { title: "대출 / 금융", accent: "sky", items: [
     { href: "/business/loan", label: "대출 이자 계산기", desc: "원리금·원금균등 월 상환금과 총이자" },
@@ -36,6 +41,7 @@ const groups: Group[] = [
     { href: "/business/weekly-holiday", label: "주휴수당 계산기", desc: "주 15시간 이상 주휴수당 예상" },
     { href: "/business/night-pay", label: "야간수당 계산기", desc: "야간근로 가산수당 계산" },
     { href: "/business/rest-day-pay", label: "휴일근로수당 계산기", desc: "휴일근로 가산수당 계산" },
+    { href: "/business/overtime-pay", label: "연장근로수당 계산기", desc: "통상시급 1.5배 연장근로 가산수당 계산" },
   ]},
 ];
 
