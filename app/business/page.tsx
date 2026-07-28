@@ -29,6 +29,9 @@ const groups: Group[] = [
     { href: "/business/compound", label: "복리 계산기", desc: "원금·이율·기간으로 만기 금액 계산" },
     { href: "/business/margin", label: "마진율 계산기", desc: "원가·판매가로 마진율·마크업률 계산" },
     { href: "/business/break-even", label: "손익분기점 계산기", desc: "고정비·공헌이익률로 BEP 매출·판매량 계산" },
+    { href: "/business/discount", label: "할인율 계산기", desc: "정가와 판매가로 할인액·할인율 계산" },
+    { href: "/business/fee", label: "수수료 계산기", desc: "금액과 수수료율로 정산금액 계산" },
+    { href: "/business/target-revenue", label: "목표매출 계산기", desc: "고정비·변동비·목표이익으로 필요 매출 계산" },
   ]},
   { title: "대출 / 금융", accent: "sky", items: [
     { href: "/business/loan", label: "대출 이자 계산기", desc: "원리금·원금균등 월 상환금과 총이자" },
