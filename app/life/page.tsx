@@ -24,6 +24,7 @@ const groups: Group[] = [
       { href: "/life/korean-age", label: "만 나이 계산기", desc: "생년월일로 오늘 기준 만 나이 확인" },
       { href: "/life/dday", label: "D-day · 기념일 계산기", desc: "목표일까지 남은 날짜 계산" },
       { href: "/life/ovulation", label: "배란일·가임기 계산기", desc: "생리주기로 배란일·가임기 계산" },
+      { href: "/life/pregnancy-due-date", label: "출산예정일 계산기", desc: "마지막 생리일로 출산예정일·임신 주수 계산" },
     ],
   },
   {
@@ -33,6 +34,8 @@ const groups: Group[] = [
       { href: "/life/dog-age", label: "강아지 나이 계산기", desc: "반려견 나이를 사람 나이로 환산" },
       { href: "/life/percentage", label: "퍼센트 계산기", desc: "퍼센트·비율·증감률 한 번에 계산" },
       { href: "/life/temperature", label: "온도 변환 계산기", desc: "섭씨·화씨·켈빈 서로 변환" },
+      { href: "/life/electricity-bill", label: "전기요금 계산기", desc: "사용량(kWh)으로 누진 3단계 전기요금 계산" },
+      { href: "/life/blood-pressure", label: "혈압 계산기", desc: "수축기·이완기 혈압으로 단계 분류" },
     ],
   },
   {
