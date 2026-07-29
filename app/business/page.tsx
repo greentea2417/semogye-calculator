@@ -13,6 +13,7 @@ const groups: Group[] = [
     { href: "/business/freelance", label: "프리랜서 실수령액", desc: "3.3% 원천징수 기준 간이 계산" },
     { href: "/business/salary-conversion", label: "연봉 → 월급 계산기", desc: "연봉을 월급으로 환산" },
     { href: "/business/net-salary", label: "세후 실수령액 간이 계산기", desc: "보험·세금 공제 후 금액 확인" },
+    { href: "/business/minimum-wage", label: "최저임금 계산기", desc: "2026년 최저시급 기준 충족 여부·월급 환산" },
   ]},
   { title: "세금 / 공제", accent: "violet", items: [
     { href: "/business/vat", label: "부가세 계산기", desc: "공급가액/부가세 분리" },
@@ -36,12 +37,14 @@ const groups: Group[] = [
   { title: "대출 / 금융", accent: "sky", items: [
     { href: "/business/loan", label: "대출 이자 계산기", desc: "원리금·원금균등 월 상환금과 총이자" },
     { href: "/business/savings", label: "적금 이자 계산기", desc: "정기적금 만기 수령액(세후) 계산" },
+    { href: "/business/deposit", label: "예금 이자 계산기", desc: "정기예금 만기 수령액(세후) 계산" },
   ]},
   { title: "근로수당", accent: "rose", items: [
     { href: "/business/weekly-holiday", label: "주휴수당 계산기", desc: "주 15시간 이상 주휴수당 예상" },
     { href: "/business/night-pay", label: "야간수당 계산기", desc: "야간근로 가산수당 계산" },
     { href: "/business/rest-day-pay", label: "휴일근로수당 계산기", desc: "휴일근로 가산수당 계산" },
     { href: "/business/overtime-pay", label: "연장근로수당 계산기", desc: "통상시급 1.5배 연장근로 가산수당 계산" },
+    { href: "/business/ordinary-wage", label: "통상임금 계산기", desc: "월 통상임금으로 통상시급·통상일급 계산" },
   ]},
 ];
 
