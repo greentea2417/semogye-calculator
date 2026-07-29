@@ -11,9 +11,11 @@ const groups: Group[] = [
     { href: "/business/salary", label: "월급 계산기", desc: "실수령액을 빠르게 확인" },
     { href: "/business/hourly-multi", label: "사장님용 시급 계산기", desc: "직원 여러 명 인건비를 한 번에 계산" },
     { href: "/business/freelance", label: "프리랜서 실수령액", desc: "3.3% 원천징수 기준 간이 계산" },
+    { href: "/business/freelance-backcalc", label: "프리랜서 세후금액 역산", desc: "원하는 실수령액으로 세전 계약금 계산" },
     { href: "/business/salary-conversion", label: "연봉 → 월급 계산기", desc: "연봉을 월급으로 환산" },
     { href: "/business/net-salary", label: "세후 실수령액 간이 계산기", desc: "보험·세금 공제 후 금액 확인" },
     { href: "/business/minimum-wage", label: "최저임금 계산기", desc: "2026년 최저시급 기준 충족 여부·월급 환산" },
+    { href: "/business/daily-wage", label: "일용직 급여 계산기", desc: "일당과 근무일수로 원천징수 세금 계산" },
   ]},
   { title: "세금 / 공제", accent: "violet", items: [
     { href: "/business/vat", label: "부가세 계산기", desc: "공급가액/부가세 분리" },
@@ -24,6 +26,7 @@ const groups: Group[] = [
     { href: "/business/retirement", label: "퇴직금 계산기", desc: "퇴직금 예상액 확인" },
     { href: "/business/unemployment", label: "실업급여 계산기", desc: "수급 가능액 예상" },
     { href: "/business/annual", label: "연차수당 계산기", desc: "미사용 연차수당 계산" },
+    { href: "/business/average-wage", label: "평균임금 계산기", desc: "3개월 임금총액으로 1일 평균임금 계산" },
   ]},
   { title: "사업 / 수익", accent: "amber", items: [
     { href: "/business/profit", label: "손익 계산기", desc: "매출과 비용을 한 번에" },
