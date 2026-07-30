@@ -21,12 +21,14 @@ const groups: Group[] = [
     { href: "/business/vat", label: "부가세 계산기", desc: "공급가액/부가세 분리" },
     { href: "/business/four-insurance", label: "4대보험 계산기", desc: "월급으로 4대보험 공제액 계산" },
     { href: "/business/comprehensive-tax", label: "종합소득세 계산기", desc: "과세표준으로 산출세액·지방소득세 계산" },
+    { href: "/business/simplified-vat", label: "간이과세자 부가세 계산기", desc: "업종별 부가가치율로 간이과세 납부세액 계산" },
   ]},
   { title: "퇴직 / 실업", accent: "emerald", items: [
     { href: "/business/retirement", label: "퇴직금 계산기", desc: "퇴직금 예상액 확인" },
     { href: "/business/unemployment", label: "실업급여 계산기", desc: "수급 가능액 예상" },
     { href: "/business/annual", label: "연차수당 계산기", desc: "미사용 연차수당 계산" },
     { href: "/business/average-wage", label: "평균임금 계산기", desc: "3개월 임금총액으로 1일 평균임금 계산" },
+    { href: "/business/parental-leave", label: "육아휴직 급여 계산기", desc: "통상임금·기간으로 육아휴직 급여 예상액 계산" },
   ]},
   { title: "사업 / 수익", accent: "amber", items: [
     { href: "/business/profit", label: "손익 계산기", desc: "매출과 비용을 한 번에" },
@@ -41,6 +43,7 @@ const groups: Group[] = [
     { href: "/business/loan", label: "대출 이자 계산기", desc: "원리금·원금균등 월 상환금과 총이자" },
     { href: "/business/savings", label: "적금 이자 계산기", desc: "정기적금 만기 수령액(세후) 계산" },
     { href: "/business/deposit", label: "예금 이자 계산기", desc: "정기예금 만기 수령액(세후) 계산" },
+    { href: "/business/prepayment-fee", label: "중도상환수수료 계산기", desc: "잔존일수 기준 대출 중도상환수수료 계산" },
   ]},
   { title: "근로수당", accent: "rose", items: [
     { href: "/business/weekly-holiday", label: "주휴수당 계산기", desc: "주 15시간 이상 주휴수당 예상" },
