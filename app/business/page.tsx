@@ -44,6 +44,9 @@ const groups: Group[] = [
     { href: "/business/fee", label: "수수료 계산기", desc: "금액과 수수료율로 정산금액 계산" },
     { href: "/business/target-revenue", label: "목표매출 계산기", desc: "고정비·변동비·목표이익으로 필요 매출 계산" },
     { href: "/business/labor-cost-ratio", label: "인건비 비율 계산기", desc: "매출 대비 인건비 비율과 잔여 금액 계산" },
+    { href: "/business/vat-included", label: "부가세 포함/제외 계산기", desc: "부가세 포함 금액에서 공급가액·부가세 분리" },
+    { href: "/business/withholding-33", label: "원천세 3.3% 계산기", desc: "지급액에서 3.3% 공제 후 실수령액 계산" },
+    { href: "/business/supply-price", label: "공급가액 역산 계산기", desc: "공급가액으로 부가세 포함 금액 계산" },
   ]},
   { title: "대출 / 금융", accent: "sky", items: [
     { href: "/business/loan", label: "대출 이자 계산기", desc: "원리금·원금균등 월 상환금과 총이자" },
