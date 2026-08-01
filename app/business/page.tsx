@@ -16,6 +16,7 @@ const groups: Group[] = [
     { href: "/business/net-salary", label: "세후 실수령액 간이 계산기", desc: "보험·세금 공제 후 금액 확인" },
     { href: "/business/minimum-wage", label: "최저임금 계산기", desc: "2026년 최저시급 기준 충족 여부·월급 환산" },
     { href: "/business/daily-wage", label: "일용직 급여 계산기", desc: "일당과 근무일수로 원천징수 세금 계산" },
+    { href: "/business/prorated-salary", label: "월급 일할계산기", desc: "중도 입퇴사 시 재직일수 기준 월급 일할계산" },
   ]},
   { title: "세금 / 공제", accent: "violet", items: [
     { href: "/business/vat", label: "부가세 계산기", desc: "공급가액/부가세 분리" },
@@ -24,6 +25,7 @@ const groups: Group[] = [
     { href: "/business/simplified-vat", label: "간이과세자 부가세 계산기", desc: "업종별 부가가치율로 간이과세 납부세액 계산" },
     { href: "/business/corporate-tax", label: "법인세 계산기", desc: "과세표준으로 법인세·지방소득세 산출세액 계산" },
     { href: "/business/gift-tax", label: "증여세 계산기", desc: "증여재산·공제로 과세표준·납부세액 계산" },
+    { href: "/business/other-income-tax", label: "기타소득 원천징수 계산기", desc: "강연료·원고료 등 기타소득 8.8% 원천징수 계산" },
   ]},
   { title: "퇴직 / 실업", accent: "emerald", items: [
     { href: "/business/retirement", label: "퇴직금 계산기", desc: "퇴직금 예상액 확인" },
@@ -31,6 +33,7 @@ const groups: Group[] = [
     { href: "/business/annual", label: "연차수당 계산기", desc: "미사용 연차수당 계산" },
     { href: "/business/average-wage", label: "평균임금 계산기", desc: "3개월 임금총액으로 1일 평균임금 계산" },
     { href: "/business/parental-leave", label: "육아휴직 급여 계산기", desc: "통상임금·기간으로 육아휴직 급여 예상액 계산" },
+    { href: "/business/annual-days", label: "연차 개수 계산기", desc: "입사일 기준 근로기준법 연차 발생 일수 계산" },
   ]},
   { title: "사업 / 수익", accent: "amber", items: [
     { href: "/business/profit", label: "손익 계산기", desc: "매출과 비용을 한 번에" },
@@ -47,12 +50,15 @@ const groups: Group[] = [
     { href: "/business/vat-included", label: "부가세 포함/제외 계산기", desc: "부가세 포함 금액에서 공급가액·부가세 분리" },
     { href: "/business/withholding-33", label: "원천세 3.3% 계산기", desc: "지급액에서 3.3% 공제 후 실수령액 계산" },
     { href: "/business/supply-price", label: "공급가액 역산 계산기", desc: "공급가액으로 부가세 포함 금액 계산" },
+    { href: "/business/depreciation", label: "감가상각 계산기", desc: "정액법으로 연·월 감가상각비와 장부가액 계산" },
+    { href: "/business/inventory-turnover", label: "재고회전율 계산기", desc: "매출원가·평균재고로 재고회전율·회전일수 계산" },
   ]},
   { title: "대출 / 금융", accent: "sky", items: [
     { href: "/business/loan", label: "대출 이자 계산기", desc: "원리금·원금균등 월 상환금과 총이자" },
     { href: "/business/savings", label: "적금 이자 계산기", desc: "정기적금 만기 수령액(세후) 계산" },
     { href: "/business/deposit", label: "예금 이자 계산기", desc: "정기예금 만기 수령액(세후) 계산" },
     { href: "/business/prepayment-fee", label: "중도상환수수료 계산기", desc: "잔존일수 기준 대출 중도상환수수료 계산" },
+    { href: "/business/dsr", label: "DSR 계산기", desc: "연소득·연간 원리금으로 총부채원리금상환비율 계산" },
   ]},
   { title: "근로수당", accent: "rose", items: [
     { href: "/business/weekly-holiday", label: "주휴수당 계산기", desc: "주 15시간 이상 주휴수당 예상" },
