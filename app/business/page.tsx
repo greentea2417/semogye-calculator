@@ -22,6 +22,8 @@ const groups: Group[] = [
     { href: "/business/four-insurance", label: "4대보험 계산기", desc: "월급으로 4대보험 공제액 계산" },
     { href: "/business/comprehensive-tax", label: "종합소득세 계산기", desc: "과세표준으로 산출세액·지방소득세 계산" },
     { href: "/business/simplified-vat", label: "간이과세자 부가세 계산기", desc: "업종별 부가가치율로 간이과세 납부세액 계산" },
+    { href: "/business/corporate-tax", label: "법인세 계산기", desc: "과세표준으로 법인세·지방소득세 산출세액 계산" },
+    { href: "/business/gift-tax", label: "증여세 계산기", desc: "증여재산·공제로 과세표준·납부세액 계산" },
   ]},
   { title: "퇴직 / 실업", accent: "emerald", items: [
     { href: "/business/retirement", label: "퇴직금 계산기", desc: "퇴직금 예상액 확인" },
@@ -41,6 +43,10 @@ const groups: Group[] = [
     { href: "/business/discount", label: "할인율 계산기", desc: "정가와 판매가로 할인액·할인율 계산" },
     { href: "/business/fee", label: "수수료 계산기", desc: "금액과 수수료율로 정산금액 계산" },
     { href: "/business/target-revenue", label: "목표매출 계산기", desc: "고정비·변동비·목표이익으로 필요 매출 계산" },
+    { href: "/business/labor-cost-ratio", label: "인건비 비율 계산기", desc: "매출 대비 인건비 비율과 잔여 금액 계산" },
+    { href: "/business/vat-included", label: "부가세 포함/제외 계산기", desc: "부가세 포함 금액에서 공급가액·부가세 분리" },
+    { href: "/business/withholding-33", label: "원천세 3.3% 계산기", desc: "지급액에서 3.3% 공제 후 실수령액 계산" },
+    { href: "/business/supply-price", label: "공급가액 역산 계산기", desc: "공급가액으로 부가세 포함 금액 계산" },
   ]},
   { title: "대출 / 금융", accent: "sky", items: [
     { href: "/business/loan", label: "대출 이자 계산기", desc: "원리금·원금균등 월 상환금과 총이자" },
