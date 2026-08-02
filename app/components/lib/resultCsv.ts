@@ -29,18 +29,19 @@ type Options = {
   slug: string;
   /** CSV 첫 줄에 넣는 계산기 이름 */
   title: string;
-  /** 사용자가 입력한 값. 모든 계산기가 기본으로 함께 내보낸다. */
+  /** 사용자가 직접 입력한 값. 모든 계산기가 기본으로 함께 내보낸다. */
   inputs?: CsvInput[];
   lines: ResultLine[];
   subTotal?: ResultLine;
   total?: ResultLine;
+  footerNote?: string;
 };
 
 /**
  * 사용자 입력값 + 결과 패널에 표시되는 줄을 그대로 CSV로 내려받는다.
  * 한글 엑셀에서 깨지지 않도록 BOM을 붙인다.
  */
-export function downloadResultCsv({ slug, title, inputs, lines, subTotal, total }: Options) {
+export function downloadResultCsv({ slug, title, inputs, lines, subTotal, total, footerNote }: Options) {
   const rows: string[][] = [["계산기", title], ["기준일", todayStamp()]];
 
   if (inputs?.length) {
@@ -57,6 +58,7 @@ export function downloadResultCsv({ slug, title, inputs, lines, subTotal, total 
   }
   if (subTotal) rows.push([subTotal.label, toCell(subTotal.value)]);
   if (total) rows.push([total.label, toCell(total.value)]);
+  if (footerNote) rows.push([], [footerNote, ""]);
 
   const csv = rows.map((row) => row.map(csvEscape).join(",")).join("\n");
 

@@ -26,6 +26,9 @@ const groups: Group[] = [
     { href: "/business/corporate-tax", label: "법인세 계산기", desc: "과세표준으로 법인세·지방소득세 산출세액 계산" },
     { href: "/business/gift-tax", label: "증여세 계산기", desc: "증여재산·공제로 과세표준·납부세액 계산" },
     { href: "/business/other-income-tax", label: "기타소득 원천징수 계산기", desc: "강연료·원고료 등 기타소득 8.8% 원천징수 계산" },
+    { href: "/business/dividend-tax", label: "배당소득세 계산기", desc: "배당금 원천징수 15.4%와 실수령액 계산" },
+    { href: "/business/dividend-net-backcalc", label: "세후 배당금 역산 계산기", desc: "원하는 세후 금액으로 세전 배당금 계산" },
+    { href: "/business/dividend-yield", label: "배당수익률 계산기", desc: "매입금액과 배당금으로 세전·세후 수익률 계산" },
     { href: "/business/inheritance-tax", label: "상속세 계산기", desc: "상속재산·공제로 과세표준·납부세액 계산" },
   ]},
   { title: "퇴직 / 실업", accent: "emerald", items: [
