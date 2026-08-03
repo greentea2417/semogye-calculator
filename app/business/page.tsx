@@ -53,6 +53,9 @@ const groups: Group[] = [
     { href: "/business/supply-price", label: "공급가액 역산 계산기", desc: "공급가액으로 부가세 포함 금액 계산" },
     { href: "/business/depreciation", label: "감가상각 계산기", desc: "정액법으로 연·월 감가상각비와 장부가액 계산" },
     { href: "/business/inventory-turnover", label: "재고회전율 계산기", desc: "매출원가·평균재고로 재고회전율·회전일수 계산" },
+    { href: "/business/broker-fee", label: "부동산 중개보수 계산기", desc: "매매·전세·월세 거래금액으로 중개보수(복비) 상한액 계산" },
+    { href: "/business/acquisition-tax", label: "취득세 계산기", desc: "취득가액과 세율로 취득세·지방교육세 계산" },
+    { href: "/business/registration-tax", label: "등록면허세 계산기", desc: "과세표준과 세율로 등록면허세 계산" },
   ]},
   { title: "대출 / 금융", accent: "sky", items: [
     { href: "/business/loan", label: "대출 이자 계산기", desc: "원리금·원금균등 월 상환금과 총이자" },
