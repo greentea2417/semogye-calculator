@@ -17,6 +17,7 @@ const groups: Group[] = [
     { href: "/business/minimum-wage", label: "최저임금 계산기", desc: "2026년 최저시급 기준 충족 여부·월급 환산" },
     { href: "/business/daily-wage", label: "일용직 급여 계산기", desc: "일당과 근무일수로 원천징수 세금 계산" },
     { href: "/business/prorated-salary", label: "월급 일할계산기", desc: "중도 입퇴사 시 재직일수 기준 월급 일할계산" },
+    { href: "/business/raise-rate", label: "연봉 인상률 계산기", desc: "기존·변경 연봉으로 인상률·인상액·월 환산 계산" },
   ]},
   { title: "세금 / 공제", accent: "violet", items: [
     { href: "/business/vat", label: "부가세 계산기", desc: "공급가액/부가세 분리" },
@@ -52,6 +53,7 @@ const groups: Group[] = [
     { href: "/business/supply-price", label: "공급가액 역산 계산기", desc: "공급가액으로 부가세 포함 금액 계산" },
     { href: "/business/depreciation", label: "감가상각 계산기", desc: "정액법으로 연·월 감가상각비와 장부가액 계산" },
     { href: "/business/inventory-turnover", label: "재고회전율 계산기", desc: "매출원가·평균재고로 재고회전율·회전일수 계산" },
+    { href: "/business/rental-yield", label: "임대수익률 계산기", desc: "매매가·보증금·월세로 표면·실질 임대수익률 계산" },
   ]},
   { title: "대출 / 금융", accent: "sky", items: [
     { href: "/business/loan", label: "대출 이자 계산기", desc: "원리금·원금균등 월 상환금과 총이자" },
@@ -59,6 +61,7 @@ const groups: Group[] = [
     { href: "/business/deposit", label: "예금 이자 계산기", desc: "정기예금 만기 수령액(세후) 계산" },
     { href: "/business/prepayment-fee", label: "중도상환수수료 계산기", desc: "잔존일수 기준 대출 중도상환수수료 계산" },
     { href: "/business/dsr", label: "DSR 계산기", desc: "연소득·연간 원리금으로 총부채원리금상환비율 계산" },
+    { href: "/business/rent-conversion", label: "전월세 전환율 계산기", desc: "전세보증금·전환율로 월세와 법정 상한 계산" },
   ]},
   { title: "근로수당", accent: "rose", items: [
     { href: "/business/weekly-holiday", label: "주휴수당 계산기", desc: "주 15시간 이상 주휴수당 예상" },
