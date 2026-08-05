@@ -21,6 +21,9 @@ const groups: Group[] = [
   { title: "세금 / 공제", accent: "violet", items: [
     { href: "/business/vat", label: "부가세 계산기", desc: "공급가액/부가세 분리" },
     { href: "/business/four-insurance", label: "4대보험 계산기", desc: "월급으로 4대보험 공제액 계산" },
+    { href: "/business/pension", label: "국민연금 계산기", desc: "기준소득월액으로 국민연금 보험료 계산" },
+    { href: "/business/health-insurance", label: "건강보험료 계산기", desc: "건강보험료와 장기요양보험료 계산" },
+    { href: "/business/employment-insurance", label: "고용보험료 계산기", desc: "근로자·사업주 고용보험료 계산" },
     { href: "/business/comprehensive-tax", label: "종합소득세 계산기", desc: "과세표준으로 산출세액·지방소득세 계산" },
     { href: "/business/simplified-vat", label: "간이과세자 부가세 계산기", desc: "업종별 부가가치율로 간이과세 납부세액 계산" },
     { href: "/business/corporate-tax", label: "법인세 계산기", desc: "과세표준으로 법인세·지방소득세 산출세액 계산" },
