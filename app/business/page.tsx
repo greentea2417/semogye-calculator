@@ -28,6 +28,7 @@ const groups: Group[] = [
     { href: "/business/simplified-vat", label: "간이과세자 부가세 계산기", desc: "업종별 부가가치율로 간이과세 납부세액 계산" },
     { href: "/business/corporate-tax", label: "법인세 계산기", desc: "과세표준으로 법인세·지방소득세 산출세액 계산" },
     { href: "/business/gift-tax", label: "증여세 계산기", desc: "증여재산·공제로 과세표준·납부세액 계산" },
+    { href: "/business/inheritance-tax", label: "상속세 계산기", desc: "상속재산·공제로 과세표준·납부세액 계산" },
     { href: "/business/other-income-tax", label: "기타소득 원천징수 계산기", desc: "강연료·원고료 등 기타소득 8.8% 원천징수 계산" },
     { href: "/business/retirement-tax", label: "퇴직소득세 계산기", desc: "퇴직급여·근속연수로 퇴직소득세·지방소득세 계산" },
   ]},
@@ -65,6 +66,8 @@ const groups: Group[] = [
     { href: "/business/deposit", label: "예금 이자 계산기", desc: "정기예금 만기 수령액(세후) 계산" },
     { href: "/business/prepayment-fee", label: "중도상환수수료 계산기", desc: "잔존일수 기준 대출 중도상환수수료 계산" },
     { href: "/business/dsr", label: "DSR 계산기", desc: "연소득·연간 원리금으로 총부채원리금상환비율 계산" },
+    { href: "/business/ltv", label: "LTV 계산기", desc: "담보가치·한도율로 최대 대출액과 담보인정비율 계산" },
+    { href: "/business/dti", label: "DTI 계산기", desc: "연소득·대출 상환액으로 총부채상환비율 계산" },
   ]},
   { title: "근로수당", accent: "rose", items: [
     { href: "/business/weekly-holiday", label: "주휴수당 계산기", desc: "주 15시간 이상 주휴수당 예상" },
