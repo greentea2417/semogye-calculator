@@ -88,6 +88,61 @@ export default function UnemploymentClient() {
         />
       }
       guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
+      article={
+        <CalculatorArticle
+          sections={[
+            {
+              heading: "실업급여(구직급여)란?",
+              body: (
+                <p>
+                  실업급여는 고용보험에 가입한 근로자가 <strong>비자발적으로 일자리를 잃었을 때</strong> 재취업 활동을 지원하기
+                  위해 지급하는 급여입니다. 정식 명칭은 구직급여로, 실직 전 평균임금과 고용보험 가입기간·연령에 따라 지급액과
+                  지급기간이 정해집니다.
+                </p>
+              ),
+            },
+            {
+              heading: "계산 방법",
+              body: (
+                <>
+                  <p className="rounded-xl bg-gray-50 px-4 py-3 font-medium text-gray-800">
+                    1일 구직급여 = 평균 1일 임금 × 60% (상·하한액 적용)
+                    <br />
+                    총 예상액 = 1일 구직급여 × 소정급여일수
+                  </p>
+                  <p>
+                    1일 구직급여는 이직 전 평균임금의 <strong>60%</strong>를 기준으로 하되, 법에서 정한 <strong>상한액과
+                    하한액</strong> 범위 안에서 결정됩니다. 하한액은 최저임금과 연동됩니다.
+                  </p>
+                </>
+              ),
+            },
+            {
+              heading: "수급 요건과 지급기간",
+              body: (
+                <>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>이직 전 18개월 동안 고용보험 가입기간이 <strong>통산 180일 이상</strong>이어야 합니다.</li>
+                    <li>경영상 해고·계약만료 등 <strong>비자발적 사유</strong>로 이직해야 하며, 자발적 퇴사는 원칙적으로 제외됩니다.</li>
+                    <li>소정급여일수는 가입기간과 연령에 따라 <strong>120일~270일</strong>로 결정됩니다.</li>
+                    <li>적극적인 재취업 활동(구직활동 신고)을 이어가야 계속 수급할 수 있습니다.</li>
+                  </ul>
+                </>
+              ),
+            },
+            {
+              heading: "주의사항",
+              body: (
+                <p>
+                  본 계산기는 평균임금의 60%(상한 적용) 기준의 <strong>추정치</strong>입니다. 실제 수급 여부와 금액은 상·하한액
+                  변동, 이직 사유, 연령, 가입기간 구간에 따라 달라지므로, 정확한 내용은 고용보험(고용24) 공식 안내와 관할
+                  고용센터 상담으로 확인하세요.
+                </p>
+              ),
+            },
+          ]}
+        />
+      }
     >
       <InputBlock
         label="평균 1일 임금"

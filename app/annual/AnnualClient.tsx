@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import InputBlock from "@/components/InputBlock";
 import CalculatorLayout from "@/components/CalculatorLayout";
+import CalculatorArticle from "@/components/CalculatorArticle";
 import ResultPanel, { type ResultLine } from "@/components/ResultPanel";
 import { downloadResultCsv } from "@/components/lib/resultCsv";
 import BottomActions from "@/components/BottomActions";
@@ -76,6 +77,58 @@ export default function AnnualClient() {
         />
       }
       guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
+      article={
+        <CalculatorArticle
+          sections={[
+            {
+              heading: "연차수당이란?",
+              body: (
+                <p>
+                  연차수당은 <strong>발생한 연차유급휴가를 사용하지 못하고 남겼을 때</strong>, 그 미사용 일수만큼 임금으로
+                  보상받는 수당입니다. 연차는 근로자의 휴식권을 위해 부여되는 유급휴가이므로, 쓰지 못한 연차는 금전으로
+                  청구할 수 있습니다.
+                </p>
+              ),
+            },
+            {
+              heading: "계산 방법",
+              body: (
+                <>
+                  <p className="rounded-xl bg-gray-50 px-4 py-3 font-medium text-gray-800">
+                    연차수당 = 1일 통상임금 × 미사용 연차일수
+                  </p>
+                  <p>
+                    1일 통상임금은 보통 <strong>월 통상임금 ÷ 월 소정근로시간(약 209시간) × 1일 소정근로시간(8시간)</strong>으로
+                    구합니다. 미사용 연차일수는 발생한 연차에서 실제 사용한 연차를 뺀 값입니다.
+                  </p>
+                </>
+              ),
+            },
+            {
+              heading: "연차 발생 기준 (근로기준법 제60조)",
+              body: (
+                <>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>입사 1년 미만: 1개월 개근 시 1일씩, 최대 11일 발생</li>
+                    <li>1년 이상 근속(80% 이상 출근): 15일 발생</li>
+                    <li>3년 이상부터 2년마다 1일씩 가산, 최대 25일 한도</li>
+                  </ul>
+                </>
+              ),
+            },
+            {
+              heading: "주의사항",
+              body: (
+                <p>
+                  연차수당은 통상임금 기준으로 계산하는 경우가 많지만, 회사 규정과 임금 산정 방식에 따라 달라질 수 있습니다.
+                  또한 연차 소멸·이월 기준, 회계연도 기준 부여 여부에 따라 실제 지급액이 달라지므로 취업규칙과 근로계약을
+                  함께 확인하세요. 본 계산기는 참고용 추정치입니다.
+                </p>
+              ),
+            },
+          ]}
+        />
+      }
     >
       <InputBlock label="1일 통상임금(또는 평균임금)" type="text" value={dailyWageRaw} onChange={(e: any) => setDailyWageRaw(formatComma(parseNumber(e.target.value)))} placeholder="예: 100,000" />
       <InputBlock label="미사용 연차일수" type="text" value={unusedDaysRaw} onChange={(e: any) => setUnusedDaysRaw(formatComma(parseNumber(e.target.value)))} placeholder="예: 8" />

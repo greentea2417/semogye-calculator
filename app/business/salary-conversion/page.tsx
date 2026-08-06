@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import InputBlock from "../../components/InputBlock";
 import BottomActions from "../../components/BottomActions";
 import CalculatorLayout from "../../components/CalculatorLayout";
+import CalculatorArticle from "../../components/CalculatorArticle";
 import ResultPanel, { type ResultLine } from "../../components/ResultPanel";
 import { downloadResultCsv } from "../../components/lib/resultCsv";
 import { copyToClipboardSafe } from "../../components/lib/shareUtils";
@@ -75,6 +76,60 @@ export default function SalaryConversionPage() {
         />
       }
       guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
+      article={
+        <CalculatorArticle
+          sections={[
+            {
+              heading: "연봉과 월급, 무엇이 다를까?",
+              body: (
+                <p>
+                  연봉은 <strong>1년 동안 받기로 한 임금 총액</strong>이고, 월급은 이를 매달 나눠 받는 금액입니다. 채용 공고나
+                  근로계약서에는 보통 연봉으로 표기되기 때문에, 매달 실제로 받는 금액을 가늠하려면 월 단위로 환산해 볼 필요가
+                  있습니다.
+                </p>
+              ),
+            },
+            {
+              heading: "계산 방법",
+              body: (
+                <>
+                  <p className="rounded-xl bg-gray-50 px-4 py-3 font-medium text-gray-800">
+                    월급(세전) = 연봉 ÷ 12
+                    <br />
+                    주급(세전) = 연봉 ÷ 52
+                  </p>
+                  <p>
+                    가장 일반적인 방식은 연봉을 <strong>12개월</strong>로 나누는 것입니다. 다만 퇴직금을 연봉에 포함(13분할)하는
+                    계약이라면 실제 월급은 연봉 ÷ 13에 가까워집니다.
+                  </p>
+                </>
+              ),
+            },
+            {
+              heading: "계산 예시",
+              body: (
+                <>
+                  <p>연봉 3,600만원인 경우:</p>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>월급(세전) = 36,000,000 ÷ 12 = <strong>3,000,000원</strong></li>
+                    <li>주급(세전) = 36,000,000 ÷ 52 ≈ 692,308원</li>
+                  </ul>
+                </>
+              ),
+            },
+            {
+              heading: "주의사항",
+              body: (
+                <p>
+                  여기서 나오는 값은 <strong>세전 환산액</strong>입니다. 4대보험과 소득세가 빠진 실수령액은 세전 월급보다 낮으며,
+                  정확한 실수령액은 ‘세후 실수령액 간이 계산기’에서 확인할 수 있습니다. 상여금·성과급이 연봉에 포함된 계약이면
+                  매달 받는 금액이 환산액과 다를 수 있습니다.
+                </p>
+              ),
+            },
+          ]}
+        />
+      }
     >
       <InputBlock
         label="연봉 (세전)"

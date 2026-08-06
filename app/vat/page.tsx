@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import InputBlock from "@/components/InputBlock";
 import BottomActions from "@/components/BottomActions";
 import CalculatorLayout from "@/components/CalculatorLayout";
+import CalculatorArticle from "@/components/CalculatorArticle";
 import ResultPanel, { type ResultLine } from "@/components/ResultPanel";
 import { downloadResultCsv } from "@/components/lib/resultCsv";
 import { copyToClipboardSafe } from "@/components/lib/shareUtils";
@@ -86,6 +87,64 @@ export default function VatPage() {
         />
       }
       guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
+      article={
+        <CalculatorArticle
+          sections={[
+            {
+              heading: "부가가치세(부가세)란?",
+              body: (
+                <p>
+                  부가가치세는 상품·서비스가 거래되는 각 단계에서 <strong>생긴 부가가치(마진)에 부과되는 세금</strong>으로,
+                  일반과세자는 공급가액의 10%가 적용됩니다. 사업자는 소비자에게 받은 매출세액에서 매입 시 부담한 매입세액을 뺀
+                  차액을 국세청에 신고·납부합니다.
+                </p>
+              ),
+            },
+            {
+              heading: "계산 방법",
+              body: (
+                <>
+                  <p className="rounded-xl bg-gray-50 px-4 py-3 font-medium text-gray-800">
+                    납부세액 = 매출세액 − 매입세액
+                    <br />
+                    매출세액 = 매출 공급가액 × 10% / 매입세액 = 매입 공급가액 × 10%
+                  </p>
+                  <p>
+                    결과가 <strong>양수면 납부</strong>, <strong>음수면 환급</strong> 대상입니다. 공급가액은 부가세를 뺀 금액,
+                    공급대가는 부가세를 포함한 총액이라는 점을 구분해서 입력하세요.
+                  </p>
+                </>
+              ),
+            },
+            {
+              heading: "계산 예시",
+              body: (
+                <>
+                  <p>매출 공급가액 3,000만원, 매입 공급가액 1,200만원인 경우:</p>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>매출세액 = 30,000,000 × 10% = 3,000,000원</li>
+                    <li>매입세액 = 12,000,000 × 10% = 1,200,000원</li>
+                    <li>납부세액 = 3,000,000 − 1,200,000 = <strong>1,800,000원</strong></li>
+                  </ul>
+                </>
+              ),
+            },
+            {
+              heading: "신고 시기와 주의사항",
+              body: (
+                <>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>법인은 분기별(연 4회), 개인 일반과세자는 반기별(연 2회) 확정신고합니다.</li>
+                    <li>접대비·비영업용 승용차 관련 매입세액 등은 <strong>불공제</strong>되어 차감되지 않습니다.</li>
+                    <li>간이과세자는 업종별 부가가치율이 적용되어 계산 방식이 다릅니다(별도 계산기 이용).</li>
+                    <li>본 계산기는 가산세·면세 항목을 반영하지 않은 일반과세자 기준 단순 계산입니다.</li>
+                  </ul>
+                </>
+              ),
+            },
+          ]}
+        />
+      }
     >
       <InputBlock
         label="매출 공급가액 (부가세 별도)"
