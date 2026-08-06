@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import PageTitle from "./PageTitle";
 import AccordionFAQ from "./AccordionFAQ";
+import CalculatorJsonLd from "./CalculatorJsonLd";
 
 type FAQItem = { q: string; a: string };
 
@@ -31,6 +32,7 @@ export default function CalculatorLayout({
 }: Props) {
   return (
     <main className="mx-auto max-w-xl px-5 py-12 sm:py-16">
+      <CalculatorJsonLd name={title} description={subtitle} faqItems={faqItems} />
       <section className="mb-8">
         <PageTitle tone={tone} title={title} subtitle={subtitle} />
         {intro ? <div className="text-center text-sm leading-relaxed text-gray-500">{intro}</div> : null}
