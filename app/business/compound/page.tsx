@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import InputBlock from "@/components/InputBlock";
 import BottomActions from "@/components/BottomActions";
 import CalculatorLayout from "@/components/CalculatorLayout";
+import CalculatorArticle from "@/components/CalculatorArticle";
 import ResultPanel, { type ResultLine } from "@/components/ResultPanel";
 import { LifeChoice } from "@/components/LifeResult";
 import { downloadResultCsv } from "@/components/lib/resultCsv";
@@ -103,6 +104,64 @@ export default function CompoundPage() {
         />
       }
       guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
+      article={
+        <CalculatorArticle
+          sections={[
+            {
+              heading: "복리란?",
+              body: (
+                <p>
+                  복리는 원금에 붙은 이자가 다음 기간에 <strong>다시 원금에 합쳐져 이자를 낳는</strong> 방식입니다. 원금에만
+                  이자가 붙는 단리와 달리, 시간이 길어질수록 이자가 이자를 불려 금액 차이가 눈덩이처럼 커집니다. "복리의
+                  마법"이라는 말이 여기서 나옵니다.
+                </p>
+              ),
+            },
+            {
+              heading: "계산 방법",
+              body: (
+                <>
+                  <p className="rounded-xl bg-gray-50 px-4 py-3 font-medium text-gray-800">
+                    만기금액 = 원금 × (1 + 연이율 ÷ 복리횟수)<sup>복리횟수 × 기간</sup>
+                    <br />
+                    세후 수령액 = 만기금액 − 이자소득세(이자 × 15.4%)
+                  </p>
+                  <p>
+                    월 복리는 복리횟수 12, 연 복리는 1을 사용합니다. 같은 이율이라도 복리 주기가 짧을수록(월 복리) 만기금액이
+                    조금 더 커집니다.
+                  </p>
+                </>
+              ),
+            },
+            {
+              heading: "계산 예시",
+              body: (
+                <>
+                  <p>원금 10,000,000원, 연이율 3.5%, 3년, 월 복리인 경우:</p>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>만기금액 = 10,000,000 × (1 + 0.035÷12)<sup>36</sup> ≈ <strong>11,105,570원</strong></li>
+                    <li>세전 이자 ≈ 1,105,570원 → 이자소득세 15.4% ≈ 170,258원</li>
+                    <li>세후 수령액 ≈ <strong>10,935,312원</strong></li>
+                  </ul>
+                </>
+              ),
+            },
+            {
+              heading: "주의사항",
+              body: (
+                <>
+                  <p>이 계산기는 <strong>목돈을 한 번 넣는 예금(거치식)</strong>의 복리를 계산합니다.</p>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>매달 납입하는 적금은 회차별로 이자 기간이 달라 결과가 다릅니다.</li>
+                    <li>이자소득세 15.4%(소득세 14% + 지방소득세 1.4%)는 원천징수됩니다.</li>
+                    <li>우대금리·중도해지·비과세 상품 여부에 따라 실제 수령액이 달라질 수 있습니다.</li>
+                  </ul>
+                </>
+              ),
+            },
+          ]}
+        />
+      }
     >
       <InputBlock
         label="원금 (원)"

@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import InputBlock from "../../components/InputBlock";
 import BottomActions from "../../components/BottomActions";
 import CalculatorLayout from "../../components/CalculatorLayout";
+import CalculatorArticle from "../../components/CalculatorArticle";
 import ResultPanel, { type ResultLine } from "../../components/ResultPanel";
 import { downloadResultCsv } from "../../components/lib/resultCsv";
 import { copyToClipboardSafe } from "../../components/lib/shareUtils";
@@ -73,6 +74,59 @@ export default function NetSalaryPage() {
         />
       }
       guide={<BottomActions onShare={async () => { if (navigator.share) await navigator.share({ title: "세후 실수령액 간이 계산기", url: shareUrl }); else { await copyToClipboardSafe(shareUrl); toast("링크를 복사했어요!"); } }} onExcelDownload={onCsvDownload} />}
+      article={
+        <CalculatorArticle
+          sections={[
+            {
+              heading: "세후 실수령액이란?",
+              body: (
+                <p>
+                  세후 실수령액은 계약상 <strong>세전 월급에서 4대보험료와 세금을 뺀 뒤 실제 통장에 들어오는 금액</strong>입니다.
+                  같은 월급이라도 4대보험 가입 여부, 비과세 항목, 부양가족 수에 따라 실수령액이 달라집니다. 이 계산기는 빠른
+                  감을 잡기 위한 <strong>간이 추정</strong> 도구입니다.
+                </p>
+              ),
+            },
+            {
+              heading: "계산 방법",
+              body: (
+                <>
+                  <p className="rounded-xl bg-gray-50 px-4 py-3 font-medium text-gray-800">
+                    실수령액 = 세전 월급 − 4대보험(약 9.7%) − 세금(약 3%)
+                  </p>
+                  <p>
+                    4대보험은 국민연금·건강보험·장기요양·고용보험을 합산한 근로자 부담분을, 세금은 근로소득세와 지방소득세를
+                    대략적인 비율로 반영합니다. 정확한 항목별 계산이 필요하면 <strong>월급 실수령액 계산기</strong>를 이용하세요.
+                  </p>
+                </>
+              ),
+            },
+            {
+              heading: "계산 예시",
+              body: (
+                <>
+                  <p>세전 월급 3,000,000원인 경우:</p>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>4대보험(추정) ≈ 3,000,000 × 9.7% = 291,000원</li>
+                    <li>세금(추정) ≈ 3,000,000 × 3% = 90,000원</li>
+                    <li>실수령액(예상) ≈ <strong>2,619,000원</strong></li>
+                  </ul>
+                </>
+              ),
+            },
+            {
+              heading: "주의사항",
+              body: (
+                <p>
+                  본 계산기는 단순 비율을 적용한 <strong>간이 추정치</strong>로, 부양가족 수·비과세 식대·회사별 공제 규정이
+                  반영되지 않습니다. 실제 급여명세서와 차이가 날 수 있으며, 정확한 금액은 회사 급여 규정과 그해 세법·요율
+                  기준을 확인해야 합니다.
+                </p>
+              ),
+            },
+          ]}
+        />
+      }
     >
       <InputBlock label="세전 월급 (원)" type="text" placeholder="3,000,000" value={gross} onChange={(e) => setGross(formatComma(parseNumber(e.target.value)))} />
     </CalculatorLayout>

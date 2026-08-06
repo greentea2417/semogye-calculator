@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import InputBlock from "@/components/InputBlock";
 import BottomActions from "@/components/BottomActions";
 import CalculatorLayout from "@/components/CalculatorLayout";
+import CalculatorArticle from "@/components/CalculatorArticle";
 import ResultPanel from "@/components/ResultPanel";
 import { encodeShareState } from "../components/lib/shareState";
 import { copyToClipboardSafe } from "../components/lib/shareUtils";
@@ -272,6 +273,67 @@ function ProfitContent() {
             </div>
           )}
         </>
+      }
+      article={
+        <CalculatorArticle
+          sections={[
+            {
+              heading: "손익(순이익)이란?",
+              body: (
+                <p>
+                  손익 계산은 한 달 동안 벌어들인 <strong>총 매출</strong>에서 재료비·임대료·인건비·공과금·광고비 등 모든
+                  비용을 뺀 <strong>순이익(영업이익)</strong>을 구하는 과정입니다. 매출이 아무리 커도 비용 관리가 안 되면
+                  남는 돈이 적기 때문에, 자영업·소상공인에게 가장 기본이 되는 지표입니다.
+                </p>
+              ),
+            },
+            {
+              heading: "계산 방법",
+              body: (
+                <>
+                  <p className="rounded-xl bg-gray-50 px-4 py-3 font-medium text-gray-800">
+                    순이익 = 총 매출 − (재료비 + 임대료 + 인건비 + 공과금 + 광고비)
+                    <br />
+                    수익률(%) = 순이익 ÷ 총 매출 × 100
+                  </p>
+                  <p>
+                    수익률은 매출 1원당 실제로 얼마가 남는지를 보여주는 비율입니다. 같은 순이익이라도 매출 규모에 따라
+                    수익률은 크게 달라지므로, 금액과 비율을 함께 보는 것이 좋습니다.
+                  </p>
+                </>
+              ),
+            },
+            {
+              heading: "계산 예시",
+              body: (
+                <>
+                  <p>월 매출 20,000,000원, 총 지출 15,000,000원인 경우:</p>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>순이익 = 20,000,000 − 15,000,000 = <strong>5,000,000원</strong></li>
+                    <li>수익률 = 5,000,000 ÷ 20,000,000 × 100 = <strong>25.0%</strong></li>
+                  </ul>
+                  <p>
+                    여기에 카드·간편결제 수수료(1.5~3.7%)나 플랫폼 수수료를 공과금·기타 항목에 더 넣어 계산하면 실제
+                    손에 쥐는 이익에 더 가까워집니다.
+                  </p>
+                </>
+              ),
+            },
+            {
+              heading: "주의사항",
+              body: (
+                <>
+                  <p>이 계산기는 <strong>부가세와 종합소득세를 제외한 단순 영업이익</strong> 기준입니다.</p>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>부가세는 매출·매입에 따라 별도로 정산되므로 부가세 계산기에서 확인하세요.</li>
+                    <li>종합소득세는 연 단위 소득에 따라 누진세율로 부과됩니다.</li>
+                    <li>감가상각·이자비용 등 회계상 비용은 포함되지 않은 참고용 계산입니다.</li>
+                  </ul>
+                </>
+              ),
+            },
+          ]}
+        />
       }
     >
       <InputBlock
