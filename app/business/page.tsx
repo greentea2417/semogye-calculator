@@ -71,6 +71,9 @@ const groups: Group[] = [
   ]},
   { title: "근로수당", accent: "rose", items: [
     { href: "/business/weekly-holiday", label: "주휴수당 계산기", desc: "주 15시간 이상 주휴수당 예상" },
+    { href: "/business/dismissal-advance", label: "해고예고수당 계산기", desc: "30일 예고 미준수 시 평균임금 30일분 계산" },
+    { href: "/business/shutdown-allowance", label: "휴업수당 계산기", desc: "휴업일수에 따른 평균임금 70% 계산" },
+    { href: "/business/ordinary-wage-reverse", label: "통상시급 역산 계산기", desc: "월 통상임금과 환산시간으로 시급 역산" },
     { href: "/business/night-pay", label: "야간수당 계산기", desc: "야간근로 가산수당 계산" },
     { href: "/business/rest-day-pay", label: "휴일근로수당 계산기", desc: "휴일근로 가산수당 계산" },
     { href: "/business/overtime-pay", label: "연장근로수당 계산기", desc: "통상시급 1.5배 연장근로 가산수당 계산" },
