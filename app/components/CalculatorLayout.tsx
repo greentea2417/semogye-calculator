@@ -1,4 +1,6 @@
-import type { ReactNode } from "react";
+"use client";
+
+import { useEffect, type ReactNode } from "react";
 import PageTitle from "./PageTitle";
 import AccordionFAQ from "./AccordionFAQ";
 import CalculatorJsonLd from "./CalculatorJsonLd";
@@ -30,6 +32,12 @@ export default function CalculatorLayout({
   faqTitle,
   faqItems,
 }: Props) {
+  useEffect(() => {
+    document.title = `${title} | 세모계`;
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute("content", subtitle ?? "세모계 계산기");
+  }, [title, subtitle]);
+
   return (
     <main className="mx-auto max-w-xl px-5 py-12 sm:py-16">
       <CalculatorJsonLd name={title} description={subtitle} faqItems={faqItems} />
