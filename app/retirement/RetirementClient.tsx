@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import InputBlock from "@/components/InputBlock";
 import BottomActions from "@/components/BottomActions";
 import CalculatorLayout from "@/components/CalculatorLayout";
+import CalculatorArticle from "@/components/CalculatorArticle";
 import ResultPanel, { type ResultLine } from "@/components/ResultPanel";
 import { downloadResultCsv } from "@/components/lib/resultCsv";
 import { copyToClipboardSafe } from "@/components/lib/shareUtils";
@@ -87,6 +88,69 @@ export default function RetirementClient() {
         />
       }
       guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
+      article={
+        <CalculatorArticle
+          sections={[
+            {
+              heading: "퇴직금이란?",
+              body: (
+                <>
+                  <p>
+                    퇴직금은 <strong>1년 이상 계속 근로한 근로자가 퇴직할 때</strong> 사용자가 지급해야 하는 법정 급여입니다.
+                    주 15시간 이상 일했다면 정규직뿐 아니라 계약직·아르바이트도 대상이 되며, 근속 1년마다 약 한 달치
+                    평균임금을 받는 구조입니다.
+                  </p>
+                </>
+              ),
+            },
+            {
+              heading: "계산 방법",
+              body: (
+                <>
+                  <p className="rounded-xl bg-gray-50 px-4 py-3 font-medium text-gray-800">
+                    1일 평균임금 = 퇴직 전 3개월 임금총액 ÷ 그 기간의 총일수
+                    <br />
+                    퇴직금 = 1일 평균임금 × 30일 × (총 재직일수 ÷ 365)
+                  </p>
+                  <p>
+                    평균임금 산정 기간은 보통 <strong>89~92일</strong>(3개월)이며, 이 기간에 받은 기본급과 각종 수당,
+                    상여금의 안분액이 포함됩니다.
+                  </p>
+                </>
+              ),
+            },
+            {
+              heading: "계산 예시",
+              body: (
+                <>
+                  <p>최근 3개월 임금 총액 9,000,000원(92일), 총 재직일수 1,095일(3년)인 경우:</p>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>1일 평균임금 = 9,000,000 ÷ 92 ≈ 97,826원</li>
+                    <li>퇴직금 = 97,826 × 30 × (1,095 ÷ 365) ≈ <strong>8,804,340원</strong></li>
+                  </ul>
+                  <p>재직일수가 365일 미만이면 지급 대상이 아니어서 0원으로 표시됩니다.</p>
+                </>
+              ),
+            },
+            {
+              heading: "법적 근거와 주의사항",
+              body: (
+                <>
+                  <p>
+                    퇴직금은 <strong>근로자퇴직급여 보장법 제8조</strong>에 근거합니다. 실제 지급액은 다음 이유로 달라질 수 있습니다.
+                  </p>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>평균임금이 통상임금보다 적으면 <strong>통상임금을 기준</strong>으로 계산합니다.</li>
+                    <li>상여금·연차수당 등의 포함 범위에 따라 평균임금이 달라집니다.</li>
+                    <li>퇴직소득세가 별도로 공제되므로, 실수령 퇴직금은 계산값보다 낮을 수 있습니다.</li>
+                  </ul>
+                  <p>본 계산기는 참고용 추정치이며, 정확한 금액은 회사 규정과 노무 판단을 확인하세요.</p>
+                </>
+              ),
+            },
+          ]}
+        />
+      }
     >
       <InputBlock
         label="최근 3개월 총임금"

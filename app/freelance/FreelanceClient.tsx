@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import InputBlock from "../components/InputBlock";
 import BottomActions from "../components/BottomActions";
 import CalculatorLayout from "../components/CalculatorLayout";
+import CalculatorArticle from "../components/CalculatorArticle";
 import ResultPanel, { type ResultLine } from "../components/ResultPanel";
 import { downloadResultCsv } from "../components/lib/resultCsv";
 import { toast } from "../components/toast";
@@ -99,6 +100,68 @@ export default function FreelancePage() {
           subTotal={resultSubTotal}
           total={resultTotal}
           note="* 원천징수 3.3% 기준이며, 5월 종합소득세 신고 결과에 따라 최종 세액은 달라질 수 있습니다."
+        />
+      }
+      article={
+        <CalculatorArticle
+          sections={[
+            {
+              heading: "프리랜서 3.3% 원천징수란?",
+              body: (
+                <>
+                  <p>
+                    프리랜서·인적용역 사업자는 근로자처럼 4대보험을 떼는 대신, 대금을 받을 때 <strong>3.3%가 원천징수</strong>됩니다.
+                    이는 소득세 3%와 지방소득세 0.3%를 합한 세율로, 지급하는 회사가 미리 떼어 세무서에 대신 납부합니다.
+                    그래서 통장에는 계약 금액의 96.7%가 입금됩니다.
+                  </p>
+                </>
+              ),
+            },
+            {
+              heading: "계산 방법",
+              body: (
+                <>
+                  <p className="rounded-xl bg-gray-50 px-4 py-3 font-medium text-gray-800">
+                    소득세 = 세전 금액 × 3%
+                    <br />
+                    지방소득세 = 소득세 × 10% (= 세전 금액 × 0.3%)
+                    <br />
+                    실수령액 = 세전 금액 − (소득세 + 지방소득세)
+                  </p>
+                </>
+              ),
+            },
+            {
+              heading: "계산 예시",
+              body: (
+                <>
+                  <p>세전 수입 2,500,000원인 경우:</p>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>소득세 = 2,500,000 × 3% = 75,000원</li>
+                    <li>지방소득세 = 75,000 × 10% = 7,500원</li>
+                    <li>총 공제 = 82,500원 → 실수령액 = <strong>2,417,500원</strong></li>
+                  </ul>
+                </>
+              ),
+            },
+            {
+              heading: "종합소득세 신고와 환급",
+              body: (
+                <>
+                  <p>
+                    3.3% 원천징수는 <strong>최종 세금이 아니라 미리 낸 세금(선납)</strong>입니다. 매년 5월 종합소득세 신고를 통해
+                    1년치 소득과 경비를 정산하며, 이때 다음이 반영됩니다.
+                  </p>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>소득이 적거나 경비·공제가 많으면 <strong>세금을 환급</strong>받을 수 있습니다.</li>
+                    <li>소득이 높으면 오히려 추가 납부가 발생할 수 있습니다.</li>
+                    <li>연 소득 규모에 따라 건강보험 지역가입자 전환 등도 고려해야 합니다.</li>
+                  </ul>
+                  <p>본 계산기는 원천징수 3.3% 기준의 참고용 값이며, 최종 세액은 신고 결과에 따라 달라집니다.</p>
+                </>
+              ),
+            },
+          ]}
         />
       }
     >

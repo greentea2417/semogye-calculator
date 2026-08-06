@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import InputBlock from "../components/InputBlock";
 import BottomActions from "../components/BottomActions";
 import CalculatorLayout from "../components/CalculatorLayout";
+import CalculatorArticle from "../components/CalculatorArticle";
 import ResultPanel, { type ResultLine } from "../components/ResultPanel";
 import { downloadResultCsv } from "../components/lib/resultCsv";
 import { copyToClipboardSafe } from "../components/lib/shareUtils";
@@ -102,6 +103,69 @@ export default function SalaryClient() {
         />
       }
       guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
+      article={
+        <CalculatorArticle
+          sections={[
+            {
+              heading: "실수령액이란?",
+              body: (
+                <>
+                  <p>
+                    실수령액은 세전 월급(계약상 급여)에서 <strong>4대보험료와 근로소득세·지방소득세를 공제한 뒤 실제 통장에
+                    입금되는 금액</strong>입니다. 흔히 말하는 "세후 월급"이 바로 이 실수령액으로, 같은 연봉이라도 부양가족 수와
+                    비과세 항목에 따라 실수령액이 달라집니다.
+                  </p>
+                </>
+              ),
+            },
+            {
+              heading: "계산 방법",
+              body: (
+                <>
+                  <p>이 계산기는 다음 순서로 계산합니다.</p>
+                  <ol className="list-decimal space-y-1 pl-5">
+                    <li>세전 월급에서 <strong>비과세 식대</strong> 등을 빼 과세 기준액을 구합니다.</li>
+                    <li>과세 기준액에 4대보험 요율(국민연금 4.5%, 건강보험 3.545%, 장기요양 = 건강보험 × 12.95%, 고용보험 0.9%)을 적용합니다.</li>
+                    <li>근로소득세와 지방소득세(소득세의 10%)를 공제합니다.</li>
+                    <li>세전 월급에서 위 공제액 합계를 빼면 <strong>월 실수령액</strong>이 됩니다.</li>
+                  </ol>
+                </>
+              ),
+            },
+            {
+              heading: "계산 예시",
+              body: (
+                <>
+                  <p>세전 월급 3,000,000원, 4대보험 가입, 비과세 없음인 경우 대략:</p>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>국민연금 135,000 + 건강 106,350 + 장기요양 약 13,772 + 고용 27,000원</li>
+                    <li>소득세·지방소득세 약간 공제</li>
+                    <li>총 공제 약 30만 원대 → 실수령액 약 <strong>265만~270만 원</strong> 수준</li>
+                  </ul>
+                  <p>비과세 식대 20만 원을 반영하면 공제 기준이 낮아져 실수령액이 조금 더 올라갑니다.</p>
+                </>
+              ),
+            },
+            {
+              heading: "법적 근거와 주의사항",
+              body: (
+                <>
+                  <p>
+                    4대보험 공제는 국민연금법·국민건강보험법·고용보험법에, 근로소득세는 <strong>소득세법의 근로소득 간이세액표</strong>에
+                    근거합니다. 다만 아래 이유로 실제 급여명세서와 차이가 날 수 있습니다.
+                  </p>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>간이세액표의 소득세는 <strong>부양가족 수·자녀 수</strong>에 따라 달라지며, 이 계산기는 간이 추정값을 사용합니다.</li>
+                    <li>연말정산에서 1년치 세액이 다시 정산됩니다.</li>
+                    <li>보수월액 상·하한, 회사별 수당·공제 규정에 따라 금액이 달라질 수 있습니다.</li>
+                  </ul>
+                  <p>정확한 금액은 회사 급여 규정과 그해 세법·요율 기준을 확인해 주세요.</p>
+                </>
+              ),
+            },
+          ]}
+        />
+      }
     >
       <InputBlock
         label="월 급여 (세전)"

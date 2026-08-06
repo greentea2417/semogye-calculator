@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import InputBlock from "@/components/InputBlock";
 import BottomActions from "@/components/BottomActions";
 import CalculatorLayout from "@/components/CalculatorLayout";
+import CalculatorArticle from "@/components/CalculatorArticle";
 import ResultPanel, { type ResultLine } from "@/components/ResultPanel";
 import { downloadResultCsv } from "@/components/lib/resultCsv";
 import { copyToClipboardSafe } from "@/components/lib/shareUtils";
@@ -97,6 +98,71 @@ export default function FourInsurancePage() {
         />
       }
       guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
+      article={
+        <CalculatorArticle
+          sections={[
+            {
+              heading: "4대보험이란?",
+              body: (
+                <>
+                  <p>
+                    4대보험은 <strong>국민연금·건강보험·고용보험·산재보험</strong>을 말하는, 법으로 가입이 의무화된 사회보험입니다.
+                    이 중 근로자 급여에서 매달 공제되는 것은 국민연금·건강보험(+장기요양)·고용보험이며,
+                    산재보험은 전액 회사(사업주)가 부담해 근로자 급여에서는 빠지지 않습니다.
+                  </p>
+                </>
+              ),
+            },
+            {
+              heading: "2025년 근로자 부담 요율",
+              body: (
+                <>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li><strong>국민연금</strong> — 보수월액의 4.5% (회사도 4.5% 부담)</li>
+                    <li><strong>건강보험</strong> — 보수월액의 3.545% (회사도 동일 부담)</li>
+                    <li><strong>장기요양보험</strong> — 건강보험료의 12.95%</li>
+                    <li><strong>고용보험</strong> — 보수월액의 0.9%</li>
+                  </ul>
+                  <p>
+                    국민연금과 건강보험은 근로자와 회사가 <strong>절반씩(노사 반반)</strong> 부담하는 구조여서, 실제 보험 재정에는
+                    표시된 요율의 2배가 들어갑니다.
+                  </p>
+                </>
+              ),
+            },
+            {
+              heading: "계산 예시",
+              body: (
+                <>
+                  <p>월 급여(세전) 3,000,000원인 경우 근로자 부담:</p>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>국민연금 = 3,000,000 × 4.5% = 135,000원</li>
+                    <li>건강보험 = 3,000,000 × 3.545% = 106,350원</li>
+                    <li>장기요양 = 106,350 × 12.95% ≈ 13,772원</li>
+                    <li>고용보험 = 3,000,000 × 0.9% = 27,000원</li>
+                    <li>합계 ≈ <strong>282,122원</strong></li>
+                  </ul>
+                </>
+              ),
+            },
+            {
+              heading: "실제 명세서와 다를 수 있는 이유",
+              body: (
+                <>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>식대 등 <strong>비과세 항목</strong>은 보수월액에서 제외되어 실제 공제 기준이 낮아질 수 있습니다.</li>
+                    <li>국민연금·건강보험에는 <strong>보수월액 상·하한선</strong>이 있어 고소득/저소득 구간에서 달라집니다.</li>
+                    <li>매년 요율이 조정되고, 건강보험은 연말·연초에 <strong>정산분</strong>이 추가로 반영됩니다.</li>
+                  </ul>
+                  <p>
+                    소득세·지방소득세까지 반영한 최종 실수령액이 궁금하다면 <strong>월급 실수령액 계산기</strong>를 함께 이용하세요.
+                  </p>
+                </>
+              ),
+            },
+          ]}
+        />
+      }
     >
       <InputBlock
         label="월 급여 (세전)"

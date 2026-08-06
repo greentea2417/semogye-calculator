@@ -12,6 +12,7 @@ type Props = {
   children: ReactNode;
   result: ReactNode;
   guide?: ReactNode;
+  article?: ReactNode;
   faqTitle: string;
   faqItems: FAQItem[];
 };
@@ -24,6 +25,7 @@ export default function CalculatorLayout({
   children,
   result,
   guide,
+  article,
   faqTitle,
   faqItems,
 }: Props) {
@@ -43,6 +45,8 @@ export default function CalculatorLayout({
       </section>
 
       {guide ? <section className="mt-6">{guide}</section> : null}
+
+      {article ? article : null}
 
       <AccordionFAQ title={faqTitle} items={faqItems} />
     </main>
