@@ -696,6 +696,30 @@ export default function HourlyMultiClient() {
             <b className="font-medium text-gray-900">3.3% 원천징수</b> 등을 함께 고려해 총액을 보여줍니다.
           </p>
 
+          <p className="font-semibold text-gray-900">계산 방법</p>
+          <ol className="list-decimal space-y-1 pl-5 leading-6">
+            <li>직원별 <b className="font-medium text-gray-900">시급 × 월 실근로시간</b>으로 기본 급여를 구합니다.</li>
+            <li>주 평균 근로시간이 15시간 이상이면 <b className="font-medium text-gray-900">주휴수당</b>(1일 소정근로시간, 최대 8시간 × 시급)을 더합니다.</li>
+            <li>프리랜서(3.3%)를 켜면 세전 합계에서 사업소득 원천징수 3.3%를 뺀 실지급액을 보여줍니다.</li>
+            <li>모든 직원의 실지급액을 합산해 <b className="font-medium text-gray-900">매장 전체 총 인건비</b>를 표시합니다.</li>
+          </ol>
+
+          <p className="font-semibold text-gray-900">계산 예시</p>
+          <p className="leading-6">
+            시급 10,000원 · 월 실근로시간 200시간 직원 1명이라면 기본 급여는{" "}
+            <b className="font-medium text-gray-900">2,000,000원</b>입니다. 주 15시간 이상이라 주휴수당이 발생하면 여기에
+            1일 소정근로시간(최대 8시간) 기준 예상 주휴수당이 더해지고, 프리랜서 3.3%를 켜면 세전 합계에서
+            원천징수액을 뺀 금액이 실지급액으로 표시됩니다.
+          </p>
+
+          <p className="font-semibold text-gray-900">법적 근거와 주의사항</p>
+          <p className="leading-6">
+            주휴수당은 <b className="font-medium text-gray-900">근로기준법 제55조</b>에 따라 1주 소정근로시간이 15시간 이상인
+            근로자에게 발생하고, 휴게시간은 같은 법 제54조에 따라 4시간마다 30분 이상 부여하며{" "}
+            <b className="font-medium text-gray-900">무급</b>으로 처리합니다. 그래서 근무시간에는 휴게시간을 제외한
+            실근로시간만 입력해야 정확합니다.
+          </p>
+
           <p className="text-xs leading-5 text-gray-500">
             ※ 본 계산은 참고용이며, 실제 4대보험 적용 여부, 주휴수당 발생 조건, 사업장·근무 형태에 따라 실제 부담 금액은 달라질 수
             있습니다.
