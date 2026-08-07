@@ -32,6 +32,9 @@ const groups: Group[] = [
     { href: "/business/other-income-tax", label: "기타소득 원천징수 계산기", desc: "강연료·원고료 등 기타소득 8.8% 원천징수 계산" },
     { href: "/business/retirement-tax", label: "퇴직소득세 계산기", desc: "퇴직급여·근속연수로 퇴직소득세·지방소득세 계산" },
     { href: "/business/car-tax", label: "자동차세 계산기", desc: "배기량·차령으로 승용차 자동차세·지방교육세 계산" },
+    { href: "/business/capital-gains-tax", label: "양도소득세 계산기", desc: "양도가액·취득가액·보유기간으로 양도소득세·지방소득세 계산" },
+    { href: "/business/property-tax", label: "재산세 계산기", desc: "주택 공시가격·공정시장가액비율로 재산세·지방교육세 계산" },
+    { href: "/business/stamp-tax", label: "인지세 계산기", desc: "계약서 기재금액 구간별 부동산 인지세 계산" },
   ]},
   { title: "퇴직 / 실업", accent: "emerald", items: [
     { href: "/business/retirement", label: "퇴직금 계산기", desc: "퇴직금 예상액 확인" },
