@@ -31,6 +31,7 @@ const groups: Group[] = [
     { href: "/business/inheritance-tax", label: "상속세 계산기", desc: "상속재산·공제로 과세표준·납부세액 계산" },
     { href: "/business/other-income-tax", label: "기타소득 원천징수 계산기", desc: "강연료·원고료 등 기타소득 8.8% 원천징수 계산" },
     { href: "/business/retirement-tax", label: "퇴직소득세 계산기", desc: "퇴직급여·근속연수로 퇴직소득세·지방소득세 계산" },
+    { href: "/business/car-tax", label: "자동차세 계산기", desc: "배기량·차령으로 승용차 자동차세·지방교육세 계산" },
   ]},
   { title: "퇴직 / 실업", accent: "emerald", items: [
     { href: "/business/retirement", label: "퇴직금 계산기", desc: "퇴직금 예상액 확인" },
@@ -59,6 +60,8 @@ const groups: Group[] = [
     { href: "/business/inventory-turnover", label: "재고회전율 계산기", desc: "매출원가·평균재고로 재고회전율·회전일수 계산" },
     { href: "/business/roi", label: "투자수익률(ROI) 계산기", desc: "투자금액·회수금액으로 순이익과 투자수익률 계산" },
     { href: "/business/roe", label: "자기자본이익률(ROE) 계산기", desc: "당기순이익·자기자본으로 자기자본이익률 계산" },
+    { href: "/business/debt-ratio", label: "부채비율 계산기", desc: "부채총계·자기자본으로 재무건전성 부채비율 계산" },
+    { href: "/business/receivables-turnover", label: "매출채권회전율 계산기", desc: "매출액·평균매출채권으로 회전율·회수기간 계산" },
   ]},
   { title: "대출 / 금융", accent: "sky", items: [
     { href: "/business/loan", label: "대출 이자 계산기", desc: "원리금·원금균등 월 상환금과 총이자" },
