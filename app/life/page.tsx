@@ -81,26 +81,33 @@ function Sidebar({ groups, selected, onSelect }: { groups: Group[]; selected: st
 function MobileSections({ groups }: { groups: Group[] }) {
   return (
     <div className="space-y-8 md:hidden">
-      {groups.map((group) => (
-        <section key={group.title} className="rounded-[28px] border border-gray-100 bg-white p-5 shadow-sm shadow-gray-200/30">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-green-50 px-3 py-1 text-xs font-bold text-green-600">{group.title}</div>
-          <div className="grid grid-cols-1 gap-4">
-            {group.items.map((item) => (
-              <Link key={item.href} href={item.href} className="group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-green-200 hover:shadow-lg">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h2 className="text-lg font-bold text-gray-900 transition-colors group-hover:text-green-600">{item.label}</h2>
-                    <p className="mt-1 text-sm text-gray-500">{item.desc}</p>
+      {groups.map((group) => {
+        const s = { "body 계산기": "bg-blue-50 text-blue-600", "day 계산기": "bg-violet-50 text-violet-600", "건강·생활 계산기": "bg-emerald-50 text-emerald-600", "학점 계산기": "bg-amber-50 text-amber-600" }[group.title] ?? "bg-blue-50 text-blue-600";
+        return (
+          <section key={group.title} className="rounded-[28px] border border-gray-100 bg-white p-5 shadow-sm shadow-gray-200/30">
+            <div className={`mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold ${s}`}>{group.title}</div>
+            <div className="grid grid-cols-1 gap-4">
+              {group.items.map((item) => (
+                <Link key={item.href} href={item.href} className="group rounded-2xl border border-gray-200 bg-white p-5 transition-all hover:-translate-y-0.5 hover:border-green-200 hover:shadow-lg">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <h2 className="text-lg font-bold text-gray-900 transition-colors group-hover:text-green-600">{item.label}</h2>
+                      <p className="mt-1 text-sm text-gray-500">{item.desc}</p>
+                    </div>
+                    <span className="text-gray-300 transition-colors group-hover:text-green-500">→</span>
                   </div>
-                  <span className="text-gray-300 transition-colors group-hover:text-green-500">→</span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
-      ))}
+                </Link>
+              ))}
+            </div>
+          </section>
+        );
+      })}
     </div>
   );
+}
+
+function EmptyState({ message }: { message: string }) {
+  return <div className="rounded-2xl border border-dashed border-gray-200 bg-gray-50 px-4 py-10 text-center text-sm text-gray-500">{message}</div>;
 }
 
 export default function LifePage() {
@@ -113,15 +120,15 @@ export default function LifePage() {
   }, []);
 
   const visibleGroups = useMemo(() => {
-    if (selected === ALL_TITLE) return groups;
-    return groups.filter((group) => group.title === selected);
-  }, [selected]);
-
-  const visibleItems = useMemo(() => {
-    const base = visibleGroups.flatMap((group) => group.items);
     const q = query.trim().toLowerCase();
-    return q ? base.filter((item) => `${item.label} ${item.desc}`.toLowerCase().includes(q)) : base;
-  }, [visibleGroups, query]);
+    const base = selected === ALL_TITLE ? groups : groups.filter((group) => group.title === selected);
+    if (!q) return base;
+    return base
+      .map((group) => ({ ...group, items: group.items.filter((item) => `${item.label} ${item.desc}`.toLowerCase().includes(q)) }))
+      .filter((group) => group.items.length > 0);
+  }, [selected, query]);
+
+  const visibleItems = useMemo(() => visibleGroups.flatMap((group) => group.items), [visibleGroups]);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
@@ -165,7 +172,7 @@ export default function LifePage() {
         </div>
       </div>
 
-      <MobileSections groups={groups} />
+      {visibleGroups.length ? <MobileSections groups={visibleGroups} /> : <EmptyState message="검색 결과가 없어요. 다른 키워드로 찾아보세요." />}
     </div>
   );
 }

@@ -138,6 +138,10 @@ function MobileSections({ groups }: { groups: Group[] }) {
   );
 }
 
+function EmptyState({ message }: { message: string }) {
+  return <div className="rounded-2xl border border-dashed border-gray-200 bg-gray-50 px-4 py-10 text-center text-sm text-gray-500">{message}</div>;
+}
+
 export default function BusinessPage() {
   const [selected, setSelected] = useState(ALL_TITLE);
   const [query, setQuery] = useState("");
@@ -149,6 +153,14 @@ export default function BusinessPage() {
     },
     [selected, query],
   );
+  const visibleGroups = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    const base = selected === ALL_TITLE ? groups : groups.filter((g) => g.title === selected);
+    if (!q) return base;
+    return base
+      .map((group) => ({ ...group, items: group.items.filter((item) => `${item.label} ${item.desc}`.toLowerCase().includes(q)) }))
+      .filter((group) => group.items.length > 0);
+  }, [selected, query]);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
@@ -194,7 +206,7 @@ export default function BusinessPage() {
         </div>
       </div>
 
-      <MobileSections groups={groups} />
+      {visibleGroups.length ? <MobileSections groups={visibleGroups} /> : <EmptyState message="검색 결과가 없어요. 다른 키워드로 찾아보세요." />}
     </div>
   );
 }
