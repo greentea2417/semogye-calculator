@@ -140,9 +140,14 @@ function MobileSections({ groups }: { groups: Group[] }) {
 
 export default function BusinessPage() {
   const [selected, setSelected] = useState(ALL_TITLE);
+  const [query, setQuery] = useState("");
   const visibleItems = useMemo(
-    () => (selected === ALL_TITLE ? groups.flatMap((g) => g.items) : groups.filter((g) => g.title === selected).flatMap((g) => g.items)),
-    [selected],
+    () => {
+      const base = selected === ALL_TITLE ? groups.flatMap((g) => g.items) : groups.filter((g) => g.title === selected).flatMap((g) => g.items);
+      const q = query.trim().toLowerCase();
+      return q ? base.filter((item) => `${item.label} ${item.desc}`.toLowerCase().includes(q)) : base;
+    },
+    [selected, query],
   );
 
   return (
@@ -154,6 +159,18 @@ export default function BusinessPage() {
         <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl font-['Pretendard_Variable',sans-serif]">필요한 계산기를 골라보세요</h1>
         <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-gradient-to-r from-blue-600 to-sky-300" />
         <p className="mt-3 text-gray-500">급여, 세금, 퇴직, 실업급여, 연차수당까지 자주 쓰는 계산기만 모았습니다.</p>
+      </div>
+
+      <div className="mb-8">
+        <label className="sr-only" htmlFor="business-search">비즈니스 계산기 검색</label>
+        <input
+          id="business-search"
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="계산기 이름이나 설명으로 검색"
+          className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm shadow-sm outline-none transition placeholder:text-gray-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-100"
+        />
       </div>
 
       <div className="hidden gap-6 md:flex md:flex-row">

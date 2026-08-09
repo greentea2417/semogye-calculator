@@ -105,6 +105,7 @@ function MobileSections({ groups }: { groups: Group[] }) {
 
 export default function LifePage() {
   const [selected, setSelected] = useState(ALL_TITLE);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const hash = decodeURIComponent(window.location.hash.replace(/^#/, ""));
@@ -116,7 +117,11 @@ export default function LifePage() {
     return groups.filter((group) => group.title === selected);
   }, [selected]);
 
-  const visibleItems = useMemo(() => visibleGroups.flatMap((group) => group.items), [visibleGroups]);
+  const visibleItems = useMemo(() => {
+    const base = visibleGroups.flatMap((group) => group.items);
+    const q = query.trim().toLowerCase();
+    return q ? base.filter((item) => `${item.label} ${item.desc}`.toLowerCase().includes(q)) : base;
+  }, [visibleGroups, query]);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
@@ -127,6 +132,18 @@ export default function LifePage() {
         <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl font-['Pretendard_Variable',sans-serif]">필요한 계산기를 골라보세요</h1>
         <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-gradient-to-r from-green-600 to-emerald-300" />
         <p className="mt-3 text-gray-500">건강, 학업, 재미까지 일상에서 바로 쓰는 계산기만 모았습니다.</p>
+      </div>
+
+      <div className="mb-8">
+        <label className="sr-only" htmlFor="life-search">라이프 계산기 검색</label>
+        <input
+          id="life-search"
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="계산기 이름이나 설명으로 검색"
+          className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm shadow-sm outline-none transition placeholder:text-gray-400 focus:border-green-300 focus:ring-4 focus:ring-green-100"
+        />
       </div>
 
       <div className="hidden gap-6 md:flex md:flex-row">
