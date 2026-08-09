@@ -173,16 +173,17 @@ export default function BusinessPage() {
         <p className="mt-3 text-gray-500">급여, 세금, 퇴직, 실업급여, 연차수당까지 자주 쓰는 계산기만 모았습니다.</p>
       </div>
 
-      <div className="mb-8">
+      <div className="mb-7">
         <label className="sr-only" htmlFor="business-search">비즈니스 계산기 검색</label>
         <div className="relative">
+          <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-gray-300">⌕</span>
           <input
             id="business-search"
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="계산기 이름이나 설명으로 검색"
-            className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 pr-10 text-sm shadow-sm outline-none transition placeholder:text-gray-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-100"
+            className="w-full rounded-2xl border border-gray-200 bg-white px-9 py-3 pr-10 text-sm shadow-sm outline-none transition placeholder:text-gray-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-100"
           />
           {query ? (
             <button
@@ -195,7 +196,10 @@ export default function BusinessPage() {
             </button>
           ) : null}
         </div>
-        <p className="mt-2 text-xs text-gray-400">검색 결과: {visibleItems.length}개</p>
+        <div className="mt-2 flex items-center justify-between text-[11px] text-gray-400">
+          <span>이름/설명으로 바로 찾기</span>
+          <span>{visibleItems.length}개 결과</span>
+        </div>
       </div>
 
       <div className="hidden gap-6 md:flex md:flex-row">
