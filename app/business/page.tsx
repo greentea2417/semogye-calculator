@@ -49,6 +49,9 @@ const groups: Group[] = [
   ]},
   { title: "사업 / 수익", accent: "amber", items: [
     { href: "/business/profit", label: "손익 계산기", desc: "매출과 비용을 한 번에" },
+    { href: "/business/gross-profit", label: "매출총이익 계산기", desc: "매출과 매출원가로 매출총이익을 계산" },
+    { href: "/business/operating-profit", label: "영업이익 계산기", desc: "매출총이익에서 판매관리비를 차감" },
+    { href: "/business/net-profit", label: "순이익 계산기", desc: "영업외수익·비용과 법인세까지 반영" },
     { href: "/business/compound", label: "복리 계산기", desc: "원금·이율·기간으로 만기 금액 계산" },
     { href: "/business/margin", label: "마진율 계산기", desc: "원가·판매가로 마진율·마크업률 계산" },
     { href: "/business/break-even", label: "손익분기점 계산기", desc: "고정비·공헌이익률로 BEP 매출·판매량 계산" },
