@@ -47,8 +47,8 @@ export default function VatReversePage() {
   return (
     <CalculatorLayout
       tone="business"
-      title="부가세 역산 계산기"
-      subtitle="부가세 포함 금액을 넣으면 공급가액과 부가세를 분리해 드려요."
+      title="부가세 역산 계산기 | 세모계"
+      subtitle="부가세 포함 금액에서 공급가액과 부가세를 분리합니다."
       intro="국내 일반과세자 부가가치세율 10%를 기준으로 역산합니다."
       faqTitle="부가세 역산 계산기 자주 묻는 질문"
       faqItems={[

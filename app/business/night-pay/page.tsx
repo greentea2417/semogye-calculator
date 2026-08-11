@@ -53,7 +53,7 @@ export default function NightPayPage() {
   });
 
   return (
-    <CalculatorLayout tone="business" title="야간수당 계산기" subtitle="야간근로 가산임금을 빠르게 계산합니다." intro="22시~06시 야간근로를 기준으로 가산수당과 총액을 확인할 수 있어요." faqTitle="야간수당 계산기 자주 묻는 질문" faqItems={[
+    <CalculatorLayout tone="business" title="야간수당 계산기 | 세모계" subtitle="야간근로 가산임금을 빠르게 계산합니다." intro="22시~06시 야간근로를 기준으로 가산수당과 총액을 확인할 수 있어요." faqTitle="야간수당 계산기 자주 묻는 질문" faqItems={[
       { q: "Q. 야간수당은 언제 붙나요?", a: "A. 통상적으로 밤 10시부터 오전 6시 사이의 근로에 50% 가산이 붙습니다." },
       { q: "Q. 연장근로랑 같이 붙나요?", a: "A. 네. 연장/휴일/야간이 중복되면 각각의 가산 여부가 달라질 수 있어 실제 계약 기준을 확인해야 합니다." },
       { q: "Q. 계산 결과가 실수령액인가요?", a: "A. 아니요. 가산임금의 세전 금액을 보여줍니다." },

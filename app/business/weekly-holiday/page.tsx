@@ -67,7 +67,7 @@ export default function WeeklyHolidayPage() {
   return (
     <CalculatorLayout
       tone="business"
-      title="주휴수당 계산기"
+      title="주휴수당 계산기 | 세모계"
       subtitle="주 15시간 이상 근무 시 발생할 수 있는 주휴수당을 계산합니다."
       intro="주간 실근로시간과 근무일수를 기준으로 월 예상 주휴수당을 바로 확인해보세요."
       faqTitle="주휴수당 계산기 자주 묻는 질문"

@@ -71,7 +71,7 @@ export default function OvertimePayPage() {
   return (
     <CalculatorLayout
       tone="business"
-      title="연장근로수당 계산기"
+      title="연장근로수당 계산기 | 세모계"
       subtitle="통상시급과 연장근로시간을 넣으면 1.5배 연장근로수당을 계산합니다."
       intro="근로기준법 제56조에 따라 연장근로는 통상임금의 50%를 가산해, 시간당 통상시급의 1.5배로 지급합니다."
       faqTitle="연장근로수당 계산기 자주 묻는 질문"

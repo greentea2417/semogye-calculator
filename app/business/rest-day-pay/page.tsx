@@ -50,7 +50,7 @@ export default function RestDayPayPage() {
   });
 
   return (
-    <CalculatorLayout tone="business" title="휴일근로수당 계산기" subtitle="휴일 근로에 붙는 가산수당을 계산합니다." intro="휴일에 일한 시간과 시급만 넣으면 예상 수당을 바로 확인할 수 있어요." faqTitle="휴일근로수당 계산기 자주 묻는 질문" faqItems={[
+    <CalculatorLayout tone="business" title="휴일근로수당 계산기 | 세모계" subtitle="휴일 근로에 붙는 가산수당을 계산합니다." intro="휴일에 일한 시간과 시급만 넣으면 예상 수당을 바로 확인할 수 있어요." faqTitle="휴일근로수당 계산기 자주 묻는 질문" faqItems={[
       { q: "Q. 휴일근로는 어떻게 계산하나요?", a: "A. 휴일에 근로하면 통상임금에 가산이 붙는 구조로 계산됩니다. 실제 가산율은 근로형태에 따라 달라질 수 있어요." },
       { q: "Q. 주휴일과 공휴일이 같은가요?", a: "A. 아니요. 주휴일과 공휴일은 법적 성격이 다를 수 있어 취업규칙을 함께 확인해야 합니다." },
       { q: "Q. 연장근로와 중복되나요?", a: "A. 중복 여부는 실제 근로시간/휴일/야간 조건을 함께 봐야 합니다." },
