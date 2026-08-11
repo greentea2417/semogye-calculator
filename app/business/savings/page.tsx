@@ -82,7 +82,7 @@ export default function SavingsPage() {
   return (
     <CalculatorLayout
       tone="business"
-      title="적금 이자 계산기"
+      title="적금 이자 계산기 | 세모계"
       subtitle="매달 납입액과 이율, 기간을 넣으면 정기적금 만기 수령액을 계산합니다."
       intro="정기적금(단리) 기준으로 세전 이자와 이자소득세 15.4%를 뗀 세후 만기 수령액을 확인할 수 있어요."
       faqTitle="적금 이자 계산기 자주 묻는 질문"

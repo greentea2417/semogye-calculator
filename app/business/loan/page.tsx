@@ -107,7 +107,7 @@ export default function LoanPage() {
   return (
     <CalculatorLayout
       tone="business"
-      title="대출 이자 계산기"
+      title="대출 이자 계산기 | 세모계"
       subtitle="대출 원금과 이율, 기간을 넣으면 월 상환금과 총 이자를 계산합니다."
       intro="원리금균등·원금균등 두 가지 상환 방식을 지원하며, 총 이자와 총 상환액까지 한 번에 확인할 수 있어요."
       faqTitle="대출 이자 계산기 자주 묻는 질문"

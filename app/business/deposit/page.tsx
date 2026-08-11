@@ -83,7 +83,7 @@ export default function DepositPage() {
   return (
     <CalculatorLayout
       tone="business"
-      title="예금 이자 계산기"
+      title="예금 이자 계산기 | 세모계"
       subtitle="목돈을 한 번에 맡기는 정기예금(단리)의 세후 만기 수령액을 계산합니다."
       intro="예치 금액과 연이율, 기간을 넣으면 세전 이자와 이자소득세 15.4%를 뗀 세후 수령액을 바로 확인할 수 있어요."
       faqTitle="예금 이자 계산기 자주 묻는 질문"
