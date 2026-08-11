@@ -55,7 +55,7 @@ export default function NetSalaryPage() {
   return (
     <CalculatorLayout
       tone="business"
-      title="세후 실수령액 계산기"
+      title="월급 실수령액 계산기 | 세모계"
       subtitle="세전 월급에서 4대보험과 세금을 빼서 실수령액을 계산합니다."
       intro="월급 실수령액을 빠르게 확인하고 싶을 때 쓰는 간이 계산기입니다. 회사별 공제 구조와 비과세 항목에 따라 실제 금액은 달라질 수 있습니다."
       faqTitle="세후 실수령액 계산기 자주 묻는 질문"

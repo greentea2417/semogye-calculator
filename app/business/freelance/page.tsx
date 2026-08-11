@@ -57,7 +57,7 @@ export default function BusinessFreelancePage() {
   return (
     <CalculatorLayout
       tone="business"
-      title="프리랜서 3.3% 실수령액 계산기"
+      title="프리랜서 3.3% 계산기 | 세모계"
       subtitle="3.3% 원천징수 기준으로 프리랜서 실수령액을 계산합니다."
       intro="세전 금액에서 사업소득 원천징수 3.3%를 반영해 실제 받는 돈을 빠르게 확인할 수 있습니다."
       faqTitle="프리랜서 3.3% 실수령액 계산기 자주 묻는 질문"

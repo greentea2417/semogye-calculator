@@ -106,7 +106,7 @@ export default function HourlyClient() {
   return (
     <CalculatorLayout
       tone="business"
-      title="시급 계산기"
+      title="시급 계산기 | 세모계"
       subtitle="시급과 월 근로시간으로 월 총 급여(세전)를 계산합니다."
       intro="주휴수당 포함 여부를 선택하면 알바·파트타임 근로자의 월 총 급여를 바로 확인할 수 있어요."
       faqTitle="시급 계산기 자주 묻는 질문"

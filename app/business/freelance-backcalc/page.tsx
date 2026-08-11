@@ -64,7 +64,7 @@ export default function FreelanceBackcalcPage() {
   return (
     <CalculatorLayout
       tone="business"
-      title="프리랜서 세후금액 역산 계산기"
+      title="프리랜서 3.3% 세전금액 역산 계산기 | 세모계"
       subtitle="원하는 실수령액 기준으로 3.3% 원천징수 전 세전 계약금을 계산합니다."
       intro="프리랜서 계약에서 '실수령액 기준 얼마를 받아야 하나요?'를 빠르게 역산하는 계산기입니다. 3.3% 원천징수만 단순 반영합니다."
       faqTitle="프리랜서 세후금액 역산 계산기 자주 묻는 질문"
