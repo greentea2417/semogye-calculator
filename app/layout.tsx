@@ -2,7 +2,10 @@ import Script from 'next/script';
 import "./globals.css";
 
 export const metadata = {
-  title: "세모계 - 세상의 모든 계산기",
+  title: {
+    default: "세모계 - 세상의 모든 계산기",
+    template: "%s | 세모계",
+  },
   description: "생활, 급여, 세금, 자영업까지. 세상의 모든 계산을 더 정확하게.",
 };
 
