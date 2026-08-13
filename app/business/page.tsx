@@ -176,7 +176,7 @@ export default function BusinessPage() {
         </span>
         <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl font-['Pretendard_Variable',sans-serif]">필요한 계산기를 골라보세요</h1>
         <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-gradient-to-r from-blue-600 to-sky-300" />
-        <p className="mt-3 text-gray-500">급여, 세금, 퇴직, 실업급여, 연차수당까지 자주 쓰는 계산기만 모았습니다.</p>
+        <p className="mt-3 text-gray-500">월급 실수령액, 주휴수당, 부가세, 프리랜서 3.3%, 예금·적금, 퇴직·실업급여까지 자주 검색되는 계산기를 한곳에 모았습니다.</p>
       </div>
 
       <div className="mb-7">

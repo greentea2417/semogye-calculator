@@ -138,7 +138,7 @@ export default function LifePage() {
         </span>
         <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl font-['Pretendard_Variable',sans-serif]">필요한 계산기를 골라보세요</h1>
         <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-gradient-to-r from-green-600 to-emerald-300" />
-        <p className="mt-3 text-gray-500">건강, 학업, 재미까지 일상에서 바로 쓰는 계산기만 모았습니다.</p>
+        <p className="mt-3 text-gray-500">BMI, 체지방률, 만 나이, D-day, 불쾌지수, 전기요금처럼 일상에서 바로 쓰는 계산기를 한곳에 모았습니다.</p>
       </div>
 
       <div className="mb-7">
