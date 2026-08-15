@@ -10,27 +10,94 @@ type FAQItem = { q: string; a: string };
 const RELATED: Record<string, { href: string; label: string }[]> = {
   "월급 계산기": [
     { href: "/business/hourly-multi", label: "사장님용 시급 계산기" },
-    { href: "/business/net-salary", label: "세후 실수령액 간이 계산기" },
+    { href: "/business/net-salary", label: "월급 실수령액 계산기" },
     { href: "/business/prorated-salary", label: "월급 일할계산기" },
+  ],
+  "시급 계산기": [
+    { href: "/business/hourly-multi", label: "사장님용 시급 계산기" },
+    { href: "/business/weekly-holiday", label: "주휴수당 계산기" },
+    { href: "/business/overtime-pay", label: "연장근로수당 계산기" },
   ],
   "사장님용 시급 계산기": [
     { href: "/business/hourly", label: "시급 계산기" },
+    { href: "/business/net-salary", label: "월급 실수령액 계산기" },
     { href: "/business/weekly-holiday", label: "주휴수당 계산기" },
     { href: "/business/overtime-pay", label: "연장근로수당 계산기" },
+  ],
+  "월급 실수령액 계산기": [
+    { href: "/business/hourly", label: "시급 계산기" },
+    { href: "/business/freelance", label: "프리랜서 3.3% 계산기" },
+    { href: "/business/prorated-salary", label: "월급 일할계산기" },
+  ],
+  "프리랜서 3.3% 계산기": [
+    { href: "/business/freelance-backcalc", label: "프리랜서 3.3% 세전금액 역산 계산기" },
+    { href: "/business/withholding-33", label: "원천세 3.3% 계산기" },
+    { href: "/business/net-salary", label: "월급 실수령액 계산기" },
+  ],
+  "프리랜서 3.3% 세전금액 역산 계산기": [
+    { href: "/business/freelance", label: "프리랜서 3.3% 계산기" },
+    { href: "/business/withholding-33", label: "원천세 3.3% 계산기" },
+    { href: "/business/compound", label: "복리 계산기" },
   ],
   "부가세 계산기": [
     { href: "/business/vat-reverse", label: "부가세 역산 계산기" },
     { href: "/business/simplified-vat", label: "간이과세자 부가세 계산기" },
     { href: "/business/vat-pre-notice", label: "부가세 예정고지 계산기" },
+    { href: "/business/vat-included", label: "부가세 포함/제외 계산기" },
+  ],
+  "부가세 역산 계산기": [
+    { href: "/business/vat", label: "부가세 계산기" },
+    { href: "/business/supply-price", label: "공급가액 역산 계산기" },
+    { href: "/business/vat-included", label: "부가세 포함/제외 계산기" },
+  ],
+  "예금 이자 계산기": [
+    { href: "/business/savings", label: "적금 이자 계산기" },
+    { href: "/business/compound", label: "복리 계산기" },
+    { href: "/business/loan", label: "대출 이자 계산기" },
+  ],
+  "적금 이자 계산기": [
+    { href: "/business/deposit", label: "예금 이자 계산기" },
+    { href: "/business/compound", label: "복리 계산기" },
+    { href: "/business/loan", label: "대출 이자 계산기" },
   ],
   "복리 계산기": [
     { href: "/business/deposit", label: "예금 이자 계산기" },
     { href: "/business/savings", label: "적금 이자 계산기" },
     { href: "/business/loan", label: "대출 이자 계산기" },
   ],
+  "주휴수당 계산기": [
+    { href: "/business/hourly", label: "시급 계산기" },
+    { href: "/business/overtime-pay", label: "연장근로수당 계산기" },
+    { href: "/business/night-pay", label: "야간수당 계산기" },
+  ],
+  "연장근로수당 계산기": [
+    { href: "/business/hourly", label: "시급 계산기" },
+    { href: "/business/night-pay", label: "야간수당 계산기" },
+    { href: "/business/rest-day-pay", label: "휴일근로수당 계산기" },
+  ],
+  "휴일근로수당 계산기": [
+    { href: "/business/overtime-pay", label: "연장근로수당 계산기" },
+    { href: "/business/night-pay", label: "야간수당 계산기" },
+    { href: "/business/hourly", label: "시급 계산기" },
+  ],
+  "야간수당 계산기": [
+    { href: "/business/overtime-pay", label: "연장근로수당 계산기" },
+    { href: "/business/rest-day-pay", label: "휴일근로수당 계산기" },
+    { href: "/business/hourly", label: "시급 계산기" },
+  ],
+  "퇴직금 계산기": [
+    { href: "/business/retirement-tax", label: "퇴직소득세 계산기" },
+    { href: "/business/average-wage", label: "평균임금 계산기" },
+    { href: "/business/unemployment", label: "실업급여 계산기" },
+  ],
   "실업급여 계산기": [
     { href: "/business/retirement", label: "퇴직금 계산기" },
+    { href: "/business/average-wage", label: "평균임금 계산기" },
     { href: "/business/annual", label: "연차수당 계산기" },
+  ],
+  "연차수당 계산기": [
+    { href: "/business/annual-days", label: "연차 개수 계산기" },
+    { href: "/business/average-wage", label: "평균임금 계산기" },
     { href: "/business/unemployment", label: "실업급여 계산기" },
   ],
   "BMI 계산기": [
