@@ -29,14 +29,21 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-bold text-gray-900 mb-3">3. 금지 행위</h2>
+          <h2 className="text-lg font-bold text-gray-900 mb-3">3. 사용자의 책임</h2>
+          <p>
+            사용자는 입력값이 실제 상황과 일치하는지 확인해야 하며, 계산 결과를 계약·세무·노무 판단의 유일한 근거로 사용해서는 안 됩니다.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-bold text-gray-900 mb-3">4. 금지 행위</h2>
           <p>
             서비스의 정상 동작을 방해하거나, 허위 정보로 시스템을 교란하거나, 불법적인 방식으로 이용하는 행위는 금지됩니다.
           </p>
         </section>
 
         <section>
-          <h2 className="text-lg font-bold text-gray-900 mb-3">4. 책임 제한</h2>
+          <h2 className="text-lg font-bold text-gray-900 mb-3">5. 책임 제한</h2>
           <p>
             세모계는 가능한 한 정확한 계산을 제공하기 위해 노력하지만, 계산 결과를 직접적 손해배상 책임의 근거로 보지 않습니다.
             중요한 의사결정 전에는 반드시 공식 문서와 전문가 확인을 병행하세요.

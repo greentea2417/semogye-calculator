@@ -27,7 +27,16 @@ export default function ContactPage() {
             <li>새로운 계산기 제안</li>
             <li>검색 노출/SEO 관련 의견</li>
             <li>광고 배치 또는 사용성 피드백</li>
+            <li>모바일에서 잘 보이지 않는 화면 제보</li>
           </ul>
+        </section>
+
+        <section className="bg-gray-50 rounded-2xl border border-gray-100 p-6">
+          <h2 className="text-lg font-bold text-gray-900 mb-3">빠른 제보 팁</h2>
+          <p>
+            계산기 이름과 함께 입력값, 기대한 결과, 실제 결과를 적어주시면 더 빨리 확인할 수 있습니다.
+            스크린샷을 함께 보내주면 재현이 쉬워집니다.
+          </p>
         </section>
       </div>
     </main>

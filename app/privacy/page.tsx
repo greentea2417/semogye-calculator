@@ -29,16 +29,24 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="text-lg font-bold text-gray-900 mb-3">3. 보관 및 처리</h2>
+          <h2 className="text-lg font-bold text-gray-900 mb-3">3. 로그와 보관 정책</h2>
           <p>
             사용자가 입력한 정보는 계산을 위해 일시적으로 처리될 수 있으나, 원칙적으로 별도 보관하지 않습니다.
-            세모계는 데이터 최소 수집 원칙을 지향합니다.
+            세모계는 데이터 최소 수집 원칙을 지향하며, 서비스 운영에 필요한 최소한의 접속 정보만 처리할 수 있습니다.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-bold text-gray-900 mb-3">4. 외부 서비스</h2>
+          <p>
+            광고, 통계, 링크 미리보기 등 일부 기능은 외부 서비스의 영향을 받을 수 있습니다.
+            외부 서비스의 쿠키 및 개인정보 처리 방식은 해당 서비스의 정책을 따릅니다.
           </p>
         </section>
 
         <section className="bg-gray-50 p-6 rounded-2xl border border-gray-100">
           <h2 className="text-sm font-bold text-gray-900 mb-2">문의처</h2>
-          <p className="text-xs text-gray-500">문의하기 페이지를 통해 서비스 관련 문의를 남겨주세요.</p>
+          <p className="text-xs text-gray-500">문의하기 페이지를 통해 서비스 관련 문의를 남겨주세요. 계산 오류 제보도 환영합니다.</p>
         </section>
       </div>
     </main>
