@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import InputBlock from "@/components/InputBlock";
 import BottomActions from "@/components/BottomActions";
 import CalculatorLayout from "@/components/CalculatorLayout";
+import CalculatorArticle from "@/components/CalculatorArticle";
 import ResultPanel, { type ResultLine } from "@/components/ResultPanel";
 import { downloadResultCsv } from "@/components/lib/resultCsv";
 import { copyToClipboardSafe } from "@/components/lib/shareUtils";
@@ -74,6 +75,61 @@ export default function ProratedSalaryPage() {
       ]}
       result={<ResultPanel title="월급 일할계산 결과" lines={lines} total={{ label: "일할 급여", value: `${result.dailyPay.toLocaleString()}원` }} />}
       guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
+      article={
+        <CalculatorArticle
+          sections={[
+            {
+              heading: "월급 일할계산이란?",
+              body: (
+                <p>
+                  일할계산은 한 달을 <strong>다 근무하지 않았을 때</strong>, 실제 재직한 날짜만큼만 월급을 나눠 지급하는
+                  방식입니다. 월 중간에 입사하거나 퇴사한 달, 무급휴직이 있었던 달의 급여를 정산할 때 사용합니다.
+                  근로기준법에 특정 방식이 법으로 정해져 있지는 않지만, 고용노동부 행정해석상 <strong>달력일(역일)</strong>을
+                  기준으로 하는 방식이 가장 널리 쓰입니다.
+                </p>
+              ),
+            },
+            {
+              heading: "계산 방법",
+              body: (
+                <>
+                  <p className="rounded-xl bg-gray-50 px-4 py-3 font-medium text-gray-800">
+                    1일 급여 = 월급 ÷ 해당 월 총일수
+                    <br />
+                    일할 급여 = 월급 × 재직일수 ÷ 해당 월 총일수
+                  </p>
+                  <p>
+                    총일수는 역일 기준이면 해당 월의 실제 달력일수(28~31일)를, 회사 규정이 30일 고정 방식이면 30을 넣습니다.
+                    재직일수는 주휴일·휴무일을 포함한 <strong>재직(달력) 일수</strong>로 셉니다.
+                  </p>
+                </>
+              ),
+            },
+            {
+              heading: "계산 예시",
+              body: (
+                <>
+                  <p>월급 3,000,000원, 해당 월 총일수 30일, 15일에 입사해 말일까지 재직(재직일수 16일)한 경우:</p>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>1일 급여 = 3,000,000 ÷ 30 = 100,000원</li>
+                    <li>일할 급여 = 3,000,000 × 16 ÷ 30 = <strong>1,600,000원</strong></li>
+                  </ul>
+                </>
+              ),
+            },
+            {
+              heading: "주의사항",
+              body: (
+                <p>
+                  본 계산은 <strong>세전(공제 전)</strong> 금액이며, 4대보험·세금은 별도로 공제됩니다. 회사 취업규칙이
+                  근무일(영업일) 기준 일할계산이나 30일 고정 방식을 정하고 있다면 결과가 달라질 수 있으므로, 실제 정산은
+                  회사 급여 규정을 함께 확인하세요.
+                </p>
+              ),
+            },
+          ]}
+        />
+      }
     >
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <InputBlock label="월급 (원)" type="text" inputMode="numeric" value={monthlyRaw} onChange={(e) => setMonthlyRaw(formatComma(parseNumber(e.target.value)))} placeholder="예: 3,000,000" />

@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import BottomActions from "@/components/BottomActions";
 import CalculatorLayout from "@/components/CalculatorLayout";
+import CalculatorArticle from "@/components/CalculatorArticle";
 import ResultPanel, { type ResultLine } from "@/components/ResultPanel";
 import { downloadResultCsv } from "@/components/lib/resultCsv";
 
@@ -125,6 +126,62 @@ export default function HourlyClient() {
         />
       }
       guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
+      article={
+        <CalculatorArticle
+          sections={[
+            {
+              heading: "시급 계산기란?",
+              body: (
+                <p>
+                  시급 계산기는 <strong>시급과 한 달 실근로시간</strong>을 입력하면 월 총 급여(세전)를 바로 계산하는 도구입니다.
+                  아르바이트·파트타임·시간제 근로처럼 매달 근무시간이 달라지는 경우, 이번 달에 받을 급여가 얼마인지 빠르게
+                  확인할 때 사용합니다. 주휴수당 포함 여부까지 선택할 수 있어 실제 받는 금액에 더 가깝게 잡을 수 있습니다.
+                </p>
+              ),
+            },
+            {
+              heading: "계산 방법",
+              body: (
+                <>
+                  <p className="rounded-xl bg-gray-50 px-4 py-3 font-medium text-gray-800">
+                    기본급 = 시급 × 월 실근로시간
+                    <br />
+                    주휴수당 = 시급 × 주휴시간 × (52주 ÷ 12개월)
+                    <br />
+                    월 총 급여(세전) = 기본급 + 주휴수당
+                  </p>
+                  <p>
+                    주휴시간은 <strong>min(1일 소정근로시간, 8시간)</strong>으로 보며, 1일 소정근로시간은 주간 실근로시간을
+                    주당 근무일수로 나눠 구합니다. 1주 소정근로시간이 15시간 미만이면 주휴수당은 발생하지 않습니다.
+                  </p>
+                </>
+              ),
+            },
+            {
+              heading: "계산 예시",
+              body: (
+                <>
+                  <p>시급 12,000원, 월 실근로시간 100시간(주휴 미포함)인 경우:</p>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>기본급 = 12,000 × 100 = <strong>1,200,000원</strong></li>
+                    <li>주휴수당을 포함하면 주 15시간 이상·개근 조건에서 예상 주휴수당이 더해집니다.</li>
+                  </ul>
+                </>
+              ),
+            },
+            {
+              heading: "주의사항",
+              body: (
+                <p>
+                  이 계산기는 <strong>세전(공제 전) 금액</strong>을 보여줍니다. 실제 통장에 들어오는 금액은 4대보험과
+                  세금이 공제되어 더 적어질 수 있습니다. 또한 근무시간에는 무급 휴게시간을 제외한 실근로시간만 입력해야
+                  정확하며(근로기준법 제54조), 주휴수당 지급 여부는 근로계약과 실제 근무 형태에 따라 달라질 수 있습니다.
+                </p>
+              ),
+            },
+          ]}
+        />
+      }
     >
       <div>
         <label className="input-label">시급</label>

@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import InputBlock from "@/components/InputBlock";
 import BottomActions from "@/components/BottomActions";
 import CalculatorLayout from "@/components/CalculatorLayout";
+import CalculatorArticle from "@/components/CalculatorArticle";
 import ResultPanel, { type ResultLine } from "@/components/ResultPanel";
 import { downloadResultCsv } from "@/components/lib/resultCsv";
 import { copyToClipboardSafe } from "@/components/lib/shareUtils";
@@ -92,6 +93,64 @@ export default function SimplifiedVatPage() {
       ]}
       result={<ResultPanel title="간이과세자 부가세 계산 결과" lines={lines} total={{ label: "납부세액", value: `${result.payable.toLocaleString()}원` }} />}
       guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
+      article={
+        <CalculatorArticle
+          sections={[
+            {
+              heading: "간이과세자 부가세란?",
+              body: (
+                <p>
+                  간이과세자는 연 매출(공급대가)이 일정 기준 미만인 소규모 개인사업자에게 적용되는 부가가치세 제도입니다.
+                  일반과세자가 <strong>매출세액 − 매입세액</strong>으로 계산하는 것과 달리, 간이과세자는{" "}
+                  <strong>업종별 부가가치율</strong>을 곱해 세액을 낮게 산정하기 때문에 실효세율이 매출의 약 1.5~4% 수준으로
+                  낮습니다.
+                </p>
+              ),
+            },
+            {
+              heading: "계산 방법",
+              body: (
+                <>
+                  <p className="rounded-xl bg-gray-50 px-4 py-3 font-medium text-gray-800">
+                    매출세액 = 매출(공급대가) × 업종별 부가가치율 × 10%
+                    <br />
+                    매입세액공제 = 매입액(공급대가) × 0.5%
+                    <br />
+                    납부세액 = 매출세액 − 매입세액공제
+                  </p>
+                  <p>
+                    업종별 부가가치율은 소매·음식점 15%, 제조·농림어업 20%, 숙박 25%, 건설·운수·정보통신 및 기타 서비스 30%,
+                    금융보험·전문과학기술·부동산임대 40%입니다(2021.7.1 이후 기준).
+                  </p>
+                </>
+              ),
+            },
+            {
+              heading: "계산 예시",
+              body: (
+                <>
+                  <p>음식점(부가가치율 15%), 연 매출 5,000만원, 매입액 2,000만원인 경우:</p>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>매출세액 = 50,000,000 × 15% × 10% = 750,000원</li>
+                    <li>매입세액공제 = 20,000,000 × 0.5% = 100,000원</li>
+                    <li>납부세액 = 750,000 − 100,000 = <strong>650,000원</strong></li>
+                  </ul>
+                </>
+              ),
+            },
+            {
+              heading: "납부의무 면제와 주의사항",
+              body: (
+                <p>
+                  해당 과세기간(연) 공급대가 합계가 <strong>4,800만원 미만</strong>이면 부가가치세 납부의무가 면제됩니다.
+                  다만 면제 대상이라도 <strong>신고 의무는 남아</strong> 있습니다. 본 계산은 신용카드 매출세액공제 등 개별
+                  공제를 제외한 간이 계산이므로, 실제 납부세액은 홈택스 신고 결과와 다를 수 있습니다.
+                </p>
+              ),
+            },
+          ]}
+        />
+      }
     >
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <InputBlock label="연 매출액 (원, 부가세 포함)" type="text" inputMode="numeric" value={salesRaw} onChange={(e) => setSalesRaw(formatComma(parseNumber(e.target.value)))} placeholder="예: 50,000,000" />
