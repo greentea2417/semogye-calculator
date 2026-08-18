@@ -5,6 +5,7 @@ import InputBlock from "@/components/InputBlock";
 import BottomActions from "@/components/BottomActions";
 import CalculatorLayout from "@/components/CalculatorLayout";
 import ResultPanel, { type ResultLine } from "@/components/ResultPanel";
+import CalculatorArticle from "@/components/CalculatorArticle";
 import { downloadResultCsv } from "@/components/lib/resultCsv";
 import { copyToClipboardSafe } from "@/components/lib/shareUtils";
 import { toast } from "@/components/toast";
@@ -118,6 +119,62 @@ export default function DepositPage() {
         />
       }
       guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
+      article={
+        <CalculatorArticle
+          sections={[
+            {
+              heading: "정기예금 이자란?",
+              body: (
+                <p>
+                  정기예금은 <strong>목돈을 한 번에 맡기고</strong> 약정 기간 뒤 원금과 이자를 받는 상품입니다. 처음부터
+                  원금 전체가 예치되므로 원금 전액에 이율이 붙습니다. 이 계산기는 단리(이자에 이자가 붙지 않는 방식)를
+                  기준으로 세전 이자와 세후 수령액을 보여줍니다.
+                </p>
+              ),
+            },
+            {
+              heading: "계산 방법",
+              body: (
+                <>
+                  <p className="rounded-xl bg-gray-50 px-4 py-3 font-medium text-gray-800">
+                    세전 이자 = 예치 원금 × 연이율 × (개월수 ÷ 12)
+                    <br />
+                    이자소득세 = 세전 이자 × 15.4%
+                    <br />
+                    세후 만기 수령액 = 원금 + (세전 이자 − 이자소득세)
+                  </p>
+                  <p>
+                    이자소득세 15.4%는 소득세 14%와 지방소득세 1.4%를 합한 값으로, 이자에서 원천징수됩니다.
+                  </p>
+                </>
+              ),
+            },
+            {
+              heading: "계산 예시",
+              body: (
+                <>
+                  <p>3,000만원을 연 4%로 12개월 예치한 경우:</p>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>세전 이자 = 30,000,000 × 4% × (12 ÷ 12) = 1,200,000원</li>
+                    <li>이자소득세 = 1,200,000 × 15.4% = 184,800원</li>
+                    <li>세후 만기 수령액 = 30,000,000 + (1,200,000 − 184,800) = <strong>31,015,200원</strong></li>
+                  </ul>
+                </>
+              ),
+            },
+            {
+              heading: "주의사항",
+              body: (
+                <p>
+                  본 계산은 <strong>단리·이자소득세 15.4%</strong> 기준입니다. 상품의 우대금리, 비과세·세금우대 계좌,
+                  복리 적용 여부에 따라 실제 수령액은 달라질 수 있습니다. 매달 나눠 넣는 상품이라면 적금 이자 계산기,
+                  이자에 이자가 붙는 방식이라면 복리 계산기를 이용하세요.
+                </p>
+              ),
+            },
+          ]}
+        />
+      }
     >
       <InputBlock
         label="예치 원금 (원)"

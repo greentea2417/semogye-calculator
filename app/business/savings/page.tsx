@@ -5,6 +5,7 @@ import InputBlock from "@/components/InputBlock";
 import BottomActions from "@/components/BottomActions";
 import CalculatorLayout from "@/components/CalculatorLayout";
 import ResultPanel, { type ResultLine } from "@/components/ResultPanel";
+import CalculatorArticle from "@/components/CalculatorArticle";
 import { downloadResultCsv } from "@/components/lib/resultCsv";
 import { copyToClipboardSafe } from "@/components/lib/shareUtils";
 import { toast } from "@/components/toast";
@@ -113,6 +114,64 @@ export default function SavingsPage() {
         />
       }
       guide={<BottomActions onShare={onShare} onExcelDownload={onCsvDownload} />}
+      article={
+        <CalculatorArticle
+          sections={[
+            {
+              heading: "정기적금 이자란?",
+              body: (
+                <p>
+                  정기적금은 <strong>매달 일정 금액을 나눠 납입</strong>하고 만기에 원금과 이자를 받는 상품입니다. 예금과
+                  달리 전체 원금이 처음부터 예치된 게 아니라, 먼저 넣은 돈일수록 이자가 붙는 기간이 길어집니다. 그래서
+                  같은 이율이라도 적금 이자는 예금보다 적습니다.
+                </p>
+              ),
+            },
+            {
+              heading: "계산 방법",
+              body: (
+                <>
+                  <p className="rounded-xl bg-gray-50 px-4 py-3 font-medium text-gray-800">
+                    세전 이자 = 월 납입액 × (연이율 ÷ 12) × (n × (n+1) ÷ 2)
+                    <br />
+                    이자소득세 = 세전 이자 × 15.4%
+                    <br />
+                    세후 만기 수령액 = 총 납입 원금 + (세전 이자 − 이자소득세)
+                  </p>
+                  <p>
+                    여기서 n은 납입 개월수입니다. n(n+1)/2는 각 회차 납입금이 만기까지 예치되는 개월수의 합으로, 먼저
+                    넣은 돈에 이자가 더 오래 붙는 구조를 반영합니다.
+                  </p>
+                </>
+              ),
+            },
+            {
+              heading: "계산 예시",
+              body: (
+                <>
+                  <p>매달 30만원씩 연 3.5%로 12개월 납입한 경우:</p>
+                  <ul className="list-disc space-y-1 pl-5">
+                    <li>총 납입 원금 = 300,000 × 12 = 3,600,000원</li>
+                    <li>세전 이자 = 300,000 × (3.5% ÷ 12) × (12 × 13 ÷ 2) = 68,250원</li>
+                    <li>이자소득세 = 68,250 × 15.4% ≈ 10,511원</li>
+                    <li>세후 만기 수령액 ≈ <strong>3,657,739원</strong></li>
+                  </ul>
+                </>
+              ),
+            },
+            {
+              heading: "주의사항",
+              body: (
+                <p>
+                  본 계산은 <strong>단리·이자소득세 15.4%</strong> 기준입니다. 상품의 우대금리, 비과세·세금우대,
+                  자유적립식 여부에 따라 실제 수령액은 달라질 수 있습니다. 목돈을 한 번에 맡기는 경우에는 예금 이자
+                  계산기, 이자에 이자가 붙는 방식은 복리 계산기를 이용하세요.
+                </p>
+              ),
+            },
+          ]}
+        />
+      }
     >
       <InputBlock
         label="월 납입액 (원)"
