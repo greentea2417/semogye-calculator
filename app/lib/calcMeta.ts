@@ -5,7 +5,7 @@ export type CalcMeta = { title: string; description: string };
 const SITE = "https://semogye.com";
 
 export const calcMeta: Record<string, CalcMeta> = {
-  "business/annual-days": { title: "연차 개수 계산기 | 세모계", description: "입사일과 기준일로 근로기준법에 따라 발생하는 연차 유급휴가 일수를 계산합니다." },
+  "business/annual-days": { title: "연차 계산기 – 입사일로 발생 연차 일수 계산", description: "입사일만 넣으면 1년 미만은 월 1일, 1년 이상은 15일부터 최대 25일까지 근속연수별 발생 연차 일수를 바로 확인합니다. 입사일 기준·회계연도 기준 차이도 함께 안내해요." },
   "business/annual": { title: "연차수당 계산기 | 세모계", description: "미사용 연차 일수와 통상임금으로 받을 수 있는 연차수당을 계산합니다." },
   "business/bonus": { title: "상여금·성과급 계산기 | 세모계", description: "기본급과 상여금을 합산해 실수령액을 계산합니다." },
   "business/break-even": { title: "손익분기점 계산기 | 세모계", description: "고정비와 단위 판매가·변동비를 넣으면 손익분기 판매량과 매출액을 계산합니다." },

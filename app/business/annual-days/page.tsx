@@ -91,7 +91,7 @@ export default function AnnualDaysPage() {
   return (
     <CalculatorLayout
       tone="business"
-      title="연차 개수 계산기"
+      title="연차 계산기"
       subtitle="입사일과 기준일로 근로기준법에 따라 발생하는 연차 유급휴가 일수를 계산합니다."
       intro="근로기준법 제60조 기준, 입사일 기준(연 80% 이상 출근 가정)으로 발생 연차 일수를 계산합니다. 연차수당 금액이 아닌 '개수'를 계산하는 도구예요."
       faqTitle="연차 개수 계산기 자주 묻는 질문"
