@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "소개 | 세모계",
+  title: "소개",
   description: "세모계가 어떤 서비스인지, 무엇을 목표로 하는지 확인하세요.",
 };
 

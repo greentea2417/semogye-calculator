@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "문의하기 | 세모계",
+  title: "문의하기",
   description: "세모계 서비스 문의, 오류 제보, 제안 사항을 남겨주세요.",
 };
 

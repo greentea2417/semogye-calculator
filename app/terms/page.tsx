@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "이용약관 | 세모계",
+  title: "이용약관",
   description: "세모계 이용 시 적용되는 기본 약관과 책임 범위를 확인하세요.",
 };
 

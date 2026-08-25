@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "개인정보처리방침 | 세모계",
+  title: "개인정보처리방침",
   description: "세모계의 개인정보 수집, 이용, 광고 및 쿠키 정책을 확인하세요.",
 };
 

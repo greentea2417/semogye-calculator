@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "FAQ | 세모계",
+  title: "FAQ",
   description: "세모계 계산기 이용 방법과 자주 묻는 질문을 확인하세요.",
 };
 
