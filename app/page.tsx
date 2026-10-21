@@ -145,6 +145,7 @@ export default function HomePage() {
           <div className="mt-8 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm text-gray-400">
             <Link href="/about" className="hover:text-white">소개</Link>
             <Link href="/faq" className="hover:text-white">FAQ</Link>
+            <Link href="/blog" className="hover:text-white">블로그</Link>
             <Link href="/contact" className="hover:text-white">문의사항</Link>
             <Link href="/privacy" className="hover:text-white">개인정보처리방침</Link>
             <Link href="/terms" className="hover:text-white">이용약관</Link>

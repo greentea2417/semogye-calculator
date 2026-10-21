@@ -6,6 +6,7 @@
 import type { MetadataRoute } from "next";
 import fs from "node:fs";
 import path from "node:path";
+import { blogArticles } from "./blog/content";
 
 const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://semogye.com").replace(/\/+$/, "");
 const APP_DIR = path.join(process.cwd(), "app");
@@ -42,14 +43,18 @@ function collectRoutes(): string[] {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  if (process.env.VERCEL_ENV === "preview") return [];
+
   const now = new Date();
-  const all = collectRoutes();
-  const set = new Set(all);
+  const routes = new Set(collectRoutes());
+  // Do not expose the empty blog index or dynamic article template to search engines.
+  if (blogArticles.length === 0) routes.delete("/blog");
+  for (const article of blogArticles) routes.add(`/blog/${article.slug}`);
 
   // 최상위 /X 가 /business/X 로도 존재하면, 최상위(중복/리다이렉트 대상)는 색인에서 제외
-  const canonical = all.filter((r) => {
+  const canonical = [...routes].filter((r) => {
     const seg = r.split("/").filter(Boolean);
-    if (seg.length === 1 && set.has(`/business/${seg[0]}`)) return false;
+    if (seg.length === 1 && routes.has(`/business/${seg[0]}`)) return false;
     return true;
   });
 

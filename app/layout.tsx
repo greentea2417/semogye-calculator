@@ -7,6 +7,7 @@ export const metadata = {
     template: "%s | 세모계",
   },
   description: "생활, 급여, 세금, 자영업까지. 세상의 모든 계산을 더 정확하게.",
+  robots: process.env.VERCEL_ENV === "preview" ? { index: false, follow: false } : undefined,
 };
 
 export default function RootLayout({
