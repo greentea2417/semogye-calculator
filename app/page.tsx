@@ -1,8 +1,25 @@
 import Link from "next/link";
+import ArticleCard from "./blog/ArticleCard";
+import { blogArticles } from "./blog/content";
 
 export default function HomePage() {
+  const latestArticles = [...blogArticles]
+    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+    .slice(0, 3);
+
   return (
     <div className="min-h-screen">
+      <header className="relative z-10 mx-auto flex h-16 max-w-6xl items-center justify-end px-4 sm:px-6">
+        <nav aria-label="주요 메뉴">
+          <Link
+            href="/blog"
+            className="inline-flex min-h-11 items-center justify-center rounded-full bg-blue-600 px-5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+          >
+            블로그
+          </Link>
+        </nav>
+      </header>
+
       {/* 히어로 */}
       <section className="relative overflow-hidden">
         <div
@@ -39,19 +56,49 @@ export default function HomePage() {
           <div className="mt-7 flex flex-wrap justify-center gap-3">
             <Link
               href="/business"
-              className="rounded-full border border-gray-900 bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(37,99,235,0.22)] active:-translate-y-0.5 active:shadow-[0_12px_30px_rgba(37,99,235,0.22)]"
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-900 bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(37,99,235,0.22)] active:-translate-y-0.5 active:shadow-[0_12px_30px_rgba(37,99,235,0.22)]"
             >
               비즈니스 계산기
             </Link>
             <Link
               href="/life"
-              className="rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm font-semibold text-gray-700 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(34,197,94,0.20)] active:-translate-y-0.5 active:shadow-[0_12px_30px_rgba(34,197,94,0.20)]"
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm font-semibold text-gray-700 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(34,197,94,0.20)] active:-translate-y-0.5 active:shadow-[0_12px_30px_rgba(34,197,94,0.20)]"
             >
               라이프 계산기
+            </Link>
+            <Link
+              href="/blog"
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-blue-600 bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-[0_12px_30px_rgba(37,99,235,0.22)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+            >
+              생활·경제 블로그 →
             </Link>
           </div>
         </div>
       </section>
+
+      {latestArticles.length > 0 && (
+        <section
+          aria-labelledby="home-latest-articles"
+          className="mx-auto max-w-5xl px-4 pb-12 sm:px-6"
+        >
+          <div className="mb-5 flex items-end justify-between gap-4">
+            <div>
+              <p className="text-sm font-semibold text-blue-700">새로운 이야기</p>
+              <h2 id="home-latest-articles" className="mt-1 text-2xl font-bold text-gray-900">
+                최신 기사
+              </h2>
+            </div>
+            <Link href="/blog" className="shrink-0 text-sm font-semibold text-blue-700 hover:text-blue-800">
+              전체 보기 →
+            </Link>
+          </div>
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {latestArticles.map((article) => (
+              <ArticleCard key={article.slug} article={article} />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* 제품 미리보기: 브라우저 목업 */}
       <section className="max-w-3xl mx-auto px-6 pb-24">
