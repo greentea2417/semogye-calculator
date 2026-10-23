@@ -206,6 +206,7 @@ textarea:focus-visible {
 .blog-home__intro { padding-block: clamp(3.5rem, 8vw, 7.5rem) clamp(2.5rem, 5vw, 4.75rem); border-bottom: 1px solid var(--blog-line); }
 .blog-home__title { margin-top: 1.25rem; max-width: 11ch; font-size: clamp(3.1rem, 8.2vw, 7.6rem); font-weight: 750; line-height: .98; letter-spacing: -.075em; }
 .blog-home__title em { color: var(--blog-accent); font-style: normal; }
+.blog-home__subtitle { margin-top: 1rem; max-width: 35rem; font-size: clamp(1.55rem, 3.6vw, 2.7rem); font-weight: 600; line-height: 1.2; letter-spacing: -.055em; word-break: keep-all; }
 .blog-home__dek { max-width: 35rem; margin-top: 1.75rem; color: var(--blog-muted); font-size: clamp(1rem, 1.5vw, 1.22rem); line-height: 1.8; word-break: keep-all; }
 .blog-home__issue { align-self: end; border-left: 1px solid var(--blog-line); padding: .25rem 0 .25rem 1.5rem; }
 .blog-home__issue dl { display: grid; grid-template-columns: 1fr auto; gap: .65rem 1.25rem; margin-top: 1.4rem; }

@@ -28,9 +28,10 @@ export default function BlogHomePage() {
         <div className="col-span-12 lg:col-span-8">
           <p className="blog-eyebrow">SE—MO—GYE <span aria-hidden="true">/</span> INDEPENDENT JOURNAL</p>
           <h1 id="blog-title" className="blog-home__title">
-            생활과 경제,<br />더 <em>명확하게.</em>
+            세모계
           </h1>
-          <p className="blog-home__dek">복잡한 숫자와 제도를 정확하고 편안하게 읽을 수 있도록 정리합니다.</p>
+          <p className="blog-home__subtitle">세상의 모든 이야기</p>
+          <p className="blog-home__dek">일상의 궁금증부터 새로운 발견까지.</p>
         </div>
         <div className="blog-home__issue col-span-12 lg:col-span-3 lg:col-start-10" aria-label="저널 정보">
           <p className="blog-eyebrow">THE JOURNAL</p>

@@ -19,7 +19,6 @@ export default function HomePage() {
           </Link>
         </nav>
       </header>
-
       {/* 히어로 */}
       <section className="relative overflow-hidden">
         <div
@@ -43,7 +42,7 @@ export default function HomePage() {
           </h1>
           <div className="mt-5 h-1 w-16 rounded-full bg-gradient-to-r from-blue-500 to-sky-300" />
 
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-gray-500 not-italic sm:mt-6 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-xl px-2 text-base leading-7 text-gray-700 not-italic sm:mt-6 sm:px-0 sm:text-lg sm:leading-relaxed">
             급여, 주휴수당, 세금부터 생활 계산까지. 사장님이 직접 계산할 필요 없이
             <br className="hidden md:block" />
             필요한 계산만 빠르게 찾고 바로 확인할 수 있게 만들었어요.
@@ -53,24 +52,18 @@ export default function HomePage() {
             회원가입 없이 무료로 바로 이용 가능
           </p>
 
-          <div className="mt-7 flex flex-wrap justify-center gap-3">
+          <div className="mt-7 grid w-full max-w-md grid-cols-2 gap-3">
             <Link
               href="/business"
-              className="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-900 bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(37,99,235,0.22)] active:-translate-y-0.5 active:shadow-[0_12px_30px_rgba(37,99,235,0.22)]"
+              className="inline-flex min-h-11 w-full min-w-0 items-center justify-center whitespace-nowrap rounded-full border border-blue-600 bg-blue-600 px-2 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 sm:px-5"
             >
               비즈니스 계산기
             </Link>
             <Link
               href="/life"
-              className="inline-flex min-h-11 items-center justify-center rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm font-semibold text-gray-700 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(34,197,94,0.20)] active:-translate-y-0.5 active:shadow-[0_12px_30px_rgba(34,197,94,0.20)]"
+              className="inline-flex min-h-11 w-full min-w-0 items-center justify-center whitespace-nowrap rounded-full border border-blue-200 bg-white px-2 py-2.5 text-sm font-semibold text-blue-700 shadow-sm transition-colors hover:bg-blue-50 hover:text-blue-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 sm:px-5"
             >
               라이프 계산기
-            </Link>
-            <Link
-              href="/blog"
-              className="inline-flex min-h-11 items-center justify-center rounded-full border border-blue-600 bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-[0_12px_30px_rgba(37,99,235,0.22)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
-            >
-              생활·경제 블로그 →
             </Link>
           </div>
         </div>
